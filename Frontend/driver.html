@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚌 NewBus - تطبيق السائق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap">
+    
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-light: #3B82F6;
+            --primary-dark: #1D4ED8;
+            --secondary: #10B981;
+            --secondary-dark: #059669;
+            --dark: #1F2937;
+            --gray: #6B7280;
+            --light-gray: #F3F4F6;
+            --white: #FFFFFF;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --success: #10B981;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+        }
+
+        .user-type-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 30px 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-message h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .welcome-message p {
+            color: var(--gray);
+        }
+
+        /* Driver Dashboard */
+        .driver-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-icon.primary { background: #DBEAFE; color: var(--primary); }
+        .card-icon.success { background: #D1FAE5; color: var(--success); }
+        .card-icon.warning { background: #FEF3C7; color: var(--warning); }
+        .card-icon.info { background: #E0E7FF; color: #6366F1; }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* Trip Form */
+        .trip-form {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #E5E7EB;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .passenger-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .count-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #D1D5DB;
+            background: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .count-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .count-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .action-btn.start {
+            background: linear-gradient(135deg, var(--success) 0%, var(--secondary-dark) 100%);
+            color: white;
+        }
+
+        .action-btn.start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .action-btn.end {
+            background: linear-gradient(135deg, var(--danger) 0%, #DC2626 100%);
+            color: white;
+        }
+
+        .action-btn.end:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Active Trip Info */
+        .active-trip {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--success);
+        }
+
+        .trip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .trip-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .trip-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Driver Map */
+        .driver-map-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 30px;
+            height: 350px;
+        }
+
+        .map-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .driver-map {
+            height: 250px;
+            background: #E0F2FE;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Access Denied Message */
+        .access-denied {
+            text-align: center;
+            padding: 50px 20px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 50px auto;
+            max-width: 500px;
+        }
+
+        .access-denied i {
+            font-size: 4rem;
+            color: var(--danger);
+            margin-bottom: 20px;
+        }
+
+        .access-denied h2 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .access-denied p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .access-denied .btn {
+            display: inline-flex;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .driver-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .trip-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .driver-map-container {
+                height: 300px;
+            }
+            
+            .driver-map {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bus"></i>
+                    <span>NewBus - تطبيق السائق</span>
+                </div>
+                
+                <div class="user-info">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div>
+                            <div class="user-name" id="userName">السائق</div>
+                            <div class="user-type-badge">سائق</div>
+                        </div>
+                    </div>
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content" id="mainContent"></div>
+
+    <script>
+        // App State
+        const state = {
+            isTripActive: false,
+            passengerCount: 0,
+            currentTrip: null,
+            currentUser: null
+        };
+
+        // Configuration
+        const CONFIG = {
+            ROUTES: [
+                { id: 'city-campus', name: 'المدينة الجامعية ← الجامعة' },
+                { id: 'dahar-feroz', name: 'موقف الدهار ← الفيروز' },
+                { id: 'biology-dahar', name: 'كلية تربية الاحياء ← موقف الدهار' },
+                { id: 'feroz-campus', name: 'الفيروز ← الجامعة' }
+            ],
+            BUSES: [
+                { id: '101', name: '#101 (سعة 50 راكب)' },
+                { id: '102', name: '#102 (سعة 50 راكب)' },
+                { id: '103', name: '#103 (سعة 45 راكب)' },
+                { id: '104', name: '#104 (سعة 60 راكب)' }
+            ],
+            STATIONS: [
+                { name: 'المدينة الجامعية', top: '20%', left: '20%' },
+                { name: 'موقف الدهار', top: '40%', left: '40%' },
+                { name: 'كلية تربية الاحياء', top: '60%', left: '60%' },
+                { name: 'الفيروز', top: '30%', left: '80%' },
+                { name: 'الجامعة', top: '70%', left: '80%' }
+            ],
+            MAX_PASSENGERS: 60,
+            MIN_PASSENGERS: 0
+        };
+
+        // DOM Elements
+        const dom = {
+            mainContent: document.getElementById('mainContent'),
+            userName: document.getElementById('userName')
+        };
+
+        // Auth Functions
+        function checkAuth() {
+            state.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!state.currentUser || !state.currentUser.isLoggedIn) {
+                window.location.href = "login.html";
+                return false;
+            }
+            
+            if (state.currentUser.accountType !== 'driver') {
+                showAccessDenied();
+                return false;
+            }
+            
+            return true;
+        }
+
+        function showAccessDenied() {
+            dom.mainContent.innerHTML = `
+                <div class="access-denied">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h2>غير مسموح بالوصول</h2>
+                    <p>هذه الصفحة مخصصة للسائقين فقط. يرجى تسجيل الدخول بحساب سائق.</p>
+                    <button class="btn" onclick="handleLogout()">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول بحساب آخر
+                    </button>
+                </div>
+            `;
+        }
+
+        function handleLogout() {
+            if (!confirm('هل تريد تسجيل الخروج؟')) return;
+
+            if (state.isTripActive) {
+                if (confirm('هناك رحلة نشطة. هل تريد إنهاء الرحلة قبل الخروج؟')) {
+                    endTrip();
+                }
+            }
+
+            if (state.currentUser) {
+                state.currentUser.isLoggedIn = false;
+                localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
+            }
+
+            window.location.href = "login.html";
+        }
+
+        // Load Functions
+        function loadDriverInterface() {
+            loadUserInfo();
+            loadTripState();
+            renderInterface();
+        }
+
+        function loadUserInfo() {
+            dom.userName.textContent = state.currentUser.name || 'السائق';
+        }
+
+        function loadTripState() {
+            const savedTrip = JSON.parse(localStorage.getItem('currentTrip'));
+            
+            if (savedTrip && savedTrip.isActive) {
+                state.isTripActive = true;
+                state.currentTrip = savedTrip;
+                state.passengerCount = savedTrip.passengerCount || 0;
+            }
+        }
+
+        // Render Functions
+        function renderInterface() {
+            dom.mainContent.innerHTML = `
+                ${renderWelcomeMessage()}
+                ${renderDashboard()}
+                ${state.isTripActive ? renderActiveTrip() : renderTripForm()}
+                ${renderMap()}
+            `;
+
+            createDriverMap();
+            if (!state.isTripActive) setupTripFormEvents();
+        }
+
+        function renderWelcomeMessage() {
+            return `
+                <div class="welcome-message">
+                    <h1>مرحباً ${state.currentUser.name || 'عزيزي السائق'}</h1>
+                    <p>استخدم تطبيق NewBus لإدارة رحلاتك وتتبع حافلتك</p>
+                </div>
+            `;
+        }
+
+        function renderDashboard() {
+            return `
+                <div class="driver-dashboard">
+                    ${renderDashboardCard('fas fa-road', 'primary', 'رحلات اليوم', '3', 'رحلة مكتملة')}
+                    ${renderDashboardCard('fas fa-clock', 'success', 'متوسط الوقت', '24', 'دقيقة للرحلة')}
+                    ${renderDashboardCard('fas fa-users', 'warning', 'الركاب اليوم', '142', 'مسافر تم نقلهم')}
+                </div>
+            `;
+        }
+
+        function renderDashboardCard(icon, colorClass, title, value, label) {
+            return `
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon ${colorClass}">
+                            <i class="${icon}"></i>
+                        </div>
+                        <div class="card-title">${title}</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px 0;">
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--${colorClass});">${value}</div>
+                        <div style="color: var(--gray);">${label}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTripForm() {
+            return `
+                <div class="trip-form">
+                    <h2 style="color: var(--primary); margin-bottom: 20px;">
+                        <i class="fas fa-play-circle"></i> بدء رحلة جديدة
+                    </h2>
+                    
+                    ${renderSelect('routeSelect', 'اختر المسار', CONFIG.ROUTES)}
+                    ${renderSelect('busSelect', 'اختر الحافلة', CONFIG.BUSES)}
+                    
+                    <div style="text-align: center; margin: 25px 0;">
+                        <label class="form-label">عدد الركاب الحالي</label>
+                        <div class="passenger-count">
+                            <button class="count-btn" id="decreasePassengers">-</button>
+                            <div class="count-display" id="passengerCountDisplay">${state.passengerCount}</div>
+                            <button class="count-btn" id="increasePassengers">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="action-btn start" id="startTripBtn">
+                        <i class="fas fa-play"></i> بدء الرحلة
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderSelect(id, label, options) {
+            const optionsHtml = options.map(opt => 
+                `<option value="${opt.id}">${opt.name}</option>`
+            ).join('');
+            
+            return `
+                <div class="form-group">
+                    <label class="form-label">${label}</label>
+                    <select class="form-control" id="${id}">
+                        <option value="">-- ${label} --</option>
+                        ${optionsHtml}
+                    </select>
+                </div>
+            `;
+        }
+
+        function renderActiveTrip() {
+            return `
+                <div class="active-trip">
+                    <div class="trip-header">
+                        <div class="trip-title">
+                            <i class="fas fa-bus"></i> الرحلة الجارية
+                        </div>
+                        <div style="background: var(--success); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600;">
+                            🟢 نشطة
+                        </div>
+                    </div>
+                    
+                    ${renderTripDetails()}
+                    ${renderTripStats()}
+                    
+                    <button class="action-btn end" id="endTripBtn" style="margin-top: 25px;">
+                        <i class="fas fa-stop"></i> إنهاء الرحلة
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderTripDetails() {
+            return `
+                <div style="margin-bottom: 20px;">
+                    <div style="font-size: 1.1rem; margin-bottom: 10px;">
+                        <strong>المسار:</strong> ${state.currentTrip.routeName}
+                    </div>
+                    <div style="font-size: 1.1rem; margin-bottom: 10px;">
+                        <strong>الحافلة:</strong> #${state.currentTrip.busNumber}
+                    </div>
+                    <div style="font-size: 1.1rem;">
+                        <strong>وقت البدء:</strong> ${state.currentTrip.startTime}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTripStats() {
+            return `
+                <div class="trip-stats">
+                    ${renderStatItem(state.passengerCount, 'عدد الركاب')}
+                    ${renderStatItem('24', 'دقيقة متبقية')}
+                    ${renderStatItem('65%', 'إكمال الرحلة')}
+                </div>
+            `;
+        }
+
+        function renderStatItem(value, label) {
+            return `
+                <div class="stat-item">
+                    <div class="stat-value">${value}</div>
+                    <div class="stat-label">${label}</div>
+                </div>
+            `;
+        }
+
+        function renderMap() {
+            return `
+                <div class="driver-map-container">
+                    <div class="map-title">
+                        <i class="fas fa-map-markated-alt"></i> خريطة الرحلة
+                    </div>
+                    <div class="driver-map" id="driverMap"></div>
+                </div>
+            `;
+        }
+
+        // Trip Form Events
+        function setupTripFormEvents() {
+            document.getElementById('increasePassengers')?.addEventListener('click', increasePassengers);
+            document.getElementById('decreasePassengers')?.addEventListener('click', decreasePassengers);
+            document.getElementById('startTripBtn')?.addEventListener('click', startTrip);
+        }
+
+        function increasePassengers() {
+            if (state.passengerCount < CONFIG.MAX_PASSENGERS) {
+                state.passengerCount++;
+                updatePassengerCount();
+            }
+        }
+
+        function decreasePassengers() {
+            if (state.passengerCount > CONFIG.MIN_PASSENGERS) {
+                state.passengerCount--;
+                updatePassengerCount();
+            }
+        }
+
+        function updatePassengerCount() {
+            const display = document.getElementById('passengerCountDisplay');
+            if (display) display.textContent = state.passengerCount;
+        }
+
+        // Trip Functions
+        function startTrip() {
+            const routeSelect = document.getElementById('routeSelect');
+            const busSelect = document.getElementById('busSelect');
+            
+            if (!routeSelect.value || !busSelect.value) {
+                alert('الرجاء اختيار المسار والحافلة قبل بدء الرحلة');
+                return;
+            }
+            
+            const routeName = routeSelect.options[routeSelect.selectedIndex].text;
+            const busNumber = busSelect.value;
+            
+            state.isTripActive = true;
+            state.currentTrip = {
+                isActive: true,
+                routeName: routeName,
+                busNumber: busNumber,
+                passengerCount: state.passengerCount,
+                startTime: new Date().toLocaleTimeString(),
+                startDate: new Date().toISOString()
+            };
+            
+            saveTripToStorage();
+            renderInterface();
+            document.getElementById('endTripBtn')?.addEventListener('click', endTrip);
+        }
+
+        function endTrip() {
+            if (!confirm('هل أنت متأكد من إنهاء الرحلة؟')) return;
+
+            saveCompletedTrip();
+            resetTripState();
+            renderInterface();
+            
+            alert('تم إنهاء الرحلة بنجاح وتخزين بياناتها');
+        }
+
+        function saveTripToStorage() {
+            localStorage.setItem('currentTrip', JSON.stringify(state.currentTrip));
+        }
+
+        function saveCompletedTrip() {
+            const completedTrips = JSON.parse(localStorage.getItem('completedTrips')) || [];
+            state.currentTrip.endTime = new Date().toLocaleTimeString();
+            state.currentTrip.isActive = false;
+            completedTrips.push(state.currentTrip);
+            localStorage.setItem('completedTrips', JSON.stringify(completedTrips));
+        }
+
+        function resetTripState() {
+            state.isTripActive = false;
+            state.passengerCount = 0;
+            state.currentTrip = null;
+            localStorage.removeItem('currentTrip');
+        }
+
+        // Map Functions
+        function createDriverMap() {
+            const map = document.getElementById('driverMap');
+            if (!map) return;
+
+            createBusMarker(map);
+            createStationMarkers(map);
+            
+            if (state.isTripActive) animateBus();
+        }
+
+        function createBusMarker(map) {
+            const busMarker = document.createElement('div');
+            busMarker.className = 'bus-marker';
+            busMarker.title = 'موقع حافلتك';
+            
+            Object.assign(busMarker.style, {
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '30px',
+                height: '30px',
+                background: 'var(--primary)',
+                borderRadius: '50%',
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '12px',
+                fontWeight: 'bold',
+                boxShadow: '0 3px 10px rgba(0,0,0,0.3)',
+                border: '3px solid white'
+            });
+            
+            busMarker.innerHTML = '<i class="fas fa-bus"></i>';
+            map.appendChild(busMarker);
+        }
+
+        function createStationMarkers(map) {
+            CONFIG.STATIONS.forEach(station => {
+                const marker = document.createElement('div');
+                marker.className = 'station-marker';
+                marker.title = station.name;
+                
+                Object.assign(marker.style, {
+                    position: 'absolute',
+                    top: station.top,
+                    left: station.left,
+                    width: '12px',
+                    height: '12px',
+                    background: 'var(--warning)',
+                    borderRadius: '50%',
+                    boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+                    border: '2px solid white'
+                });
+                
+                map.appendChild(marker);
+            });
+        }
+
+        function animateBus() {
+            const busMarker = document.querySelector('.bus-marker');
+            if (!busMarker) return;
+            
+            let position = 0;
+            setInterval(() => {
+                position = (position + 0.5) % 100;
+                busMarker.style.left = `${20 + position * 0.6}%`;
+                busMarker.style.top = `${30 + Math.sin(position * 0.1) * 20}%`;
+            }, 100);
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            if (checkAuth()) {
+                loadDriverInterface();
+            }
+        });
+    </script>
+</body>
+</html>
