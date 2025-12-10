@@ -1,0 +1,2485 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\students\\dto\\dtostudentupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\students\\dto\\dtostudentread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\driver\\dto\\dtodriverupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\admins\\dto\\dtoadminupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\students\\studentbll\\studentbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\driver\\driver\\driverbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\admins\\bll\\adminbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\adminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\adminscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\tripscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\tripscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\driverscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\driverscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\token\\token\\token.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\driver\\dto\\dtodrivercreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\emailservice\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\emailservice\\iemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\AppData\\Roaming\\Microsoft\\UserSecrets\\48a4de8c-2a55-4e52-8c50-6c15177a9e0d\\secrets.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\newbusapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:newbusapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\driver\\interface\\idriverbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\admins\\interface\\iadminbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\repositry\\repoclassess\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\repositry\\interfaces\\iunitofwork\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\students\\interface\\istudentbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\newbusbll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\newbuscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\driver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\resetpasswordadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\resetpasswordstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\resetpassworddriver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\repositry\\interfaces\\ibaserepositry\\ibaserepositry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtopassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtoresetpassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\trip\\itripbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\trip\\tripbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\clshub\\livehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:clshub\\livehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\stationtrips\\istationtrip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\stationtrips\\stationtrip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\station\\stationbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\station\\dtostationread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\newbusdal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\stationtrip\\dtostationtrip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\repositry\\repoclassess\\baserepositry\\baserepsitry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251204192555_mlll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251205124616_mmmm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251205123835_mmm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\newbuscontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\station.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\trip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\stationtrip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\groupconnections.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\studentconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\math\\utilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:math\\utilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\admins\\dto\\dtoadminread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\admins\\mapper\\adminprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\middelware\\checkloginingmiddelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:middelware\\checkloginingmiddelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\middelware\\errormiddelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:middelware\\errormiddelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\admins\\dto\\dtoadminadd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\students\\dto\\dtostudentcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\facultiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\facultiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\generalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\generalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\route.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\adminconnections.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\driverconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\routescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\routescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\controllers\\busescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:controllers\\busescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtocurrentlocation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\logoutservice\\logoutbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\logoutservice\\ilogoutbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtologout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtologin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205205532_mmmmmmmm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\token\\itoken\\itoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\hashing service\\inter\\ihashingbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\hashing service\\hash\\hashingbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\enums\\enstatusbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtoreturnkeyval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtoreturnlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\enums\\enstatustrip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\enums\\engender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\trip\\dto\\dtotripupdatestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\repsone\\apiresponsesucess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\trip\\dto\\dtotripcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\trip\\triprepo\\triprepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\trip\\dto\\dtotripread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\trip\\interfacetriprepo\\itriprepsitry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\trip\\mapper\\tripprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251204192411_mlll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\route\\inteface\\iroute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\route\\route\\routesbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\bus\\busbll\\busbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\group\\group\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\station\\interface\\istationbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\studentconnection\\studentconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\faculty\\facultybll\\facultybll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\driverconnection\\driverconnectionbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\admins\\repo\\adminrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\adminconnection\\adminconnectionbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtoupdatelocation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\dto general\\dtoupdatepassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\bus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\driverconnection\\idriverconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\studentconnection\\istudentconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\adminconnection\\iadminconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201221213_addtableadminconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251201211715_updatesignalr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\faculty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201210502_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\exceptions\\forbiddenexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\repsone\\apiresponsefailure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\constant\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\admins\\interfacerepo\\iadminrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\students\\repo\\studentrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\students\\interfacerepo\\istudentrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\driver\\interfacerepo\\idriverrepositry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\driver\\repo\\driverrepositry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\driver\\mapper\\driverprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\bus\\mapper\\busprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\driver\\dto\\dtodriverupdatebus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\driver\\dto\\dtodriverread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251129135621_updateee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}|NewBusAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\faculty\\interface\\ifacultybll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8523736D-C0C8-FD61-8301-EAD648D8C713}|..\\NewBusBLL\\NewBusBLL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusbll\\bus\\interface\\ibusbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\bus\\dto\\dtobusread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\bus\\dto\\dtostatusbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\bus\\dto\\dtobusupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\students\\mapper\\studentprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127162845_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127162321_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160513_updateautoincrementtt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160151_updateautoincrement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160036_updateautoincrement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126194319_updategender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126193615_updategender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126193418_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\efpt.config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusProject\\NewBusAPI.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251129140204_updateee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251128153859_update.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251127163134_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251201210620_m1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251203203825_kk.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251201221618_addtableadminconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251205210252_mmmmmmmm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251205151324_mmmmmmm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251205145433_mmmmm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251205011309_updateeeee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251204232518_updatemtriptable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251206165715_upo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251206145010_up.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251207235819_addtablestationtrip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251208174331_mamaammm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251208171440_mamaamm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C0BBB26-338E-6A1C-6563-3F436F885688}|..\\NewBusDAL\\NewBusDAL.csproj|c:\\users\\nvidia plus\\downloads\\new-bus-app\\newbusproject\\newbusdal\\migrations\\20251208164350_mamaam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StudentBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Students\\StudentBLL\\StudentBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Students\\StudentBLL\\StudentBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Students\\StudentBLL\\StudentBLL.cs*",
+              "RelativeToolTip": "..\\NewBusBLL\\Students\\StudentBLL\\StudentBLL.cs*",
+              "ViewState": "AgIAANIAAAAAAAAAAAAAAOIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T13:15:51.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AdminsController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\AdminsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminsController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\AdminsController.cs*",
+              "RelativeToolTip": "Controllers\\AdminsController.cs*",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAG0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T18:22:51.728Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Admins\\BLL\\AdminBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Admins\\BLL\\AdminBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Admins\\BLL\\AdminBLL.cs*",
+              "RelativeToolTip": "..\\NewBusBLL\\Admins\\BLL\\AdminBLL.cs*",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAAALgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T17:54:45.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DriverBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Driver\\Driver\\DriverBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Driver\\Driver\\DriverBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Driver\\Driver\\DriverBLL.cs*",
+              "RelativeToolTip": "..\\NewBusBLL\\Driver\\Driver\\DriverBLL.cs*",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAAAAUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:49:28.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DTOAdminUpdate.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\DTO\\DTOAdminUpdate.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Admins\\DTO\\DTOAdminUpdate.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\DTO\\DTOAdminUpdate.cs*",
+              "RelativeToolTip": "..\\NewBusDAL\\Admins\\DTO\\DTOAdminUpdate.cs*",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T16:49:08.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DtoDriverUpdate.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DtoDriverUpdate.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Driver\\DTO\\DtoDriverUpdate.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DtoDriverUpdate.cs*",
+              "RelativeToolTip": "..\\NewBusDAL\\Driver\\DTO\\DtoDriverUpdate.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:43:54.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DTOStudentRead.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\DTO\\DTOStudentRead.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Students\\DTO\\DTOStudentRead.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\DTO\\DTOStudentRead.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Students\\DTO\\DTOStudentRead.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T12:59:39.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DTOStudentUpdate.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\DTO\\DTOStudentUpdate.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Students\\DTO\\DTOStudentUpdate.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\DTO\\DTOStudentUpdate.cs*",
+              "RelativeToolTip": "..\\NewBusDAL\\Students\\DTO\\DTOStudentUpdate.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T13:04:08.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TripsController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\TripsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TripsController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\TripsController.cs",
+              "RelativeToolTip": "Controllers\\TripsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T13:49:35.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DriversController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\DriversController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DriversController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\DriversController.cs*",
+              "RelativeToolTip": "Controllers\\DriversController.cs*",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAAAHwAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T15:54:22.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Token.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Token\\Token\\Token.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Token\\Token\\Token.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Token\\Token\\Token.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Token\\Token\\Token.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAALAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T13:41:39.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DTODriverCreate.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DTODriverCreate.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Driver\\DTO\\DTODriverCreate.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DTODriverCreate.cs*",
+              "RelativeToolTip": "..\\NewBusDAL\\Driver\\DTO\\DTODriverCreate.cs*",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAuwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:41:16.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\EmailService\\EmailService.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\EmailService\\EmailService.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\EmailService\\EmailService.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\EmailService\\EmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T13:32:19.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Iemail.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\EmailService\\Iemail.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\EmailService\\Iemail.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\EmailService\\Iemail.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\EmailService\\Iemail.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAA4AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T13:47:33.81Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "secrets.json",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\AppData\\Roaming\\Microsoft\\UserSecrets\\48a4de8c-2a55-4e52-8c50-6c15177a9e0d\\secrets.json",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Roaming\\Microsoft\\UserSecrets\\48a4de8c-2a55-4e52-8c50-6c15177a9e0d\\secrets.json",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\AppData\\Roaming\\Microsoft\\UserSecrets\\48a4de8c-2a55-4e52-8c50-6c15177a9e0d\\secrets.json",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Roaming\\Microsoft\\UserSecrets\\48a4de8c-2a55-4e52-8c50-6c15177a9e0d\\secrets.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-30T15:10:14.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "NewBusAPI.csproj",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\NewBusAPI.csproj",
+              "RelativeDocumentMoniker": "NewBusAPI.csproj",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\NewBusAPI.csproj",
+              "RelativeToolTip": "NewBusAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-26T17:15:15.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IDriverBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Driver\\InterFace\\IDriverBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Driver\\InterFace\\IDriverBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Driver\\InterFace\\IDriverBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Driver\\InterFace\\IDriverBLL.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAA4wB0AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:50:30.109Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "StudentsController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\StudentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StudentsController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\StudentsController.cs",
+              "RelativeToolTip": "Controllers\\StudentsController.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAowIUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T13:43:20.497Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IadminBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Admins\\InterFace\\IadminBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Admins\\InterFace\\IadminBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Admins\\InterFace\\IadminBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Admins\\InterFace\\IadminBLL.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwB0AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T17:22:55.98Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\RepoClassess\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Repositry\\RepoClassess\\UnitOfWork\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\RepoClassess\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Repositry\\RepoClassess\\UnitOfWork\\UnitOfWork.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAADIAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:00:22.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\Interfaces\\IunitOfWork\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Repositry\\Interfaces\\IunitOfWork\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\Interfaces\\IunitOfWork\\IUnitOfWork.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Repositry\\Interfaces\\IunitOfWork\\IUnitOfWork.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAACUAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T18:05:51.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IStudentBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Students\\InterFace\\IStudentBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Students\\InterFace\\IStudentBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Students\\InterFace\\IStudentBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Students\\InterFace\\IStudentBLL.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAABgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T13:13:58.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "NewBusBLL.csproj",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\NewBusBLL.csproj",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\NewBusBLL.csproj",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\NewBusBLL.csproj",
+              "RelativeToolTip": "..\\NewBusBLL\\NewBusBLL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-26T18:41:39.676Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 160,
+              "Title": "20251208174331_mamaammm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251208174331_mamaammm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251208174331_mamaammm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251208174331_mamaammm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251208174331_mamaammm.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T17:43:31.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Admin.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Admin.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Admin.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Admin.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABUAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:29:45.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Driver.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Driver.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Driver.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Driver.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Driver.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAA1wCEAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:32:09.204Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Student.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Student.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Student.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAuwB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:30:39.432Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ResetPasswordAdmin.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\ResetPasswordAdmin.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\ResetPasswordAdmin.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\ResetPasswordAdmin.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\ResetPasswordAdmin.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAAA4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T17:39:57.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ResetPasswordStudent.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\ResetPasswordStudent.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\ResetPasswordStudent.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\ResetPasswordStudent.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\ResetPasswordStudent.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T15:51:19.131Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "ResetPasswordDriver.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\ResetPasswordDriver.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\ResetPasswordDriver.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\ResetPasswordDriver.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\ResetPasswordDriver.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAA0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T17:39:28.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "NewBusContext.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\NewBusContext.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\NewBusContext.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\NewBusContext.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\NewBusContext.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABEAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T17:42:47.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 161,
+              "Title": "20251208171440_mamaamm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251208171440_mamaamm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251208171440_mamaamm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251208171440_mamaamm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251208171440_mamaamm.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T17:14:40.451Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 162,
+              "Title": "20251208164350_mamaam.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251208164350_mamaam.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251208164350_mamaam.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251208164350_mamaam.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251208164350_mamaam.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T16:43:50.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "DtoPassword.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoPassword.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DtoPassword.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoPassword.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DtoPassword.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T16:38:12.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "IbaseRepositry.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\Interfaces\\IBaseRepositry\\IbaseRepositry.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Repositry\\Interfaces\\IBaseRepositry\\IbaseRepositry.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\Interfaces\\IBaseRepositry\\IbaseRepositry.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Repositry\\Interfaces\\IBaseRepositry\\IbaseRepositry.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAuwBIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T17:48:43.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "StationsController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\StationsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StationsController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\StationsController.cs",
+              "RelativeToolTip": "Controllers\\StationsController.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAnwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T20:48:26.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "DToResetPassword.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DToResetPassword.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DToResetPassword.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DToResetPassword.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DToResetPassword.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T16:00:41.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ITripBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Trip\\ITripBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Trip\\ITripBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Trip\\ITripBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Trip\\ITripBLL.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAewA0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T12:10:10.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "TripBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Trip\\TripBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Trip\\TripBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Trip\\TripBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Trip\\TripBLL.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABoAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T01:16:20.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "IstationTrip.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StationTrips\\IstationTrip.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\StationTrips\\IstationTrip.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StationTrips\\IstationTrip.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\StationTrips\\IstationTrip.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T14:58:57.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "StationTrip.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StationTrips\\StationTrip.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\StationTrips\\StationTrip.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StationTrips\\StationTrip.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\StationTrips\\StationTrip.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAIwBkAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T00:06:18.9Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "StationBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Station\\StationBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Station\\StationBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Station\\StationBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Station\\StationBLL.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:50:35.287Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "DTOStationRead.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Station\\DTOStationRead.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Station\\DTOStationRead.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Station\\DTOStationRead.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Station\\DTOStationRead.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T14:50:35.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "DtoStationTrip.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\StationTrip\\DtoStationTrip.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\StationTrip\\DtoStationTrip.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\StationTrip\\DtoStationTrip.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\StationTrip\\DtoStationTrip.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T00:08:15.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "BaseRepsitry.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\RepoClassess\\BaseRepositry\\BaseRepsitry.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Repositry\\RepoClassess\\BaseRepositry\\BaseRepsitry.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Repositry\\RepoClassess\\BaseRepositry\\BaseRepsitry.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Repositry\\RepoClassess\\BaseRepositry\\BaseRepsitry.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:25:30.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "LiveHub.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\clshub\\LiveHub.cs",
+              "RelativeDocumentMoniker": "clshub\\LiveHub.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\clshub\\LiveHub.cs",
+              "RelativeToolTip": "clshub\\LiveHub.cs",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAAAKcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:40:36.535Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "NewBusDAL.csproj",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\NewBusDAL.csproj",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\NewBusDAL.csproj",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\NewBusDAL.csproj",
+              "RelativeToolTip": "..\\NewBusDAL\\NewBusDAL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-26T17:39:20.556Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "20251204192555_mlll.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251204192555_mlll.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251204192555_mlll.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251204192555_mlll.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251204192555_mlll.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T19:25:56.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "20251205124616_mmmm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205124616_mmmm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251205124616_mmmm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205124616_mmmm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251205124616_mmmm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T12:46:16.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "20251205123835_mmm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205123835_mmm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251205123835_mmm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205123835_mmm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251205123835_mmm.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T12:38:35.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "NewBusContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\NewBusContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\NewBusContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\NewBusContextModelSnapshot.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\NewBusContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T19:25:25.93Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 159,
+              "Title": "20251207235819_addtablestationtrip.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251207235819_addtablestationtrip.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251207235819_addtablestationtrip.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251207235819_addtablestationtrip.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251207235819_addtablestationtrip.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T23:58:20.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Trip.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Trip.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Trip.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Trip.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Trip.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T19:15:44.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "StationTrip.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\StationTrip.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\StationTrip.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\StationTrip.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\StationTrip.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T23:45:16.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "GroupConnections.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\GroupConnections.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\GroupConnections.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\GroupConnections.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\GroupConnections.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABQAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:11:48.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "StudentConnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\StudentConnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\StudentConnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\StudentConnection.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\StudentConnection.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T20:59:18.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Utilities.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Math\\Utilities.cs",
+              "RelativeDocumentMoniker": "Math\\Utilities.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Math\\Utilities.cs",
+              "RelativeToolTip": "Math\\Utilities.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T20:05:45.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Station.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Station.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Station.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Station.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Station.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:13:18.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "DTOAdminRead.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\DTO\\DTOAdminRead.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Admins\\DTO\\DTOAdminRead.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\DTO\\DTOAdminRead.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Admins\\DTO\\DTOAdminRead.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:51:43.874Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "AdminProfile.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\Mapper\\AdminProfile.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Admins\\Mapper\\AdminProfile.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\Mapper\\AdminProfile.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Admins\\Mapper\\AdminProfile.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T13:10:34.458Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAAAJQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T17:42:56.063Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "CheckLoginingMiddelware.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Middelware\\CheckLoginingMiddelware.cs",
+              "RelativeDocumentMoniker": "Middelware\\CheckLoginingMiddelware.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Middelware\\CheckLoginingMiddelware.cs",
+              "RelativeToolTip": "Middelware\\CheckLoginingMiddelware.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAAC0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T19:54:00.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "ErrorMiddelware.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Middelware\\ErrorMiddelware.cs",
+              "RelativeDocumentMoniker": "Middelware\\ErrorMiddelware.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Middelware\\ErrorMiddelware.cs",
+              "RelativeToolTip": "Middelware\\ErrorMiddelware.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAABgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T14:07:40.321Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "DTOAdminAdd.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\DTO\\DTOAdminAdd.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Admins\\DTO\\DTOAdminAdd.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\DTO\\DTOAdminAdd.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Admins\\DTO\\DTOAdminAdd.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:51:43.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "DTOStudentCreate.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\DTO\\DTOStudentCreate.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Students\\DTO\\DTOStudentCreate.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\DTO\\DTOStudentCreate.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Students\\DTO\\DTOStudentCreate.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABoAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T13:02:02.923Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAAB8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T14:39:37.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 157,
+              "Title": "20251206165715_upo.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251206165715_upo.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251206165715_upo.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251206165715_upo.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251206165715_upo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T16:57:15.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABoAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-06T16:14:24.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "FacultiesController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\FacultiesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FacultiesController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\FacultiesController.cs",
+              "RelativeToolTip": "Controllers\\FacultiesController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAC0AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T11:51:40.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 158,
+              "Title": "20251206145010_up.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251206145010_up.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251206145010_up.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251206145010_up.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251206145010_up.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T14:50:11.248Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "Person.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Person.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Person.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Person.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Person.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAqwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:30:37.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "GeneralController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\GeneralController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GeneralController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\GeneralController.cs",
+              "RelativeToolTip": "Controllers\\GeneralController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAACQAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T16:45:48.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "Route.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Route.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Route.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Route.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Route.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAA8AAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T18:42:38.774Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "AdminConnections.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\AdminConnections.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\AdminConnections.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\AdminConnections.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\AdminConnections.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:10:01.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "DriverConnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\DriverConnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\DriverConnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\DriverConnection.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\DriverConnection.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAswBIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:01:05.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "RoutesController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\RoutesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RoutesController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\RoutesController.cs",
+              "RelativeToolTip": "Controllers\\RoutesController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABgAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T19:01:42.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "BusesController.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\BusesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BusesController.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\Controllers\\BusesController.cs",
+              "RelativeToolTip": "Controllers\\BusesController.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAD0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T15:45:42.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "DTOCurrentLocation.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOCurrentLocation.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DTOCurrentLocation.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOCurrentLocation.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DTOCurrentLocation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T11:39:11.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "DtoLogout.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoLogout.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DtoLogout.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoLogout.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DtoLogout.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T19:23:23.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "DTOLogin.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOLogin.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DTOLogin.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOLogin.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DTOLogin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T13:17:02.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "RefreshToken.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\RefreshToken.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\RefreshToken.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\RefreshToken.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\RefreshToken.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAA4AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T19:08:19.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "LogoutBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\LogoutService\\LogoutBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\LogoutService\\LogoutBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\LogoutService\\LogoutBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\LogoutService\\LogoutBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T19:24:38.837Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "IlogoutBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\LogoutService\\IlogoutBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\LogoutService\\IlogoutBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\LogoutService\\IlogoutBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\LogoutService\\IlogoutBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T19:45:21.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "20251205205532_mmmmmmmm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205205532_mmmmmmmm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251205205532_mmmmmmmm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205205532_mmmmmmmm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251205205532_mmmmmmmm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T20:55:32.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 152,
+              "Title": "20251205210252_mmmmmmmm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205210252_mmmmmmmm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251205210252_mmmmmmmm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205210252_mmmmmmmm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251205210252_mmmmmmmm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T21:02:52.241Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "IhashingBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Hashing Service\\Inter\\IhashingBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Hashing Service\\Inter\\IhashingBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Hashing Service\\Inter\\IhashingBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Hashing Service\\Inter\\IhashingBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T19:21:32.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "HashingBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Hashing Service\\Hash\\HashingBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Hashing Service\\Hash\\HashingBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Hashing Service\\Hash\\HashingBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Hashing Service\\Hash\\HashingBLL.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T19:20:32.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "IToken.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Token\\IToken\\IToken.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Token\\IToken\\IToken.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Token\\IToken\\IToken.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Token\\IToken\\IToken.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T13:41:52.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "DtoReturnKeyVal.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoReturnKeyVal.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DtoReturnKeyVal.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoReturnKeyVal.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DtoReturnKeyVal.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T16:29:44.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "enStatusBus.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Enums\\enStatusBus.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Enums\\enStatusBus.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Enums\\enStatusBus.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Enums\\enStatusBus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T15:29:28.712Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "DTOReturnLogin.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOReturnLogin.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DTOReturnLogin.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOReturnLogin.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DTOReturnLogin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T13:33:54.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "enStatusTrip.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Enums\\enStatusTrip.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Enums\\enStatusTrip.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Enums\\enStatusTrip.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Enums\\enStatusTrip.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T19:18:12.597Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "DtoTripUpdateStatus.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\DTO\\DtoTripUpdateStatus.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Trip\\DTO\\DtoTripUpdateStatus.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\DTO\\DtoTripUpdateStatus.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Trip\\DTO\\DtoTripUpdateStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T12:19:24.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "enGender.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Enums\\enGender.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Enums\\enGender.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Enums\\enGender.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Enums\\enGender.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:28:42.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "NotFoundException.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Exceptions\\NotFoundException.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Exceptions\\NotFoundException.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Exceptions\\NotFoundException.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Exceptions\\NotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T14:22:56.746Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "ApiResponseSucess.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Repsone\\ApiResponseSucess.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Repsone\\ApiResponseSucess.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Repsone\\ApiResponseSucess.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Repsone\\ApiResponseSucess.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T12:23:42.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "DtoTripCreate.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\DTO\\DtoTripCreate.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Trip\\DTO\\DtoTripCreate.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\DTO\\DtoTripCreate.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Trip\\DTO\\DtoTripCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T15:44:39.183Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 153,
+              "Title": "20251205151324_mmmmmmm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205151324_mmmmmmm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251205151324_mmmmmmm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205151324_mmmmmmm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251205151324_mmmmmmm.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T15:13:24.843Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 154,
+              "Title": "20251205145433_mmmmm.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205145433_mmmmm.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251205145433_mmmmm.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205145433_mmmmm.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251205145433_mmmmm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T14:54:33.217Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 91,
+              "Title": "DtoTripRead.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\DTO\\DtoTripRead.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Trip\\DTO\\DtoTripRead.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\DTO\\DtoTripRead.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Trip\\DTO\\DtoTripRead.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T12:11:33.133Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 92,
+              "Title": "ITripRepsitry.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\InterfaceTripRepo\\ITripRepsitry.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Trip\\InterfaceTripRepo\\ITripRepsitry.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\InterfaceTripRepo\\ITripRepsitry.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Trip\\InterfaceTripRepo\\ITripRepsitry.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAA4AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T13:03:34.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "TripRepo.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\TripRepo\\TripRepo.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Trip\\TripRepo\\TripRepo.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\TripRepo\\TripRepo.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Trip\\TripRepo\\TripRepo.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAAB4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T13:07:25.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 93,
+              "Title": "TripProfile.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\Mapper\\TripProfile.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Trip\\Mapper\\TripProfile.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Trip\\Mapper\\TripProfile.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Trip\\Mapper\\TripProfile.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABYAAACSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T12:50:55.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 155,
+              "Title": "20251205011309_Updateeeee.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205011309_Updateeeee.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251205011309_Updateeeee.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251205011309_Updateeeee.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251205011309_Updateeeee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T01:13:10.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 95,
+              "Title": "IRoute.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Route\\InteFace\\IRoute.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Route\\InteFace\\IRoute.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Route\\InteFace\\IRoute.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Route\\InteFace\\IRoute.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAowA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T18:58:41.958Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 94,
+              "Title": "20251204192411_mlll.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251204192411_mlll.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251204192411_mlll.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251204192411_mlll.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251204192411_mlll.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAACIAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T19:24:11.626Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 156,
+              "Title": "20251204232518_UpdateMTripTable.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251204232518_UpdateMTripTable.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251204232518_UpdateMTripTable.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251204232518_UpdateMTripTable.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251204232518_UpdateMTripTable.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T23:25:19.101Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 96,
+              "Title": "RoutesBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Route\\Route\\RoutesBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Route\\Route\\RoutesBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Route\\Route\\RoutesBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Route\\Route\\RoutesBLL.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T18:52:16.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 98,
+              "Title": "Group.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Group\\Group\\Group.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Group\\Group\\Group.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Group\\Group\\Group.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Group\\Group\\Group.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:59:43.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 97,
+              "Title": "BusBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Bus\\BusBll\\BusBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Bus\\BusBll\\BusBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Bus\\BusBll\\BusBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Bus\\BusBll\\BusBLL.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAnwDoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T15:40:05.005Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 99,
+              "Title": "IstationBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Station\\Interface\\IstationBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Station\\Interface\\IstationBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Station\\Interface\\IstationBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Station\\Interface\\IstationBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:56:04.434Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 100,
+              "Title": "StudentConnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StudentConnection\\StudentConnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\StudentConnection\\StudentConnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StudentConnection\\StudentConnection.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\StudentConnection\\StudentConnection.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAIBJwAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:39:25.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 101,
+              "Title": "FacultyBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Faculty\\FacultyBLL\\FacultyBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Faculty\\FacultyBLL\\FacultyBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Faculty\\FacultyBLL\\FacultyBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Faculty\\FacultyBLL\\FacultyBLL.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAIBJwCEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T11:40:10.05Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 102,
+              "Title": "DriverConnectionBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\DriverConnection\\DriverConnectionBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\DriverConnection\\DriverConnectionBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\DriverConnection\\DriverConnectionBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\DriverConnection\\DriverConnectionBLL.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAIBJwAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:36:22.054Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 103,
+              "Title": "AdminRepo.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\Repo\\AdminRepo.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Admins\\Repo\\AdminRepo.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\Repo\\AdminRepo.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Admins\\Repo\\AdminRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T16:23:09.449Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 150,
+              "Title": "20251203203825_kk.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251203203825_kk.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251203203825_kk.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251203203825_kk.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251203203825_kk.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAIBQwBYAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T20:38:26.29Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 104,
+              "Title": "AdminConnectionBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\AdminConnection\\AdminConnectionBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\AdminConnection\\AdminConnectionBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\AdminConnection\\AdminConnectionBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\AdminConnection\\AdminConnectionBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:23:11.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 105,
+              "Title": "DtoUpdateLocation.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoUpdateLocation.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DtoUpdateLocation.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DtoUpdateLocation.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DtoUpdateLocation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T23:37:39.964Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 106,
+              "Title": "DTOUpdatePassword.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOUpdatePassword.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\DTO General\\DTOUpdatePassword.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\DTO General\\DTOUpdatePassword.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\DTO General\\DTOUpdatePassword.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T11:38:28.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 107,
+              "Title": "Bus.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Bus.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Bus.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Bus.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Bus.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBJwBAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T15:59:01.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 108,
+              "Title": "IDriverConnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\DriverConnection\\IDriverConnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\DriverConnection\\IDriverConnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\DriverConnection\\IDriverConnection.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\DriverConnection\\IDriverConnection.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAIBJwA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:45:29.477Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 109,
+              "Title": "IStudentConnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StudentConnection\\IStudentConnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\StudentConnection\\IStudentConnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\StudentConnection\\IStudentConnection.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\StudentConnection\\IStudentConnection.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAA5wAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:44:08.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 110,
+              "Title": "IAdminConnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\AdminConnection\\IAdminConnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\AdminConnection\\IAdminConnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\AdminConnection\\IAdminConnection.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\AdminConnection\\IAdminConnection.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAIBJwAsAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:42:15.921Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 151,
+              "Title": "20251201221618_addtableadminconnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201221618_addtableadminconnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251201221618_addtableadminconnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201221618_addtableadminconnection.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251201221618_addtableadminconnection.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:16:19.144Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 111,
+              "Title": "20251201221213_addtableadminconnection.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201221213_addtableadminconnection.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251201221213_addtableadminconnection.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201221213_addtableadminconnection.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251201221213_addtableadminconnection.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T22:12:14.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 112,
+              "Title": "20251201211715_updateSignalR.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201211715_updateSignalR.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251201211715_updateSignalR.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201211715_updateSignalR.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251201211715_updateSignalR.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAIBJwGEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:17:15.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 113,
+              "Title": "Faculty.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Faculty.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Faculty.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Faculty.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Faculty.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:33:19.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 114,
+              "Title": "Group.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Group.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Models\\Group.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Models\\Group.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Models\\Group.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:07:15.902Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 149,
+              "Title": "20251201210620_m1.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201210620_m1.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251201210620_m1.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201210620_m1.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251201210620_m1.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:06:21.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 115,
+              "Title": "20251201210502_m1.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201210502_m1.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251201210502_m1.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251201210502_m1.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251201210502_m1.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-01T21:05:02.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 116,
+              "Title": "ForBiddenException.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Exceptions\\ForBiddenException.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Exceptions\\ForBiddenException.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Exceptions\\ForBiddenException.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Exceptions\\ForBiddenException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T15:40:18.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 117,
+              "Title": "APIResponseFailure.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Repsone\\APIResponseFailure.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Repsone\\APIResponseFailure.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Repsone\\APIResponseFailure.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Repsone\\APIResponseFailure.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABRwAkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:00:21.513Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 118,
+              "Title": "Roles.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Constant\\Roles.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Constant\\Roles.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Constant\\Roles.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Constant\\Roles.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T13:55:12.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 119,
+              "Title": "IadminRepo.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\InterFaceRepo\\IadminRepo.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Admins\\InterFaceRepo\\IadminRepo.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Admins\\InterFaceRepo\\IadminRepo.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Admins\\InterFaceRepo\\IadminRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T16:22:20.657Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 122,
+              "Title": "IDriverRepositry.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\InterFaceRepo\\IDriverRepositry.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Driver\\InterFaceRepo\\IDriverRepositry.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\InterFaceRepo\\IDriverRepositry.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Driver\\InterFaceRepo\\IDriverRepositry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBpwA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T14:07:59.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 121,
+              "Title": "IStudentRepo.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\InterFaceRepo\\IStudentRepo.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Students\\InterFaceRepo\\IStudentRepo.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\InterFaceRepo\\IStudentRepo.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Students\\InterFaceRepo\\IStudentRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T16:29:51.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 120,
+              "Title": "StudentRepo.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\Repo\\StudentRepo.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Students\\Repo\\StudentRepo.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\Repo\\StudentRepo.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Students\\Repo\\StudentRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T16:46:02.662Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 123,
+              "Title": "DriverRepositry.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\Repo\\DriverRepositry.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Driver\\Repo\\DriverRepositry.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\Repo\\DriverRepositry.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Driver\\Repo\\DriverRepositry.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAwBwAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T14:20:15.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 124,
+              "Title": "DriverProfile.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\Mapper\\DriverProfile.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Driver\\Mapper\\DriverProfile.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\Mapper\\DriverProfile.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Driver\\Mapper\\DriverProfile.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAqwCEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:47:12.172Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 125,
+              "Title": "BusProfile.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\Mapper\\BusProfile.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Bus\\Mapper\\BusProfile.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\Mapper\\BusProfile.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Bus\\Mapper\\BusProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T16:13:00.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 126,
+              "Title": "DTODriverUpdateBus.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DTODriverUpdateBus.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Driver\\DTO\\DTODriverUpdateBus.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DTODriverUpdateBus.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Driver\\DTO\\DTODriverUpdateBus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:45:18.613Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 127,
+              "Title": "DTODriverRead.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DTODriverRead.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Driver\\DTO\\DTODriverRead.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Driver\\DTO\\DTODriverRead.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Driver\\DTO\\DTODriverRead.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA4wBUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:10:53.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 146,
+              "Title": "20251129140204_updateee.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251129140204_updateee.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251129140204_updateee.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251129140204_updateee.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251129140204_updateee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T14:02:04.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 128,
+              "Title": "20251129135621_updateee.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251129135621_updateee.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251129135621_updateee.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251129135621_updateee.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251129135621_updateee.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T13:56:21.932Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 129,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusAPI\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-26T17:45:59.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 130,
+              "Title": "IFacultyBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Faculty\\Interface\\IFacultyBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Faculty\\Interface\\IFacultyBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Faculty\\Interface\\IFacultyBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Faculty\\Interface\\IFacultyBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-29T11:40:29.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 131,
+              "Title": "IBusBLL.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Bus\\Interface\\IBusBLL.cs",
+              "RelativeDocumentMoniker": "..\\NewBusBLL\\Bus\\Interface\\IBusBLL.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusBLL\\Bus\\Interface\\IBusBLL.cs",
+              "RelativeToolTip": "..\\NewBusBLL\\Bus\\Interface\\IBusBLL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAMBdwA4AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T15:26:57.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 134,
+              "Title": "DtoBusUpdate.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\DTO\\DtoBusUpdate.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Bus\\DTO\\DtoBusUpdate.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\DTO\\DtoBusUpdate.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Bus\\DTO\\DtoBusUpdate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T15:54:00.155Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 133,
+              "Title": "DTOStatusBus.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\DTO\\DTOStatusBus.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Bus\\DTO\\DTOStatusBus.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\DTO\\DTOStatusBus.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Bus\\DTO\\DTOStatusBus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T16:11:07.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 132,
+              "Title": "DtoBusRead.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\DTO\\DtoBusRead.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Bus\\DTO\\DtoBusRead.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Bus\\DTO\\DtoBusRead.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Bus\\DTO\\DtoBusRead.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABRwA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T16:21:48.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 147,
+              "Title": "20251128153859_update.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251128153859_update.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251128153859_update.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251128153859_update.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251128153859_update.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T15:38:59.667Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 135,
+              "Title": "StudentProfile.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\Mapper\\StudentProfile.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Students\\Mapper\\StudentProfile.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Students\\Mapper\\StudentProfile.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Students\\Mapper\\StudentProfile.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBpwBwAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T13:09:57.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 148,
+              "Title": "20251127163134_initial.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127163134_initial.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251127163134_initial.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127163134_initial.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251127163134_initial.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwBIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T16:31:34.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 136,
+              "Title": "20251127162845_initial.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127162845_initial.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251127162845_initial.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127162845_initial.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251127162845_initial.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T16:28:46.037Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 137,
+              "Title": "20251127162321_initial.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127162321_initial.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251127162321_initial.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127162321_initial.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251127162321_initial.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T16:23:22.302Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 138,
+              "Title": "20251127160513_updateautoincrementtt.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160513_updateautoincrementtt.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251127160513_updateautoincrementtt.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160513_updateautoincrementtt.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251127160513_updateautoincrementtt.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T16:05:14.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 140,
+              "Title": "20251127160036_updateautoincrement.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160036_updateautoincrement.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251127160036_updateautoincrement.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160036_updateautoincrement.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251127160036_updateautoincrement.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T16:00:37.278Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 139,
+              "Title": "20251127160151_updateautoincrement.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160151_updateautoincrement.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251127160151_updateautoincrement.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251127160151_updateautoincrement.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251127160151_updateautoincrement.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-27T16:01:52.209Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 141,
+              "Title": "20251126194319_updategender.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126194319_updategender.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251126194319_updategender.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126194319_updategender.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251126194319_updategender.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:43:19.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 142,
+              "Title": "20251126193615_updategender.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126193615_updategender.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251126193615_updategender.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126193615_updategender.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251126193615_updategender.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:36:16.101Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 143,
+              "Title": "20251126193418_initial.cs",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126193418_initial.cs",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\Migrations\\20251126193418_initial.cs",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\Migrations\\20251126193418_initial.cs",
+              "RelativeToolTip": "..\\NewBusDAL\\Migrations\\20251126193418_initial.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:34:18.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 144,
+              "Title": "efpt.config.json",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\efpt.config.json",
+              "RelativeDocumentMoniker": "..\\NewBusDAL\\efpt.config.json",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusDAL\\efpt.config.json",
+              "RelativeToolTip": "..\\NewBusDAL\\efpt.config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-26T18:07:10.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 145,
+              "Title": "NewBusAPI.csproj",
+              "DocumentMoniker": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusProject\\NewBusAPI.csproj",
+              "RelativeDocumentMoniker": "..\\NewBusProject\\NewBusAPI.csproj",
+              "ToolTip": "C:\\Users\\NVIDIA PLUS\\Downloads\\New-Bus-App\\NewBusProject\\NewBusProject\\NewBusAPI.csproj",
+              "RelativeToolTip": "..\\NewBusProject\\NewBusAPI.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-26T17:07:56.021Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
