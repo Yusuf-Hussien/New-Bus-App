@@ -40,5 +40,11 @@ namespace NewBusBLL.StudentConnection
                 await _UOW.Complete();
             }
         }
+
+        public async Task<int> GetAllStudentConnection()
+        {
+            var StudentActive = await _UOW.StudentConnections.GetAllAsync();
+            return StudentActive.Count();
+        }
     }
 }

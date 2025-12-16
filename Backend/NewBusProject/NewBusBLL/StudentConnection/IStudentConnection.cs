@@ -10,5 +10,7 @@ namespace NewBusBLL.StudentConnection
     {
         public  Task AddToConnectionStudentTable(string connectionId, int StudentId);
         public Task RemoveFromConnectionStudentTable(string connectionId);
+        public Task<int> GetAllStudentConnection();
+
     }
 }

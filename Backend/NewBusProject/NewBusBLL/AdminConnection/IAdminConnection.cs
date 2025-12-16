@@ -10,5 +10,7 @@ namespace NewBusBLL.AdminConnection
     {
         public  Task AddToConnectionAdminTable(string connectionId, int adminId);
         public  Task RemoveFromConnectionAdminTable(string connectionId);
+        public Task<int> GetAllAdminActive();
+
     }
 }

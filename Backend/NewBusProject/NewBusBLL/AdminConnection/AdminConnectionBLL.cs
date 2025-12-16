@@ -14,6 +14,11 @@ namespace NewBusBLL.AdminConnection
         {
             _UOW = UOW;
         }
+        public async Task<int> GetAllAdminActive()
+        {
+            var AdminActive = await _UOW.AdminConnections.GetAllAsync();
+            return AdminActive.Count();
+        }
         public async Task AddToConnectionAdminTable(string connectionId, int adminId)
         {
             var admin = await _UOW.Admins.GetByIdAsync(adminId);

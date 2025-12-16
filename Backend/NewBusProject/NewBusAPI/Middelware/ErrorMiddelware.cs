@@ -2,7 +2,6 @@
 {
     using NewBusAPI.Repsone;
     using NewBusBLL.Exceptions;
-    using NewBusBLL.Repsone;
     using System.ComponentModel.DataAnnotations;
     using System.Net;
     using System.Text.Json;
@@ -58,7 +57,7 @@
             context.Response.StatusCode = (int)status;
 
 
-            var result = JsonSerializer.Serialize(new APIResponseFailure(ex.Message));
+            var result = JsonSerializer.Serialize(new ApiResponse<string>(ex.Message));
 
             return context.Response.WriteAsync(result);
         }

@@ -31,27 +31,34 @@ namespace NewBusAPI.Controllers
         [Authorize(Roles = "Admin")]
 
         [HttpGet("{id}")]
-    public async Task<ActionResult<ApiResponseSucess<DtoTripRead>>> GetTripByID([FromRoute] int id)
+    public async Task<ActionResult<ApiResponse<DtoTripRead>>> GetTripByID([FromRoute] int id)
     {
         var Trip = await _TripBLL.GetTripByID(id);
-        return Ok(new ApiResponseSucess<DtoTripRead>(Trip, "Trip Data By ID"));
+        return Ok(new ApiResponse<DtoTripRead>(Trip, "Trip Data By ID"));
     }
   
     [HttpGet]
         [Authorize(Roles = "Admin")]
 
-        public async Task<ActionResult<ApiResponseSucess<IEnumerable<DtoTripRead>>>> GetAllTrips()
+        public async Task<ActionResult<ApiResponse<IEnumerable<DtoTripRead>>>> GetAllTrips()
     {
         var Trips = await _TripBLL.GetAllTrips();
-        return Ok(new ApiResponseSucess<IEnumerable<DtoTripRead>>(Trips, "Admins Data"));
+        return Ok(new ApiResponse<IEnumerable<DtoTripRead>>(Trips, "Admins Data"));
     }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
 
+        public async Task<ActionResult<ApiResponse<int>>> GetAllTripsCountToday()
+        {
+            var Trips = await _TripBLL.GetAllTripsCountToday();
+            return Ok(new ApiResponse<int>(Trips, "Admins Data"));
+        }
 
         [HttpPost("StartTrip")]
         [Authorize(Roles ="Driver")]
 
-        public async Task<ActionResult<ApiResponseSucess<int>>> StartTrip(DtoTripCreate dTO)
+        public async Task<ActionResult<ApiResponse<int>>> StartTrip(DtoTripCreate dTO)
     {
             var DriverID = User?.FindFirst("ID")?.Value;
             if (DriverID == null)
@@ -59,12 +66,12 @@ namespace NewBusAPI.Controllers
             dTO.CreatedByDriverId = Convert.ToInt32(DriverID);
 
             var TripId =await _TripBLL.AddTrip(dTO);
-        return Ok(new ApiResponseSucess<int>(TripId, "Trip Created Successfuly"));
+        return Ok(new ApiResponse<int>(TripId, "Trip Created Successfuly"));
     }
         [Authorize(Roles = "Driver")]
 
         [HttpPut("DriverUpdateStatusTrip")]
-    public async Task<ActionResult<ApiResponseSucess<string>>> UpdateStatusTrip(DtoTripUpdateStatus dTO)
+    public async Task<ActionResult<ApiResponse<string>>> UpdateStatusTrip(DtoTripUpdateStatus dTO)
     {
             var DriverID = User?.FindFirst("ID")?.Value;
             if (DriverID == null)
@@ -73,23 +80,23 @@ namespace NewBusAPI.Controllers
             dTO.CreatedByDriverID = Convert.ToInt32(DriverID);
             await _TripBLL.UpdateStatusTrip(dTO);
 
-        return Ok(new ApiResponseSucess<string>("", "Trip Update Status Updated Successfuly"));
+        return Ok(new ApiResponse<string>("", "Trip Update Status Updated Successfuly"));
     }
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Driver")]
-        public async Task<ActionResult<ApiResponseSucess<string>>> CancelTrip([FromRoute] int id)
+        public async Task<ActionResult<ApiResponse<string>>> CancelTrip([FromRoute] int id)
     {
         await _TripBLL.CancelTrip(id);
-        return Ok(new ApiResponseSucess<string>("", "Cancel Trip Successfuly"));
+        return Ok(new ApiResponse<string>("", "Cancel Trip Successfuly"));
     }
         [HttpPut("FinishTrip/{id}")]
         [Authorize(Roles = "Driver")]
 
-        public async Task<ActionResult<ApiResponseSucess<string>>> FinishTrip([FromRoute] int id)
+        public async Task<ActionResult<ApiResponse<string>>> FinishTrip([FromRoute] int id)
         {
             await _TripBLL.FinishTrip(id);
-            return Ok(new ApiResponseSucess<string>("", "Finish Trip Successfuly"));
+            return Ok(new ApiResponse<string>("", "Finish Trip Successfuly"));
         }
 
      

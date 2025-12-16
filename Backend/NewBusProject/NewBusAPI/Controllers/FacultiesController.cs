@@ -26,28 +26,28 @@ namespace NewBusAPI.Controllers
             _FacultyBLL = facultyBLL;
         }
         [HttpGet]
-        public async Task<ActionResult<ApiResponseSucess<IEnumerable<Faculty>>>> GetAllFaculties()
+        public async Task<ActionResult<ApiResponse<IEnumerable<Faculty>>>> GetAllFaculties()
         {
             var faculties = await _FacultyBLL.GetAllFacultiesAsync();
-            return Ok(new ApiResponseSucess<IEnumerable<Faculty>>(faculties,"Faculties Data Successfuly"));
+            return Ok(new ApiResponse<IEnumerable<Faculty>>(faculties,"Faculties Data Successfuly"));
         }
         [HttpGet("{id}",Name = "GetFacultyByIdAsync")]
-        public async Task<ActionResult<ApiResponseSucess<Faculty>>> GetFacultyById([FromRoute] int id)
+        public async Task<ActionResult<ApiResponse<Faculty>>> GetFacultyById([FromRoute] int id)
         {
             var faculty = await _FacultyBLL.GetFacultyByIdAsync(id);
-            return Ok(new ApiResponseSucess<Faculty>(faculty, "Faculty Data Successfuly"));
+            return Ok(new ApiResponse<Faculty>(faculty, "Faculty Data Successfuly"));
         }
         [HttpPost("FacultyCreate")]
-        public async Task<ActionResult<ApiResponseSucess<int>>> AddFaculty(Faculty dTO)
+        public async Task<ActionResult<ApiResponse<int>>> AddFaculty(Faculty dTO)
         {
         await _FacultyBLL.AddFacultyAsync(dTO);
-            return Ok(new ApiResponseSucess<int>(dTO.Id, "Faculty Created Successfuly"));
+            return Ok(new ApiResponse<int>(dTO.Id, "Faculty Created Successfuly"));
         }
         [HttpPut("FacultyUpdate/{id}")]
-        public async Task<ActionResult<ApiResponseSucess<string>>> UpdateFaculty(Faculty dTO,int id)
+        public async Task<ActionResult<ApiResponse<string>>> UpdateFaculty(Faculty dTO,int id)
         {
             await _FacultyBLL.UpdateFacultyAsync(dTO,id);
-            return Ok(new ApiResponseSucess<string>("","Faculty Updated Successfuly"));
+            return Ok(new ApiResponse<string>("","Faculty Updated Successfuly"));
         }
     }
 }

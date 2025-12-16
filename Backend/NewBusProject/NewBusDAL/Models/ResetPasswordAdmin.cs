@@ -13,7 +13,8 @@ namespace NewBusDAL.Models
         public string? OTP { get; set; }
         [ForeignKey("Admin")]
         public int AdminId { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsVerified { get; set; } = false;
+        public DateTime ExpireAt {  get; set; }
         public virtual Admin Admin { get; set; }
     }
 }

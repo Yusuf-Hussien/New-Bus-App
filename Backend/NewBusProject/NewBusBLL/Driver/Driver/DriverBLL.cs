@@ -131,7 +131,9 @@ namespace NewBusBLL.Driver.Driver
             var resetstudent = new ResetPasswordDriver()
             {
                 OTP = BCrypt.Net.BCrypt.HashPassword(OTP.ToString()),
-                DriverId = Drivers.Id
+                DriverId = Drivers.Id,
+                ExpireAt = DateTime.Now.AddMinutes(10),
+                IsVerified = false
             };
             await _unitOfWork.ResetPasswordDrivers.AddAsync(resetstudent);
             await _unitOfWork.Complete();
@@ -141,10 +143,10 @@ namespace NewBusBLL.Driver.Driver
         {
             int studentid = 0;
             ResetPasswordDriver Reset = null;
-            var ResetPasss = await _unitOfWork.ResetPasswordDrivers.FindAsync(r => r.IsActive);
+            var ResetPasss = await _unitOfWork.ResetPasswordDrivers.FindAsync(r => r.IsVerified==false);
             foreach (var reset in ResetPasss)
             {
-                if (BCrypt.Net.BCrypt.Verify(dtoPassword.OTP, reset.OTP))
+                if (BCrypt.Net.BCrypt.Verify(dtoPassword.OTP, reset.OTP)&&reset.ExpireAt>DateTime.Now)
                 {
                     studentid = reset.DriverId;
                     Reset = reset;
@@ -153,13 +155,13 @@ namespace NewBusBLL.Driver.Driver
             }
 
             if (Reset == null)
-                throw new ValidationException("OTP Failed");
+                throw new ValidationException("OTP Failed Or Expired");
 
             var Admin = await _unitOfWork.Drivers.GetByIdAsync(studentid);
             if (Admin == null) throw new ValidationException("There is error during Reset Password");
 
             Admin.Password = BCrypt.Net.BCrypt.HashPassword(dtoPassword.Password);
-            Reset.IsActive = false;
+            Reset.IsVerified = true;
 
             await _unitOfWork.Complete();
 

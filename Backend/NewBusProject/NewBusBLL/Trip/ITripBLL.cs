@@ -9,6 +9,8 @@ namespace NewBusBLL.Trip
 {
     public interface ITripBLL
     {
+        public Task<int> GetAllTripsCountToday();
+
         public Task<IEnumerable<DtoTripRead>> GetAllTrips();
         public Task<DtoTripRead> GetTripByID (int id);
         public Task<int> AddTrip(DtoTripCreate trip);

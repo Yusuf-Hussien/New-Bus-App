@@ -12,5 +12,7 @@ namespace NewBusBLL.DriverConnection
 
 
         public  Task RemoveFromConnectionDriverTable(string connectionId);
+        public Task<int> GetAllDriverActive();
+
     }
 }

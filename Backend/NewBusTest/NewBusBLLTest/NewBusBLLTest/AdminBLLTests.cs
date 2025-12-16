@@ -537,8 +537,6 @@ namespace NewBusBLL.Tests.Admins
                 SecondName = "Marie",
                 ThirdName = "Anne",
                 LastName = "Smith",
-                Email = "jane@example.com",
-                Phone = "9876543210",
                 Gender = enGender.Female.ToString()
             };
 
@@ -561,8 +559,6 @@ namespace NewBusBLL.Tests.Admins
             Assert.That(admin.Username, Is.EqualTo("updateduser"));
             Assert.That(admin.Person.FirstName, Is.EqualTo("Jane"));
             Assert.That(admin.Person.LastName, Is.EqualTo("Smith"));
-            Assert.That(admin.Person.Email, Is.EqualTo("jane@example.com"));
-            Assert.That(admin.Person.Phone, Is.EqualTo("9876543210"));
             _mockUnitOfWork.Verify(u => u.Complete(), Times.Once);
         }
 

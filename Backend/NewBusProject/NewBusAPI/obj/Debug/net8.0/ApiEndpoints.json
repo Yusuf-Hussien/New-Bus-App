@@ -15,7 +15,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Bus.DTO.DtoBusRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Bus.DTO.DtoBusRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -71,7 +71,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -133,7 +133,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -311,7 +311,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -373,7 +373,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -435,7 +435,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -559,7 +559,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Admins.DTO.DTOAdminRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -621,7 +621,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -683,7 +683,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -745,7 +745,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -807,7 +807,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -869,13 +869,49 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.DTO_General.DTOReturnLogin, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.DTO_General.DTOReturnLogin, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
           "text/json"
         ],
         "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
       }
     ]
   },
@@ -895,13 +931,49 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.DTO_General.DTOReturnLogin, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.DTO_General.DTOReturnLogin, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
           "text/json"
         ],
         "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
       }
     ]
   },
@@ -921,13 +993,49 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.DTO_General.DTOReturnLogin, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.DTO_General.DTOReturnLogin, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
           "text/json"
         ],
         "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
       }
     ]
   },
@@ -947,13 +1055,49 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
           "text/json"
         ],
         "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 401
       }
     ]
   },
@@ -973,7 +1117,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1029,7 +1173,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Bus.DTO.DtoBusRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Bus.DTO.DtoBusRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1091,7 +1235,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1153,7 +1297,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1209,7 +1353,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Bus.DTO.DTOStatusBus, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Bus.DTO.DTOStatusBus, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1265,7 +1409,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1327,7 +1471,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1389,7 +1533,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1451,7 +1595,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1513,7 +1657,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1575,7 +1719,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1637,7 +1781,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1699,7 +1843,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Driver.DTO.DTODriverRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1761,7 +1905,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.DTO_General.DTOCurrentLocation, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.DTO_General.DTOCurrentLocation, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1823,7 +1967,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1885,7 +2029,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1947,7 +2091,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2009,7 +2153,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2071,7 +2215,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2133,7 +2277,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2189,7 +2333,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Models.Faculty, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Models.Faculty, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2251,7 +2395,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Models.Faculty, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Models.Faculty, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2314,7 +2458,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2381,7 +2525,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2437,7 +2581,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.DTO_General.DtoReturnKeyVal, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.DTO_General.DtoReturnKeyVal, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2457,7 +2601,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.DTO_General.DtoReturnKeyVal, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.DTO_General.DtoReturnKeyVal, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2477,7 +2621,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.DTO_General.DtoReturnKeyVal, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.DTO_General.DtoReturnKeyVal, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2503,7 +2647,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2529,7 +2673,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2549,7 +2693,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Models.Station, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Models.Station, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2611,7 +2755,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2673,7 +2817,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2729,7 +2873,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2791,7 +2935,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2853,7 +2997,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2915,7 +3059,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2977,7 +3121,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3039,7 +3183,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3101,7 +3245,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3163,7 +3307,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3225,7 +3369,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Students.DTO.DTOStudentRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3287,7 +3431,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3349,7 +3493,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3411,7 +3555,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3473,7 +3617,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3535,7 +3679,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3591,7 +3735,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Trip.DTO.DtoTripRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[NewBusDAL.Trip.DTO.DtoTripRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3653,7 +3797,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[NewBusDAL.Trip.DTO.DtoTripRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[NewBusDAL.Trip.DTO.DtoTripRead, NewBusDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3715,7 +3859,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3777,7 +3921,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3839,7 +3983,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3901,7 +4045,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "NewBusAPI.Repsone.ApiResponseSucess\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "NewBusAPI.Repsone.ApiResponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

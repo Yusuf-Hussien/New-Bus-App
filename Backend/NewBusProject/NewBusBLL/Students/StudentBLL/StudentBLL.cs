@@ -293,7 +293,9 @@ namespace NewBusBLL.Students.StudentBLL
             var resetstudent = new ResetPasswordStudent()
             {
                 OTP=BCrypt.Net.BCrypt.HashPassword(OTP.ToString()),
-                StudentId=Students.Id
+                StudentId=Students.Id,
+                ExpireAt = DateTime.Now.AddMinutes(10)
+                ,IsVerified=false
             };
         await    _UOW.ResetPasswordStudents.AddAsync(resetstudent);
          await  _UOW.Complete();    
@@ -303,10 +305,10 @@ namespace NewBusBLL.Students.StudentBLL
         {
             int studentid=0;
             ResetPasswordStudent Reset = null;
-            var ResetPasss = await _UOW.ResetPasswordStudents.FindAsync(r=>r.IsActive);
+            var ResetPasss = await _UOW.ResetPasswordStudents.FindAsync(r=>r.IsVerified==false);
             foreach(var reset in ResetPasss)
             {
-                if(BCrypt.Net.BCrypt.Verify(dtoPassword.OTP,reset.OTP))
+                if(BCrypt.Net.BCrypt.Verify(dtoPassword.OTP,reset.OTP) && reset.ExpireAt > DateTime.Now)
                 {
                   studentid=reset.StudentId;
                     Reset = reset;
@@ -315,13 +317,13 @@ namespace NewBusBLL.Students.StudentBLL
             }
           
             if (Reset == null)
-                throw new ValidationException("OTP Failed");
+                throw new ValidationException("OTP Failed Or Exppired");
 
             var student = await _UOW.Students.GetByIdAsync(studentid);
             if (student == null) throw new ValidationException("There is error during Reset Password");
 
             student.Password = BCrypt.Net.BCrypt.HashPassword(dtoPassword.Password);
-            Reset.IsActive = false;
+            Reset.IsVerified = true;
 
             await  _UOW.Complete();
 

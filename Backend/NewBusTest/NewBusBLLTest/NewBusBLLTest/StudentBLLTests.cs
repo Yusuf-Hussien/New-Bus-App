@@ -15,7 +15,27 @@ using NewBusDAL.Repositry.Interfaces.IunitOfWork;
 using NewBusDAL.Students.DTO;
 using NUnit.Framework;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;using AutoMapper;
+using Moq;
+using NewBusBLL.AdminConnection;
+using NewBusBLL.Bus.BusBll;
+using NewBusBLL.DriverConnection;
+using NewBusBLL.Exceptions;
+using NewBusBLL.Hashing_Service.Inter;
+using NewBusBLL.LogoutService;
+using NewBusBLL.Route.Route;
+using NewBusBLL.StationTrips;
+using NewBusBLL.StudentConnection;
+using NewBusDAL.Bus.DTO;
+using NewBusDAL.DTO_General;
+using NewBusDAL.Enums;
+using NewBusDAL.Models;
+using NewBusDAL.Repositry.Interfaces.IunitOfWork;
+using NewBusDAL.StationTrip;
+using NUnit.Framework;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+
 
 namespace NewBusBLL.Tests.Students
 {
@@ -722,8 +742,6 @@ namespace NewBusBLL.Tests.Students
                 SecondName = "Marie",
                 ThirdName = "Anne",
                 LastName = "Smith",
-                Email = "jane@example.com",
-                Phone = "9876543210",
                 LevelOfStudy = 4,
                 Gender = (int)enGender.Female
             };

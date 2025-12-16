@@ -12,6 +12,11 @@ namespace NewBusAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public class AuthController : ControllerBase
     {
         private readonly IadminBLL _adminBll;
@@ -27,31 +32,31 @@ namespace NewBusAPI.Controllers
             _RefreshToken = token;
         }
         [HttpPost("LoginAdmin")]
-        public async Task<ActionResult<ApiResponseSucess<DTOReturnLogin>>> LoginAdmin(DTOLogin login)
+        public async Task<ActionResult<ApiResponse<DTOReturnLogin>>> LoginAdmin(DTOLogin login)
         {
             var Tokens = await _adminBll.Login(login);
             await _RefreshToken.AddRefreshToken(new DtoLogout() { RefreshToken = Tokens.RefreshToken });
-            return Ok(new ApiResponseSucess<DTOReturnLogin>(Tokens, "Tokens"));
+            return Ok(new ApiResponse<DTOReturnLogin>(Tokens, "Tokens"));
         }
         [HttpPost("LoginStudent")]
-        public async Task<ActionResult<ApiResponseSucess<DTOReturnLogin>>> LoginStudent(DTOLogin login)
+        public async Task<ActionResult<ApiResponse<DTOReturnLogin>>> LoginStudent(DTOLogin login)
         {
             var Tokens = await _StudentBLL.Login(login);
             await _RefreshToken.AddRefreshToken(new DtoLogout() { RefreshToken = Tokens.RefreshToken });
-            return Ok(new ApiResponseSucess<DTOReturnLogin>(Tokens, "Tokens"));
+            return Ok(new ApiResponse<DTOReturnLogin>(Tokens, "Tokens"));
         }
         [HttpPost("LoginDriver")]
-        public async Task<ActionResult<ApiResponseSucess<DTOReturnLogin>>> LoginDriver(DTOLogin login)
+        public async Task<ActionResult<ApiResponse<DTOReturnLogin>>> LoginDriver(DTOLogin login)
         {
             var Tokens = await _DriverBLL.Login(login);
             await _RefreshToken.AddRefreshToken(new DtoLogout(){ RefreshToken = Tokens.RefreshToken });
-            return Ok(new ApiResponseSucess<DTOReturnLogin>(Tokens, "Tokens"));
+            return Ok(new ApiResponse<DTOReturnLogin>(Tokens, "Tokens"));
         }
         [HttpPost("Logout")]
-        public async Task<ActionResult<ApiResponseSucess<string>>> Logout(DtoLogout RefreshToken)
+        public async Task<ActionResult<ApiResponse<string>>> Logout(DtoLogout RefreshToken)
         {
             await _RefreshToken.Logout(RefreshToken);
-            return Ok(new ApiResponseSucess<string>("", "Logout Successfuly"));
+            return Ok(new ApiResponse<string>("", "Logout Successfuly"));
         }
 
 

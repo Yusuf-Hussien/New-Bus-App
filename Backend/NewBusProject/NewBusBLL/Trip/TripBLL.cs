@@ -79,9 +79,13 @@ namespace NewBusBLL.Trip
             return Trip;
         }
 
-       
+        public async Task<int> GetAllTripsCountToday()
+        {
+            var Trips = await _unitOfWork.Trips.FindAsync(t=>t.StartAt.Date==DateTime.Now.Date);
+            return Trips.Count();
+        }
 
-     public async Task UpdateStatusTrip(DtoTripUpdateStatus dto)
+        public async Task UpdateStatusTrip(DtoTripUpdateStatus dto)
         {
             if(dto==null) throw new ValidationException("DataIs Not Valid");
             if (dto.Id <= 0) throw new ValidationException("ID Must Be Positive");

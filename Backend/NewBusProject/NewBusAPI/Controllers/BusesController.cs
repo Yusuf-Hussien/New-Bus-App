@@ -27,41 +27,41 @@ namespace NewBusAPI.Controllers
             _BusBLL = BusBLL;
         }
         [HttpPost]
-        public async Task<ActionResult<ApiResponseSucess<int>>> AddBus(Bus dTO)
+        public async Task<ActionResult<ApiResponse<int>>> AddBus(Bus dTO)
         {
             await _BusBLL.AddBusAsync(dTO);
-           return Ok(new ApiResponseSucess<int>(dTO.Id, "Bus Created Successfuly"));
+           return Ok(new ApiResponse<int>(dTO.Id, "Bus Created Successfuly"));
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponseSucess<IEnumerable<DtoBusRead>>>> GetAllBuses()
+        public async Task<ActionResult<ApiResponse<IEnumerable<DtoBusRead>>>> GetAllBuses()
         {
             var buses = await _BusBLL.GetAllBusesAsync();
-            return Ok(new ApiResponseSucess<IEnumerable<DtoBusRead>> (buses, "Buses Data"));
+            return Ok(new ApiResponse<IEnumerable<DtoBusRead>> (buses, "Buses Data"));
         }
         [HttpGet("/{id}")]
-        public async Task<ActionResult<ApiResponseSucess<DtoBusRead>>> GetBusById([FromRoute] int id)
+        public async Task<ActionResult<ApiResponse<DtoBusRead>>> GetBusById([FromRoute] int id)
         {
             var bus = await _BusBLL.GetBusByIdAsync(id);
-            return Ok(new ApiResponseSucess<DtoBusRead>(bus, "Bus Data By ID"));
+            return Ok(new ApiResponse<DtoBusRead>(bus, "Bus Data By ID"));
         }
         [HttpGet("GetStatusBus")]
-        public async Task<ActionResult<ApiResponseSucess<IEnumerable<DTOStatusBus>>>> GetStatusBusAsync()
+        public async Task<ActionResult<ApiResponse<IEnumerable<DTOStatusBus>>>> GetStatusBusAsync()
         {
             var buses = await _BusBLL.GetStatusBusAsync();
-            return Ok(new ApiResponseSucess<IEnumerable<DTOStatusBus>> (buses, "Buses Status Data"));
+            return Ok(new ApiResponse<IEnumerable<DTOStatusBus>> (buses, "Buses Status Data"));
         }
         [HttpPut]
-        public async Task<ActionResult<ApiResponseSucess<string>>> UpdateBus([FromBody] DtoBusUpdate bus)
+        public async Task<ActionResult<ApiResponse<string>>> UpdateBus([FromBody] DtoBusUpdate bus)
         {
             await _BusBLL.UpdateBusAsync(bus);
-            return Ok(new ApiResponseSucess<string>("", "Buses Updated Data"));
+            return Ok(new ApiResponse<string>("", "Buses Updated Data"));
         }
         [HttpDelete]
-        public async Task<ActionResult<ApiResponseSucess<string>>> DeleteBus([FromRoute] int id)
+        public async Task<ActionResult<ApiResponse<string>>> DeleteBus([FromRoute] int id)
         {
             await _BusBLL.RemoveBusAsync(id);
-            return Ok(new ApiResponseSucess<string>("", "Buses Deleted Data"));
+            return Ok(new ApiResponse<string>("", "Buses Deleted Data"));
         }
     }
 }

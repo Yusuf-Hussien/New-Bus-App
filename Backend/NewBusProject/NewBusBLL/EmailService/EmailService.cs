@@ -119,7 +119,7 @@ namespace NewBusBLL.EmailService
             <!-- Warning -->
             <tr>
               <td style='font-size: 14px; color: #C0392B; padding-top: 20px;'>
-                This token will expire soon for security reasons.
+                This token will expire After 10 Minutes for security reasons.
               </td>
             </tr>
 

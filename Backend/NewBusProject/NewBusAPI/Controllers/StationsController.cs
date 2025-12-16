@@ -24,22 +24,22 @@ namespace NewBusAPI.Controllers
             _StationBLL = stationBLL;
         }
         [HttpGet]
-        public async Task<ActionResult<ApiResponseSucess<IEnumerable<NewBusDAL.Models.Station>>>> GetAllAdmins()
+        public async Task<ActionResult<ApiResponse<IEnumerable<NewBusDAL.Models.Station>>>> GetAllAdmins()
         {
             var admins = await _StationBLL.GetAllStations();
-            return Ok(new ApiResponseSucess<IEnumerable<NewBusDAL.Models.Station>>(admins, "Admins Data"));
+            return Ok(new ApiResponse<IEnumerable<NewBusDAL.Models.Station>>(admins, "Admins Data"));
         }
         [HttpPost("AddStation")]
-        public async Task<ActionResult<ApiResponseSucess<string>>> AddStation(NewBusDAL.Models.Station dTO)
+        public async Task<ActionResult<ApiResponse<string>>> AddStation(NewBusDAL.Models.Station dTO)
         {
             await _StationBLL.AddStation(dTO);
-            return Ok(new ApiResponseSucess<string>("", "Station Added Successfuly"));
+            return Ok(new ApiResponse<string>("", "Station Added Successfuly"));
         }
         [HttpDelete]
-        public async Task<ActionResult<ApiResponseSucess<string>>> RemoveStation(NewBusDAL.Models.Station dTO)
+        public async Task<ActionResult<ApiResponse<string>>> RemoveStation(NewBusDAL.Models.Station dTO)
         {
             await _StationBLL.RemoveStation(dTO.Id);
-            return Ok(new ApiResponseSucess<string>("", "Station Removed Successfuly"));
+            return Ok(new ApiResponse<string>("", "Station Removed Successfuly"));
         }
 
     }

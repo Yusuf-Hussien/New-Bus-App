@@ -6,6 +6,7 @@ using NewBusAPI.Middelware;
 using NewBusBLL.AdminConnection;
 using NewBusBLL.Admins.BLL;
 using NewBusBLL.Admins.InterFace;
+using NewBusBLL.BackgroundService;
 using NewBusBLL.Bus.BusBll;
 using NewBusBLL.Bus.Interface;
 using NewBusBLL.Driver.Driver;
@@ -17,6 +18,7 @@ using NewBusBLL.Faculty.Interface;
 using NewBusBLL.Hashing_Service;
 using NewBusBLL.Hashing_Service.Inter;
 using NewBusBLL.LogoutService;
+using NewBusBLL.ResetPassword;
 using NewBusBLL.Route.InteFace;
 using NewBusBLL.Route.Route;
 using NewBusBLL.Station;
@@ -30,6 +32,7 @@ using NewBusBLL.Trip;
 using NewBusDAL.Models;
 using NewBusDAL.Repositry.Interfaces.IunitOfWork;
 using NewBusDAL.Repositry.RepoClassess.UnitOfWork;
+using Quartz;
 using System.Reflection;
 using System.Text;
 
@@ -79,7 +82,7 @@ builder.Services.AddScoped<IhashingBLL, HashingBLL>();
 builder.Services.AddScoped<IlogoutBLL, LogoutBLL>();
 builder.Services.AddScoped<Iemail, EmailService>();
 
-
+builder.Services.AddScoped<IResetPassword, ResetPassword>();
 
 
 //config swagger for endpoint Token
@@ -118,6 +121,14 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.AddQuartz(q =>
+{
+    var jobkey = new JobKey(nameof(RemoveOTPnoVerfied));
+    q.AddJob<RemoveOTPnoVerfied>(opts=>opts.WithIdentity(jobkey));
+    q.AddTrigger(opts =>
+    opts.ForJob(jobkey).WithIdentity($"Trigger Remove {nameof(RemoveOTPnoVerfied)}").
+    WithCronSchedule("0 0 * * *"));
+});
 //
 builder.Services.AddCors(options =>
 {
@@ -129,6 +140,7 @@ builder.Services.AddCors(options =>
     });
 });
 var app = builder.Build();
+
 app.UseCors("AllowAll");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

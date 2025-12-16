@@ -793,9 +793,7 @@ namespace NewBusBLL.Tests.Drivers
                 FirstName = "Jane",
                 SecondName = "Marie",
                 ThirdName = "Anne",
-                LastName = "Smith",
-                Email = "jane@example.com",
-                Phone = "9876543210"
+                LastName = "Smith"
             };
 
             var driver = new NewBusDAL.Models.Driver

@@ -180,3 +180,5 @@ C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.pdb
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.genruntimeconfig.cache
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\ref\NewBusAPI.dll
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Quartz.dll
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Quartz.Extensions.DependencyInjection.dll

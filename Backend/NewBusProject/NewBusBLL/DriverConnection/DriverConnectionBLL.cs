@@ -14,6 +14,11 @@ namespace NewBusBLL.DriverConnection
         {
             _UOW = UOW;
         }
+        public async Task<int> GetAllDriverActive()
+        {
+            var DriverActive =await _UOW.DriverConnections.GetAllAsync();
+            return DriverActive.Count();
+        }
         public async Task AddToConnectionDriverTable(string connectionId, int DriverId)
         {
             var Driver = await _UOW.Drivers.GetByIdAsync(DriverId);

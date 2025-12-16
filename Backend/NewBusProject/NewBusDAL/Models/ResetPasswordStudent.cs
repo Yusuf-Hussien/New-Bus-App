@@ -13,7 +13,9 @@ namespace NewBusDAL.Models
         public string? OTP{ get; set; }
         [ForeignKey("Student")]
         public int StudentId { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool IsVerified { get; set; } = false;
+        public DateTime ExpireAt { get; set; }
+
         public virtual Student Student { get; set; }
     }
 }
