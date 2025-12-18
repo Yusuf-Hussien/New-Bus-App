@@ -1,3 +1,6 @@
+import { CONFIG } from "./../config.js";
+const BASE_API_URL = CONFIG.BASE_API_URL;
+
 // ============================
 // DOM Elements
 // ============================
