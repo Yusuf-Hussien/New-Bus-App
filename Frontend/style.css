@@ -221,7 +221,7 @@ button {
 }
 
 button:hover { 
-  background: var(--primary-dark); 
+  background: var(--primary-dark)!important; 
   transform: translateY(-3px); 
   box-shadow: var(--shadow-primary-hover); 
 }
@@ -329,7 +329,7 @@ button:focus:not(:active)::after {
 }
 
 .ghost { 
-  background: transparent; 
+  background: transparet; 
   border: 2px solid var(--white); 
   color: var(--white); 
   box-shadow: none;
@@ -497,7 +497,7 @@ button:focus:not(:active)::after {
   }
   
   input {
-    padding: 14px 20px 14px 40px;
+    padding: 14px 20px 14px 40px !important;
   }
   
   .logo-circle {
@@ -564,4 +564,74 @@ button:focus:not(:active)::after {
 .input-group select {
   position: relative;
   z-index: 2;
+}
+/* ===============================
+   MOBILE RESPONSIVE FIX
+================================ */
+
+@media screen and (max-width: 768px) {
+
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .container {
+    width: 100%;
+    min-height: auto;
+    border-radius: 0;
+  }
+
+  /* الفورم ياخد عرض الشاشة كله */
+  .form-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .sign-in,
+  .sign-up {
+    width: 100%;
+    position: relative;
+    transform: none !important;
+    opacity: 1;
+  }
+
+  /* إلغاء فكرة النص بنص */
+  .overlay-container {
+    display: none;
+  }
+
+  form {
+    padding: 40px 25px;
+    height: auto;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+  }
+}
+
+/* ===============================
+   FORM TOGGLE LOGIC (MOBILE)
+================================ */
+
+@media screen and (max-width: 768px) {
+
+  /* الوضع الافتراضي Sign In */
+  .sign-up {
+    display: none;
+  }
+
+  /* لما يتحول لـ Sign Up */
+  .container.right-panel-active .sign-in {
+    display: none;
+  }
+
+  .container.right-panel-active .sign-up {
+    display: block;
+  }
 }

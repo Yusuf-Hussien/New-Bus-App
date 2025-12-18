@@ -1,128 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NEW BUS | Login</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-  
-  <style>
-    .form-select {
-      width: 100%;
-      padding: 16px 20px 16px 45px;
-      border-radius: var(--border-radius-medium);
-      border: 2px solid transparent;
-      background: var(--background-light);
-      outline: none;
-      font-size: 15px;
-      color: #333;
-      transition: var(--transition-fast);
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      cursor: pointer;
-    }
-    
-    .form-select:focus {
-      border-color: var(--primary-color);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1);
-    }
-    
-    .input-group select + .input-icon {
-      pointer-events: none;
-    }
-    
-    .input-group::after {
-      content: '\f078';
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900;
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--primary-color);
-      pointer-events: none;
-      font-size: 14px;
-      z-index: 1;
-    }
-    
-    .input-group select {
-      position: relative;
-      z-index: 2;
-    }
-    
-    .user-type-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-left: 10px;
-      background: rgba(0, 87, 255, 0.1);
-      color: var(--primary-color);
-    }
-  </style>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login/login.css" />
 </head>
 <body>
 
+  <!-- Background Bubbles -->
   <div class="bg-bubble"></div>
   <div class="bg-bubble"></div>
   <div class="bg-bubble"></div>
   <div class="bg-bubble"></div>
 
+  <!-- Toast Notification -->
   <div id="toast">
     <i class="fas fa-check-circle"></i>
     <span id="toast-message">Account created successfully!</span>
   </div>
 
+  <!-- Forgot Password Page -->
+  <div class="forgot-password-page" id="forgotPasswordPage">
+
+    <!-- Step 1: Verify Identity -->
+    <div class="step active" id="step1">
+      <button class="back-button" id="forgotBackToSignIn">
+        <i class="fas fa-arrow-left"></i> Back to Sign In
+      </button>
+      <h1 class="step-title">Reset Your Password</h1>
+      <p class="step-description">
+        Enter your email, phone, and username to verify your identity
+      </p>
+      <form id="forgotPasswordForm">
+        <div class="input-group">
+          <i class="fas fa-envelope input-icon"></i>
+          <input type="email" id="forgotEmail" placeholder="Email" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-phone input-icon"></i>
+          <input type="tel" id="forgotPhone" placeholder="Phone Number" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-user input-icon"></i>
+          <input type="text" id="forgotUsername" placeholder="Username" required />
+        </div>
+        <div id="forgotError"></div>
+        <div id="forgotSuccess"></div>
+        <button type="submit">Verify Account</button>
+      </form>
+    </div>
+
+    <!-- Step 2: OTP Verification -->
+    <div class="step" id="step2">
+      <button class="back-button" id="backToStep1">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h1 class="step-title">Verify OTP</h1>
+      <p class="step-description">Enter the 6-digit OTP below</p>
+      <form id="otpVerificationForm">
+        <div id="otpDisplayArea"></div>
+        <div class="otp-container" id="otpContainer">
+          <input type="text" class="otp-input" maxlength="1" data-index="0" />
+          <input type="text" class="otp-input" maxlength="1" data-index="1" />
+          <input type="text" class="otp-input" maxlength="1" data-index="2" />
+          <input type="text" class="otp-input" maxlength="1" data-index="3" />
+          <input type="text" class="otp-input" maxlength="1" data-index="4" />
+          <input type="text" class="otp-input" maxlength="1" data-index="5" />
+        </div>
+        <p class="otp-timer" id="otpTimer">
+          OTP expires in: <span id="timer">03:00</span>
+        </p>
+        <div id="otpError"></div>
+        <div id="otpSuccess"></div>
+        <div class="otp-buttons">
+          <button type="submit">Verify OTP</button>
+          <button type="button" id="resendOtpBtn" class="resend-btn">
+            Resend OTP
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 3: Set New Password -->
+    <div class="step" id="step3">
+      <button class="back-button" id="backToStep2">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h1 class="step-title">Set New Password</h1>
+      <p class="step-description">
+        Create a strong password with at least 8 characters
+      </p>
+      <form id="newPasswordForm">
+        <div class="input-group">
+          <i class="fas fa-lock input-icon"></i>
+          <input type="password" id="newPassword" placeholder="New Password" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock input-icon"></i>
+          <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" required />
+        </div>
+        <div id="passwordError"></div>
+        <div id="passwordSuccess"></div>
+        <button type="submit">Update Password</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Main Container -->
   <div class="container" id="container">
 
+    <!-- Sign Up Form -->
     <div class="form-container sign-up">
       <form id="signUpForm">
         <h1>Create Account</h1>
         <div class="input-group">
           <i class="fas fa-user input-icon"></i>
-          <input type="text" id="name" placeholder="Full Name" required>
+          <input type="text" id="name" placeholder="Full Name" required />
         </div>
         <div class="input-group">
           <i class="fas fa-envelope input-icon"></i>
-          <input type="email" id="email" placeholder="Email" required>
+          <input type="email" id="email" placeholder="Email" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-user-circle input-icon"></i>
+          <input type="text" id="username" placeholder="Username" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-phone input-icon"></i>
+          <input type="tel" id="phone" placeholder="Phone Number" required />
+        </div>
+        <div class="input-group">
+          <i class="fas fa-venus-mars input-icon"></i>
+          <select id="gender" class="form-select" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </div>
         <div class="input-group">
           <i class="fas fa-user-tag input-icon"></i>
           <select id="accountType" class="form-select" required>
-            <option value="">Select Account Type</option>
+            <option value="" disabled selected>Select Account Type</option>
             <option value="passenger">Passenger</option>
             <option value="driver">Driver</option>
-            <option value="admin">Administrator</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
         <div class="input-group">
           <i class="fas fa-lock input-icon"></i>
-          <input type="password" id="password" placeholder="Password" required>
+          <input type="password" id="password" placeholder="Password" required />
         </div>
         <div class="input-group">
           <i class="fas fa-lock input-icon"></i>
-          <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
         </div>
         <p id="error"></p>
         <p id="success"></p>
         <button type="submit">Sign Up</button>
+        <button type="button" class="ghost" id="signupBackToSignIn">
+          Already have an account? Sign In
+        </button>
       </form>
     </div>
 
+    <!-- Sign In Form -->
     <div class="form-container sign-in">
       <form id="signInForm">
         <h1>Sign In</h1>
         <div class="input-group">
           <i class="fas fa-envelope input-icon"></i>
-          <input type="email" id="loginEmail" placeholder="Email" required>
+          <input type="email" id="loginEmail" placeholder="Email" required />
         </div>
         <div class="input-group">
           <i class="fas fa-lock input-icon"></i>
-          <input type="password" id="loginPassword" placeholder="Password" required>
+          <input type="password" id="loginPassword" placeholder="Password" required />
+        </div>
+        <div class="account-type-group">
+          <span class="account-type-title">Login as:</span>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="loginAccountType" value="passenger" checked />
+              <span class="radio-custom"></span>
+              <span class="radio-text">Passenger</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="loginAccountType" value="driver" />
+              <span class="radio-custom"></span>
+              <span class="radio-text">Driver</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="loginAccountType" value="admin" />
+              <span class="radio-custom"></span>
+              <span class="radio-text">Admin</span>
+            </label>
+          </div>
+        </div>
+        <div class="forgot-password-link">
+          <a href="#" id="forgotPasswordLink">Forgot Password?</a>
         </div>
         <p id="loginError"></p>
         <p id="loginSuccess"></p>
@@ -130,8 +215,11 @@
       </form>
     </div>
 
+    <!-- Overlay Panels -->
     <div class="overlay-container">
       <div class="overlay">
+
+        <!-- Overlay Left Panel -->
         <div class="overlay-panel overlay-left">
           <div class="logo-container">
             <div class="logo-circle"><i class="fas fa-bus logo-bus"></i></div>
@@ -142,6 +230,8 @@
           <p>Login to continue your journey with New Bus</p>
           <button class="ghost" id="signIn">Sign In</button>
         </div>
+
+        <!-- Overlay Right Panel -->
         <div class="overlay-panel overlay-right">
           <div class="logo-container">
             <div class="logo-circle"><i class="fas fa-bus logo-bus"></i></div>
@@ -152,274 +242,17 @@
           <p>Enter your details and start journey with New Bus</p>
           <button class="ghost" id="signUp">Sign Up</button>
         </div>
+
       </div>
     </div>
 
+    <!-- Mobile Signup Button -->
+    <button class="mobile-signup-btn" id="mobileSignupBtn">
+      <i class="fas fa-user-plus"></i> Sign Up
+    </button>
+
   </div>
 
-  <script>
-    // DOM Elements
-    const container = document.getElementById("container");
-    const signUpBtn = document.getElementById("signUp");
-    const signInBtn = document.getElementById("signIn");
-    const signUpForm = document.getElementById("signUpForm");
-    const signInForm = document.getElementById("signInForm");
-    const error = document.getElementById("error");
-    const success = document.getElementById("success");
-    const loginError = document.getElementById("loginError");
-    const loginSuccess = document.getElementById("loginSuccess");
-    const toast = document.getElementById("toast");
-    const toastMessage = document.getElementById("toast-message");
-
-    // Event Listeners
-    signUpBtn.addEventListener("click", () => togglePanel(true));
-    signInBtn.addEventListener("click", () => togglePanel(false));
-    signUpForm.addEventListener("submit", handleSignUpSubmit);
-    signInForm.addEventListener("submit", handleSignInSubmit);
-
-    // UI Functions
-    function togglePanel(isSignUp) {
-      container.classList.toggle("right-panel-active", isSignUp);
-      resetMessages();
-    }
-
-    function resetMessages() {
-      [error, success, loginError, loginSuccess].forEach(element => {
-        element.style.display = "none";
-        element.textContent = "";
-      });
-    }
-
-    function showError(message, type = 'signup') {
-      const target = type === 'signup' ? error : loginError;
-      target.textContent = message;
-      target.style.display = "block";
-      shakeElement(target);
-    }
-
-    function showSuccess(message, type = 'signup') {
-      const target = type === 'signup' ? success : loginSuccess;
-      target.textContent = message;
-      target.style.display = "block";
-    }
-
-    function showToast(message, isSuccess = true) {
-      toastMessage.textContent = message;
-      toast.querySelector('i').className = isSuccess ? 
-        "fas fa-check-circle" : "fas fa-exclamation-circle";
-      toast.classList.add("show", "success-animate");
-      
-      setTimeout(() => {
-        toast.classList.remove("show", "success-animate");
-      }, 3000);
-    }
-
-    function shakeElement(element) {
-      element.style.animation = "none";
-      setTimeout(() => element.style.animation = "shake 0.5s ease-in-out", 10);
-    }
-
-    // Sign Up Handler
-    function handleSignUpSubmit(event) {
-      event.preventDefault();
-      
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-      const accountType = document.getElementById("accountType").value;
-
-      resetMessages();
-
-      if (!validateSignUp(name, email, accountType, password, confirmPassword)) return;
-
-      if (isEmailRegistered(email)) {
-        showError("This email is already registered");
-        return;
-      }
-
-      createUserAccount(name, email, accountType);
-    }
-
-    function validateSignUp(name, email, accountType, password, confirmPassword) {
-      if (!name) {
-        showError("Please enter your full name");
-        return false;
-      }
-      
-      if (!email) {
-        showError("Please enter your email");
-        return false;
-      }
-      
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError("Please enter a valid email address");
-        return false;
-      }
-      
-      if (!accountType) {
-        showError("Please select account type");
-        return false;
-      }
-      
-      if (password.length < 6) {
-        showError("Password must be at least 6 characters.");
-        return false;
-      }
-      
-      if (password !== confirmPassword) {
-        showError("Passwords do not match!");
-        return false;
-      }
-      
-      return true;
-    }
-
-    function isEmailRegistered(email) {
-      const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-      return users.some(user => user.email === email);
-    }
-
-    function createUserAccount(name, email, accountType) {
-      const userData = {
-        id: Date.now(),
-        name: name,
-        email: email,
-        accountType: accountType,
-        isLoggedIn: true,
-        createdAt: new Date().toISOString()
-      };
-      
-      let users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-      users.push(userData);
-      
-      localStorage.setItem('newbus_users', JSON.stringify(users));
-      localStorage.setItem('currentUser', JSON.stringify(userData));
-      localStorage.setItem('userAccountType', accountType);
-      localStorage.setItem('userName', name);
-
-      showSuccess("Account created successfully! Redirecting...");
-      
-      setTimeout(() => showToast("Account created successfully!"), 500);
-      signUpForm.reset();
-
-      setTimeout(() => redirectBasedOnAccountType(accountType), 2000);
-    }
-
-    // Sign In Handler
-    function handleSignInSubmit(event) {
-      event.preventDefault();
-      
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value;
-      
-      resetMessages();
-      
-      if (!email) {
-        showError("Please enter your email", 'login');
-        return;
-      }
-      
-      if (!password) {
-        showError("Please enter your password", 'login');
-        return;
-      }
-      
-      if (tryDemoLogin(email, password)) return;
-      if (tryLocalLogin(email, password)) return;
-      
-      showError("Invalid email or password", 'login');
-    }
-
-    const DEMO_ACCOUNTS = {
-      'passenger@newbus.com': { 
-        password: '123456', 
-        type: 'passenger',
-        name: 'John Passenger'
-      },
-      'driver@newbus.com': { 
-        password: '123456', 
-        type: 'driver',
-        name: 'Ahmed Driver'
-      },
-      'admin@newbus.com': { 
-        password: '123456', 
-        type: 'admin',
-        name: 'Admin User'
-      }
-    };
-
-    function tryDemoLogin(email, password) {
-      if (!DEMO_ACCOUNTS[email] || DEMO_ACCOUNTS[email].password !== password) {
-        return false;
-      }
-
-      const account = DEMO_ACCOUNTS[email];
-      const userData = {
-        id: Date.now(),
-        email: email,
-        name: account.name,
-        accountType: account.type,
-        isLoggedIn: true,
-        isDemo: true
-      };
-      
-      saveUserSession(userData, account.type, account.name);
-      showSuccess("Signing in...", 'login');
-      
-      setTimeout(() => redirectBasedOnAccountType(account.type), 1500);
-      return true;
-    }
-
-    function tryLocalLogin(email, password) {
-      const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-      const user = users.find(u => u.email === email);
-      
-      if (!user) return false;
-      
-      user.isLoggedIn = true;
-      saveUserSession(user, user.accountType, user.name);
-      showSuccess("Signing in...", 'login');
-      
-      setTimeout(() => redirectBasedOnAccountType(user.accountType), 1500);
-      return true;
-    }
-
-    function saveUserSession(userData, accountType, userName) {
-      localStorage.setItem('currentUser', JSON.stringify(userData));
-      localStorage.setItem('userAccountType', accountType);
-      localStorage.setItem('userName', userName);
-    }
-
-    function redirectBasedOnAccountType(type) {
-      const routes = {
-        'passenger': "passenger.html",
-        'driver': "driver.html",
-        'admin': "admin.html"
-      };
-      
-      window.location.href = routes[type] || "welcome.html";
-    }
-
-    // Add shake animation
-    const style = document.createElement("style");
-    style.textContent = `
-      @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        20%, 60% { transform: translateX(-5px); }
-        40%, 80% { transform: translateX(5px); }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Auto-redirect if already logged in
-    window.addEventListener('load', function() {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      
-      if (currentUser && currentUser.isLoggedIn) {
-        redirectBasedOnAccountType(currentUser.accountType);
-      }
-    });
-  </script>
+  <script src="login/login.js"></script>
 </body>
 </html>
