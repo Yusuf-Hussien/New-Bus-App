@@ -50,7 +50,7 @@
        Sign Up Form Scroll - IMPROVED
        ============================ */
     .form-container.sign-up form {
-        max-height: 75vh;
+        max-height: none;
         overflow-y: auto;
         padding-right: 10px;
         scrollbar-width: thin;
@@ -80,7 +80,8 @@
         padding: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
+        min-height: 100vh;
     }
     
     .form-container.sign-up h1 {
@@ -485,6 +486,17 @@
         padding: 30px 20px;
       }
     }
+    @media (max-width: 1366px) {
+    .form-container.sign-up form {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .form-container.sign-up {
+        justify-content: flex-start;
+    }
+}
+
     
     @media (max-width: 768px) {
       /* Mobile Landscape / Tablet */
@@ -504,7 +516,7 @@
       }
       
       .form-container.sign-up form {
-        max-height: none; /* FIXED: إشيل الـ fixed height */
+        max-height: none !important; /* FIXED: إشيل الـ fixed height */
         overflow-y: auto;
       }
       
