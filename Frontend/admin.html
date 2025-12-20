@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🚌 NewBus - لوحة التحكم</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" />
     <link rel="stylesheet" href="admin/admin.css" />
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <div class="container">
-        <div class="header-content">
-          <div class="logo">
-            <i class="fas fa-bus"></i>
-            <span>NewBus - لوحة التحكم</span>
-          </div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-bus"></i>
+                    <span>NewBus - لوحة التحكم</span>
+                </div>
 
-          <div class="user-info">
-            <div class="user-profile">
-              <div class="user-avatar">
-                <i class="fas fa-user-shield"></i>
-              </div>
-              <div>
-                <div class="user-name" id="userName">المدير</div>
-                <div class="user-type-badge">مدير النظام</div>
-              </div>
+                <div class="user-info">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <div class="user-name" id="userName">المدير</div>
+                            <div class="user-type-badge">مدير النظام</div>
+                        </div>
+                    </div>
+                    <button class="table-btn update-admin-btn" onclick="handleUpdateAdmin()" style="margin-left: 10px;">
+                        <i class="fas fa-user-edit"></i> تحديث الملف الشخصي
+                    </button>
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                    </button>
+                </div>
             </div>
-            <button class="logout-btn" onclick="handleLogout()">
-              <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-            </button>
-          </div>
         </div>
-      </div>
     </header>
 
     <div class="container main-content" id="mainContent"></div>
 
     <script src="admin/admin.js"></script>
-  </body>
+</body>
 </html>
