@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NewBusAPI.Repsone;
 using NewBusBLL.Faculty.Interface;
+using NewBusDAL.Faculty.DTO;
 using NewBusDAL.Models;
 
 namespace NewBusAPI.Controllers
@@ -26,10 +27,10 @@ namespace NewBusAPI.Controllers
             _FacultyBLL = facultyBLL;
         }
         [HttpGet]
-        public async Task<ActionResult<ApiResponse<IEnumerable<Faculty>>>> GetAllFaculties()
+        public async Task<ActionResult<ApiResponse<IEnumerable<DtoFacultyRead>>>> GetAllFaculties()
         {
             var faculties = await _FacultyBLL.GetAllFacultiesAsync();
-            return Ok(new ApiResponse<IEnumerable<Faculty>>(faculties,"Faculties Data Successfuly"));
+            return Ok(new ApiResponse<IEnumerable<DtoFacultyRead>>(faculties,"Faculties Data Successfuly"));
         }
         [HttpGet("{id}",Name = "GetFacultyByIdAsync")]
         public async Task<ActionResult<ApiResponse<Faculty>>> GetFacultyById([FromRoute] int id)

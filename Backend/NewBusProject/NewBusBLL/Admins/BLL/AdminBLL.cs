@@ -141,8 +141,10 @@ namespace NewBusBLL.Admins.BLL
                 throw new ValidationException("Email Is Used Before");
             if (dtoAdminCreate.Gender < Convert.ToInt32(enGender.Male) || Convert.ToInt32(dtoAdminCreate.Gender) > Convert.ToInt32(enGender.Female))
                 throw new ValidationException("GenderID Is Not Correct");
+            if (dtoAdminCreate.Password.Length < 8)
+                throw new ValidationException("Password Is Not Valid");
 
-            var Token = _Hash.GenerateSaltString(8);
+            var Token = _Hash.GenerateSaltStringWithoutSlash(8);
             dtoAdminCreate.Token = Token;
 
             var admin = new Admin() {
@@ -252,8 +254,11 @@ namespace NewBusBLL.Admins.BLL
         }
         public async Task ResetPassword(DtoPassword dtoPassword)
         {
+            if (dtoPassword.Password.Length < 8)
+                throw new ValidationException("Password Is Not Valid");
             int studentid = 0;
             ResetPasswordAdmin Reset = null;
+          
             var ResetPasss = await _unitOfWork.ResetPasswordAdmins.FindAsync(r => r.IsVerified==false);
             foreach (var reset in ResetPasss)
             {

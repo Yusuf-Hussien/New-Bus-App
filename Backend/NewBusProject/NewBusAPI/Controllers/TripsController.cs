@@ -46,7 +46,7 @@ namespace NewBusAPI.Controllers
         return Ok(new ApiResponse<IEnumerable<DtoTripRead>>(Trips, "Admins Data"));
     }
 
-        [HttpGet]
+        [HttpGet("GetAllTripsCountToday")]
         [Authorize(Roles = "Admin")]
 
         public async Task<ActionResult<ApiResponse<int>>> GetAllTripsCountToday()

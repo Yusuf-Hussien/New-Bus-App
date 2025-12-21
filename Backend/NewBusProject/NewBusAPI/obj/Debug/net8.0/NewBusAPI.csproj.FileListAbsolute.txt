@@ -1,11 +1,3 @@
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.csproj.AssemblyReference.cache
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\rpswa.dswa.cache.json
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.AssemblyInfoInputs.cache
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.AssemblyInfo.cs
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.csproj.CoreCompileInputs.cache
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\appsettings.json
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\NewBusAPI.staticwebassets.endpoints.json
@@ -59,6 +51,8 @@ C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Quartz.dll
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Quartz.Extensions.DependencyInjection.dll
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -165,6 +159,14 @@ C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\NewBusDAL.dll
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\NewBusBLL.pdb
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\NewBusDAL.pdb
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.csproj.AssemblyReference.cache
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.AssemblyInfoInputs.cache
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.AssemblyInfo.cs
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.csproj.CoreCompileInputs.cache
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -180,5 +182,3 @@ C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.pdb
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\NewBusAPI.genruntimeconfig.cache
 C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\obj\Debug\net8.0\ref\NewBusAPI.dll
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Quartz.dll
-C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusAPI\bin\Debug\net8.0\Quartz.Extensions.DependencyInjection.dll

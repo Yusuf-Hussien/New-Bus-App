@@ -1,0 +1,14 @@
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\bin\Release\net8.0\NewBusDAL.deps.json
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\bin\Release\net8.0\NewBusDAL.runtimeconfig.json
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\bin\Release\net8.0\NewBusDAL.dll
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\bin\Release\net8.0\NewBusDAL.pdb
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.csproj.AssemblyReference.cache
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.AssemblyInfoInputs.cache
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.AssemblyInfo.cs
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.csproj.CoreCompileInputs.cache
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.dll
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\refint\NewBusDAL.dll
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.pdb
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\NewBusDAL.genruntimeconfig.cache
+C:\Users\NVIDIA PLUS\Downloads\New-Bus-App\NewBusProject\NewBusDAL\obj\Release\net8.0\ref\NewBusDAL.dll

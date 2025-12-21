@@ -57,7 +57,7 @@ namespace NewBusAPI.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet("getbyLastName/{LastName}")]
 
-        public async Task<ActionResult<ApiResponse<IEnumerable<DTOStudentRead>>>> GetAdminByLastName([FromRoute] string LastName)
+        public async Task<ActionResult<ApiResponse<IEnumerable<DTOStudentRead>>>> GetStudentByLastName([FromRoute] string LastName)
     {
             var Students = await _StudentBLL.GetStudentByLastName(LastName);
             return Ok(new ApiResponse<IEnumerable<DTOStudentRead>>(Students, "Students Data By LastName"));

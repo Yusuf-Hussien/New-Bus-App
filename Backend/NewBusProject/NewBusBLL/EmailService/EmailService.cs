@@ -174,7 +174,7 @@ namespace NewBusBLL.EmailService
             message.IsBodyHtml = true;
 
             // لينك التفعيل
-            string verifyUrl = $"https://localhost:7157/api/Admins/VerifyEmail/{token}";
+            string verifyUrl = $"https://newbus.tryasp.net/api/Admins/VerifyEmail/{token}";
 
             // جسم الإيميل بسيط جدًا
             string htmlBody = $@"
@@ -285,7 +285,7 @@ namespace NewBusBLL.EmailService
                 message.IsBodyHtml = true;
 
                 // لينك التفعيل
-                string verifyUrl = $"https://localhost:7157/api/Students/VerifyEmail/{token}";
+                string verifyUrl = $"https://newbus.tryasp.net/api/Students/VerifyEmail/{token}";
 
             // جسم الإيميل بسيط جدًا
             string htmlBody = $@"
@@ -396,7 +396,7 @@ namespace NewBusBLL.EmailService
             message.IsBodyHtml = true;
 
             // لينك التفعيل //
-            string verifyUrl = $"https://localhost:7157/api/Drivers/VerifyEmail/{token}";
+            string verifyUrl = $"https://newbus.tryasp.net/api/Drivers/VerifyEmail/{token}";
 
             // جسم الإيميل بسيط جدًا
             string htmlBody = $@"

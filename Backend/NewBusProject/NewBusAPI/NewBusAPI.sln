@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36705.20
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewBusAPI", "NewBusAPI.csproj", "{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewBusBLL", "..\NewBusBLL\NewBusBLL.csproj", "{8523736D-C0C8-FD61-8301-EAD648D8C713}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewBusDAL", "..\NewBusDAL\NewBusDAL.csproj", "{3C0BBB26-338E-6A1C-6563-3F436F885688}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BE9FBD0-AA7B-7185-C0E9-C970A686A48E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8523736D-C0C8-FD61-8301-EAD648D8C713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8523736D-C0C8-FD61-8301-EAD648D8C713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8523736D-C0C8-FD61-8301-EAD648D8C713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8523736D-C0C8-FD61-8301-EAD648D8C713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0BBB26-338E-6A1C-6563-3F436F885688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0BBB26-338E-6A1C-6563-3F436F885688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0BBB26-338E-6A1C-6563-3F436F885688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0BBB26-338E-6A1C-6563-3F436F885688}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F2F5A78-3D71-48C3-A2D4-8DA8B275F44A}
+	EndGlobalSection
+EndGlobal

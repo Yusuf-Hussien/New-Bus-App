@@ -57,7 +57,9 @@ namespace NewBusBLL.Driver.Driver
                 throw new ValidationException("Bus ID Is Not Valid");
             if(!await _unitOfWork.Admins.IsExist(a => a.Id == driver.CreatedByAdminID))
                 throw new ValidationException("Admin ID Is Not Valid");
-            var Token = _Hash.GenerateSaltString(8);
+            if (driver.Password.Length < 8)
+                throw new ValidationException("Password Is Not Valid");
+            var Token = _Hash.GenerateSaltStringWithoutSlash(8);
             driver.Token = Token;
 
             var driverr = new NewBusDAL.Models.Driver()
@@ -141,6 +143,8 @@ namespace NewBusBLL.Driver.Driver
         }
         public async Task ResetPassword(DtoPassword dtoPassword)
         {
+            if (dtoPassword.Password.Length < 8)
+                throw new ValidationException("Password Is Not Valid");
             int studentid = 0;
             ResetPasswordDriver Reset = null;
             var ResetPasss = await _unitOfWork.ResetPasswordDrivers.FindAsync(r => r.IsVerified==false);

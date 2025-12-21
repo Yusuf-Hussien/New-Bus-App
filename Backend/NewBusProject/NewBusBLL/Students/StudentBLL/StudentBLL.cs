@@ -62,14 +62,16 @@ namespace NewBusBLL.Students.StudentBLL
                 throw new ValidationException("Phone Is Used Before");
             if (await _UOW.Students.IsExist(s => s.Person.Email == dtoStudentCreate.Email))
                 throw new ValidationException("Email Is Used Before");
-            if (!await _UOW.Students.IsExist(s => s.FacultyId == dtoStudentCreate.FacultyId))
+            if (!await _UOW.Faculties.IsExist(f => f.Id == dtoStudentCreate.FacultyId))
                 throw new ValidationException("Uou must Choice Faculty ID Correctly");
             if (dtoStudentCreate.Level>7||dtoStudentCreate.Level<1)
                 throw new ValidationException("Level of Faculty Is Incorrect");
             if (dtoStudentCreate.Gender <Convert.ToInt32( enGender.Male) || Convert.ToInt32(dtoStudentCreate.Gender)> 2)
                 throw new ValidationException("GenderID Is Not Correct");
+            if (dtoStudentCreate.Password.Length < 8)
+                throw new ValidationException("Password Is Not Valid");
 
-            var Token = _Hash.GenerateSaltString(8);//original
+            var Token = _Hash.GenerateSaltStringWithoutSlash(8);//original
             dtoStudentCreate.Token = Token;
 
             var Student = new Student()
@@ -303,6 +305,8 @@ namespace NewBusBLL.Students.StudentBLL
         }
         public async Task ResetPassword(DtoPassword dtoPassword)
         {
+            if (dtoPassword.Password.Length < 8)
+                throw new ValidationException("Password Is Not Valid");
             int studentid=0;
             ResetPasswordStudent Reset = null;
             var ResetPasss = await _UOW.ResetPasswordStudents.FindAsync(r=>r.IsVerified==false);
