@@ -42,7 +42,7 @@ body {
   display: flex; 
   justify-content: center; 
   align-items: center; 
-  height: 100vh;
+  height: 100vh !important;
   overflow: hidden; 
   position: relative;
 }
@@ -179,7 +179,7 @@ form h1::after {
 
 input { 
   width: 100%; 
-  padding: 16px 20px 16px 45px; 
+  padding: 16px 20px 16px 45px !important; 
   border-radius: var(--border-radius-medium); 
   border: 2px solid transparent; 
   background: var(--background-light); 
@@ -572,7 +572,7 @@ button:focus:not(:active)::after {
 @media screen and (max-width: 768px) {
 
   body {
-    height: auto;
+    height: auto !important;
     overflow-y: auto;
   }
 

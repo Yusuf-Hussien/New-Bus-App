@@ -40,6 +40,9 @@ const otpTimer = document.getElementById("timer");
 const resendOtpBtn = document.getElementById("resendOtpBtn");
 const otpDisplayArea = document.getElementById("otpDisplayArea");
 
+// Mobile buttons
+const mobileSignupBtn = document.getElementById("mobileSignupBtn");
+
 // ============================
 // Global Variables
 // ============================
@@ -54,9 +57,30 @@ let otpTimerInterval = null;
 // ============================
 
 const DEMO_ACCOUNTS = {
-  'passenger@newbus.com': { password: '12345678', type: 'passenger', name: 'John Passenger', username: 'john_passenger', phone: '+201234567890', gender: 'male' },
-  'driver@newbus.com': { password: '12345678', type: 'driver', name: 'Ahmed Driver', username: 'ahmed_driver', phone: '+201112223344', gender: 'male' },
-  'admin@newbus.com': { password: '12345678', type: 'admin', name: 'Admin User', username: 'admin_user', phone: '+201009998877', gender: 'male' }
+    'passenger@newbus.com': {
+        password: '12345678',
+        type: 'passenger',
+        name: 'John Passenger',
+        username: 'john_passenger',
+        phone: '+201234567890',
+        gender: 'male'
+    },
+    'driver@newbus.com': {
+        password: '12345678',
+        type: 'driver',
+        name: 'Ahmed Driver',
+        username: 'ahmed_driver',
+        phone: '+201112223344',
+        gender: 'male'
+    },
+    'admin@newbus.com': {
+        password: '12345678',
+        type: 'admin',
+        name: 'Admin User',
+        username: 'admin_user',
+        phone: '+201009998877',
+        gender: 'male'
+    }
 };
 
 // ============================
@@ -64,35 +88,35 @@ const DEMO_ACCOUNTS = {
 // ============================
 
 function shakeElement(element) {
-  element.style.animation = "none";
-  setTimeout(() => element.style.animation = "shake 0.5s ease-in-out", 10);
+    element.style.animation = "none";
+    setTimeout(() => element.style.animation = "shake 0.5s ease-in-out", 10);
 }
 
 function showToast(message, isSuccess = true) {
-  toastMessage.textContent = message;
-  toast.querySelector('i').className = isSuccess ? "fas fa-check-circle" : "fas fa-exclamation-circle";
-  toast.classList.add("show", "success-animate");
-  setTimeout(() => toast.classList.remove("show", "success-animate"), 3000);
+    toastMessage.textContent = message;
+    toast.querySelector('i').className = isSuccess ? "fas fa-check-circle" : "fas fa-exclamation-circle";
+    toast.classList.add("show", "success-animate");
+    setTimeout(() => toast.classList.remove("show", "success-animate"), 3000);
 }
 
 function resetMessages() {
-  [error, success, loginError, loginSuccess].forEach(el => {
-    el.style.display = "none";
-    el.textContent = "";
-  });
+    [error, success, loginError, loginSuccess].forEach(el => {
+        el.style.display = "none";
+        el.textContent = "";
+    });
 }
 
 function showError(message, type = 'signup') {
-  const target = type === 'signup' ? error : loginError;
-  target.textContent = message;
-  target.style.display = "block";
-  shakeElement(target);
+    const target = type === 'signup' ? error : loginError;
+    target.textContent = message;
+    target.style.display = "block";
+    shakeElement(target);
 }
 
 function showSuccess(message, type = 'signup') {
-  const target = type === 'signup' ? success : loginSuccess;
-  target.textContent = message;
-  target.style.display = "block";
+    const target = type === 'signup' ? success : loginSuccess;
+    target.textContent = message;
+    target.style.display = "block";
 }
 
 // ============================
@@ -100,45 +124,45 @@ function showSuccess(message, type = 'signup') {
 // ============================
 
 function showForgotPasswordPage() {
-  forgotPasswordPage.classList.add("active");
-  container.style.display = "none";
-  showStep(1);
-  resetForgotPasswordForm();
+    forgotPasswordPage.classList.add("active");
+    container.style.display = "none";
+    showStep(1);
+    resetForgotPasswordForm();
 }
 
 function hideForgotPasswordPage() {
-  forgotPasswordPage.classList.remove("active");
-  container.style.display = "flex";
-  resetUserData = null;
-  clearOtpTimer();
+    forgotPasswordPage.classList.remove("active");
+    container.style.display = "flex";
+    resetUserData = null;
+    clearOtpTimer();
 }
 
 function showStep(stepNumber) {
-  [step1, step2, step3].forEach(s => s.classList.remove("active"));
-  if (stepNumber === 1) step1.classList.add("active");
-  if (stepNumber === 2) step2.classList.add("active");
-  if (stepNumber === 3) step3.classList.add("active");
+    [step1, step2, step3].forEach(s => s.classList.remove("active"));
+    if (stepNumber === 1) step1.classList.add("active");
+    if (stepNumber === 2) step2.classList.add("active");
+    if (stepNumber === 3) step3.classList.add("active");
 }
 
 function resetForgotPasswordForm() {
-  forgotPasswordForm.reset();
-  forgotError.style.display = forgotSuccess.style.display = "none";
-  forgotError.textContent = forgotSuccess.textContent = "";
+    forgotPasswordForm.reset();
+    forgotError.style.display = forgotSuccess.style.display = "none";
+    forgotError.textContent = forgotSuccess.textContent = "";
 }
 
 function resetStep3() {
-  newPasswordForm.reset();
-  passwordError.style.display = passwordSuccess.style.display = "none";
-  passwordError.textContent = passwordSuccess.textContent = "";
+    newPasswordForm.reset();
+    passwordError.style.display = passwordSuccess.style.display = "none";
+    passwordError.textContent = passwordSuccess.textContent = "";
 }
 
 function resetOtpForm() {
-  otpContainer.querySelectorAll('.otp-input').forEach(input => {
-    input.value = '';
-    input.classList.remove('filled');
-  });
-  otpError.style.display = otpSuccess.style.display = "none";
-  otpError.textContent = otpSuccess.textContent = "";
+    otpContainer.querySelectorAll('.otp-input').forEach(input => {
+        input.value = '';
+        input.classList.remove('filled');
+    });
+    otpError.style.display = otpSuccess.style.display = "none";
+    otpError.textContent = otpSuccess.textContent = "";
 }
 
 // ============================
@@ -146,52 +170,59 @@ function resetOtpForm() {
 // ============================
 
 function generateOTP() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+    return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
 function generateAndSendOTP() {
-  currentOTP = generateOTP();
-  otpExpiryTime = Date.now() + 3 * 60 * 1000;
+    currentOTP = generateOTP();
+    otpExpiryTime = Date.now() + 3 * 60 * 1000;
 
-  otpDisplayArea.innerHTML = `
-    <div class="otp-display-container">
-      <div class="otp-instruction"><strong>Enter this OTP in the boxes below:</strong></div>
-      <div class="otp-display">${currentOTP.split('').join(' ')}</div>
-      <div class="otp-instruction" style="font-size: 12px;">(This is a simulation. OTP would be sent in real app)</div>
-    </div>
-  `;
-  
-  resetOtpForm();
-  startOtpTimer();
-  showOtpSuccess("OTP generated successfully! Enter the 6-digit code above.");
-  const firstInput = otpContainer.querySelector('[data-index="0"]');
-  if (firstInput) firstInput.focus();
+    otpDisplayArea.innerHTML = `
+        <div class="otp-display-container">
+            <div class="otp-instruction"><strong>Enter this OTP in the boxes below:</strong></div>
+            <div class="otp-display">${currentOTP.split('').join(' ')}</div>
+            <div class="otp-instruction" style="font-size: 12px;">(This is a simulation. OTP would be sent in real app)</div>
+        </div>
+    `;
+    
+    resetOtpForm();
+    startOtpTimer();
+    showOtpSuccess("OTP generated successfully! Enter the 6-digit code above.");
+    
+    const firstInput = otpContainer.querySelector('[data-index="0"]');
+    if (firstInput) firstInput.focus();
 }
 
 function startOtpTimer() {
-  clearOtpTimer();
-  function updateTimer() {
-    const timeLeft = otpExpiryTime - Date.now();
-    if (timeLeft <= 0) {
-      clearInterval(otpTimerInterval);
-      otpTimer.textContent = "00:00";
-      otpTimer.parentElement.style.color = "#e74c3c";
-      return;
+    clearOtpTimer();
+    
+    function updateTimer() {
+        const timeLeft = otpExpiryTime - Date.now();
+        if (timeLeft <= 0) {
+            clearInterval(otpTimerInterval);
+            otpTimer.textContent = "00:00";
+            otpTimer.parentElement.style.color = "#e74c3c";
+            return;
+        }
+        
+        const minutes = Math.floor(timeLeft / 60000);
+        const seconds = Math.floor((timeLeft % 60000) / 1000);
+        otpTimer.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
     }
-    const minutes = Math.floor(timeLeft / 60000);
-    const seconds = Math.floor((timeLeft % 60000) / 1000);
-    otpTimer.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-  }
-  updateTimer();
-  otpTimerInterval = setInterval(updateTimer, 1000);
+    
+    updateTimer();
+    otpTimerInterval = setInterval(updateTimer, 1000);
 }
 
 function clearOtpTimer() {
-  if (otpTimerInterval) { clearInterval(otpTimerInterval); otpTimerInterval = null; }
+    if (otpTimerInterval) {
+        clearInterval(otpTimerInterval);
+        otpTimerInterval = null;
+    }
 }
 
 function getEnteredOTP() {
-  return Array.from(otpContainer.querySelectorAll('.otp-input')).map(i => i.value).join('');
+    return Array.from(otpContainer.querySelectorAll('.otp-input')).map(i => i.value).join('');
 }
 
 // ============================
@@ -199,240 +230,737 @@ function getEnteredOTP() {
 // ============================
 
 function handleForgotPasswordSubmit(e) {
-  e.preventDefault();
-  const email = document.getElementById("forgotEmail").value.trim();
-  const phone = document.getElementById("forgotPhone").value.trim();
-  const username = document.getElementById("forgotUsername").value.trim();
+    e.preventDefault();
+    const email = document.getElementById("forgotEmail").value.trim();
+    const phone = document.getElementById("forgotPhone").value.trim();
+    const username = document.getElementById("forgotUsername").value.trim();
 
-  forgotError.style.display = forgotSuccess.style.display = "none";
+    forgotError.style.display = forgotSuccess.style.display = "none";
 
-  if (!email || !phone || !username) { showForgotError("Please enter email, phone, and username"); return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showForgotError("Please enter a valid email address"); return; }
-
-  const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-  let foundUser = users.find(u => u.email === email && u.phone === phone && u.username === username);
-
-  if (!foundUser && DEMO_ACCOUNTS[email]) {
-    const demo = DEMO_ACCOUNTS[email];
-    if (demo.phone === phone && demo.username === username) {
-      foundUser = { ...demo, email, isDemo: true };
+    if (!email || !phone || !username) {
+        showForgotError("Please enter email, phone, and username");
+        return;
     }
-  }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showForgotError("Please enter a valid email address");
+        return;
+    }
 
-  if (foundUser) {
-    resetUserData = foundUser;
-    showForgotSuccess("Identity verified! Generating OTP...");
-    setTimeout(() => { showStep(2); generateAndSendOTP(); }, 1000);
-  } else showForgotError("No account found with these details. Make sure all information matches.");
+    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    let foundUser = users.find(u => u.email === email && u.phone === phone && u.username === username);
+
+    if (!foundUser && DEMO_ACCOUNTS[email]) {
+        const demo = DEMO_ACCOUNTS[email];
+        if (demo.phone === phone && demo.username === username) {
+            foundUser = { ...demo, email, isDemo: true };
+        }
+    }
+
+    if (foundUser) {
+        resetUserData = foundUser;
+        showForgotSuccess("Identity verified! Generating OTP...");
+        setTimeout(() => {
+            showStep(2);
+            generateAndSendOTP();
+        }, 1000);
+    } else {
+        showForgotError("No account found with these details. Make sure all information matches.");
+    }
 }
 
 function handleOtpVerificationSubmit(e) {
-  e.preventDefault();
-  const enteredOTP = getEnteredOTP();
-  otpError.style.display = otpSuccess.style.display = "none";
+    e.preventDefault();
+    const enteredOTP = getEnteredOTP();
+    otpError.style.display = otpSuccess.style.display = "none";
 
-  if (enteredOTP.length !== 6) { showOtpError("Please enter the complete 6-digit OTP"); return; }
-  if (Date.now() > otpExpiryTime) { showOtpError("OTP has expired. Please request a new one."); return; }
+    if (enteredOTP.length !== 6) {
+        showOtpError("Please enter the complete 6-digit OTP");
+        return;
+    }
+    
+    if (Date.now() > otpExpiryTime) {
+        showOtpError("OTP has expired. Please request a new one.");
+        return;
+    }
 
-  if (enteredOTP === currentOTP) {
-    showOtpSuccess("OTP verified successfully!");
-    clearOtpTimer();
-    setTimeout(() => showStep(3), 1000);
-  } else { showOtpError("Invalid OTP. Please try again."); shakeElement(otpError); }
+    if (enteredOTP === currentOTP) {
+        showOtpSuccess("OTP verified successfully!");
+        clearOtpTimer();
+        setTimeout(() => showStep(3), 1000);
+    } else {
+        showOtpError("Invalid OTP. Please try again.");
+        shakeElement(otpError);
+    }
 }
 
 function handleNewPasswordSubmit(e) {
-  e.preventDefault();
-  const newPassword = document.getElementById("newPassword").value;
-  const confirmNewPassword = document.getElementById("confirmNewPassword").value;
+    e.preventDefault();
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmNewPassword = document.getElementById("confirmNewPassword").value;
 
-  passwordError.style.display = passwordSuccess.style.display = "none";
+    passwordError.style.display = passwordSuccess.style.display = "none";
 
-  if (newPassword.length < 8) { showPasswordError("Password must be at least 8 characters"); return; }
-  if (newPassword !== confirmNewPassword) { showPasswordError("Passwords do not match"); return; }
+    if (newPassword.length < 8) {
+        showPasswordError("Password must be at least 8 characters");
+        return;
+    }
+    
+    if (newPassword !== confirmNewPassword) {
+        showPasswordError("Passwords do not match");
+        return;
+    }
 
-  if (updateUserPassword(resetUserData, newPassword)) {
-    showPasswordSuccess("Password updated successfully!");
-    setTimeout(() => { hideForgotPasswordPage(); showToast("Password has been reset successfully!"); }, 1500);
-  } else showPasswordError("Failed to update password. Please try again.");
+    if (updateUserPassword(resetUserData, newPassword)) {
+        showPasswordSuccess("Password updated successfully!");
+        setTimeout(() => {
+            hideForgotPasswordPage();
+            showToast("Password has been reset successfully!");
+        }, 1500);
+    } else {
+        showPasswordError("Failed to update password. Please try again.");
+    }
 }
 
 function updateUserPassword(userData, newPassword) {
-  try {
-    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    try {
+        const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
 
-    if (userData.isDemo) {
-      const idx = users.findIndex(u => u.email === userData.email);
-      if (idx === -1) users.push({ ...userData, password: newPassword, isDemoBased: true, id: Date.now(), createdAt: new Date().toISOString() });
-      else users[idx].password = newPassword;
-    } else {
-      const idx = users.findIndex(u => u.email === userData.email);
-      if (idx !== -1) users[idx].password = newPassword;
+        if (userData.isDemo) {
+            const idx = users.findIndex(u => u.email === userData.email);
+            if (idx === -1) {
+                users.push({
+                    ...userData,
+                    password: newPassword,
+                    isDemoBased: true,
+                    id: Date.now(),
+                    createdAt: new Date().toISOString()
+                });
+            } else {
+                users[idx].password = newPassword;
+            }
+        } else {
+            const idx = users.findIndex(u => u.email === userData.email);
+            if (idx !== -1) {
+                users[idx].password = newPassword;
+            }
+        }
+
+        localStorage.setItem('newbus_users', JSON.stringify(users));
+        return true;
+    } catch (err) {
+        console.error("Error updating password:", err);
+        return false;
     }
-
-    localStorage.setItem('newbus_users', JSON.stringify(users));
-    return true;
-  } catch (err) { console.error("Error updating password:", err); return false; }
 }
 
 // ============================
 // OTP UI Messages
 // ============================
 
-function showForgotError(msg) { forgotError.textContent = msg; forgotError.style.display="block"; shakeElement(forgotError); }
-function showForgotSuccess(msg) { forgotSuccess.textContent = msg; forgotSuccess.style.display="block"; }
-function showOtpError(msg) { otpError.textContent = msg; otpError.style.display="block"; shakeElement(otpError); }
-function showOtpSuccess(msg) { otpSuccess.textContent = msg; otpSuccess.style.display="block"; }
-function showPasswordError(msg) { passwordError.textContent = msg; passwordError.style.display="block"; shakeElement(passwordError); }
-function showPasswordSuccess(msg) { passwordSuccess.textContent = msg; passwordSuccess.style.display="block"; }
-
-// ============================
-// Sign Up / Sign In Functions
-// ============================
-
-function redirectBasedOnAccountType(accountType) {
-  switch(accountType) {
-    case 'passenger': window.location.href='passenger.html'; break;
-    case 'driver': window.location.href='driver.html'; break;
-    case 'admin': window.location.href='admin.html'; break;
-    default: console.error('Unknown account type:', accountType);
-  }
+function showForgotError(msg) {
+    forgotError.textContent = msg;
+    forgotError.style.display = "block";
+    shakeElement(forgotError);
 }
 
-function saveUserSession(userData) {
-  localStorage.setItem('currentUser', JSON.stringify(userData));
-  localStorage.setItem('userAccountType', userData.accountType);
-  localStorage.setItem('userName', userData.name);
-  showSuccess("Signing in...", 'login');
-  setTimeout(()=>redirectBasedOnAccountType(userData.accountType),1500);
+function showForgotSuccess(msg) {
+    forgotSuccess.textContent = msg;
+    forgotSuccess.style.display = "block";
+}
+
+function showOtpError(msg) {
+    otpError.textContent = msg;
+    otpError.style.display = "block";
+    shakeElement(otpError);
+}
+
+function showOtpSuccess(msg) {
+    otpSuccess.textContent = msg;
+    otpSuccess.style.display = "block";
+}
+
+function showPasswordError(msg) {
+    passwordError.textContent = msg;
+    passwordError.style.display = "block";
+    shakeElement(passwordError);
+}
+
+function showPasswordSuccess(msg) {
+    passwordSuccess.textContent = msg;
+    passwordSuccess.style.display = "block";
 }
 
 // ============================
 // Sign Up Logic
 // ============================
 
-function handleSignUpSubmit(event){
-  event.preventDefault();
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const username = document.getElementById("username").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const gender = document.getElementById("gender").value;
-  const accountType = document.getElementById("accountType").value;
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
+function handleSignUpSubmit(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const gender = document.getElementById("gender").value;
+    const accountType = document.getElementById("accountType").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
-  resetMessages();
-  if (!validateSignUp(name,email,username,phone,gender,accountType,password,confirmPassword)) return;
-  if (isEmailRegistered(email)) { showError("This email is already registered"); return; }
-  if (isUsernameTaken(username)) { showError("Username is already taken"); return; }
+    resetMessages();
+    
+    // Validation
+    if (!validateSignUp(name, email, username, phone, gender, accountType, password, confirmPassword)) return;
+    
+    if (isEmailRegistered(email)) {
+        showError("This email is already registered");
+        return;
+    }
+    
+    if (isUsernameTaken(username)) {
+        showError("Username is already taken");
+        return;
+    }
 
-  const userData = { 
-    id: Date.now(), name,email,username,phone,gender,accountType,password,isLoggedIn:true,createdAt:new Date().toISOString() 
-  };
-  const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-  users.push(userData);
-  localStorage.setItem('newbus_users', JSON.stringify(users));
+    // Create user data
+    const userData = {
+        id: Date.now(),
+        name,
+        email,
+        username,
+        phone,
+        gender,
+        accountType,
+        password,
+        isLoggedIn: false,
+        createdAt: new Date().toISOString()
+    };
 
-  saveUserSession(userData);
-  signUpForm.reset();
+    // Save to localStorage
+    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    users.push(userData);
+    localStorage.setItem('newbus_users', JSON.stringify(users));
+    
+    console.log("User registered successfully:", userData.email);
+
+    // Show success message
+    showSignUpSuccess(userData);
+    
+    // Reset the form but keep success message
+    document.getElementById("signUpForm").reset();
+}
+
+function showSignUpSuccess(userData) {
+    const successMessage = document.getElementById("success");
+    
+    successMessage.innerHTML = `
+        <div style="text-align: center; padding: 15px;">
+            <i class="fas fa-check-circle" style="color: #28a745; font-size: 24px; margin-bottom: 10px; display: block;"></i>
+            <h3 style="color: #155724; margin-bottom: 10px;">Account Created Successfully!</h3>
+            <p style="margin-bottom: 5px;"><strong>Welcome, ${userData.name}!</strong></p>
+            <p style="color: #0c5460; font-size: 14px; margin-bottom: 15px;">
+                Your account has been created as <strong>${userData.accountType}</strong>.
+            </p>
+            <p style="font-size: 13px; color: #6c757d;">
+                You can now sign in with your email: <strong>${userData.email}</strong>
+            </p>
+            <button id="autoSwitchToSignIn" style="
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: var(--border-radius-medium);
+                font-size: 14px;
+                cursor: pointer;
+                margin-top: 15px;
+                transition: all 0.3s ease;
+            ">
+                <i class="fas fa-sign-in-alt"></i> Switch to Sign In
+            </button>
+        </div>
+    `;
+    
+    successMessage.style.display = "block";
+    
+    // Add event listener to the switch button
+    const switchBtn = document.getElementById('autoSwitchToSignIn');
+    if (switchBtn) {
+        switchBtn.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+            resetMessages();
+            
+            // Auto-fill email in sign in form for convenience
+            document.getElementById("loginEmail").value = userData.email;
+        });
+    }
+    
+    // Auto switch after 5 seconds
+    setTimeout(() => {
+        if (container.classList.contains("right-panel-active")) {
+            container.classList.remove("right-panel-active");
+            resetMessages();
+            document.getElementById("loginEmail").value = userData.email;
+        }
+    }, 5000);
 }
 
 // ============================
-// Sign In Logic
+// Sign In Logic - FIXED
 // ============================
 
-function handleSignInSubmit(event){
-  event.preventDefault();
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value;
-  const selectedAccountType = document.querySelector('input[name="loginAccountType"]:checked').value;
+function handleSignInSubmit(event) {
+    event.preventDefault();
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const selectedAccountType = document.querySelector('input[name="loginAccountType"]:checked').value;
 
-  resetMessages();
-  if (!email) { showError("Please enter your email",'login'); return; }
-  if (!password) { showError("Please enter your password",'login'); return; }
+    resetMessages();
+    
+    if (!email) {
+        showError("Please enter your email", 'login');
+        return;
+    }
+    
+    if (!password) {
+        showError("Please enter your password", 'login');
+        return;
+    }
 
-  if (tryDemoLogin(email,password,selectedAccountType)) return;
-  if (tryLocalLogin(email,password,selectedAccountType)) return;
+    console.log("Login attempt:", { email, password, selectedAccountType });
 
-  showError("Invalid email or password",'login');
+    if (tryDemoLogin(email, password, selectedAccountType)) return;
+    if (tryLocalLogin(email, password, selectedAccountType)) return;
+
+    showError("Invalid email or password", 'login');
 }
 
-function tryDemoLogin(email,password,selectedAccountType){
-  if (!DEMO_ACCOUNTS[email] || DEMO_ACCOUNTS[email].password!==password) return false;
-  const account = DEMO_ACCOUNTS[email];
-  if (account.type!==selectedAccountType){ showError(`Please select "${account.type}" account type to login`,'login'); return false; }
-  const userData = { id:Date.now(), email,name:account.name,username:account.username,phone:account.phone,gender:account.gender,accountType:account.type,isLoggedIn:true,isDemo:true };
-  saveUserSession(userData);
-  return true;
+function tryDemoLogin(email, password, selectedAccountType) {
+    if (!DEMO_ACCOUNTS[email] || DEMO_ACCOUNTS[email].password !== password) return false;
+    
+    const account = DEMO_ACCOUNTS[email];
+    if (account.type !== selectedAccountType) {
+        showError(`Please select "${account.type}" account type to login`, 'login');
+        return false;
+    }
+    
+    const userData = {
+        id: Date.now(),
+        email,
+        name: account.name,
+        username: account.username,
+        phone: account.phone,
+        gender: account.gender,
+        accountType: account.type,
+        isLoggedIn: true,
+        isDemo: true
+    };
+    
+    console.log("Demo login successful:", userData);
+    saveUserSession(userData);
+    return true;
 }
 
-function tryLocalLogin(email,password,selectedAccountType){
-  const users = JSON.parse(localStorage.getItem('newbus_users'))||[];
-  const user = users.find(u=>u.email===email);
-  if(!user||user.password!==password) return false;
-  if(user.accountType!==selectedAccountType){ showError(`Please select "${user.accountType}" account type to login`,'login'); return false; }
-  user.isLoggedIn = true;
-  saveUserSession(user);
-  return true;
+function tryLocalLogin(email, password, selectedAccountType) {
+    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    console.log("Total users in localStorage:", users.length);
+    
+    const user = users.find(u => u.email === email);
+    
+    if (!user) {
+        console.log("User not found with email:", email);
+        return false;
+    }
+    
+    console.log("User found:", { 
+        email: user.email, 
+        password: user.password ? "***" : "missing",
+        accountType: user.accountType 
+    });
+    
+    // التحقق من كلمة المرور
+    if (user.password !== password) {
+        console.log("Password mismatch");
+        console.log("Input password:", password);
+        console.log("Stored password:", user.password);
+        return false;
+    }
+    
+    if (user.accountType !== selectedAccountType) {
+        showError(`Please select "${user.accountType}" account type to login`, 'login');
+        return false;
+    }
+    
+    // تحديث حالة تسجيل الدخول في localStorage
+    const updatedUsers = users.map(u => {
+        if (u.email === email) {
+            return { ...u, isLoggedIn: true };
+        }
+        return u;
+    });
+    
+    localStorage.setItem('newbus_users', JSON.stringify(updatedUsers));
+    
+    const loggedInUser = { ...user, isLoggedIn: true };
+    console.log("Local login successful:", loggedInUser);
+    saveUserSession(loggedInUser);
+    return true;
+}
+
+function saveUserSession(userData) {
+    console.log("Saving user session to localStorage...");
+    
+    // تأكد من أن isLoggedIn = true
+    const sessionData = {
+        ...userData,
+        isLoggedIn: true,
+        lastLogin: new Date().toISOString()
+    };
+    
+    // حفظ البيانات في localStorage
+    localStorage.setItem('currentUser', JSON.stringify(sessionData));
+    localStorage.setItem('userAccountType', userData.accountType);
+    localStorage.setItem('userName', userData.name);
+    
+    // Debug: عرض ما تم حفظه
+    console.log("Saved to localStorage:");
+    console.log("- currentUser:", JSON.parse(localStorage.getItem('currentUser')));
+    console.log("- userAccountType:", localStorage.getItem('userAccountType'));
+    console.log("- userName:", localStorage.getItem('userName'));
+    
+    // Show success message and redirect
+    showSuccess("Login successful! Redirecting...", 'login');
+    
+    setTimeout(() => {
+        console.log("Redirecting to:", userData.accountType);
+        redirectBasedOnAccountType(userData.accountType);
+    }, 1500);
+}
+
+function redirectBasedOnAccountType(accountType) {
+    console.log("Attempting redirect to:", accountType);
+    
+    // التحقق من أن الصفحات موجودة
+    const pages = {
+        passenger: 'passenger.html',
+        driver: 'driver.html',
+        admin: 'admin.html'
+    };
+    
+    if (pages[accountType]) {
+        console.log("Redirecting to:", pages[accountType]);
+        window.location.href = pages[accountType];
+    } else {
+        console.error("Unknown account type or page not found:", accountType);
+        showError(`Page for ${accountType} not found!`, 'login');
+    }
+}
+
+// ============================
+// Validation Helpers
+// ============================
+
+function validateSignUp(name, email, username, phone, gender, accountType, password, confirmPassword) {
+    if (!name) {
+        showError("Please enter your full name");
+        return false;
+    }
+    
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError("Please enter a valid email");
+        return false;
+    }
+    
+    if (!username || !/^[a-zA-Z0-9_]{3,20}$/.test(username)) {
+        showError("Username must be 3-20 characters");
+        return false;
+    }
+    
+    if (!phone || !/^[+]?[0-9]{10,15}$/.test(phone)) {
+        showError("Please enter valid phone number");
+        return false;
+    }
+    
+    if (!gender) {
+        showError("Please select gender");
+        return false;
+    }
+    
+    if (!accountType) {
+        showError("Please select account type");
+        return false;
+    }
+    
+    if (!password || password.length < 8) {
+        showError("Password must be at least 8 characters");
+        return false;
+    }
+    
+    if (password !== confirmPassword) {
+        showError("Passwords do not match");
+        return false;
+    }
+    
+    return true;
+}
+
+function isEmailRegistered(email) {
+    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    return users.some(u => u.email === email);
+}
+
+function isUsernameTaken(username) {
+    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    return users.some(u => u.username === username);
+}
+
+// ============================
+// Form Reset Functions
+// ============================
+
+function resetSignUpForm() {
+    // Reset form values
+    if (signUpForm) {
+        signUpForm.reset();
+    }
+    
+    // Reset messages
+    resetMessages();
 }
 
 // ============================
 // Event Listeners
 // ============================
 
-signUpBtn.addEventListener("click",()=>container.classList.add("right-panel-active"));
-signInBtn.addEventListener("click",()=>container.classList.remove("right-panel-active"));
+// Initialize event listeners
+function initEventListeners() {
+    console.log("Initializing event listeners...");
+    
+    // Main navigation
+    if (signUpBtn) {
+        signUpBtn.addEventListener("click", () => {
+            console.log("Sign Up button clicked");
+            container.classList.add("right-panel-active");
+            resetSignUpForm();
+        });
+    } else {
+        console.error("Sign Up button not found!");
+    }
+    
+    if (signInBtn) {
+        signInBtn.addEventListener("click", () => {
+            console.log("Sign In button clicked");
+            container.classList.remove("right-panel-active");
+            resetMessages();
+        });
+    } else {
+        console.error("Sign In button not found!");
+    }
 
-signUpForm.addEventListener("submit", handleSignUpSubmit);
-signInForm.addEventListener("submit", handleSignInSubmit);
+    // Form submissions
+    if (signUpForm) {
+        signUpForm.addEventListener("submit", handleSignUpSubmit);
+    } else {
+        console.error("Sign Up form not found!");
+    }
+    
+    if (signInForm) {
+        signInForm.addEventListener("submit", handleSignInSubmit);
+    } else {
+        console.error("Sign In form not found!");
+    }
 
-resendOtpBtn.addEventListener("click", generateAndSendOTP);
+    // Mobile Signup Button
+    if (mobileSignupBtn) {
+        mobileSignupBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            console.log("Mobile Sign Up button clicked!");
+            
+            container.classList.add("right-panel-active");
+            
+            // Reset login messages
+            loginError.style.display = "none";
+            loginSuccess.style.display = "none";
+            loginError.textContent = "";
+            loginSuccess.textContent = "";
+            
+            window.scrollTo(0, 0);
+        });
+    } else {
+        console.log("Mobile signup button not found (optional)");
+    }
 
-forgotPasswordLink?.addEventListener("click", (e)=>{ e.preventDefault(); showForgotPasswordPage(); });
-forgotBackToSignIn?.addEventListener("click",(e)=>{ e.preventDefault(); hideForgotPasswordPage(); });
-backToStep1?.addEventListener("click",(e)=>{ e.preventDefault(); showStep(1); });
-backToStep2?.addEventListener("click",(e)=>{ e.preventDefault(); showStep(2); });
+    // Forgot Password
+    if (resendOtpBtn) {
+        resendOtpBtn.addEventListener("click", generateAndSendOTP);
+    }
+    
+    if (forgotPasswordLink) {
+        forgotPasswordLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            showForgotPasswordPage();
+        });
+    }
+    
+    if (forgotBackToSignIn) {
+        forgotBackToSignIn.addEventListener("click", (e) => {
+            e.preventDefault();
+            hideForgotPasswordPage();
+        });
+    }
+    
+    if (backToStep1) {
+        backToStep1.addEventListener("click", (e) => {
+            e.preventDefault();
+            showStep(1);
+        });
+    }
+    
+    if (backToStep2) {
+        backToStep2.addEventListener("click", (e) => {
+            e.preventDefault();
+            showStep(2);
+        });
+    }
 
-forgotPasswordForm?.addEventListener("submit", handleForgotPasswordSubmit);
-otpVerificationForm?.addEventListener("submit", handleOtpVerificationSubmit);
-newPasswordForm?.addEventListener("submit", handleNewPasswordSubmit);
+    // Forgot password forms
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener("submit", handleForgotPasswordSubmit);
+    }
+    
+    if (otpVerificationForm) {
+        otpVerificationForm.addEventListener("submit", handleOtpVerificationSubmit);
+    }
+    
+    if (newPasswordForm) {
+        newPasswordForm.addEventListener("submit", handleNewPasswordSubmit);
+    }
 
-otpContainer.addEventListener('input', e => {
-  if (!e.target.classList.contains('otp-input')) return;
-  const idx = parseInt(e.target.dataset.index);
-  if(e.target.value.length===1 && idx<5) otpContainer.querySelector(`[data-index="${idx+1}"]`)?.focus();
-  e.target.classList.toggle('filled', e.target.value.length===1);
-});
+    // OTP input handling
+    if (otpContainer) {
+        otpContainer.addEventListener('input', e => {
+            if (!e.target.classList.contains('otp-input')) return;
+            
+            const idx = parseInt(e.target.dataset.index);
+            if (e.target.value.length === 1 && idx < 5) {
+                otpContainer.querySelector(`[data-index="${idx + 1}"]`)?.focus();
+            }
+            
+            e.target.classList.toggle('filled', e.target.value.length === 1);
+        });
 
-otpContainer.addEventListener('keydown', e=>{
-  if (!e.target.classList.contains('otp-input')) return;
-  const idx = parseInt(e.target.dataset.index);
-  if(e.key==='Backspace' && e.target.value==='' && idx>0) otpContainer.querySelector(`[data-index="${idx-1}"]`)?.focus();
+        otpContainer.addEventListener('keydown', e => {
+            if (!e.target.classList.contains('otp-input')) return;
+            
+            const idx = parseInt(e.target.dataset.index);
+            if (e.key === 'Backspace' && e.target.value === '' && idx > 0) {
+                otpContainer.querySelector(`[data-index="${idx - 1}"]`)?.focus();
+            }
+        });
+    }
+
+    // Back to Sign In from Sign Up (dynamic event delegation)
+    document.addEventListener('click', function(e) {
+        if (e.target && (e.target.id === 'signupBackToSignIn' || e.target.closest('#signupBackToSignIn'))) {
+            e.preventDefault();
+            container.classList.remove("right-panel-active");
+            resetMessages();
+        }
+        
+        // Auto switch button from success message
+        if (e.target && e.target.id === 'autoSwitchToSignIn') {
+            e.preventDefault();
+            container.classList.remove("right-panel-active");
+            resetMessages();
+        }
+    });
+    
+    console.log("Event listeners initialized successfully");
+}
+
+// ============================
+// Initialize Application
+// ============================
+
+// Initialize all event listeners when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM Content Loaded - Initializing login system...");
+    initEventListeners();
+    
+    // Auto-focus email field on sign in page
+    if (!container.classList.contains("right-panel-active")) {
+        setTimeout(() => {
+            const loginEmail = document.getElementById("loginEmail");
+            if (loginEmail) {
+                loginEmail.focus();
+                console.log("Auto-focused login email field");
+            }
+        }, 300);
+    }
+    
+    // Debug: عرض بيانات localStorage الحالية
+    console.log("Current localStorage data:");
+    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    console.log("Registered users:", users.length);
+    users.forEach(user => {
+        console.log(`- ${user.email} (${user.accountType})`);
+    });
 });
 
 // ============================
-// Validation Helpers
+// Page Load Check - UPDATED
 // ============================
 
-function validateSignUp(name,email,username,phone,gender,accountType,password,confirmPassword){
-  if(!name){ showError("Please enter your full name"); return false; }
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showError("Please enter a valid email"); return false; }
-  if(!username||!/^[a-zA-Z0-9_]{3,20}$/.test(username)){ showError("Username must be 3-20 characters"); return false; }
-  if(!phone||!/^[+]?[0-9]{10,15}$/.test(phone)){ showError("Please enter valid phone number"); return false; }
-  if(!gender){ showError("Please select gender"); return false; }
-  if(!accountType){ showError("Please select account type"); return false; }
-  if(!password||password.length<8){ showError("Password must be at least 8 characters"); return false; }
-  if(password!==confirmPassword){ showError("Passwords do not match"); return false; }
-  return true;
+// Check if user is already logged in
+window.addEventListener('load', function() {
+    console.log("Page loaded - checking authentication...");
+    
+    const currentUser = localStorage.getItem('currentUser');
+    const userAccountType = localStorage.getItem('userAccountType');
+    
+    console.log("currentUser from localStorage:", currentUser);
+    console.log("userAccountType from localStorage:", userAccountType);
+    
+    if (currentUser) {
+        try {
+            const userData = JSON.parse(currentUser);
+            console.log("Parsed userData:", userData);
+            
+            if (userData.isLoggedIn === true && userAccountType) {
+                console.log("User is already logged in, redirecting to:", userAccountType);
+                
+                // تأخير قليل للتأكد من تحميل الصفحة
+                setTimeout(() => {
+                    redirectBasedOnAccountType(userAccountType);
+                }, 500);
+            } else {
+                console.log("User is not logged in or missing data");
+                console.log("isLoggedIn:", userData.isLoggedIn);
+                console.log("userAccountType:", userAccountType);
+            }
+        } catch (error) {
+            console.error("Error parsing currentUser:", error);
+        }
+    } else {
+        console.log("No currentUser found in localStorage");
+    }
+});
+
+// ============================
+// Debug Functions - للتحقق من المشكلة
+// ============================
+
+function debugLocalStorage() {
+    console.log("=== LOCALSTORAGE DEBUG ===");
+    console.log("All localStorage keys:", Object.keys(localStorage));
+    
+    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    console.log("Number of users:", users.length);
+    console.log("All users:", users);
+    
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log("Current user:", currentUser);
+    
+    console.log("User account type:", localStorage.getItem('userAccountType'));
+    console.log("User name:", localStorage.getItem('userName'));
 }
 
-function isEmailRegistered(email){
-  const users = JSON.parse(localStorage.getItem('newbus_users'))||[];
-  return users.some(u=>u.email===email);
-}
-
-function isUsernameTaken(username){
-  const users = JSON.parse(localStorage.getItem('newbus_users'))||[];
-  return users.some(u=>u.username===username);
-}
