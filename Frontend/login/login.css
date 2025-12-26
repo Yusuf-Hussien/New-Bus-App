@@ -1,780 +1,493 @@
 /* ============================
        Form Select Styles
-       ============================ */
-    .form-select {
-      width: 100%;
-      padding: 16px 20px 16px 45px;
-      border-radius: var(--border-radius-medium);
-      border: 2px solid transparent;
-      background: var(--background-light);
-      outline: none;
-      font-size: 15px;
-      color: #333;
-      transition: var(--transition-fast);
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      cursor: pointer;
-    }
-    
-    .form-select:focus {
-      border-color: var(--primary-color);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1);
-    }
-    
-    .input-group select + .input-icon {
-      pointer-events: none;
-    }
-    
-    .input-group::after {
-      content: '\f078';
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900;
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--primary-color);
-      pointer-events: none;
-      font-size: 14px;
-      z-index: 1;
-    }
-    
-    .input-group select {
-      position: relative;
-      z-index: 2;
-    }
-    
-    /* ============================
-       Sign Up Form Scroll - IMPROVED
-       ============================ */
-    .form-container.sign-up form {
-        max-height: none;
-        overflow-y: auto;
-        padding-right: 10px;
-        scrollbar-width: thin;
-        scrollbar-color: var(--primary-color) var(--background-light);
-    }
-    
-    .form-container.sign-up form::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    .form-container.sign-up form::-webkit-scrollbar-track {
-        background: var(--background-light);
-        border-radius: 10px;
-    }
-    
-    .form-container.sign-up form::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 10px;
-    }
-    
-    .form-container.sign-up form::-webkit-scrollbar-thumb:hover {
-        background: #0052cc;
-    }
-    
-    /* Adjust form spacing for scroll */
-    .form-container.sign-up {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        min-height: 100vh;
-    }
-    
-    .form-container.sign-up h1 {
-        margin-bottom: 20px;
-        font-size: clamp(24px, 5vw, 32px);
-        text-align: center;
-    }
-    
-    /* Ensure all input groups have proper spacing */
-    .form-container.sign-up .input-group {
-        margin-bottom: 15px;
-    }
-    
-    /* ============================
-       Radio Button Group Styles - IMPROVED
-       ============================ */
-    .account-type-group {
-      margin: 15px 0;
-      text-align: center;
-    }
-    
-    .account-type-title {
-      display: block;
-      margin-bottom: 12px;
-      font-size: 14px;
-      color: var(--text-light);
-      font-weight: 500;
-    }
-    
-    .radio-group {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    
-    .radio-label {
-      display: inline-flex;
-      align-items: center;
-      cursor: pointer;
-      padding: 8px 15px;
-      border-radius: var(--border-radius-medium);
-      background: var(--background-light);
-      transition: var(--transition-fast);
-      border: 2px solid transparent;
-      min-width: 100px;
-      justify-content: center;
-    }
-    
-    .radio-label:hover {
-      background: rgba(0, 87, 255, 0.05);
-      border-color: rgba(0, 87, 255, 0.2);
-    }
-    
-    .radio-label input[type="radio"] {
-      display: none;
-    }
-    
-    .radio-label .radio-custom {
-      width: 18px;
-      height: 18px;
-      border: 2px solid #ccc;
-      border-radius: 50%;
-      margin-right: 8px;
-      position: relative;
-      transition: var(--transition-fast);
-      flex-shrink: 0;
-    }
-    
-    .radio-label input[type="radio"]:checked + .radio-custom {
-      border-color: var(--primary-color);
-      background: var(--primary-color);
-    }
-    
-    .radio-label input[type="radio"]:checked + .radio-custom::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
-      background: white;
-      border-radius: 50%;
-    }
-    
-    .radio-label .radio-text {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-dark);
-      white-space: nowrap;
-    }
-    
-    .radio-label input[type="radio"]:checked ~ .radio-text {
-      color: var(--primary-color);
-      font-weight: 600;
-    }
-    
-    /* ============================
-       User Type Badge
-       ============================ */
-    .user-type-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-left: 10px;
-      background: rgba(0, 87, 255, 0.1);
-      color: var(--primary-color);
-    }
-    
-    /* ============================
-       Forgot Password Link
-       ============================ */
-    .forgot-password-link {
-      text-align: right;
-      margin: -8px 0 15px 0;
-    }
-    
-    .forgot-password-link a {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-size: 14px;
-      transition: var(--transition-fast);
-      display: inline-block;
-    }
-    
-    .forgot-password-link a:hover {
-      text-decoration: underline;
-    }
-    
-    /* ============================
-       Forgot Password Page - IMPROVED
-       ============================ */
-    .forgot-password-page {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--white);
-      z-index: 1000;
-      padding: 40px;
-      box-sizing: border-box;
-      animation: fadeIn 0.3s ease;
-    }
-    
-    .forgot-password-page.active {
-      display: block;
-    }
-    
-    /* ============================
-       Steps in Forgot Password
-       ============================ */
-    .step {
-      display: none;
-      animation: slideIn 0.3s ease;
-    }
-    
-    .step.active {
-      display: block;
-    }
-    
-    .step-title {
-      font-size: clamp(22px, 5vw, 28px);
-      margin-bottom: 10px;
-      color: var(--text-dark);
-      text-align: center;
-    }
-    
-    .step-description {
-      color: var(--text-light);
-      margin-bottom: 30px;
-      font-size: clamp(14px, 3vw, 16px);
-      text-align: center;
-      line-height: 1.5;
-    }
-    
-    /* ============================
-       OTP Input Styles - IMPROVED
-       ============================ */
-    .otp-container {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-    }
-    
-    .otp-input {
-      width: 50px;
-      height: 60px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      border: 2px solid var(--background-light);
-      border-radius: var(--border-radius-small);
-      background: var(--background-light);
-      outline: none;
-      transition: var(--transition-fast);
-      flex: 0 0 auto;
-    }
-    
-    .otp-input:focus {
-      border-color: var(--primary-color);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1);
-    }
-    
-    .otp-input.filled {
-      border-color: var(--primary-color);
-      background: rgba(0, 87, 255, 0.05);
-    }
-    
-    /* ============================
-       OTP Display Styles - IMPROVED
-       ============================ */
-    .otp-display-container {
-      text-align: center;
-      margin: 15px 0;
-    }
-    
-    .otp-display {
-      font-size: clamp(20px, 6vw, 28px);
-      font-weight: bold;
-      letter-spacing: clamp(4px, 1vw, 10px); /* FIXED */
-      color: var(--primary-color);
-      background: rgba(0, 87, 255, 0.1);
-      padding: 15px;
-      border-radius: var(--border-radius-medium);
-      margin: 15px auto;
-      display: inline-block;
-      border: 2px dashed rgba(0, 87, 255, 0.3);
-      font-family: monospace;
-      min-width: min(200px, 80vw);
-      word-spacing: clamp(4px, 1vw, 10px); /* FIXED */
-    }
-    
-    .otp-instruction {
-      color: var(--text-light);
-      font-size: clamp(12px, 3vw, 14px);
-      margin: 10px 0;
-      text-align: center;
-      line-height: 1.4;
-    }
-    
-    .otp-instruction strong {
-      color: var(--primary-color);
-      display: block;
-      margin-bottom: 5px;
-    }
-    
-    .otp-timer {
-      text-align: center;
-      color: #e74c3c;
-      font-size: clamp(13px, 3vw, 14px);
-      margin: 10px 0;
-      font-weight: 500;
-    }
-    
-    /* ============================
-       Back Button
-       ============================ */
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      color: var(--primary-color);
-      text-decoration: none;
-      margin-bottom: 30px;
-      font-size: 14px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-    }
-    
-    .back-button i {
-      margin-right: 8px;
-      font-size: 12px;
-    }
-    
-    /* ============================
-       Error and Success Messages
-       ============================ */
-    #forgotError, #forgotSuccess,
-    #otpError, #otpSuccess {
-      display: none;
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: var(--border-radius-small);
-      font-size: 14px;
-      text-align: center;
-    }
-    
-    #forgotError, #otpError {
-      background-color: rgba(231, 76, 60, 0.1);
-      color: #e74c3c;
-    }
-    
-    #forgotSuccess, #otpSuccess {
-      background-color: rgba(39, 174, 96, 0.1);
-      color: #27ae60;
-    }
-    
-    #passwordError {
-      background-color: rgba(231, 76, 60, 0.1);
-      color: #e74c3c;
-    }
-    
-    #passwordSuccess {
-      background-color: rgba(39, 174, 96, 0.1);
-      color: #27ae60;
-    }
-    
-    #error, #success, #loginError, #loginSuccess {
-      text-align: center;
-      margin: 15px 0;
-      padding: 10px;
-      border-radius: var(--border-radius-small);
-      font-size: 14px;
-    }
-    
-    #error, #loginError {
-      background-color: rgba(231, 76, 60, 0.1);
-      color: #e74c3c;
-    }
-    
-    #success, #loginSuccess {
-      background-color: rgba(39, 174, 96, 0.1);
-      color: #27ae60;
-    }
-    
-    /* ============================
-       Buttons Responsive Styles
-       ============================ */
-    button[type="submit"], .ghost {
-      font-size: clamp(14px, 3vw, 16px);
-      padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
-      min-height: 44px; /* Better touch target for mobile */
-    }
-    
-    .ghost {
-      font-size: clamp(13px, 2.5vw, 15px);
-      padding: clamp(10px, 2.5vw, 14px) clamp(18px, 4vw, 28px);
-    }
-    
-    /* ============================
-       Input Groups Responsive
-       ============================ */
-    .input-group {
-      margin-bottom: clamp(12px, 3vw, 16px);
-    }
-    
-    .input-group input, .form-select {
-      font-size: clamp(14px, 3vw, 16px);
-      padding: clamp(14px, 3.5vw, 18px) clamp(20px, 4vw, 45px);
-    }
-    
-    .input-icon {
-      font-size: clamp(14px, 3vw, 16px);
-      left: clamp(15px, 4vw, 20px);
-    }
-    
-    /* ============================
-       Animations
-       ============================ */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    /* ============================
-       Responsive Styles - PROFESSIONAL
-       ============================ */
-    @media (max-width: 1200px) {
-      .container {
-        max-width: 90%;
-      }
-    }
-    
-    @media (max-width: 992px) {
-      .container {
-        max-width: 95%;
-        padding: 20px;
-      }
-      
-      .form-container {
-        width: 100%;
-        padding: 30px 20px;
-      }
-    }
-    @media (max-width: 1366px) {
-    .form-container.sign-up form {
-        max-height: none;
-        overflow-y: visible;
-    }
-
-    .form-container.sign-up {
-        justify-content: flex-start;
-    }
+============================ */
+.form-select {
+    width: 100%;
+    padding: 16px 20px 16px 45px;
+    border-radius: var(--border-radius-medium);
+    border: 2px solid transparent;
+    background: var(--background-light);
+    outline: none;
+    font-size: 15px;
+    color: #333;
+    transition: var(--transition-fast);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
 }
 
-    
-    @media (max-width: 768px) {
-      /* Mobile Landscape / Tablet */
-      .container {
-        flex-direction: column;
-        height: auto;
-        min-height: 100vh;
-        border-radius: 0;
-        box-shadow: none;
-      }
-      
-      .form-container {
-        width: 100%;
-        margin: 0;
-        padding: 30px 20px;
-        border-radius: 0;
-      }
-      
-      .form-container.sign-up form {
-        max-height: none !important; /* FIXED: إشيل الـ fixed height */
-        overflow-y: auto;
-      }
-      
-      .overlay-container {
-        display: none;
-      }
-      
-      .forgot-password-page {
-        padding: 30px 20px;
-      }
-      
-      .step-title {
-        font-size: 22px;
-      }
-      
-      .step-description {
-        font-size: 14px;
-      }
-      
-      /* OTP Mobile Improvements */
-      .otp-input {
-        width: 45px;
-        height: 55px;
-        font-size: 22px;
-      }
-      
-      .otp-container {
-        gap: 8px;
-        justify-content: space-between; /* FIXED */
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      
-      /* Radio Group Mobile */
-      .radio-group {
-        flex-direction: column;
-        align-items: stretch; /* FIXED */
-        gap: 10px;
-      }
-      
-      .radio-label {
-        width: 100%; /* FIXED */
-        max-width: 100%;
-        min-width: auto;
-        justify-content: flex-start; /* FIXED */
-      }
-      
-      /* Sign In Form on Mobile */
-      .form-container.sign-in h1,
-      .form-container.sign-up h1 {
-        font-size: 26px;
-        margin-bottom: 25px;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      /* Mobile Portrait */
-      .container {
-        padding: 15px 10px;
-      }
-      
-      .form-container {
-        padding: 25px 15px;
-      }
-      
-      .form-container.sign-up form {
-        max-height: none;
-        padding-right: 5px;
-      }
-      
-      .otp-input {
-        width: 40px;
-        height: 50px;
-        font-size: 20px;
-      }
-      
-      .otp-container {
-        gap: 6px;
-        max-width: 280px;
-      }
-      
-      .otp-display {
-        padding: 12px;
-        letter-spacing: 6px;
-        min-width: 90%;
-        font-size: 18px;
-      }
-      
-      .radio-label {
-        width: 100%;
-        padding: 10px;
-      }
-      
-      .account-type-title {
-        font-size: 13px;
-      }
-      
-      .forgot-password-link a {
-        font-size: 13px;
-      }
-      
-      /* Form Titles */
-      h1 {
-        font-size: 24px !important;
-      }
-      
-      /* Back Button */
-      .back-button {
-        font-size: 13px;
-        margin-bottom: 20px;
-      }
-      
-      /* Buttons */
-      button[type="submit"] {
-        width: 100%;
-        padding: 14px;
-      }
-    }
-    
-    @media (max-width: 400px) {
-      /* Small Phones */
-      .otp-input {
-        width: 35px;
-        height: 45px;
-        font-size: 18px;
-        min-width: 35px; /* FIXED: تحسين للمس */
-      }
-      
-      .otp-container {
-        gap: 4px; /* FIXED */
-        max-width: 240px;
-      }
-      
-      .form-container {
-        padding: 20px 10px;
-      }
-      
-      .radio-label {
-        width: 100%;
-        padding: 8px 10px;
-      }
-      
-      .radio-text {
-        font-size: 13px;
-      }
-      
-      .input-group input, .form-select {
-        padding: 12px 35px;
-      }
-      
-      .input-icon {
-        left: 12px;
-      }
-      
-      .otp-display {
-        font-size: 16px; /* FIXED */
-        padding: 10px;
-        letter-spacing: 4px;
-        min-width: 95%;
-      }
-      
-      .step-title {
-        font-size: 20px;
-      }
-      
-      .step-description {
-        font-size: 13px;
-      }
-    }
-    
-    @media (max-height: 700px) and (orientation: landscape) {
-      /* Landscape Mobile */
-      .form-container.sign-up form {
-        max-height: 55vh;
-      }
-      
-      .input-group {
-        margin-bottom: 10px;
-      }
-      
-      .input-group input, .form-select {
-        padding: 12px 35px;
-      }
-      
-      h1 {
-        font-size: 20px !important;
-        margin-bottom: 15px !important;
-      }
-      
-      /* تحسين الـ OTP في الوضع الأفقي */
-      .otp-container {
-        gap: 4px;
-      }
-      
-      .otp-input {
-        width: 40px;
-        height: 50px;
-      }
-    }
-    
-    /* ============================
-       Touch Device Optimizations
-       ============================ */
-    @media (hover: none) and (pointer: coarse) {
-      /* For touch devices */
-      .radio-label:hover {
-        background: var(--background-light);
-        border-color: transparent;
-      }
-      
-      button, .radio-label, input, select {
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;
-      }
-      
-      .input-group input:focus, .form-select:focus {
-        border-width: 2px;
-      }
-      
-      /* Increase touch targets */
-      .otp-input {
-        min-width: 44px;
-        min-height: 44px;
-      }
-      
-      .radio-label {
-        min-height: 44px;
-      }
-      
-      .form-select {
-        min-height: 50px;
-      }
-    }
-    
-    /* ============================
-       Dark Mode Support
-       ============================ */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --text-dark: #f0f0f0;
-        --text-light: #b0b0b0;
-        --background-light: rgba(255, 255, 255, 0.1);
-      }
-      
-      .form-select, .otp-input, .radio-label {
-        background: rgba(255, 255, 255, 0.05);
-        color: #f0f0f0;
-      }
-      
-      .form-select:focus, .otp-input:focus {
-        background: rgba(255, 255, 255, 0.1);
-      }
-    }
+.form-select:focus {
+    border-color: var(--primary-color);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1);
+}
 
-    /* ============================
-   Mobile Signup Button - NEW
-   ============================ */
+.input-group select + .input-icon {
+    pointer-events: none;
+}
+
+.input-group::after {
+    content: '\f078';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    pointer-events: none;
+    font-size: 14px;
+    z-index: 1;
+}
+
+.input-group select {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================
+       Login Container
+============================ */
+.login-container {
+    min-height: 650px;
+}
+
+.right-panel-active #signInForm {
+    display: none;
+}
+
+/* ============================
+       Sign Up Form Styles
+============================ */
+.form-container.sign-up {
+    min-height: auto;
+    overflow: auto;
+    padding: 20px;
+    padding-top: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.form-container.sign-up form {
+    margin-top: 50px;
+    max-height: none;
+    padding-right: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--background-light);
+}
+
+.form-container.sign-up form::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-container.sign-up form::-webkit-scrollbar-track {
+    background: var(--background-light);
+    border-radius: 10px;
+}
+
+.form-container.sign-up form::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.form-container.sign-up form::-webkit-scrollbar-thumb:hover {
+    background: #0052cc;
+}
+
+.form-container.sign-up h1 {
+    margin-bottom: 20px;
+    font-size: clamp(24px, 5vw, 32px);
+    text-align: center;
+}
+
+.form-container.sign-up .input-group {
+    margin-bottom: 15px;
+}
+
+/* ============================
+       Radio Button Group Styles
+============================ */
+.account-type-group {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.account-type-title {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.radio-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: var(--border-radius-medium);
+    background: var(--background-light);
+    transition: var(--transition-fast);
+    border: 2px solid transparent;
+    min-width: 100px;
+    justify-content: center;
+}
+
+.radio-label:hover {
+    background: rgba(0, 87, 255, 0.05);
+    border-color: rgba(0, 87, 255, 0.2);
+}
+
+.radio-label input[type="radio"] {
+    display: none;
+}
+
+.radio-label .radio-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+.radio-label .radio-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    white-space: nowrap;
+}
+
+.radio-label input[type="radio"]:checked ~ .radio-text {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ============================
+       User Type Badge
+============================ */
+.user-type-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 10px;
+    background: rgba(0, 87, 255, 0.1);
+    color: var(--primary-color);
+}
+
+/* ============================
+       Forgot Password Link
+============================ */
+.forgot-password-link {
+    text-align: right;
+    margin: -8px 0 15px 0;
+}
+
+.forgot-password-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition-fast);
+    display: inline-block;
+}
+
+.forgot-password-link a:hover {
+    text-decoration: underline;
+}
+
+/* ============================
+       Forgot Password Page
+============================ */
+.forgot-password-page {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--white);
+    z-index: 1000;
+    padding: 40px;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease;
+}
+
+.forgot-password-page.active {
+    display: block;
+}
+
+/* ============================
+       Steps in Forgot Password
+============================ */
+.step {
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+.step.active {
+    display: block;
+}
+
+.step-title {
+    font-size: clamp(22px, 5vw, 28px);
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.step-description {
+    color: var(--text-light);
+    margin-bottom: 30px;
+    font-size: clamp(14px, 3vw, 16px);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ============================
+       OTP Input Styles
+============================ */
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.otp-input {
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border: 2px solid var(--background-light);
+    border-radius: var(--border-radius-small);
+    background: var(--background-light);
+    outline: none;
+    transition: var(--transition-fast);
+    flex: 0 0 auto;
+}
+
+.otp-input:focus {
+    border-color: var(--primary-color);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1);
+}
+
+.otp-input.filled {
+    border-color: var(--primary-color);
+    background: rgba(0, 87, 255, 0.05);
+}
+
+/* ============================
+       OTP Display Styles
+============================ */
+.otp-display-container {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.otp-display {
+    font-size: clamp(20px, 6vw, 28px);
+    font-weight: bold;
+    letter-spacing: clamp(4px, 1vw, 10px);
+    color: var(--primary-color);
+    background: rgba(0, 87, 255, 0.1);
+    padding: 15px;
+    border-radius: var(--border-radius-medium);
+    margin: 15px auto;
+    display: inline-block;
+    border: 2px dashed rgba(0, 87, 255, 0.3);
+    font-family: monospace;
+    min-width: min(200px, 80vw);
+    word-spacing: clamp(4px, 1vw, 10px);
+}
+
+.otp-instruction {
+    color: var(--text-light);
+    font-size: clamp(12px, 3vw, 14px);
+    margin: 10px 0;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.otp-instruction strong {
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.otp-timer {
+    text-align: center;
+    color: #e74c3c;
+    font-size: clamp(13px, 3vw, 14px);
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+/* ============================
+       Back Button
+============================ */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-bottom: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.back-button i {
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.back-signin-btn {
+    color: var(--primary-color) !important;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    margin-top: 12px;
+}
+
+/* ============================
+       Error and Success Messages
+============================ */
+#error,
+#success,
+#loginError,
+#loginSuccess,
+#forgotError,
+#forgotSuccess,
+#otpError,
+#otpSuccess {
+    display: none;
+}
+
+#forgotError,
+#otpError {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: var(--border-radius-small);
+    font-size: 14px;
+    text-align: center;
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+#forgotSuccess,
+#otpSuccess {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: var(--border-radius-small);
+    font-size: 14px;
+    text-align: center;
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+}
+
+#passwordError {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+#passwordSuccess {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+}
+
+#error,
+#success,
+#loginError,
+#loginSuccess {
+    text-align: center;
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: var(--border-radius-small);
+    font-size: 14px;
+}
+
+#error,
+#loginError {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+#success,
+#loginSuccess {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+}
+
+/* ============================
+       Buttons Responsive Styles
+============================ */
+button[type="submit"],
+.ghost {
+    font-size: clamp(14px, 3vw, 16px);
+    padding: clamp(12px, 3vw, 16px) clamp(20px, 5vw, 32px);
+    min-height: 44px;
+}
+
+.ghost {
+    font-size: clamp(13px, 2.5vw, 15px);
+    padding: clamp(10px, 2.5vw, 14px) clamp(18px, 4vw, 28px);
+}
+
+/* ============================
+       Input Groups Responsive
+============================ */
+.input-group {
+    margin-bottom: clamp(12px, 3vw, 16px);
+}
+
+.input-group input,
+.form-select {
+    font-size: clamp(14px, 3vw, 16px);
+    padding: clamp(14px, 3.5vw, 18px) clamp(20px, 4vw, 45px)!;
+}
+
+.input-icon {
+    font-size: clamp(14px, 3vw, 16px);
+    left: clamp(15px, 4vw, 20px);
+}
+
+/* ============================
+       Mobile Signup Button
+============================ */
 .mobile-signup-btn {
     display: none;
     position: fixed;
@@ -803,11 +516,30 @@
 .mobile-signup-btn i {
     margin-right: 8px;
 }
-.back-signin-btn {
-  color: var(--primary-color) !important;
-  background: transparent;
-  border: 2px solid var(--primary-color);
-  margin-top: 12px;
+
+/* ============================
+       Animations
+============================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes fadeInUp {
@@ -815,21 +547,200 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+/* ============================
+       Responsive Styles
+============================ */
+
+/* Large Screens */
+@media (max-width: 1366px) {
+    .form-container.sign-up form {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .form-container.sign-up {
+        justify-content: flex-start;
+    }
+}
+
+/* Desktops */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+    .container {
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    .form-container {
+        width: 100%;
+        padding: 30px 20px;
+    }
+}
+
+/* Mobile Landscape / Tablet */
 @media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .form-container {
+        width: 100%;
+        margin: 0;
+        padding: 30px 20px;
+        border-radius: 0;
+    }
+
+    .form-container.sign-up form {
+        max-height: none !important;
+        overflow-y: auto;
+    }
+
+    .overlay-container {
+        display: none;
+    }
+
+    .forgot-password-page {
+        padding: 30px 20px;
+    }
+
+    .step-title {
+        font-size: 22px;
+    }
+
+    .step-description {
+        font-size: 14px;
+    }
+
+    /* OTP Mobile Improvements */
+    .otp-input {
+        width: 45px;
+        height: 55px;
+        font-size: 22px;
+    }
+
+    .otp-container {
+        gap: 8px;
+        justify-content: space-between;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Radio Group Mobile */
+    .radio-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .radio-label {
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
+        justify-content: flex-start;
+    }
+
+    /* Sign In Form on Mobile */
+    .form-container.sign-in h1,
+    .form-container.sign-up h1 {
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    /* Mobile Signup Button */
     .mobile-signup-btn {
         display: flex;
         align-items: center;
         justify-content: center;
     }
+
+    /* Sign Up Form Adjustment */
+    .form-container.sign-up {
+        padding-top: 0px;
+    }
 }
 
+/* Mobile Portrait */
 @media (max-width: 576px) {
+    .container {
+        padding: 15px 10px;
+    }
+
+    .form-container {
+        padding: 25px 15px;
+    }
+
+    .form-container.sign-up form {
+        max-height: none;
+        padding-right: 5px;
+    }
+
+    .otp-input {
+        width: 40px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .otp-container {
+        gap: 6px;
+        max-width: 280px;
+    }
+
+    .otp-display {
+        padding: 12px;
+        letter-spacing: 6px;
+        min-width: 90%;
+        font-size: 18px;
+    }
+
+    .radio-label {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .account-type-title {
+        font-size: 13px;
+    }
+
+    .forgot-password-link a {
+        font-size: 13px;
+    }
+
+    /* Form Titles */
+    h1 {
+        font-size: 24px !important;
+    }
+
+    /* Back Button */
+    .back-button {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    /* Buttons */
+    button[type="submit"] {
+        width: 100%;
+        padding: 14px;
+    }
+
+    /* Mobile Signup Button */
     .mobile-signup-btn {
         bottom: 15px;
         right: 15px;
@@ -838,9 +749,59 @@
     }
 }
 
-/* ============================
-   Extra Small Screens Fix
-   ============================ */
+/* Extra Small Screens */
+@media (max-width: 400px) {
+    .otp-input {
+        width: 35px;
+        height: 45px;
+        font-size: 18px;
+        min-width: 35px;
+    }
+
+    .otp-container {
+        gap: 4px;
+        max-width: 240px;
+    }
+
+    .form-container {
+        padding: 20px 10px;
+    }
+
+    .radio-label {
+        width: 100%;
+        padding: 8px 10px;
+    }
+
+    .radio-text {
+        font-size: 13px;
+    }
+
+    .input-group input,
+    .form-select {
+        padding: 12px 35px;
+    }
+
+    .input-icon {
+        left: 12px;
+    }
+
+    .otp-display {
+        font-size: 16px;
+        padding: 10px;
+        letter-spacing: 4px;
+        min-width: 95%;
+    }
+
+    .step-title {
+        font-size: 20px;
+    }
+
+    .step-description {
+        font-size: 13px;
+    }
+}
+
+/* Extra Extra Small Screens */
 @media (max-width: 350px) {
     .otp-input {
         width: 30px !important;
@@ -848,35 +809,136 @@
         font-size: 16px !important;
         min-width: 30px !important;
     }
-    
+
     .otp-container {
         gap: 3px !important;
         max-width: 200px !important;
     }
-    
-    .input-group input, .form-select {
+
+    .input-group input,
+    .form-select {
         padding: 10px 30px !important;
         font-size: 13px !important;
     }
-    
+
     .input-icon {
         left: 10px !important;
         font-size: 13px !important;
     }
-    
+
     .radio-text {
         font-size: 12px !important;
     }
-    
+
     .radio-custom {
         width: 16px !important;
         height: 16px !important;
     }
-    
+
     .mobile-signup-btn {
         padding: 8px 16px !important;
         font-size: 12px !important;
         bottom: 10px !important;
         right: 10px !important;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 700px) and (orientation: landscape) {
+    .form-container.sign-up form {
+        max-height: 55vh;
+    }
+
+    .input-group {
+        margin-bottom: 10px;
+    }
+
+    .input-group input,
+    .form-select {
+        padding: 12px 35px;
+    }
+
+    h1 {
+        font-size: 20px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* تحسين الـ OTP في الوضع الأفقي */
+    .otp-container {
+        gap: 4px;
+    }
+
+    .otp-input {
+        width: 40px;
+        height: 50px;
+    }
+}
+
+/* Tablet Adjustment */
+@media (max-width: 1024px) {
+    .form-container.sign-up {
+        padding-top: 0px;
+    }
+}
+
+/* ============================
+       Touch Device Optimizations
+============================ */
+@media (hover: none) and (pointer: coarse) {
+
+    /* For touch devices */
+    .radio-label:hover {
+        background: var(--background-light);
+        border-color: transparent;
+    }
+
+    button,
+    .radio-label,
+    input,
+    select {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .input-group input:focus,
+    .form-select:focus {
+        border-width: 2px;
+    }
+
+    /* Increase touch targets */
+    .otp-input {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .radio-label {
+        min-height: 44px;
+    }
+
+    .form-select {
+        min-height: 50px;
+    }
+}
+
+/* ============================
+       Dark Mode Support
+============================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-dark: #f0f0f0;
+        --text-light: #b0b0b0;
+        --background-light: rgba(255, 255, 255, 0.1);
+    }
+
+    .form-select,
+    .otp-input,
+    .radio-label {
+        background: rgba(255, 255, 255, 0.05);
+        color: #f0f0f0;
+    }
+
+    .form-select:focus,
+    .otp-input:focus {
+        background: rgba(255, 255, 255, 0.1);
     }
 }
