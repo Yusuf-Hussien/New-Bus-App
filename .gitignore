@@ -1,2 +1,5 @@
 .env
 env.json
+bin/
+obj/
+.vs/
