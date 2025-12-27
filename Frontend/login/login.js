@@ -1,7 +1,7 @@
 // ============================
 // DOM Elements
 // ============================
-
+const API_BASE_URL = "https://newbus.tryasp.net/api/";
 const container = document.getElementById("container");
 const signUpBtn = document.getElementById("signUp");
 const signInBtn = document.getElementById("signIn");
@@ -51,6 +51,57 @@ let resetUserData = null;
 let currentOTP = null;
 let otpExpiryTime = null;
 let otpTimerInterval = null;
+
+
+
+// ============================
+// API Helpers
+// ============================
+
+async function apiRequest(URI, method = "GET", headers = {}, data = null) {
+  try {
+    const options = {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        ...headers
+      }
+    };
+
+    if (data) {
+      options.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(API_BASE_URL + URI, options);
+
+    // Try to parse JSON error message if present
+    let responseData;
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      responseData = await response.json();
+    }
+
+    if (!response.ok) {
+      // Extract message from API or fallback
+      const errorMsg = responseData?.Message || responseData?.error || "Something went wrong. Please try again.";
+      //alert(errorMsg);  // Or better: show in a custom error div
+      return { success: false, error: errorMsg };
+    }
+
+    // 204 No Content (e.g., DELETE success)
+    if (response.status === 204) {
+      return { success: true, data: null };
+    }
+
+    // Successful response with JSON body
+    return { success: true, data: responseData || null };
+
+  } catch (error) {
+    console.error("API Request Error:", error);
+    //alert("Network error. Please check your connection and try again.");
+    return { success: false, error: "Network error" };
+  }
+}
 
 // ============================
 // Demo Accounts
@@ -395,7 +446,7 @@ function showPasswordSuccess(msg) {
 // Sign Up Logic
 // ============================
 
-function handleSignUpSubmit(event) {
+async function handleSignUpSubmit(event) {
     event.preventDefault();
     
     const name = document.getElementById("name").value.trim();
@@ -403,51 +454,62 @@ function handleSignUpSubmit(event) {
     const username = document.getElementById("username").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const gender = document.getElementById("gender").value;
-    const accountType = document.getElementById("accountType").value;
+    const faculty = document.getElementById("faculty").value;
+    const level = document.getElementById("level").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
     resetMessages();
     
     // Validation
-    if (!validateSignUp(name, email, username, phone, gender, accountType, password, confirmPassword)) return;
+    if (!validateSignUp(name, email, username, phone, gender, faculty,level, password, confirmPassword)) return;
     
-    if (isEmailRegistered(email)) {
+    /*if (isEmailRegistered(email)) {
         showError("This email is already registered");
         return;
-    }
+    }*/
     
-    if (isUsernameTaken(username)) {
+    /*if (isUsernameTaken(username)) {
         showError("Username is already taken");
         return;
-    }
+    }*/
 
     // Create user data
     const userData = {
-        id: Date.now(),
-        name,
-        email,
-        username,
-        phone,
-        gender,
-        accountType,
-        password,
-        isLoggedIn: false,
-        createdAt: new Date().toISOString()
+        firstName:name,
+        secondName: "second", 
+        thirdName: "third",
+        lastName: "last",
+        email: email,
+        phone: phone,
+        gender: gender,
+        username: username,
+        password: password,
+        facultyId: faculty,
+        level: level,
     };
 
     // Save to localStorage
-    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-    users.push(userData);
-    localStorage.setItem('newbus_users', JSON.stringify(users));
-    
-    console.log("User registered successfully:", userData.email);
+    //const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
+    //users.push(userData);
+    //localStorage.setItem('newbus_users', JSON.stringify(users));
 
+    // Send sign up request to API
+    const signUpResponse = await signUpRequest(userData);
+    
     // Show success message
-    showSignUpSuccess(userData);
+    if (signUpResponse.success) {
+        showSignUpSuccess(userData);
+    } else {
+        showSignUpError(signUpResponse.error);
+    }
     
     // Reset the form but keep success message
     document.getElementById("signUpForm").reset();
+}
+
+async function signUpRequest(userData) {
+    return apiRequest("Students/SignUp", "POST", {}, userData);
 }
 
 function showSignUpSuccess(userData) {
@@ -457,9 +519,9 @@ function showSignUpSuccess(userData) {
         <div style="text-align: center; padding: 15px;">
             <i class="fas fa-check-circle" style="color: #28a745; font-size: 24px; margin-bottom: 10px; display: block;"></i>
             <h3 style="color: #155724; margin-bottom: 10px;">Account Created Successfully!</h3>
-            <p style="margin-bottom: 5px;"><strong>Welcome, ${userData.name}!</strong></p>
+            <p style="margin-bottom: 5px;"><strong>Welcome, ${userData.firstName}!</strong></p>
             <p style="color: #0c5460; font-size: 14px; margin-bottom: 15px;">
-                Your account has been created as <strong>${userData.accountType}</strong>.
+                Your account has been created!.
             </p>
             <p style="font-size: 13px; color: #6c757d;">
                 You can now sign in with your email: <strong>${userData.email}</strong>
@@ -502,6 +564,106 @@ function showSignUpSuccess(userData) {
             document.getElementById("loginEmail").value = userData.email;
         }
     }, 5000);
+}
+
+function showSignUpError(errorMessage = "Something went wrong. Please try again.") {
+    const errorContainer = document.getElementById("error");
+    
+    errorContainer.innerHTML = `
+        <div style="
+            text-align: center; 
+            padding: 30px 20px; 
+            background: linear-gradient(135deg, #fff0f0 0%, #ffe6e6 100%);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.2);
+            position: relative;
+            overflow: hidden;
+            max-width: 420px;
+            margin: 20px auto;
+            border: 1px solid #ff8787;
+        ">
+            <!-- Subtle fallen leaves for theme consistency -->
+            <i class="fas fa-leaf" style="position: absolute; top: 10px; left: 20px; color: #c0392b; opacity: 0.4; font-size: 20px; transform: rotate(20deg);"></i>
+            <i class="fas fa-leaf" style="position: absolute; top: 15px; right: 30px; color: #e74c3c; opacity: 0.3; font-size: 18px; transform: rotate(-30deg);"></i>
+            <i class="fas fa-leaf" style="position: absolute; bottom: 20px; left: 40px; color: #d63031; opacity: 0.4; font-size: 22px; transform: rotate(45deg);"></i>
+
+            <i class="fas fa-exclamation-triangle" style="
+                color: #e74c3c; 
+                font-size: 48px; 
+                margin-bottom: 15px; 
+                display: block;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            "></i>
+            
+            <h3 style="
+                color: #c0392b; 
+                margin: 0 0 12px 0; 
+                font-size: 24px;
+                font-weight: 600;
+            ">
+                Oops! We Hit a Snag
+            </h3>
+            
+            <p style="
+                color: #a93226; 
+                font-size: 16px; 
+                margin: 15px 0 20px 0;
+                line-height: 1.6;
+                max-width: 340px;
+                margin-left: auto;
+                margin-right: auto;
+            ">
+                ${errorMessage}
+            </p>
+            
+            <p style="
+                font-size: 14px; 
+                color: #7f3f3f; 
+                margin: 10px 0 25px 0;
+            ">
+                Please check your details and try again.
+            </p>
+            
+            <button id="retrySignUp" style="
+                background: linear-gradient(to right, #e74c3c, #c0392b);
+                color: white;
+                border: none;
+                padding: 12px 28px;
+                border-radius: 50px;
+                font-size: 15px;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+                transition: all 0.3s ease;
+                font-weight: 500;
+            "
+            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(231,76,60,0.5)'"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(231,76,60,0.4)'">
+                <i class="fas fa-redo-alt"></i> Try Again
+            </button>
+        </div>
+    `;
+    
+    errorContainer.style.display = "block";
+
+    // Optional: Add click handler to retry (e.g., clear form or just dismiss)
+    const retryBtn = document.getElementById('retrySignUp');
+    if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+            resetMessages(); // Hide error and success messages
+            // Optionally scroll to form or focus first input
+            document.querySelector('#signUpForm input')?.focus();
+        });
+    }
+
+    // Auto-hide error after 8 seconds (optional – errors usually stay until user acts)
+    // Comment out if you want it to persist
+    /*
+    setTimeout(() => {
+        if (errorContainer.style.display === "block") {
+            errorContainer.style.display = "none";
+        }
+    }, 8000);
+    */
 }
 
 // ============================
@@ -659,7 +821,7 @@ function redirectBasedOnAccountType(accountType) {
 // Validation Helpers
 // ============================
 
-function validateSignUp(name, email, username, phone, gender, accountType, password, confirmPassword) {
+function validateSignUp(name, email, username, phone, gender, faculty,level, password, confirmPassword) {
     if (!name) {
         showError("Please enter your full name");
         return false;
@@ -685,8 +847,13 @@ function validateSignUp(name, email, username, phone, gender, accountType, passw
         return false;
     }
     
-    if (!accountType) {
-        showError("Please select account type");
+    if (!faculty) {
+        showError("Please select faculty");
+        return false;
+    }
+
+    if (!level) {
+        showError("Please select level");
         return false;
     }
     
@@ -902,7 +1069,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
     console.log("Registered users:", users.length);
     users.forEach(user => {
-        console.log(`- ${user.email} (${user.accountType})`);
+        //console.log(`- ${user.email} (${user.accountType})`);
     });
 });
 
