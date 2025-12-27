@@ -104,37 +104,6 @@ async function apiRequest(URI, method = "GET", headers = {}, data = null) {
 }
 
 // ============================
-// Demo Accounts
-// ============================
-
-const DEMO_ACCOUNTS = {
-    'passenger@newbus.com': {
-        password: '12345678',
-        type: 'passenger',
-        name: 'John Passenger',
-        username: 'john_passenger',
-        phone: '+201234567890',
-        gender: 'male'
-    },
-    'driver@newbus.com': {
-        password: '12345678',
-        type: 'driver',
-        name: 'Ahmed Driver',
-        username: 'ahmed_driver',
-        phone: '+201112223344',
-        gender: 'male'
-    },
-    'admin@newbus.com': {
-        password: '12345678',
-        type: 'admin',
-        name: 'Admin User',
-        username: 'admin_user',
-        phone: '+201009998877',
-        gender: 'male'
-    }
-};
-
-// ============================
 // Utility Functions
 // ============================
 
@@ -464,16 +433,6 @@ async function handleSignUpSubmit(event) {
     // Validation
     if (!validateSignUp(name, email, username, phone, gender, faculty,level, password, confirmPassword)) return;
     
-    /*if (isEmailRegistered(email)) {
-        showError("This email is already registered");
-        return;
-    }*/
-    
-    /*if (isUsernameTaken(username)) {
-        showError("Username is already taken");
-        return;
-    }*/
-
     // Create user data
     const userData = {
         firstName:name,
@@ -670,7 +629,7 @@ function showSignUpError(errorMessage = "Something went wrong. Please try again.
 // Sign In Logic - FIXED
 // ============================
 
-function handleSignInSubmit(event) {
+async function handleSignInSubmit(event) {
     event.preventDefault();
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
@@ -688,119 +647,71 @@ function handleSignInSubmit(event) {
         return;
     }
 
-    console.log("Login attempt:", { email, password, selectedAccountType });
-
-    if (tryDemoLogin(email, password, selectedAccountType)) return;
-    if (tryLocalLogin(email, password, selectedAccountType)) return;
+    if (await handleLogin(email, password, selectedAccountType)) return;
 
     showError("Invalid email or password", 'login');
 }
 
-function tryDemoLogin(email, password, selectedAccountType) {
-    if (!DEMO_ACCOUNTS[email] || DEMO_ACCOUNTS[email].password !== password) return false;
-    
-    const account = DEMO_ACCOUNTS[email];
-    if (account.type !== selectedAccountType) {
-        showError(`Please select "${account.type}" account type to login`, 'login');
-        return false;
-    }
-    
+async function handleLogin(email, password, selectedAccountType) {
+
     const userData = {
-        id: Date.now(),
-        email,
-        name: account.name,
-        username: account.username,
-        phone: account.phone,
-        gender: account.gender,
-        accountType: account.type,
-        isLoggedIn: true,
-        isDemo: true
+        userName: email,
+        password: password,
     };
+
+    const URI = {
+        admin: 'Auth/LoginAdmin',
+        driver: 'Auth/LoginDriver',
+        passenger: 'Auth/LoginStudent'
+    };
+
+    const response = await apiRequest(URI[selectedAccountType], "POST", {}, userData);
     
-    console.log("Demo login successful:", userData);
-    saveUserSession(userData);
+    if (!response?.success) {
+        const errorMsg = response?.error || "Login failed. Please check your credentials.";
+        showError(errorMsg, 'login');
+        return false;
+    }
+
+    saveUserCookies(response.data, selectedAccountType);
     return true;
 }
 
-function tryLocalLogin(email, password, selectedAccountType) {
-    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-    console.log("Total users in localStorage:", users.length);
-    
-    const user = users.find(u => u.email === email);
-    
-    if (!user) {
-        console.log("User not found with email:", email);
-        return false;
+function saveUserCookies(userData,accountType) {
+    if (!userData) {
+        console.error("No user data provided");
+        showError("Login failed - no user data", 'login');
+        return;
     }
-    
-    console.log("User found:", { 
-        email: user.email, 
-        password: user.password ? "***" : "missing",
-        accountType: user.accountType 
-    });
-    
-    // التحقق من كلمة المرور
-    if (user.password !== password) {
-        console.log("Password mismatch");
-        console.log("Input password:", password);
-        console.log("Stored password:", user.password);
-        return false;
-    }
-    
-    if (user.accountType !== selectedAccountType) {
-        showError(`Please select "${user.accountType}" account type to login`, 'login');
-        return false;
-    }
-    
-    // تحديث حالة تسجيل الدخول في localStorage
-    const updatedUsers = users.map(u => {
-        if (u.email === email) {
-            return { ...u, isLoggedIn: true };
-        }
-        return u;
-    });
-    
-    localStorage.setItem('newbus_users', JSON.stringify(updatedUsers));
-    
-    const loggedInUser = { ...user, isLoggedIn: true };
-    console.log("Local login successful:", loggedInUser);
-    saveUserSession(loggedInUser);
-    return true;
-}
 
-function saveUserSession(userData) {
-    console.log("Saving user session to localStorage...");
-    
-    // تأكد من أن isLoggedIn = true
+    const accessToken = userData.accessToken || '';
+    const refreshToken = userData.refreshToken || '';
+
+    // Calculate exact expiration times
+    const accessTokenExpiresAt = Date.now() + (30 * 60 * 1000);        // 30 minutes
+    const refreshTokenExpiresAt = Date.now() + (10 * 24 * 60 * 60 * 1000); // 10 days
+
+    // Save to localStorage/sessionStorage for better security
     const sessionData = {
-        ...userData,
-        isLoggedIn: true,
-        lastLogin: new Date().toISOString()
+        accessToken,
+        refreshToken,
+        accessTokenExpiresAt,    // Useful for proactive refresh
+        refreshTokenExpiresAt,
     };
+
+    // Use localStorage for persistence across tabs
+    localStorage.setItem('userSession', JSON.stringify(sessionData));
     
-    // حفظ البيانات في localStorage
-    localStorage.setItem('currentUser', JSON.stringify(sessionData));
-    localStorage.setItem('userAccountType', userData.accountType);
-    localStorage.setItem('userName', userData.name);
-    
-    // Debug: عرض ما تم حفظه
-    console.log("Saved to localStorage:");
-    console.log("- currentUser:", JSON.parse(localStorage.getItem('currentUser')));
-    console.log("- userAccountType:", localStorage.getItem('userAccountType'));
-    console.log("- userName:", localStorage.getItem('userName'));
-    
+    // Alternatively, use sessionStorage for tab-specific sessions
+    //sessionStorage.setItem('userSession', JSON.stringify(sessionData));
+
     // Show success message and redirect
     showSuccess("Login successful! Redirecting...", 'login');
-    
-    setTimeout(() => {
-        console.log("Redirecting to:", userData.accountType);
-        redirectBasedOnAccountType(userData.accountType);
-    }, 1500);
+    redirectBasedOnAccountType(accountType);
 }
 
-function redirectBasedOnAccountType(accountType) {
-    console.log("Attempting redirect to:", accountType);
-    
+
+function redirectBasedOnAccountType(accountType) {    
     // التحقق من أن الصفحات موجودة
     const pages = {
         passenger: 'passenger.html',
@@ -809,7 +720,6 @@ function redirectBasedOnAccountType(accountType) {
     };
     
     if (pages[accountType]) {
-        console.log("Redirecting to:", pages[accountType]);
         window.location.href = pages[accountType];
     } else {
         console.error("Unknown account type or page not found:", accountType);
@@ -868,16 +778,6 @@ function validateSignUp(name, email, username, phone, gender, faculty,level, pas
     }
     
     return true;
-}
-
-function isEmailRegistered(email) {
-    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-    return users.some(u => u.email === email);
-}
-
-function isUsernameTaken(username) {
-    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-    return users.some(u => u.username === username);
 }
 
 // ============================
