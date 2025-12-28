@@ -39,7 +39,7 @@
       </button>
       <h1 class="step-title">Reset Your Password</h1>
       <p class="step-description">
-        Enter your email, phone, and username to verify your identity
+        Enter your email and Account Type to verify your identity
       </p>
       <form id="forgotPasswordForm">
         <div class="input-group">
@@ -47,16 +47,18 @@
           <input type="email" id="forgotEmail" placeholder="Email" required />
         </div>
         <div class="input-group">
-          <i class="fas fa-phone input-icon"></i>
-          <input type="tel" id="forgotPhone" placeholder="Phone Number" required />
+          <i class="fas fa-user-tag input-icon"></i>
+          <select id="accountTypeForOTP" class="form-select" required>
+            <option value="" disabled selected>Select Your Account Type</option>
+            <option value="admin">Admin</option>
+            <option value="driver">Driver</option>
+            <option value="passenger">Passenger</option>
+          </select>
         </div>
-        <div class="input-group">
-          <i class="fas fa-user input-icon"></i>
-          <input type="text" id="forgotUsername" placeholder="Username" required />
-        </div>
+        
         <div id="forgotError"></div>
         <div id="forgotSuccess"></div>
-        <button type="submit">Verify Account</button>
+        <button type="submit" id="sendOtpBtn">Send OTP</button>
       </form>
     </div>
 
@@ -78,29 +80,11 @@
           <input type="text" class="otp-input" maxlength="1" data-index="5" />
         </div>
         <p class="otp-timer" id="otpTimer">
-          OTP expires in: <span id="timer">03:00</span>
+          OTP expires in: <span id="timer">10 Minutes</span>
         </p>
         <div id="otpError"></div>
         <div id="otpSuccess"></div>
-        <div class="otp-buttons">
-          <button type="submit">Verify OTP</button>
-          <button type="button" id="resendOtpBtn" class="resend-btn">
-            Resend OTP
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <!-- Step 3: Set New Password -->
-    <div class="step" id="step3">
-      <button class="back-button" id="backToStep2">
-        <i class="fas fa-arrow-left"></i> Back
-      </button>
-      <h1 class="step-title">Set New Password</h1>
-      <p class="step-description">
-        Create a strong password with at least 8 characters
-      </p>
-      <form id="newPasswordForm">
+        <form id="newPasswordForm">
         <div class="input-group">
           <i class="fas fa-lock input-icon"></i>
           <input type="password" id="newPassword" placeholder="New Password" required />
@@ -111,9 +95,27 @@
         </div>
         <div id="passwordError"></div>
         <div id="passwordSuccess"></div>
-        <button type="submit">Update Password</button>
+        <button type="submit" id="submitOTPandPasswordBtn">Update Password</button>
+      </form>
+        <!--<div class="otp-buttons">
+          <button type="submit" id="submitOTPandPasswordBtn">Verify OTP</button>
+          <button type="button" id="resendOtpBtn" class="resend-btn">
+            Resend OTP
+          </button>
+        </div>-->
       </form>
     </div>
+
+    <!-- Step 3: Set New Password 
+    <div class="step" id="step3">
+      <button class="back-button" id="backToStep2">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h1 class="step-title">Set New Password</h1>
+      <p class="step-description">
+        Create a strong password with at least 8 characters
+      </p>  
+    </div>-->
 
   </div>
 
@@ -193,7 +195,7 @@
         <h1>Sign In</h1>
         <div class="input-group">
           <i class="fas fa-envelope input-icon"></i>
-          <input type="text" id="loginEmail" placeholder="Email" required />
+          <input type="text" id="loginEmail" placeholder="Username" required />
         </div>
         <div class="input-group">
           <i class="fas fa-lock input-icon"></i>

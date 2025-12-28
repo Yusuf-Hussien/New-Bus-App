@@ -934,7 +934,7 @@ button[type="submit"],
     .otp-input,
     .radio-label {
         background: rgba(255, 255, 255, 0.05);
-        color: #f0f0f0;
+        
     }
 
     .form-select:focus,

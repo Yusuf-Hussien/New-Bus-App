@@ -19,10 +19,13 @@ const forgotPasswordLink = document.getElementById("forgotPasswordLink");
 const forgotPasswordPage = document.getElementById("forgotPasswordPage");
 const forgotBackToSignIn = document.getElementById("forgotBackToSignIn");
 const backToStep1 = document.getElementById("backToStep1");
-const backToStep2 = document.getElementById("backToStep2");
+//const backToStep2 = document.getElementById("backToStep2");
+
+document.getElementById('sendOtpBtn').addEventListener('click', handleRequstingOtpSubmit);
+document.getElementById('submitOTPandPasswordBtn').addEventListener('click', handleNewPasswordSubmit);
 
 const forgotPasswordForm = document.getElementById("forgotPasswordForm");
-const otpVerificationForm = document.getElementById("otpVerificationForm");
+//const otpVerificationForm = document.getElementById("otpVerificationForm");
 const newPasswordForm = document.getElementById("newPasswordForm");
 
 const forgotError = document.getElementById("forgotError");
@@ -37,6 +40,7 @@ const step2 = document.getElementById("step2");
 const step3 = document.getElementById("step3");
 const otpContainer = document.getElementById("otpContainer");
 const otpTimer = document.getElementById("timer");
+const submitOTPandPasswordBtn = document.getElementById("submitOTPandPasswordBtn");
 const resendOtpBtn = document.getElementById("resendOtpBtn");
 const otpDisplayArea = document.getElementById("otpDisplayArea");
 
@@ -157,11 +161,12 @@ function hideForgotPasswordPage() {
     clearOtpTimer();
 }
 
+let accountTypeForOTP = null;
 function showStep(stepNumber) {
-    [step1, step2, step3].forEach(s => s.classList.remove("active"));
+    [step1, step2].forEach(s => s.classList.remove("active"));
     if (stepNumber === 1) step1.classList.add("active");
     if (stepNumber === 2) step2.classList.add("active");
-    if (stepNumber === 3) step3.classList.add("active");
+    //if (stepNumber === 3) step3.classList.add("active");
 }
 
 function resetForgotPasswordForm() {
@@ -189,76 +194,57 @@ function resetOtpForm() {
 // OTP Functions
 // ============================
 
-function generateOTP() {
-    return Math.floor(100000 + Math.random() * 900000).toString();
-}
-
-function generateAndSendOTP() {
-    currentOTP = generateOTP();
-    otpExpiryTime = Date.now() + 3 * 60 * 1000;
-
-    otpDisplayArea.innerHTML = `
-        <div class="otp-display-container">
-            <div class="otp-instruction"><strong>Enter this OTP in the boxes below:</strong></div>
-            <div class="otp-display">${currentOTP.split('').join(' ')}</div>
-            <div class="otp-instruction" style="font-size: 12px;">(This is a simulation. OTP would be sent in real app)</div>
-        </div>
-    `;
-    
-    resetOtpForm();
-    startOtpTimer();
-    showOtpSuccess("OTP generated successfully! Enter the 6-digit code above.");
-    
-    const firstInput = otpContainer.querySelector('[data-index="0"]');
-    if (firstInput) firstInput.focus();
-}
-
-function startOtpTimer() {
-    clearOtpTimer();
-    
-    function updateTimer() {
-        const timeLeft = otpExpiryTime - Date.now();
-        if (timeLeft <= 0) {
-            clearInterval(otpTimerInterval);
-            otpTimer.textContent = "00:00";
-            otpTimer.parentElement.style.color = "#e74c3c";
-            return;
-        }
-        
-        const minutes = Math.floor(timeLeft / 60000);
-        const seconds = Math.floor((timeLeft % 60000) / 1000);
-        otpTimer.textContent = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-    }
-    
-    updateTimer();
-    otpTimerInterval = setInterval(updateTimer, 1000);
-}
-
-function clearOtpTimer() {
-    if (otpTimerInterval) {
-        clearInterval(otpTimerInterval);
-        otpTimerInterval = null;
-    }
-}
-
 function getEnteredOTP() {
     return Array.from(otpContainer.querySelectorAll('.otp-input')).map(i => i.value).join('');
 }
+
+
+async function sendOTPRequest(email, accountTypeForOTP)
+{    
+       const ACCOUNT_TYPE_URI = {
+        admin: 'Admins/OTPResetPassword',
+        driver: 'Drivers/OTPResetPassword',
+        passenger: 'Students/OTPResetPassword'
+        };
+
+        const response = apiRequest(ACCOUNT_TYPE_URI[accountTypeForOTP],"POST", {}, email);
+        showForgotSuccess("OTP Sent Successfully to your Email");
+        return;
+    }
+
+async function sendNewPasswordRequest(otp, newPassword,accountTypeForOTP)
+    {
+        const ACCOUNT_TYPE_URI = {
+        admin: 'Admins/ChangePassword',
+        driver: 'Drivers/ChangePassword',
+        passenger: 'Students/ChangePassword'
+        };
+
+        const body = {
+            password: newPassword,
+            otp: otp
+        };
+
+        const response = apiRequest(ACCOUNT_TYPE_URI[accountTypeForOTP],"POST",{}, body);
+        if(response.success)
+            showForgotSuccess("OTP Sent Successfully to your Email");
+        else 
+            showForgotError("Failed to update password."+response?.Message);
+    }
 
 // ============================
 // Forgot Password Handlers
 // ============================
 
-function handleForgotPasswordSubmit(e) {
+function handleRequstingOtpSubmit(e) {
     e.preventDefault();
     const email = document.getElementById("forgotEmail").value.trim();
-    const phone = document.getElementById("forgotPhone").value.trim();
-    const username = document.getElementById("forgotUsername").value.trim();
-
+    const accountTypeForOTP = document.getElementById("accountTypeForOTP").value;
+    
     forgotError.style.display = forgotSuccess.style.display = "none";
 
-    if (!email || !phone || !username) {
-        showForgotError("Please enter email, phone, and username");
+    if (!email || !accountTypeForOTP) {
+        showForgotError("Please enter email and account type");
         return;
     }
     
@@ -267,57 +253,23 @@ function handleForgotPasswordSubmit(e) {
         return;
     }
 
-    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-    let foundUser = users.find(u => u.email === email && u.phone === phone && u.username === username);
-
-    if (!foundUser && DEMO_ACCOUNTS[email]) {
-        const demo = DEMO_ACCOUNTS[email];
-        if (demo.phone === phone && demo.username === username) {
-            foundUser = { ...demo, email, isDemo: true };
-        }
-    }
-
-    if (foundUser) {
-        resetUserData = foundUser;
-        showForgotSuccess("Identity verified! Generating OTP...");
-        setTimeout(() => {
-            showStep(2);
-            generateAndSendOTP();
-        }, 1000);
-    } else {
-        showForgotError("No account found with these details. Make sure all information matches.");
-    }
+    sendOTPRequest(email, accountTypeForOTP);
+    accountTypeForPassword = accountTypeForOTP;
+    showStep(2);
 }
 
-function handleOtpVerificationSubmit(e) {
-    e.preventDefault();
-    const enteredOTP = getEnteredOTP();
-    otpError.style.display = otpSuccess.style.display = "none";
-
-    if (enteredOTP.length !== 6) {
-        showOtpError("Please enter the complete 6-digit OTP");
-        return;
-    }
-    
-    if (Date.now() > otpExpiryTime) {
-        showOtpError("OTP has expired. Please request a new one.");
-        return;
-    }
-
-    if (enteredOTP === currentOTP) {
-        showOtpSuccess("OTP verified successfully!");
-        clearOtpTimer();
-        setTimeout(() => showStep(3), 1000);
-    } else {
-        showOtpError("Invalid OTP. Please try again.");
-        shakeElement(otpError);
-    }
-}
-
-function handleNewPasswordSubmit(e) {
+async function handleNewPasswordSubmit(e) {
     e.preventDefault();
     const newPassword = document.getElementById("newPassword").value;
     const confirmNewPassword = document.getElementById("confirmNewPassword").value;
+    const otp = getEnteredOTP();
+    
+    otpError.style.display = otpSuccess.style.display = "none";
+
+    if (otp.length !== 6) {
+        showOtpError("Please enter the complete 6-digit OTP");
+        return;
+    }
 
     passwordError.style.display = passwordSuccess.style.display = "none";
 
@@ -331,42 +283,22 @@ function handleNewPasswordSubmit(e) {
         return;
     }
 
-    if (updateUserPassword(resetUserData, newPassword)) {
-        showPasswordSuccess("Password updated successfully!");
+    if (await updateUserPassword(otp, newPassword,accountTypeForPassword)) {
+        showOtpSuccess("OTP verified successfully and Password updated!");
+        //showPasswordSuccess("Password updated successfully!");
         setTimeout(() => {
             hideForgotPasswordPage();
             showToast("Password has been reset successfully!");
-        }, 1500);
+        }, 10);
     } else {
         showPasswordError("Failed to update password. Please try again.");
     }
 }
 
-function updateUserPassword(userData, newPassword) {
+async function updateUserPassword(otp, newPassword,accountTypeForOTP) {
     try {
-        const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-
-        if (userData.isDemo) {
-            const idx = users.findIndex(u => u.email === userData.email);
-            if (idx === -1) {
-                users.push({
-                    ...userData,
-                    password: newPassword,
-                    isDemoBased: true,
-                    id: Date.now(),
-                    createdAt: new Date().toISOString()
-                });
-            } else {
-                users[idx].password = newPassword;
-            }
-        } else {
-            const idx = users.findIndex(u => u.email === userData.email);
-            if (idx !== -1) {
-                users[idx].password = newPassword;
-            }
-        }
-
-        localStorage.setItem('newbus_users', JSON.stringify(users));
+        const response = await sendNewPasswordRequest(otp, newPassword,accountTypeForOTP);
+        if (response?.success) return true;
         return true;
     } catch (err) {
         console.error("Error updating password:", err);
@@ -448,11 +380,6 @@ async function handleSignUpSubmit(event) {
         level: level,
     };
 
-    // Save to localStorage
-    //const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-    //users.push(userData);
-    //localStorage.setItem('newbus_users', JSON.stringify(users));
-
     // Send sign up request to API
     const signUpResponse = await signUpRequest(userData);
     
@@ -511,7 +438,7 @@ function showSignUpSuccess(userData) {
             resetMessages();
             
             // Auto-fill email in sign in form for convenience
-            document.getElementById("loginEmail").value = userData.email;
+            document.getElementById("loginEmail").value = userData.userName;
         });
     }
     
@@ -858,7 +785,7 @@ function initEventListeners() {
 
     // Forgot Password
     if (resendOtpBtn) {
-        resendOtpBtn.addEventListener("click", generateAndSendOTP);
+        resendOtpBtn.addEventListener("click", handleRequstingOtpSubmit);
     }
     
     if (forgotPasswordLink) {
@@ -891,12 +818,10 @@ function initEventListeners() {
 
     // Forgot password forms
     if (forgotPasswordForm) {
-        forgotPasswordForm.addEventListener("submit", handleForgotPasswordSubmit);
+        forgotPasswordForm.addEventListener("submit", handleRequstingOtpSubmit);
     }
     
-    if (otpVerificationForm) {
-        otpVerificationForm.addEventListener("submit", handleOtpVerificationSubmit);
-    }
+
     
     if (newPasswordForm) {
         newPasswordForm.addEventListener("submit", handleNewPasswordSubmit);
@@ -1011,23 +936,3 @@ window.addEventListener('load', function() {
         console.log("No currentUser found in localStorage");
     }
 });
-
-// ============================
-// Debug Functions - للتحقق من المشكلة
-// ============================
-
-function debugLocalStorage() {
-    console.log("=== LOCALSTORAGE DEBUG ===");
-    console.log("All localStorage keys:", Object.keys(localStorage));
-    
-    const users = JSON.parse(localStorage.getItem('newbus_users')) || [];
-    console.log("Number of users:", users.length);
-    console.log("All users:", users);
-    
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    console.log("Current user:", currentUser);
-    
-    console.log("User account type:", localStorage.getItem('userAccountType'));
-    console.log("User name:", localStorage.getItem('userName'));
-}
-
