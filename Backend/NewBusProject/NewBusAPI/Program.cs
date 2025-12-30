@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NewBusAPI.HUB;
 using NewBusAPI.Middelware;
 using NewBusBLL.AdminConnection;
 using NewBusBLL.Admins.BLL;
@@ -23,6 +25,7 @@ using NewBusBLL.Route.InteFace;
 using NewBusBLL.Route.Route;
 using NewBusBLL.Station;
 using NewBusBLL.Station.Interface;
+using NewBusBLL.StationTrips;
 using NewBusBLL.StudentConnection;
 using NewBusBLL.Students.InterFace;
 using NewBusBLL.Students.StudentBLL;
@@ -59,12 +62,36 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]!))
             };
+
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = context =>
+                {
+                    var accessToken = context.Request.Query["access_token"];
+
+                    var path = context.HttpContext.Request.Path;
+                    if (!string.IsNullOrEmpty(accessToken) &&
+                        path.StartsWithSegments("/LiveHub"))
+                    {
+                        context.Token = accessToken;
+                    }
+
+                    return Task.CompletedTask;
+                }
+            };
+
         });
 
-    // Other configurations...
+// Other configurations..
+builder.Services.AddSignalR(options =>
+{
+    options.KeepAliveInterval = TimeSpan.FromSeconds(10);
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+});
 
-builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
-builder.Services.AddScoped<IadminBLL,AdminBLL>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IadminBLL, AdminBLL>();
 builder.Services.AddScoped<IStudentBLL, StudentBLL>();
 
 builder.Services.AddScoped<IBusBLL, BusBLL>();
@@ -76,7 +103,7 @@ builder.Services.AddScoped<IAdminConnection, AdminConnectionBLL>();
 builder.Services.AddScoped<IDriverConnection, DriverConnectionBLL>();
 
 builder.Services.AddScoped<IStudentConnection, NewBusBLL.StudentConnection.StudentConnection>();
-builder.Services.AddScoped<IstationBLL,StationBLL>();
+builder.Services.AddScoped<IstationBLL, StationBLL>();
 builder.Services.AddScoped<IRoute, RoutesBLL>();
 builder.Services.AddScoped<ITripBLL, TripBLL>();
 builder.Services.AddScoped<IhashingBLL, HashingBLL>();
@@ -84,6 +111,8 @@ builder.Services.AddScoped<IlogoutBLL, LogoutBLL>();
 builder.Services.AddScoped<Iemail, EmailService>();
 
 builder.Services.AddScoped<IResetPassword, ResetPassword>();
+
+builder.Services.AddScoped<IstationTrip, NewBusBLL.StationTrips.StationTrip>();
 
 
 //config swagger for endpoint Token
@@ -125,7 +154,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddQuartz(q =>
 {
     var jobkey = new JobKey(nameof(RemoveOTPnoVerfied));
-    q.AddJob<RemoveOTPnoVerfied>(opts=>opts.WithIdentity(jobkey));
+    q.AddJob<RemoveOTPnoVerfied>(opts => opts.WithIdentity(jobkey));
     q.AddTrigger(opts =>
     opts.ForJob(jobkey).WithIdentity($"Trigger Remove {nameof(RemoveOTPnoVerfied)}").
     WithCronSchedule("0 0 * * *"));
@@ -135,26 +164,38 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://127.0.0.1:5500")
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+                          .AllowCredentials();
+
     });
 });
+
 var app = builder.Build();
+var hubContext = app.Services.GetRequiredService<IHubContext<LiveHub>>();
 
+_ = Task.Run(async () =>
+{
+    while (true)
+    {
+        await Task.Delay(20000);
+
+
+        await LiveHub.CheckInactiveConnections((LiveHub)hubContext);
+    }
+});
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseCors("AllowAll");
-// Configure the HTTP request pipeline.
-
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
-
+app.MapHub<NewBusAPI.HUB.LiveHub>("/LiveHub");
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<CheckLoginingMiddelware>();
 app.MapControllers();
-app.UseMiddleware<ErrorHandlingMiddleware>();  
 
 
 app.Run();

@@ -110,7 +110,7 @@ namespace NewBusAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("OTPResetPassword")]
+        [HttpPost("OTPResetPassword")]
         public async Task<ActionResult<ApiResponse<string>>> ResetPassword([FromBody] string Email)
         {
             if (Email == null)

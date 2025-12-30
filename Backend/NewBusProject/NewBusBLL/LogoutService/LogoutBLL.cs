@@ -47,7 +47,7 @@ namespace NewBusBLL.LogoutService
           await _UOW.Complete();
                   
         }
-        public async Task<NewBusDAL.Models.RefreshToken>GetTokenByRefreshToken(string RefresToken)
+        public async Task<NewBusDAL.Models.RefreshToken> GetTokenByRefreshToken(string RefresToken)
         {
             var Tokens = await _UOW.RefreshTokens.GetAllAsync();
             foreach (var Token in Tokens)

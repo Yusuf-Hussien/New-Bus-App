@@ -15,6 +15,7 @@ namespace NewBusDAL.Models
         public double Latititude { get; set; }
         public double Longitude { get; set; }
         public double Radius { get; set; }
+        [JsonIgnore]
         public virtual ICollection<StationTrip> StationTrips { get; set; } = new List<StationTrip>();
 
     }

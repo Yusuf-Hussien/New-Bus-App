@@ -16,6 +16,7 @@ using NewBusDAL.Students.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -276,8 +277,8 @@ namespace NewBusBLL.Students.StudentBLL
             var driver = await _UOW.Students.GetByAsync(d => d.Id == liveLication.Id);
             if (driver == null)
                 return;
-            driver.Lang = liveLication.Lang;
-            driver.Lat = liveLication.Lat;
+            driver.Lang =Convert.ToDouble(liveLication.Lang);
+            driver.Lat = Convert.ToDouble(liveLication.Lat);
             await _UOW.Complete();
         }
 
@@ -290,7 +291,7 @@ namespace NewBusBLL.Students.StudentBLL
             var Students = await _UOW.Students.getallIncludeBy(a => a.Person.Email == Email,null).FirstOrDefaultAsync();
             if (Email == null)
                 throw new ValidationException("Email Invalid Not Exist");
-            var OTP = getRandom6;
+            var OTP = getRandom6();
             //
             var resetstudent = new ResetPasswordStudent()
             {

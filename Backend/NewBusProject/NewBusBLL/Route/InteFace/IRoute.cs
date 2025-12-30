@@ -1,4 +1,5 @@
 ﻿using NewBusBLL.Exceptions;
+using NewBusDAL.Route;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,5 +13,6 @@ namespace NewBusBLL.Route.InteFace
     {
         public  Task AddRoute(NewBusDAL.Models.Route route);
         public  Task RemoveRouteAsync(int id);
+        public Task<IEnumerable<dtorouteread>> GetAllRoutesAsync();   
     }
 }

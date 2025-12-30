@@ -98,8 +98,8 @@ namespace NewBusAPI.Controllers
         [HttpPost("SignUp")]
         public async Task<ActionResult<ApiResponse<string>>> CreateDriver([FromBody] DTODriverCreate dtoDriverCreate)
         {
-            var AdminID=User.FindFirst("ID")?.Value;
-            dtoDriverCreate.CreatedByAdminID =Convert.ToInt32(AdminID);
+            var AdminID = User.FindFirst("ID")?.Value;
+            dtoDriverCreate.CreatedByAdminID = Convert.ToInt32(AdminID);
             await _driverBLL.AddDriver(dtoDriverCreate);
             return Ok(new ApiResponse<string>("", "Verifiy Your Account Through Your Email"));
         }
@@ -145,7 +145,7 @@ namespace NewBusAPI.Controllers
             return Redirect(_Config["FrontEndDomainLogin"]!);
         }
         [AllowAnonymous]
-        [HttpGet("OTPResetPassword")]
+        [HttpPost("OTPResetPassword")]
         public async Task<ActionResult<ApiResponse<string>>> ResetPassword([FromBody] string Email)
         {
             if (Email == null)

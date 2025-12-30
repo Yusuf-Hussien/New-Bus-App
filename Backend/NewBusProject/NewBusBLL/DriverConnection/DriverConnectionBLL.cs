@@ -17,7 +17,7 @@ namespace NewBusBLL.DriverConnection
         public async Task<int> GetAllDriverActive()
         {
             var DriverActive =await _UOW.DriverConnections.GetAllAsync();
-            return DriverActive.Count();
+            return Convert.ToInt32(DriverActive.Count()) == 0 ? 0 : Convert.ToInt32(DriverActive.Count());
         }
         public async Task AddToConnectionDriverTable(string connectionId, int DriverId)
         {
@@ -35,15 +35,13 @@ namespace NewBusBLL.DriverConnection
         }
         public async Task RemoveFromConnectionDriverTable(string connectionId)
         {
-            var isexist = await _UOW.DriverConnections.IsExist(ac => ac.CoonectionId == connectionId);
-            if (isexist)
-            {
+          
                 var DriverConnection = await _UOW.DriverConnections.GetByAsync(ac => ac.CoonectionId == connectionId);
                 if (DriverConnection == null)
                     return;
                 await _UOW.DriverConnections.RemoveAsync(DriverConnection.Id);
                 await _UOW.Complete();
-            }
+            
         }
     }
 }
