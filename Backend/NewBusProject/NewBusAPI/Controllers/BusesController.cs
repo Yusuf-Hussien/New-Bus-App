@@ -57,7 +57,7 @@ namespace NewBusAPI.Controllers
             await _BusBLL.UpdateBusAsync(bus);
             return Ok(new ApiResponse<string>("", "Buses Updated Data"));
         }
-        [HttpDelete]
+        [HttpDelete("/{id}")]
         public async Task<ActionResult<ApiResponse<string>>> DeleteBus([FromRoute] int id)
         {
             await _BusBLL.RemoveBusAsync(id);

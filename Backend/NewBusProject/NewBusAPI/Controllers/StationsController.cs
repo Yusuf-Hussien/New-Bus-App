@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NewBusAPI.Repsone;
 using NewBusBLL.Station.Interface;
 using NewBusDAL.Admins.DTO;
+using NewBusDAL.Station;
 
 namespace NewBusAPI.Controllers
 {
@@ -24,21 +25,21 @@ namespace NewBusAPI.Controllers
             _StationBLL = stationBLL;
         }
         [HttpGet]
-        public async Task<ActionResult<ApiResponse<IEnumerable<NewBusDAL.Models.Station>>>> GetAllAdmins()
+        public async Task<ActionResult<ApiResponse<IEnumerable<DTOStationRead>>>> GetAllAdmins()
         {
             var admins = await _StationBLL.GetAllStations();
-            return Ok(new ApiResponse<IEnumerable<NewBusDAL.Models.Station>>(admins, "Admins Data"));
+            return Ok(new ApiResponse<IEnumerable<DTOStationRead>>(admins, "Admins Data"));
         }
         [HttpPost("AddStation")]
-        public async Task<ActionResult<ApiResponse<string>>> AddStation(NewBusDAL.Models.Station dTO)
+        public async Task<ActionResult<ApiResponse<int>>> AddStation(NewBusDAL.Models.Station dTO)
         {
-            await _StationBLL.AddStation(dTO);
-            return Ok(new ApiResponse<string>("", "Station Added Successfuly"));
+         var id=   await _StationBLL.AddStation(dTO);
+            return Ok(new ApiResponse<int>(id, "Station Added Successfuly"));
         }
         [HttpDelete]
-        public async Task<ActionResult<ApiResponse<string>>> RemoveStation(NewBusDAL.Models.Station dTO)
+        public async Task<ActionResult<ApiResponse<string>>> RemoveStation(int id)
         {
-            await _StationBLL.RemoveStation(dTO.Id);
+            await _StationBLL.RemoveStation(id);
             return Ok(new ApiResponse<string>("", "Station Removed Successfuly"));
         }
 

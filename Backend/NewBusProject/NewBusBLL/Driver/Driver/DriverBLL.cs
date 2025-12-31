@@ -16,6 +16,7 @@ using NewBusDAL.Repositry.RepoClassess.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -128,7 +129,7 @@ namespace NewBusBLL.Driver.Driver
             var Drivers = await _unitOfWork.Drivers.getallIncludeBy(a => a.Person.Email == Email, null).FirstOrDefaultAsync();
             if (Email == null)
                 throw new ValidationException("Email Invalid Not Exist");
-            var OTP = getRandom6;
+            var OTP = getRandom6();
             //
             var resetstudent = new ResetPasswordDriver()
             {
@@ -318,9 +319,9 @@ namespace NewBusBLL.Driver.Driver
             var driver =await _unitOfWork.Drivers.GetByAsync(d=>d.Id==dto.Id);
             if(driver == null)
                 return ;
-            driver.Lang = dto.Lang;
-            driver.Lat=dto.Lat;
-          await  _unitOfWork.Complete(); 
+            driver.Lang = Convert.ToDouble(dto.Lang);
+            driver.Lat = Convert.ToDouble(dto.Lat);
+            await _unitOfWork.Complete(); 
         }
     }
 }

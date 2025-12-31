@@ -2,6 +2,7 @@
 using NewBusBLL.Hashing_Service.Inter;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,6 +14,11 @@ namespace NewBusBLL.Hashing_Service
     {
         public string GenerateHashedPassword(string Password, string Salt)
         {
+            if (string.IsNullOrEmpty(Password))
+                throw new ValidationException("Password is null or empty");
+
+            if (string.IsNullOrEmpty(Salt))
+                throw new ValidationException("Salt is null or empty");
             byte[] passwordd = Encoding.UTF8.GetBytes(Password);
             byte[] saltt = Convert.FromBase64String(Salt);
             passwordd = saltt.Concat(passwordd).ToArray();

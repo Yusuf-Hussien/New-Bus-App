@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NewBusBLL.StationTrips
 {
-    public class StationTrip
+    public class StationTrip:IstationTrip
     {
         private readonly IUnitOfWork _UOW;
         private readonly IMapper _Mapper;

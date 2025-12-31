@@ -34,7 +34,7 @@ namespace NewBusAPI.Controllers
             return Ok(new ApiResponse<IEnumerable<DtoReturnKeyVal>>(GenederList, "Gender List Successfuly"));
 
         }
-        [Authorize (Roles ="Admin,Driver")]
+        [Authorize(Roles = "Admin,Driver")]
         [HttpGet("GetStatusBus")]
         public async Task<ActionResult<ApiResponse<IEnumerable<DtoReturnKeyVal>>>> GetStatusBus()
         {
@@ -55,29 +55,23 @@ namespace NewBusAPI.Controllers
             return Ok(new ApiResponse<IEnumerable<DtoReturnKeyVal>>(StatusTrip, "Finish Trip Successfuly"));
 
         }
-     
+
         [HttpGet("getdriveractive")]
         public async Task<ActionResult<ApiResponse<int>>> GetDriverActive()
         {
-            var DriverActive = _driverConnection.GetAllDriverActive();
-            return Ok(new ApiResponse<int>(Convert.ToInt32(DriverActive), "Drivers Active Number"));
+            int DriverActive = await _driverConnection.GetAllDriverActive();
+            return Ok(new ApiResponse<int>(DriverActive, "Drivers Active Number"));
 
         }
-       
+
         [HttpGet("getstudentactive")]
         public async Task<ActionResult<ApiResponse<int>>> getStudentActive()
         {
-            var StudentActive = _studentConnection.GetAllStudentConnection();
-            return Ok(new ApiResponse<int>(Convert.ToInt32(StudentActive), "Students Active Number"));
+            int StudentActive = await _studentConnection.GetAllStudentConnection();
+            return Ok(new ApiResponse<int>(StudentActive, "Students Active Number"));
 
         }
-       
-        [HttpGet("getadminactive")]
-        public async Task<ActionResult<ApiResponse<int>>> getAdminActive()
-        {
 
-            var AdminActive = _adminConnection.GetAllAdminActive();
-            return Ok(new ApiResponse<int>(Convert.ToInt32(AdminActive), "Admin Active Number"));
-        }
+
     }
 }

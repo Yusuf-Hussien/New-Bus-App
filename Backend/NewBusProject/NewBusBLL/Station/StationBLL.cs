@@ -1,4 +1,5 @@
-﻿using NewBusBLL.Exceptions;
+﻿using AutoMapper;
+using NewBusBLL.Exceptions;
 using NewBusBLL.Station.Interface;
 using NewBusDAL.Admins.DTO;
 using NewBusDAL.Repositry.Interfaces.IunitOfWork;
@@ -16,9 +17,11 @@ namespace NewBusBLL.Station
     public class StationBLL:IstationBLL
     {
         private readonly IUnitOfWork _UOW;
-        public StationBLL(IUnitOfWork UOW)
+        private readonly IMapper _Mapper;
+        public StationBLL(IUnitOfWork UOW,IMapper mapper)
         {
             _UOW = UOW;
+            _Mapper = mapper;
         }
         public async Task<IEnumerable<NewBusDAL.Models.Station>>GetAllStationsForHub()
         {
@@ -27,19 +30,20 @@ namespace NewBusBLL.Station
                 return null;
             return Stations;
         }
-        public async Task<IEnumerable<NewBusDAL.Models.Station>> GetAllStations()
+        public async Task<IEnumerable<DTOStationRead>> GetAllStations()
         {
             var Stations = await _UOW.Stations.GetAllAsync();
             if (Stations == null||Stations.Count()<=0)
                throw new NotFoundException("Data Is Not Found") ;
-            return Stations;
+            return _Mapper.Map<IEnumerable<DTOStationRead>>(Stations);
         }
-        public async Task AddStation(NewBusDAL.Models.Station station)
+        public async Task<int> AddStation(NewBusDAL.Models.Station station)
         {
             if (station == null)
                 throw new ValidationException("Data Is Not Valid");
-          await  _UOW.Stations.AddAsync(station);
-           await _UOW.Complete();
+            await _UOW.Stations.AddAsync(station);
+            await _UOW.Complete();
+            return station.Id;
 
         }
         public async Task RemoveStation(int StationId)
@@ -54,7 +58,6 @@ namespace NewBusBLL.Station
             await _UOW.Complete();
         }
 
-
-     
+  
     }
 }

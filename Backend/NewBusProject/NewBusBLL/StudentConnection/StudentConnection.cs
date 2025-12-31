@@ -30,21 +30,19 @@ namespace NewBusBLL.StudentConnection
         }
         public async Task RemoveFromConnectionStudentTable(string connectionId)
         {
-            var isexist = await _UOW.StudentConnections.IsExist(ac => ac.CoonectionId == connectionId );
-            if (isexist)
-            {
+           
                 var studentconnections = await _UOW.StudentConnections.GetByAsync(ac => ac.CoonectionId == connectionId);
                 if (studentconnections == null)
                     return;
                 await _UOW.StudentConnections.RemoveAsync(studentconnections.Id);
                 await _UOW.Complete();
-            }
+            
         }
 
         public async Task<int> GetAllStudentConnection()
         {
             var StudentActive = await _UOW.StudentConnections.GetAllAsync();
-            return StudentActive.Count();
+            return Convert.ToInt32(StudentActive.Count())==0?0: Convert.ToInt32(StudentActive.Count());
         }
     }
 }

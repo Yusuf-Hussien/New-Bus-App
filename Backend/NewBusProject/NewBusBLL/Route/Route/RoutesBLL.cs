@@ -1,7 +1,9 @@
-﻿using NewBusBLL.Exceptions;
+﻿using AutoMapper;
+using NewBusBLL.Exceptions;
 using NewBusBLL.Route.InteFace;
 using NewBusDAL.Repositry.Interfaces.IunitOfWork;
 using NewBusDAL.Repositry.RepoClassess.UnitOfWork;
+using NewBusDAL.Route;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,9 +17,11 @@ namespace NewBusBLL.Route.Route
     {
 
         private readonly IUnitOfWork _UOW;
-        public RoutesBLL(IUnitOfWork UOW)
+        private readonly IMapper _Mapper;
+        public RoutesBLL(IUnitOfWork UOW,IMapper mapper)
         {
             _UOW = UOW;
+            _Mapper = mapper;
         }
         public async Task AddRoute(NewBusDAL.Models.Route route)
         {
@@ -41,5 +45,19 @@ namespace NewBusBLL.Route.Route
             await _UOW.Buses.RemoveAsync(id);
             await _UOW.Complete();
         }
+
+     
+
+     public async Task<IEnumerable<dtorouteread>> GetAllRoutesAsync()
+        {
+            var routes = await _UOW.Routes.GetAllAsync();
+            if ( routes.Count() <= 0)
+                throw new NotFoundException("Data Is Not Found");
+            return  _Mapper.Map<IEnumerable<dtorouteread>>(routes);
+
+
+        }
+
+       
     }
 }

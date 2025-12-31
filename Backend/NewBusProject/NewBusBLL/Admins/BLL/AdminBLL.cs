@@ -23,14 +23,14 @@ using System.Threading.Tasks;
 
 namespace NewBusBLL.Admins.BLL
 {
-    public class AdminBLL:IadminBLL
+    public class AdminBLL : IadminBLL
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IToken _Token;
         private readonly Iemail _email;
         private readonly IhashingBLL _Hash;
-        public AdminBLL(IUnitOfWork unitOfWork, IMapper mapper ,IToken Token,Iemail email,IhashingBLL Hash)
+        public AdminBLL(IUnitOfWork unitOfWork, IMapper mapper, IToken Token, Iemail email, IhashingBLL Hash)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -42,10 +42,10 @@ namespace NewBusBLL.Admins.BLL
 
         public async Task<DTOAdminRead> GetAdminByIdAsync(int id)
         {
-            if(id <= 0)
+            if (id <= 0)
                 throw new ValidationException("Id Must Be Positive");
-            
-            var admin = await _unitOfWork.Admins.getallIncludeBy(a=>a.Id==id, new[] { "Person" }).Where(a=>a.Id==id).FirstOrDefaultAsync();
+
+            var admin = await _unitOfWork.Admins.getallIncludeBy(a => a.Id == id, new[] { "Person" }).Where(a => a.Id == id).FirstOrDefaultAsync();
 
             if (admin == null)
                 throw new NotFoundException("Data Is Not Found");
@@ -58,9 +58,9 @@ namespace NewBusBLL.Admins.BLL
             if (FirstName == null)
                 throw new ValidationException("FirstName Must Exist");
 
-            var admins = await _unitOfWork.Admins.getallIncludeBy(a => a.Person.FirstName == FirstName, new[] {"Person"} ).ToListAsync();
+            var admins = await _unitOfWork.Admins.getallIncludeBy(a => a.Person.FirstName == FirstName, new[] { "Person" }).ToListAsync();
 
-            if (admins.Count<=0)
+            if (admins.Count <= 0)
                 throw new NotFoundException("Data Is Not Found");
 
             return _mapper.Map<List<DTOAdminRead>>(admins);
@@ -68,14 +68,14 @@ namespace NewBusBLL.Admins.BLL
         public async Task<bool> VerifyEmail(string Token)
         {
 
-            var admins = await _unitOfWork.Admins.getallIncludeBy(a=>a.Isverified==false,null).ToListAsync();
+            var admins = await _unitOfWork.Admins.getallIncludeBy(a => a.Isverified == false, null).ToListAsync();
 
             foreach (var admin in admins)
             {
                 if (BCrypt.Net.BCrypt.Verify(Token, admin.Token))
                 {
                     admin.Isverified = true;
-                  await _unitOfWork.Complete();
+                    await _unitOfWork.Complete();
                     return true;
                 }
             }
@@ -147,10 +147,11 @@ namespace NewBusBLL.Admins.BLL
             var Token = _Hash.GenerateSaltStringWithoutSlash(8);
             dtoAdminCreate.Token = Token;
 
-            var admin = new Admin() {
+            var admin = new Admin()
+            {
                 Username = dtoAdminCreate.UserName,
                 Password = BCrypt.Net.BCrypt.HashPassword(dtoAdminCreate.Password),
-                Token=BCrypt.Net.BCrypt.HashPassword( dtoAdminCreate.Token),
+                Token = BCrypt.Net.BCrypt.HashPassword(dtoAdminCreate.Token),
                 Person = new Person()
                 {
                     FirstName = dtoAdminCreate.FirstName,
@@ -159,21 +160,21 @@ namespace NewBusBLL.Admins.BLL
                     LastName = dtoAdminCreate.LastName,
                     Email = dtoAdminCreate.Email,
                     Phone = dtoAdminCreate.Phone,
-                    Gender=dtoAdminCreate.Gender==Convert.ToInt32(enGender.Male)?Convert.ToInt32(enGender.Male):Convert.ToInt32(enGender.Female)
+                    Gender = dtoAdminCreate.Gender == Convert.ToInt32(enGender.Male) ? Convert.ToInt32(enGender.Male) : Convert.ToInt32(enGender.Female)
                 }
             };
 
 
             try
             {
-             await   _email.SendVerificationEmailAdmin(dtoAdminCreate.Email,Token);
+                await _email.SendVerificationEmailAdmin(dtoAdminCreate.Email, Token);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new ValidationException("Error When Verify Your Email Try In Another Time");
             }
 
-            Token= BCrypt.Net.BCrypt.HashPassword(Token);
+            Token = BCrypt.Net.BCrypt.HashPassword(Token);
             await _unitOfWork.Admins.AddAsync(admin);
             await _unitOfWork.Complete();
         }
@@ -181,36 +182,36 @@ namespace NewBusBLL.Admins.BLL
         {
             var admin = await _unitOfWork.Admins.GetByIdAsync(dtoAdminUpdate.ID);
             if (admin == null)
-            throw new NotFoundException("Data Is Not Found");
+                throw new NotFoundException("Data Is Not Found");
 
             admin.Username = dtoAdminUpdate.UsertName;
             admin.Person.FirstName = dtoAdminUpdate.FirstName;
             admin.Person.SecondName = dtoAdminUpdate.SecondName;
             admin.Person.ThirdName = dtoAdminUpdate.ThirdName;
             admin.Person.LastName = dtoAdminUpdate.LastName;
-            admin.Person.Gender = dtoAdminUpdate.Gender==Convert.ToString(enGender.Male)?Convert.ToInt32(enGender.Male): Convert.ToInt32(enGender.Female);
+            admin.Person.Gender = dtoAdminUpdate.Gender == Convert.ToString(enGender.Male) ? Convert.ToInt32(enGender.Male) : Convert.ToInt32(enGender.Female);
             await _unitOfWork.Complete();
-        }   
+        }
         public async Task DeleteAdminAsync(int id)
         {
-            if(id <= 0)
+            if (id <= 0)
                 throw new ValidationException("Id Must Be Positive");
             var admin = await _unitOfWork.Admins.GetByIdAsync(id);
             if (admin == null)
                 throw new NotFoundException("Data Is Not Found");
 
-         await _unitOfWork.Admins.RemoveAsync(admin.Id);
+            await _unitOfWork.Admins.RemoveAsync(admin.Id);
 
             await _unitOfWork.Complete();
         }
 
-       public async Task UpdatePasswordAsync(DTOUpdatePassword dtoUpdatePassword)
+        public async Task UpdatePasswordAsync(DTOUpdatePassword dtoUpdatePassword)
         {
-            if(dtoUpdatePassword == null)
+            if (dtoUpdatePassword == null)
                 throw new ValidationException("Data Is Not Valid");
-            if(string.IsNullOrEmpty( dtoUpdatePassword.OldPassword) || string.IsNullOrEmpty(dtoUpdatePassword.NewPassword))
+            if (string.IsNullOrEmpty(dtoUpdatePassword.OldPassword) || string.IsNullOrEmpty(dtoUpdatePassword.NewPassword))
                 throw new ValidationException("Old Password And New Password Are Required");
-            if(dtoUpdatePassword.ID <= 0)
+            if (dtoUpdatePassword.ID <= 0)
                 throw new ValidationException("Id Must Be Positive");
             if (dtoUpdatePassword.OldPassword.Length < 8 || dtoUpdatePassword.NewPassword.Length < 8)
                 throw new ValidationException("Passwords Must Be At Least 8 Characters Long");
@@ -218,7 +219,7 @@ namespace NewBusBLL.Admins.BLL
             var admin = await _unitOfWork.Admins.GetByIdAsync(dtoUpdatePassword.ID);
             if (admin == null)
                 throw new NotFoundException("Data Is Not Found");
-            if(dtoUpdatePassword.OldPassword==dtoUpdatePassword.NewPassword)
+            if (dtoUpdatePassword.OldPassword == dtoUpdatePassword.NewPassword)
                 throw new ValidationException("New Password Must Be Different From Old Password");
             //
             bool isOldPasswordValid = BCrypt.Net.BCrypt.Verify(dtoUpdatePassword.OldPassword, admin.Password);
@@ -236,17 +237,21 @@ namespace NewBusBLL.Admins.BLL
                 return Math.Abs((Guid.NewGuid().GetHashCode() % 900000)) + 100000;
             };
 
+
             var Admins = await _unitOfWork.Admins.getallIncludeBy(a => a.Person.Email == Email, null).FirstOrDefaultAsync();
             if (Email == null)
                 throw new ValidationException("Email Invalid Not Exist");
-            var OTP = getRandom6;
+
+            var OTP = getRandom6();
             //
             var resetstudent = new ResetPasswordAdmin()
             {
                 OTP = BCrypt.Net.BCrypt.HashPassword(OTP.ToString()),
                 AdminId = Admins.Id
-                ,ExpireAt = DateTime.Now.AddMinutes(10)
-                ,IsVerified=false
+                ,
+                ExpireAt = DateTime.Now.AddMinutes(10)
+                ,
+                IsVerified = false
             };
             await _unitOfWork.ResetPasswordAdmins.AddAsync(resetstudent);
             await _unitOfWork.Complete();
@@ -258,8 +263,8 @@ namespace NewBusBLL.Admins.BLL
                 throw new ValidationException("Password Is Not Valid");
             int studentid = 0;
             ResetPasswordAdmin Reset = null;
-          
-            var ResetPasss = await _unitOfWork.ResetPasswordAdmins.FindAsync(r => r.IsVerified==false);
+
+            var ResetPasss = await _unitOfWork.ResetPasswordAdmins.FindAsync(r => r.IsVerified == false);
             foreach (var reset in ResetPasss)
             {
                 if (BCrypt.Net.BCrypt.Verify(dtoPassword.OTP, reset.OTP) && reset.ExpireAt > DateTime.Now)
@@ -289,13 +294,13 @@ namespace NewBusBLL.Admins.BLL
                 throw new ValidationException("Data Is Not Valid");
             if (dtoAdminLogin.UserName == null || dtoAdminLogin.Password == null)
                 throw new ValidationException("Username And Password Are Required");
-            var admin = await _unitOfWork.Admins.getallIncludeBy(a => a.Username == dtoAdminLogin.UserName && (a.Isverified==true), new[] { "Person" }).FirstOrDefaultAsync();
+            var admin = await _unitOfWork.Admins.getallIncludeBy(a => a.Username == dtoAdminLogin.UserName && (a.Isverified == true), new[] { "Person" }).FirstOrDefaultAsync();
             if (admin == null)
                 throw new NotFoundException("UserName or Password is InCorrect");
             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(dtoAdminLogin.Password, admin.Password);
             if (!isPasswordValid)
                 throw new NotFoundException("UserName or Password is InCorrect");
-           return await _Token.GenerateToken(dtoAdminLogin, Roles.Admin);
+            return await _Token.GenerateToken(dtoAdminLogin, Roles.Admin);
 
         }
     }
