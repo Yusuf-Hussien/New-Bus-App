@@ -133,6 +133,9 @@ const CONFIG = {
   },
 };
 
+const API_BASE_URL = "https://newbus.tryasp.net/api/";
+
+
 // State
 const state = {
   currentUser: null,
@@ -375,17 +378,20 @@ function updateWelcomeMessage() {
 
 // Auth Functions
 function checkAuth() {
-  state.currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  if (!state.currentUser || !state.currentUser.isLoggedIn) {
+  state.currentUser = JSON.parse(localStorage.getItem("userSession"));
+ if(state.currentUser == null) {
     window.location.href = "login.html";
     return false;
   }
-
-  if (state.currentUser.accountType !== "passenger") {
+  else if(state.currentUser.refreshTokenExpiresAt < Date.now()) {
     showAccessDenied();
+    window.location.href = "login.html";
     return false;
   }
+   /*if (currentUser.isLoggedIn) {
+    window.location.href = "login.html";
+    return false;
+  }*/
 
   return true;
 }
@@ -408,7 +414,12 @@ function handleLogout() {
 
   if (state.currentUser) {
     state.currentUser.isLoggedIn = false;
-    localStorage.setItem("currentUser", JSON.stringify(state.currentUser));
+    apiRequest("Auth/Logout", "POST", {}, {
+      refreshToken: state.currentUser.refreshToken
+    }).catch((error) => { 
+      console.error("خطأ أثناء تسجيل الخروج:", error); 
+    });
+    localStorage.setItem("userSession", JSON.stringify(null));
   }
   window.location.href = "login.html";
 }
@@ -961,3 +972,62 @@ document.addEventListener("DOMContentLoaded", function () {
     loadPassengerInterface();
   }
 });
+
+
+// ============================
+// API Helpers
+// ============================
+
+async function apiAuthRequest(URI, method = "GET", headers = {}, data = null) {
+  if (state.currentUser.accessTokenExpiresAt < Date.now()) 
+    headers["Authorization"] = `Bearer ${state.currentUser?.refreshToken || ""}`;
+  else 
+    headers["Authorization"] = `Bearer ${state.currentUser?.accessToken || ""}`;
+  
+  return await apiRequest(URI, method, headers, data);
+}
+
+async function apiRequest(URI, method = "GET", headers = {}, data = null) {
+  try {
+    const options = {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        ...headers
+      }
+    };
+
+    if (data) {
+      options.body = JSON.stringify(data);
+    }
+
+    const response = await fetch(API_BASE_URL + URI, options);
+
+    // Try to parse JSON error message if present
+    let responseData;
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      responseData = await response.json();
+    }
+
+    if (!response.ok) {
+      // Extract message from API or fallback
+      const errorMsg = responseData?.Message || responseData?.error || "Something went wrong. Please try again.";
+      //alert(errorMsg);  // Or better: show in a custom error div
+      return { success: false, error: errorMsg };
+    }
+
+    // 204 No Content (e.g., DELETE success)
+    if (response.status === 204) {
+      return { success: true, data: null };
+    }
+
+    // Successful response with JSON body
+    return { success: true, data: responseData || null };
+
+  } catch (error) {
+    console.error("API Request Error:", error);
+    //alert("Network error. Please check your connection and try again.");
+    return { success: false, error: "Network error" };
+  }
+}

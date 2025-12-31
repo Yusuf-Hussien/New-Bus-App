@@ -600,19 +600,19 @@ async function handleLogin(email, password, selectedAccountType) {
         return false;
     }
 
-    saveUserCookies(response.data, selectedAccountType);
+    saveUserCookies(email, response.data, selectedAccountType);
     return true;
 }
 
-function saveUserCookies(userData,accountType) {
+function saveUserCookies(email, userData, accountType) {
     if (!userData) {
         console.error("No user data provided");
         showError("Login failed - no user data", 'login');
         return;
     }
 
-    const accessToken = userData.accessToken || '';
-    const refreshToken = userData.refreshToken || '';
+    const accessToken = userData.data.accessToken || '';
+    const refreshToken = userData.data.refreshToken || '';
 
     // Calculate exact expiration times
     const accessTokenExpiresAt = Date.now() + (30 * 60 * 1000);        // 30 minutes
@@ -620,6 +620,7 @@ function saveUserCookies(userData,accountType) {
 
     // Save to localStorage/sessionStorage for better security
     const sessionData = {
+        userName: email,
         accessToken,
         refreshToken,
         accessTokenExpiresAt,    // Useful for proactive refresh
