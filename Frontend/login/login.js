@@ -923,7 +923,7 @@ window.addEventListener('load', function() {
                 
                 // تأخير قليل للتأكد من تحميل الصفحة
                 setTimeout(() => {
-                    redirectBasedOnAccountType(userAccountType);
+                    //redirectBasedOnAccountType(userAccountType);
                 }, 500);
             } else {
                 console.log("User is not logged in or missing data");
