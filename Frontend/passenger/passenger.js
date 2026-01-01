@@ -388,10 +388,10 @@ function checkAuth() {
     window.location.href = "login.html";
     return false;
   }
-   /*if (currentUser.isLoggedIn) {
-    window.location.href = "login.html";
+  if (state.currentUser.userAccountType !== "passenger") {
+    showAccessDenied();
     return false;
-  }*/
+  }
 
   return true;
 }
