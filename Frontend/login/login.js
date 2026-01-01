@@ -620,6 +620,7 @@ function saveUserCookies(email, userData, accountType) {
 
     // Save to localStorage/sessionStorage for better security
     const sessionData = {
+        userAccountType: accountType,
         userName: email,
         accessToken,
         refreshToken,
@@ -907,24 +908,24 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
     console.log("Page loaded - checking authentication...");
     
-    const currentUser = localStorage.getItem('currentUser');
-    const userAccountType = localStorage.getItem('userAccountType');
+    const currentUser = getUserData();
+    const userAccountType = currentUser.userAccountType;
     
-    console.log("currentUser from localStorage:", currentUser);
-    console.log("userAccountType from localStorage:", userAccountType);
+    //console.log("currentUser from localStorage:", currentUser);
+    //console.log("userAccountType from localStorage:", userAccountType);
     
     if (currentUser) {
         try {
-            const userData = JSON.parse(currentUser);
-            console.log("Parsed userData:", userData);
+            ;
+            //console.log("Parsed userData:", userData);
             
-            if (userData.isLoggedIn === true && userAccountType) {
-                console.log("User is already logged in, redirecting to:", userAccountType);
+            if (checkAuth()) {
+                //console.log("User is already logged in, redirecting to:", userAccountType);
                 
                 // تأخير قليل للتأكد من تحميل الصفحة
                 setTimeout(() => {
-                    //redirectBasedOnAccountType(userAccountType);
-                }, 500);
+                    redirectBasedOnAccountType(userAccountType);
+                }, 50);
             } else {
                 console.log("User is not logged in or missing data");
                 console.log("isLoggedIn:", userData.isLoggedIn);
@@ -937,3 +938,28 @@ window.addEventListener('load', function() {
         console.log("No currentUser found in localStorage");
     }
 });
+
+
+
+function checkAuth() {
+  currentUser = getUserData();
+ if(currentUser == null) {
+    //window.location.href = "login.html";
+    return false;
+  }
+  else if(currentUser.refreshTokenExpiresAt < Date.now()) {
+    showAccessDenied();
+    //window.location.href = "login.html";
+    return false;
+  }
+   /*if (currentUser.isLoggedIn) {
+    window.location.href = "login.html";
+    return false;
+  }*/
+  return true;
+}
+
+function getUserData() {
+    currentUser = JSON.parse(localStorage.getItem("userSession"));
+    return currentUser;
+}
