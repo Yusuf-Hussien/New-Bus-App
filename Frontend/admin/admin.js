@@ -996,8 +996,17 @@ function showEditBusModal(busId) {
 // ============================
 // Add Driver Modal - نافذة إضافة سائق جديد
 // ============================
-function showAddDriverModal() {
-  const activeBuses = CONFIG.BUS_DATA.filter((bus) => bus.status === "active");
+async function showAddDriverModal() {
+  // Load buses from API if available, otherwise use local buses
+  let activeBuses = [];
+  if (state.apiBuses.length > 0) {
+    activeBuses = state.apiBuses.filter((bus) => {
+      const status = bus.status || "";
+      return status.toLowerCase() === "active";
+    });
+  } else {
+    activeBuses = CONFIG.BUS_DATA.filter((bus) => bus.status === "active");
+  }
 
   const modalContent = `
         <form id="addDriverForm" onsubmit="handleAddDriverSubmit(event)">
@@ -1092,9 +1101,11 @@ function showAddDriverModal() {
                             <option value="">اختر حافلة</option>
                             ${activeBuses
                               .map(
-                                (bus) => `
-                                <option value="${bus.id}">الحافلة #${bus.id} (موديل ${bus.model})</option>
-                            `
+                                (bus) => {
+                                  const busId = bus.id || "غير محدد";
+                                  const busPlate = bus.plateNo || bus.model || "غير محدد";
+                                  return `<option value="${busId}">${busPlate}</option>`;
+                                }
                               )
                               .join("")}
                         </select>
