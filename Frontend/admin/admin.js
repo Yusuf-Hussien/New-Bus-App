@@ -110,6 +110,7 @@ const state = {
   apiDrivers: [], // Drivers loaded from API
   apiAdmins: [], // Admins loaded from API
   apiTrips: [], // Trips loaded from API
+  apiBuses: [], // Buses loaded from API
 };
 
 // ============================
@@ -267,10 +268,11 @@ async function loadAdminInterface() {
   refreshUserData();
   dom.userName.textContent = state.currentUser.name || "المدير";
 
-  // Load drivers, admins, and trips from API
+  // Load drivers, admins, trips, and buses from API
   await loadDriversFromAPI();
   await loadAdminsFromAPI();
   await loadTripsFromAPI();
+  await loadBusesFromAPI();
 
   dom.mainContent.innerHTML = `
         ${renderWelcomeMessage()}
@@ -291,8 +293,13 @@ function renderWelcomeMessage() {
 }
 
 function renderStats() {
-  const activeBuses = CONFIG.BUS_DATA.filter(
-    (bus) => bus.status === "active"
+  // Use API buses if available, otherwise use local buses
+  const busesToCheck = state.apiBuses.length > 0 ? state.apiBuses : CONFIG.BUS_DATA;
+  const activeBuses = busesToCheck.filter(
+    (bus) => {
+      const status = bus.status || "";
+      return status.toLowerCase() === "active" || status.toLowerCase() === "active";
+    }
   ).length;
 
   return `
@@ -549,6 +556,8 @@ function renderAdminRow(admin) {
 }
 
 function renderBusesTable() {
+  // Use API buses if available, otherwise use local buses
+  const busesToRender = state.apiBuses.length > 0 ? state.apiBuses : CONFIG.BUS_DATA;
   const availableDrivers = state.drivers.map(
     (d) => d.firstName + " " + d.lastName
   );
@@ -571,7 +580,7 @@ function renderBusesTable() {
                     <thead>
                         <tr>
                             <th>رقم الحافلة</th>
-                            <th>الموديل</th>
+                            <th>رقم اللوحة</th>
                             <th>السعة</th>
                             <th>الحالة</th>
                             <th>السائق</th>
@@ -579,7 +588,7 @@ function renderBusesTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        ${CONFIG.BUS_DATA.map((bus) =>
+                        ${busesToRender.map((bus) =>
                           renderBusRow(bus, availableDrivers)
                         ).join("")}
                     </tbody>
@@ -590,30 +599,65 @@ function renderBusesTable() {
 }
 
 function renderBusRow(bus, availableDrivers) {
-  const statusClass = getStatusClass(bus.status);
-  const statusText = CONFIG.STATUS_TEXTS[bus.status] || bus.status;
+  // Handle API bus data format
+  let busId, plateNo, capacity, status, driver;
+  
+  if (bus.plateNo !== undefined) {
+    // API bus format
+    busId = bus.id || "غير محدد";
+    plateNo = bus.plateNo || "غير محدد";
+    capacity = bus.capacity || 0;
+    status = mapBusStatus(bus.status);
+    driver = bus.driver || "غير معين";
+  } else {
+    // Local bus format (CONFIG.BUS_DATA)
+    busId = bus.id;
+    plateNo = bus.model || "غير محدد";
+    capacity = bus.capacity;
+    status = bus.status;
+    driver = bus.driver || "غير معين";
+  }
+
+  const statusClass = getStatusClass(status);
+  const statusText = CONFIG.STATUS_TEXTS[status] || status;
 
   return `
         <tr>
-            <td>#${bus.id}</td>
-            <td>${bus.model}</td>
-            <td>${bus.capacity} مقعد</td>
+            <td>#${busId}</td>
+            <td>${plateNo}</td>
+            <td>${capacity} مقعد</td>
             <td>
                 <span class="status-badge ${statusClass}">${statusText}</span>
             </td>
-            <td>${bus.driver}</td>
+            <td>${driver}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="action-btn edit" onclick="showEditBusModal(${bus.id})">
+                    <button class="action-btn edit" onclick="showEditBusModal(${busId})">
                         <i class="fas fa-edit"></i> تعديل
                     </button>
-                    <button class="action-btn view" onclick="handleViewBus(${bus.id})">
+                    <button class="action-btn view" onclick="handleViewBus(${busId})">
                         <i class="fas fa-eye"></i> عرض
                     </button>
                 </div>
             </td>
         </tr>
     `;
+}
+
+// Helper function to map API bus status to local status format
+function mapBusStatus(apiStatus) {
+  if (!apiStatus) return "inactive";
+  
+  const statusMap = {
+    "Active": "active",
+    "active": "active",
+    "Inactive": "inactive",
+    "inactive": "inactive",
+    "Maintenance": "maintenance",
+    "maintenance": "maintenance"
+  };
+  
+  return statusMap[apiStatus] || apiStatus.toLowerCase();
 }
 
 function renderTripsTable() {
@@ -810,13 +854,10 @@ function showAddBusModal() {
   const modalContent = `
         <form id="addBusForm" onsubmit="handleAddBusSubmit(event)">
             <div class="form-group">
-                <label for="busNumber">رقم الحافلة *</label>
-                <input type="number" class="form-control" id="busNumber" required min="1">
-            </div>
-            
-            <div class="form-group">
-                <label for="busModel">الموديل *</label>
-                <input type="text" class="form-control" id="busModel" required>
+                <label for="busModel">رقم اللوحة *</label>
+                <input type="text" class="form-control" id="busModel" required 
+                       placeholder="مثال: AbC-10">
+                <small class="form-text">أدخل رقم لوحة الحافلة</small>
             </div>
             
             <div class="form-group">
@@ -833,7 +874,7 @@ function showAddBusModal() {
             </div>
             
             <div class="form-group">
-                <label for="busDriver">السائق المعين</label>
+                <label for="busDriver">السائق المعين (اختياري)</label>
                 <select class="form-control select" id="busDriver">
                     <option value="">اختر سائقاً</option>
                     ${availableDrivers
@@ -843,6 +884,7 @@ function showAddBusModal() {
                       )
                       .join("")}
                 </select>
+                <small class="form-text">يمكن تعيين السائق لاحقاً</small>
             </div>
             
             <div class="modal-footer">
@@ -1563,21 +1605,52 @@ function handleUpdateAdmin() {
 // ============================
 // Form Submit Handlers - معالجات تقديم النماذج
 // ============================
-function handleAddBusSubmit(event) {
+async function handleAddBusSubmit(event) {
   event.preventDefault();
 
-  const newBus = {
-    id: parseInt(document.getElementById("busNumber").value),
-    model: document.getElementById("busModel").value,
-    capacity: parseInt(document.getElementById("busCapacity").value),
-    status: document.getElementById("busStatus").value,
-    driver: document.getElementById("busDriver").value || "غير معين",
+  const plateNo = document.getElementById("busModel").value.trim();
+  const capacity = parseInt(document.getElementById("busCapacity").value);
+  const statusText = document.getElementById("busStatus").value;
+  const driver = document.getElementById("busDriver").value || "غير معين";
+
+  // Validate inputs
+  if (!plateNo || !capacity || capacity <= 0) {
+    alert("يرجى إدخال جميع البيانات بشكل صحيح");
+    return;
+  }
+
+  // Map status text to API status number (0 = Inactive, 1 = Active)
+  const statusMap = {
+    "active": 1,
+    "inactive": 0,
+    "maintenance": 0
+  };
+  const status = statusMap[statusText] !== undefined ? statusMap[statusText] : 0;
+
+  // Prepare request body
+  const requestBody = {
+    plateNo: plateNo,
+    capacity: capacity,
+    status: status
   };
 
-  CONFIG.BUS_DATA.push(newBus);
-  alert(`تم إضافة الحافلة #${newBus.id} بنجاح`);
-  closeModal();
-  loadAdminInterface();
+  try {
+    // Send request using apiAuthRequest
+    const response = await apiAuthRequest("Buses", "POST", {}, requestBody);
+
+    if (response.success) {
+      alert(`تم إضافة الحافلة ${plateNo} بنجاح`);
+      closeModal();
+      // Reload buses from API
+      await loadBusesFromAPI();
+      loadAdminInterface();
+    } else {
+      alert(`فشل إضافة الحافلة: ${response.error || "حدث خطأ غير معروف"}`);
+    }
+  } catch (error) {
+    console.error("Error adding bus:", error);
+    alert("حدث خطأ أثناء إضافة الحافلة. يرجى المحاولة مرة أخرى.");
+  }
 }
 
 function handleEditBusSubmit(event, busId) {
@@ -1654,6 +1727,23 @@ async function loadTripsFromAPI() {
   } catch (error) {
     console.error("Error loading trips from API:", error);
     state.apiTrips = [];
+  }
+}
+
+async function loadBusesFromAPI() {
+  try {
+    const response = (await apiAuthRequest("Buses", "GET")).data;
+    
+    if (response.success && response.data && Array.isArray(response.data)) {
+      state.apiBuses = response.data;
+      console.log("Loaded buses from API:", state.apiBuses.length);
+    } else {
+      console.warn("Failed to load buses from API:", response.error);
+      state.apiBuses = [];
+    }
+  } catch (error) {
+    console.error("Error loading buses from API:", error);
+    state.apiBuses = [];
   }
 }
 
