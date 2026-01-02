@@ -109,6 +109,7 @@ const state = {
   admins: [],
   apiDrivers: [], // Drivers loaded from API
   apiAdmins: [], // Admins loaded from API
+  apiTrips: [], // Trips loaded from API
 };
 
 // ============================
@@ -266,9 +267,10 @@ async function loadAdminInterface() {
   refreshUserData();
   dom.userName.textContent = state.currentUser.name || "المدير";
 
-  // Load drivers and admins from API
+  // Load drivers, admins, and trips from API
   await loadDriversFromAPI();
   await loadAdminsFromAPI();
+  await loadTripsFromAPI();
 
   dom.mainContent.innerHTML = `
         ${renderWelcomeMessage()}
@@ -311,7 +313,7 @@ function renderStats() {
             ${renderStatCard(
               "fas fa-route",
               "trips",
-              CONFIG.TRIP_DATA.length,
+              state.apiTrips.length > 0 ? state.apiTrips.length : CONFIG.TRIP_DATA.length,
               "رحلة اليوم"
             )}
         </div>
@@ -615,6 +617,9 @@ function renderBusRow(bus, availableDrivers) {
 }
 
 function renderTripsTable() {
+  // Use API trips if available, otherwise use local trips
+  const tripsToRender = state.apiTrips.length > 0 ? state.apiTrips : CONFIG.TRIP_DATA;
+
   return `
         <div class="table-container">
             <div class="table-header">
@@ -639,37 +644,109 @@ function renderTripsTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        ${CONFIG.TRIP_DATA.map(renderTripRow).join("")}
+                        ${tripsToRender.map(renderTripRow).join("")}
                     </tbody>
                 </table>
             </div>
         </div>
-    `;
+`;
 }
 
 function renderTripRow(trip) {
-  const statusClass = getStatusClass(trip.status);
-  const statusText = CONFIG.STATUS_TEXTS[trip.status] || trip.status;
+  // Handle API trip data format
+  let tripId, driver, bus, route, time, status;
+  
+  if (trip.startAt) {
+    // API trip format
+    tripId = trip.id || "غير محدد";
+    driver = trip.createByBDriverName || "غير محدد";
+    bus = trip.busPlate || trip.bus || "غير محدد";
+    route = trip.tripFrom && trip.tripTo 
+      ? `${trip.tripFrom} ← ${trip.tripTo}` 
+      : (trip.route || "غير محدد");
+    
+    // Format time from API
+    const startDate = trip.startAt ? new Date(trip.startAt) : null;
+    const endDate = trip.endAt && trip.endAt !== "0001-01-01T00:00:00" 
+      ? new Date(trip.endAt) 
+      : null;
+    
+    if (startDate) {
+      const startTime = formatTime(startDate);
+      const endTime = endDate ? formatTime(endDate) : "جاري";
+      time = `${startTime} - ${endTime}`;
+    } else {
+      time = "غير محدد";
+    }
+    
+    // Map API status to display format
+    status = mapTripStatus(trip.statusTrip || trip.status);
+  } else {
+    // Local trip format (CONFIG.TRIP_DATA)
+    tripId = trip.id;
+    driver = trip.driver;
+    bus = trip.bus;
+    route = trip.route;
+    time = trip.time;
+    status = trip.status;
+  }
+
+  const statusClass = getStatusClass(status);
+  const statusText = CONFIG.STATUS_TEXTS[status] || status;
 
   return `
         <tr>
-            <td>${trip.id}</td>
-            <td>${trip.driver}</td>
-            <td>${trip.bus}</td>
-            <td>${trip.route}</td>
-            <td>${trip.time}</td>
+            <td>${tripId}</td>
+            <td>${driver}</td>
+            <td>${bus}</td>
+            <td>${route}</td>
+            <td>${time}</td>
             <td>
                 <span class="status-badge ${statusClass}">${statusText}</span>
             </td>
             <td>
                 <div class="action-buttons">
-                    <button class="action-btn view" onclick="handleViewTrip('${trip.id}')">
+                    <button class="action-btn view" onclick="handleViewTrip('${tripId}')">
                         <i class="fas fa-eye"></i> عرض
                     </button>
                 </div>
             </td>
         </tr>
     `;
+}
+
+// Helper function to format time from Date object
+function formatTime(date) {
+  if (!date || isNaN(date.getTime())) return "غير محدد";
+  
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const period = hours >= 12 ? "م" : "ص";
+  const displayHours = hours > 12 ? hours - 12 : (hours === 0 ? 12 : hours);
+  const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  
+  return `${displayHours}:${displayMinutes} ${period}`;
+}
+
+// Helper function to map API status to local status format
+function mapTripStatus(apiStatus) {
+  if (!apiStatus) return "inactive";
+  
+  const statusMap = {
+    "Completed": "completed",
+    "completed": "completed",
+    "InProgress": "in-progress",
+    "in-progress": "in-progress",
+    "inProgress": "in-progress",
+    "Pending": "in-progress",
+    "pending": "in-progress",
+    "Cancelled": "inactive",
+    "cancelled": "inactive",
+    "Active": "in-progress",
+    "active": "in-progress"
+  };
+  
+  return statusMap[apiStatus] || apiStatus.toLowerCase();
 }
 
 function getStatusClass(status) {
@@ -1560,6 +1637,23 @@ async function loadAdminsFromAPI() {
   } catch (error) {
     console.error("Error loading admins from API:", error);
     state.apiAdmins = [];
+  }
+}
+
+async function loadTripsFromAPI() {
+  try {
+    const response = (await apiAuthRequest("Trips", "GET")).data;
+    
+    if (response.success && response.data && Array.isArray(response.data)) {
+      state.apiTrips = response.data;
+      console.log("Loaded trips from API:", state.apiTrips.length);
+    } else {
+      console.warn("Failed to load trips from API:", response.error);
+      state.apiTrips = [];
+    }
+  } catch (error) {
+    console.error("Error loading trips from API:", error);
+    state.apiTrips = [];
   }
 }
 
