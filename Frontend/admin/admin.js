@@ -309,6 +309,11 @@ function renderStats() {
               "رحلة اليوم"
             )}
         </div>
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="table-btn" onclick="showAddAdminModal()" style="font-size: 1.1rem; padding: 12px 30px;">
+                <i class="fas fa-user-shield"></i> إضافة مدير جديد
+            </button>
+        </div>
     `;
 }
 
@@ -1123,6 +1128,177 @@ function handleEditPassenger(passengerId) {
     `;
 
   showModal(`تعديل بيانات الراكب ${passenger.fullName}`, modalContent);
+}
+
+// ============================
+// Add Admin Modal - نافذة إضافة مدير جديد
+// ============================
+function showAddAdminModal() {
+  const modalContent = `
+        <form id="addAdminForm" onsubmit="handleAddAdminSubmit(event)">
+            <div class="form-section">
+                <h3 class="form-section-title">
+                    <i class="fas fa-user"></i> المعلومات الشخصية
+                </h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newAdminFirstName">الاسم الأول *</label>
+                        <input type="text" class="form-control" id="newAdminFirstName" required 
+                               placeholder="أدخل الاسم الأول">
+                    </div>
+                    <div class="form-group">
+                        <label for="newAdminSecondName">الاسم الثاني</label>
+                        <input type="text" class="form-control" id="newAdminSecondName" 
+                               placeholder="أدخل الاسم الثاني (اختياري)">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newAdminThirdName">الاسم الثالث</label>
+                        <input type="text" class="form-control" id="newAdminThirdName" 
+                               placeholder="أدخل الاسم الثالث (اختياري)">
+                    </div>
+                    <div class="form-group">
+                        <label for="newAdminLastName">الاسم الأخير *</label>
+                        <input type="text" class="form-control" id="newAdminLastName" required 
+                               placeholder="أدخل الاسم الأخير">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newAdminPhone">رقم الهاتف *</label>
+                        <input type="tel" class="form-control" id="newAdminPhone" required 
+                               placeholder="مثال: +201234567890">
+                    </div>
+                    <div class="form-group">
+                        <label for="newAdminGender">الجنس *</label>
+                        <select class="form-control select" id="newAdminGender" required>
+                            <option value="">اختر الجنس</option>
+                            <option value="1">ذكر</option>
+                            <option value="2">أنثى</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3 class="form-section-title">
+                    <i class="fas fa-key"></i> معلومات الحساب
+                </h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newAdminEmail">البريد الإلكتروني *</label>
+                        <input type="email" class="form-control" id="newAdminEmail" required 
+                               placeholder="أدخل البريد الإلكتروني">
+                    </div>
+                    <div class="form-group">
+                        <label for="newAdminUserName">اسم المستخدم *</label>
+                        <input type="text" class="form-control" id="newAdminUserName" required 
+                               placeholder="أدخل اسم المستخدم">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newAdminPassword">كلمة المرور *</label>
+                        <input type="password" class="form-control" id="newAdminPassword" required 
+                               placeholder="أدخل كلمة المرور (8 أحرف على الأقل)">
+                    </div>
+                    <div class="form-group">
+                        <label for="newAdminConfirmPassword">تأكيد كلمة المرور *</label>
+                        <input type="password" class="form-control" id="newAdminConfirmPassword" required 
+                               placeholder="أعد إدخال كلمة المرور">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="table-btn secondary" onclick="closeModal()">إلغاء</button>
+                <button type="submit" class="table-btn">
+                    <i class="fas fa-user-shield"></i> إضافة المدير
+                </button>
+            </div>
+        </form>
+    `;
+
+  showModal("إضافة مدير جديد", modalContent);
+}
+
+// ============================
+// Add Admin Handler - معالجة إضافة مدير جديد
+// ============================
+async function handleAddAdminSubmit(event) {
+  event.preventDefault();
+
+  // الحصول على البيانات من النموذج
+  const firstName = document.getElementById("newAdminFirstName").value.trim();
+  const secondName = document.getElementById("newAdminSecondName").value.trim();
+  const thirdName = document.getElementById("newAdminThirdName").value.trim();
+  const lastName = document.getElementById("newAdminLastName").value.trim();
+  const phone = document.getElementById("newAdminPhone").value.trim();
+  const gender = parseInt(document.getElementById("newAdminGender").value);
+  const email = document.getElementById("newAdminEmail").value.trim();
+  const userName = document.getElementById("newAdminUserName").value.trim();
+  const password = document.getElementById("newAdminPassword").value;
+  const confirmPassword = document.getElementById("newAdminConfirmPassword").value;
+
+  // التحقق من البيانات الإجبارية
+  if (!firstName || !lastName || !phone || gender === "" || !email || !userName || !password || !confirmPassword) {
+    alert("جميع الحقول الإجبارية مطلوبة");
+    return;
+  }
+
+  // التحقق من مطابقة كلمتي المرور
+  if (password !== confirmPassword) {
+    alert("كلمة المرور وتأكيدها غير متطابقتين");
+    return;
+  }
+
+  // التحقق من طول كلمة المرور
+  if (password.length < 8) {
+    alert("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
+    return;
+  }
+
+  // التحقق من صيغة البريد الإلكتروني
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("صيغة البريد الإلكتروني غير صحيحة");
+    return;
+  }
+
+  // إعداد بيانات الطلب
+  const requestBody = {
+    firstName: firstName,
+    secondName: secondName || "",
+    thirdName: thirdName || "",
+    lastName: lastName,
+    email: email,
+    phone: phone,
+    gender: gender,
+    userName: userName,
+    password: password
+  };
+
+  try {
+    // إرسال الطلب باستخدام apiAuthRequest
+    const response = await apiAuthRequest("Admins/Signup", "POST", {}, requestBody);
+
+    if (response.success) {
+      alert(`تم إضافة المدير ${firstName} ${lastName} بنجاح\nاسم المستخدم: ${userName}\nالبريد الإلكتروني: ${email}`);
+      closeModal();
+      // تحديث البيانات إذا لزم الأمر
+      refreshUserData();
+      loadAdminInterface();
+    } else {
+      alert(`فشل إضافة المدير: ${response.error || "حدث خطأ غير معروف"}`);
+    }
+  } catch (error) {
+    console.error("Error adding admin:", error);
+    alert("حدث خطأ أثناء إضافة المدير. يرجى المحاولة مرة أخرى.");
+  }
 }
 
 // ============================
