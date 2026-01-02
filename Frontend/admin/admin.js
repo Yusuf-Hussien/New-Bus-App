@@ -1,6 +1,9 @@
 // ============================
 // Configuration - التكوينات الثابتة
 // ============================
+const API_BASE_URL = "https://newbus.tryasp.net/api/";
+
+
 const CONFIG = {
   BUS_DATA: [
     {

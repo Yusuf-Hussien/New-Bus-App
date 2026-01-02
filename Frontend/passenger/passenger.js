@@ -135,7 +135,6 @@ const CONFIG = {
 
 const API_BASE_URL = "https://newbus.tryasp.net/api/";
 
-
 // State
 const state = {
   currentUser: null,
@@ -143,10 +142,17 @@ const state = {
   activeRouteLines: [],
   notifications: [],
   notificationPanelVisible: false,
-  busesData: [...CONFIG.INITIAL_BUSES],
+  busesData: [], // Will be populated from SignalR
   userPosition: { ...CONFIG.USER_POSITION },
   isLocationActive: false,
   locationWatcher: null,
+  signalRConnection: null, // SignalR connection reference
+  map: null, // Leaflet map reference
+  busMarkers: {}, // Leaflet bus markers
+  busCircles: {}, // Leaflet bus circles
+  studentMarker: null, // Student location marker
+  studentCircle: null, // Student location circle
+  locationInterval: null, // Location update interval
 };
 
 // DOM Elements
@@ -170,67 +176,138 @@ const dom = {
 // 1️⃣ Location Control Functions
 function toggleLocation() {
   if (state.isLocationActive) {
-    cancelLocation();
+    closeLocationSharing();
   } else {
-    setLocation();
+    startLocationSharing();
   }
 }
 
-function setLocation() {
-  if (navigator.geolocation) {
-    state.isLocationActive = true;
-    updateLocationUI();
+function startLocationSharing() {
+  if (!state.signalRConnection || !checkSignalRConnection()) {
+    alert("الاتصال غير جاهز. يرجى الانتظار والمحاولة مرة أخرى.");
+    return;
+  }
 
-    // Simulate location updates
-    state.locationWatcher = setInterval(() => {
-      state.userPosition.lat += (Math.random() - 0.5) * 0.5;
-      state.userPosition.lng += (Math.random() - 0.5) * 0.5;
-
-      // Keep within bounds
-      state.userPosition.lat = Math.max(
-        10,
-        Math.min(90, state.userPosition.lat)
-      );
-      state.userPosition.lng = Math.max(
-        10,
-        Math.min(90, state.userPosition.lng)
-      );
-
-      updateUserMarker();
-      addNotification(
-        "تحديث الموقع",
-        "تم تحديث موقعك الحالي بنجاح",
-        "fa-map-marker-alt"
-      );
-    }, 10000);
-
-    addNotification(
-      "تفعيل الموقع",
-      "تم تفعيل تتبع موقعك الحالي",
-      "fa-check-circle"
-    );
-  } else {
+  if (!navigator.geolocation) {
     alert("المتصفح لا يدعم تحديد الموقع");
-  }
-}
-
-function cancelLocation() {
-  state.isLocationActive = false;
-  if (state.locationWatcher) {
-    clearInterval(state.locationWatcher);
-    state.locationWatcher = null;
+    return;
   }
 
-  // Reset to default position
-  state.userPosition = { ...CONFIG.USER_POSITION };
-  updateUserMarker();
+  // Clear any existing interval
+  if (state.locationInterval) {
+    clearInterval(state.locationInterval);
+  }
+
+  state.isLocationActive = true;
   updateLocationUI();
 
+  // Start location updates
+  state.locationInterval = setInterval(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        // Update state
+        state.userPosition = { lat, lng };
+
+        // Send to server via SignalR
+        if (checkSignalRConnection()) {
+          state.signalRConnection
+            .invoke("sharelivelocationforstudent", lat.toString(), lng.toString())
+            .catch((err) => console.error("Share location error:", err));
+        }
+
+        // Update Leaflet map markers
+        updateStudentLocationMarker(lat, lng, accuracy);
+      },
+      (error) => {
+        console.error("Error getting location:", error.message);
+        alert("تعذر الحصول على موقعك: " + error.message);
+      }
+    );
+  }, 10000); // Every 10 seconds
+
+  // Get initial position
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+      state.userPosition = { lat, lng };
+      updateStudentLocationMarker(lat, lng, accuracy);
+    },
+    (error) => {
+      console.error("Error getting initial location:", error.message);
+    }
+  );
+
+  addNotification(
+    "تفعيل الموقع",
+    "تم تفعيل تتبع موقعك الحالي",
+    "fa-check-circle"
+  );
+}
+
+async function closeLocationSharing() {
+  state.isLocationActive = false;
+
+  // Clear interval
+  if (state.locationInterval) {
+    clearInterval(state.locationInterval);
+    state.locationInterval = null;
+  }
+
+  // Remove markers from map
+  if (state.studentMarker && state.map) {
+    state.map.removeLayer(state.studentMarker);
+    state.studentMarker = null;
+  }
+  if (state.studentCircle && state.map) {
+    state.map.removeLayer(state.studentCircle);
+    state.studentCircle = null;
+  }
+
+  // Stop location sharing on server
+  if (checkSignalRConnection()) {
+    try {
+      await state.signalRConnection.invoke("stoplocationforistudent");
+    } catch (err) {
+      console.error("Error stopping location:", err);
+    }
+  }
+
+  updateLocationUI();
   addNotification(
     "إلغاء الموقع",
     "تم إلغاء تتبع موقعك الحالي",
     "fa-times-circle"
   );
+}
+
+function updateStudentLocationMarker(lat, lng, accuracy) {
+  if (!state.map) return;
+
+  // Remove old markers
+  if (state.studentMarker) {
+    state.map.removeLayer(state.studentMarker);
+  }
+  if (state.studentCircle) {
+    state.map.removeLayer(state.studentCircle);
+  }
+
+  // Add new markers
+  state.studentMarker = L.marker([lat, lng])
+    .bindPopup("موقعك الحالي - خط العرض: " + lat + ", خط الطول: " + lng)
+    .addTo(state.map);
+
+  state.studentCircle = L.circle([lat, lng], {
+    radius: accuracy,
+    color: "blue",
+    fillColor: "#3388ff",
+    fillOpacity: 0.2,
+  }).addTo(state.map);
 }
 
 function updateLocationUI() {
@@ -254,12 +331,11 @@ function updateLocationUI() {
   }
 }
 
-function updateUserMarker() {
-  const marker = document.querySelector(".user-marker");
-  if (marker) {
-    marker.style.left = `${state.userPosition.lng}%`;
-    marker.style.top = `${state.userPosition.lat}%`;
-  }
+function checkSignalRConnection() {
+  return (
+    state.signalRConnection &&
+    state.signalRConnection.state === signalR.HubConnectionState.Connected
+  );
 }
 
 // 2️⃣ Profile Management Functions
@@ -430,7 +506,7 @@ function loadPassengerInterface() {
   loadNotifications();
   renderInterface();
   setupEventListeners();
-  startDataUpdates();
+  initializeSignalR(); // Initialize SignalR instead of fake data updates
 }
 
 function loadUserInfo() {
@@ -522,7 +598,7 @@ function renderStatCard(icon, type, value, label) {
 function renderLocationControl() {
   return `
         <div class="location-control">
-            <button class="btn btn-secondary" id="toggleLocationBtn" onclick="toggleLocation()">
+            <button class="btn btn-secondary" id="toggleLocationBtn">
                 <i class="fas fa-map-marker-alt"></i> تحديد الموقع
             </button>
             <span class="location-status" id="locationStatus">
@@ -538,7 +614,7 @@ function renderMap() {
             <div class="map-title">
                 <i class="fas fa-map"></i> خريطة حافلات الجامعة
             </div>
-            <div class="map" id="liveMap"></div>
+            <div class="map" id="liveMap" style="height: 500px; width: 100%;"></div>
         </div>
     `;
 }
@@ -554,55 +630,107 @@ function renderBusesSection() {
 
 // Map Functions
 function createMap() {
-  const map = document.getElementById("liveMap");
-  map.innerHTML = "";
+  // Check if Leaflet is loaded
+  if (typeof L === 'undefined') {
+    console.error("Leaflet library is not loaded. Please ensure Leaflet is included before this script.");
+    return;
+  }
 
-  createStationMarkers(map);
-  createUserMarker(map);
-  createBusMarkers(map);
+  // Check if map div exists
+  const mapElement = document.getElementById("liveMap");
+  if (!mapElement) {
+    console.error("Map element 'liveMap' not found");
+    return;
+  }
+
+  // Initialize Leaflet map
+  const defaultLat = 27.2579; // Hurghada
+  const defaultLng = 33.8116;
+
+  try {
+    state.map = L.map("liveMap").setView([defaultLat, defaultLng], 13);
+
+    // Add tiles (OpenStreetMap)
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(state.map);
+
+    // Bus icon for Leaflet markers
+    state.busIcon = L.icon({
+      iconUrl:
+        "https://static.vecteezy.com/system/resources/thumbnails/004/433/862/small_2x/bus-icon-with-front-view-public-transportation-station-symbol-for-location-plan-free-vector.jpg",
+      iconSize: [32, 37],
+      iconAnchor: [16, 37],
+      popupAnchor: [0, -37],
+    });
+
+    console.log("Map initialized successfully");
+  } catch (error) {
+    console.error("Error initializing map:", error);
+  }
 }
 
-function createStationMarkers(map) {
-  CONFIG.STATIONS.forEach((station) => {
-    const marker = document.createElement("div");
-    marker.className = "station-marker";
-    marker.style.left = `${station.lng}%`;
-    marker.style.top = `${station.lat}%`;
-    marker.title = station.name;
-    map.appendChild(marker);
+
+
+// Update bus marker on Leaflet map
+function updateBusMarkerOnMap(bus) {
+  if (!state.map) return;
+
+  const driverId = bus.driverId || bus.id;
+
+  // Remove old markers
+  if (state.busMarkers[driverId]) {
+    state.map.removeLayer(state.busMarkers[driverId]);
+  }
+  if (state.busCircles[driverId]) {
+    state.map.removeLayer(state.busCircles[driverId]);
+  }
+
+  // Add new markers
+  state.busMarkers[driverId] = L.marker([bus.lat, bus.lng], {
+    icon: state.busIcon,
+  })
+    .bindPopup(
+      `السائق: ${bus.driver}\nرقم الحافلة: ${bus.plateNumber || bus.id}\nمن: ${bus.from}\nإلى: ${bus.to}`
+    )
+    .addTo(state.map);
+
+  state.busCircles[driverId] = L.circle([bus.lat, bus.lng], {
+    radius: 30,
+    color: "green",
+    fillColor: "#51cf66",
+    fillOpacity: 0.2,
+  }).addTo(state.map);
+
+  // Add click handler to select bus
+  state.busMarkers[driverId].on("click", () => {
+    selectBus(bus.id);
   });
 }
 
-function createUserMarker(map) {
-  const marker = document.createElement("div");
-  marker.className = "user-marker";
-  marker.style.left = `${state.userPosition.lng}%`;
-  marker.style.top = `${state.userPosition.lat}%`;
-  marker.title = "موقعك الحالي";
-  map.appendChild(marker);
-}
+// Remove bus marker from map
+function removeBusMarkerFromMap(driverId) {
+  if (!state.map) return;
 
-function createBusMarkers(map) {
-  state.busesData.forEach((bus) => {
-    const marker = document.createElement("div");
-    marker.className = "bus-marker";
-    marker.id = `bus-marker-${bus.id}`;
-    marker.style.left = `${bus.lng}%`;
-    marker.style.top = `${bus.lat}%`;
-    marker.innerHTML = `<i class="fas fa-bus"></i>`;
-    marker.title = `الحافلة #${bus.id}: ${bus.from} → ${bus.to}`;
-
-    marker.addEventListener("click", () => selectBus(bus.id));
-    map.appendChild(marker);
-  });
+  if (state.busMarkers[driverId]) {
+    state.map.removeLayer(state.busMarkers[driverId]);
+    delete state.busMarkers[driverId];
+  }
+  if (state.busCircles[driverId]) {
+    state.map.removeLayer(state.busCircles[driverId]);
+    delete state.busCircles[driverId];
+  }
 }
 
 function renderRouteLines() {
-  const map = document.getElementById("liveMap");
+  if (!state.map) return;
 
   // Remove old route lines
   state.activeRouteLines.forEach((line) => {
-    if (line && line.parentNode) line.parentNode.removeChild(line);
+    if (line && state.map) {
+      state.map.removeLayer(line);
+    }
   });
   state.activeRouteLines = [];
 
@@ -614,54 +742,27 @@ function renderRouteLines() {
   const route = CONFIG.ROUTES.find((r) => r.id === selectedBus.route);
   if (!route || route.path.length < 2) return;
 
-  // Draw route lines between points
-  for (let i = 0; i < route.path.length - 1; i++) {
-    const start = route.path[i];
-    const end = route.path[i + 1];
+  // Draw route lines using Leaflet polyline
+  const routePoints = route.path.map((p) => [p.lat, p.lng]);
+  const polyline = L.polyline(routePoints, {
+    color: "#4dabf7",
+    weight: 4,
+    opacity: 0.7,
+  }).addTo(state.map);
 
-    const dx = end.lng - start.lng;
-    const dy = end.lat - start.lat;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+  state.activeRouteLines.push(polyline);
 
-    const routeLine = document.createElement("div");
-    routeLine.className = "route-line";
-    routeLine.style.left = `${start.lng}%`;
-    routeLine.style.top = `${start.lat}%`;
-    routeLine.style.width = `${distance}%`;
-    routeLine.style.transform = `rotate(${angle}deg)`;
-    routeLine.title = `مسار الحافلة #${state.selectedBusId}: ${
-      route.stations[i]
-    } → ${route.stations[i + 1]}`;
-
-    map.appendChild(routeLine);
-    state.activeRouteLines.push(routeLine);
-  }
-
-  // Add end circle
-  const endCircle = document.createElement("div");
-  Object.assign(endCircle.style, {
-    position: "absolute",
-    left: `${route.path[route.path.length - 1].lng}%`,
-    top: `${route.path[route.path.length - 1].lat}%`,
-    width: "15px",
-    height: "15px",
-    background: "var(--success)",
-    borderRadius: "50%",
-    border: "2px solid white",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+  // Add markers for stations
+  route.path.forEach((point, index) => {
+    const stationMarker = L.marker([point.lat, point.lng])
+      .bindPopup(route.stations[index] || `محطة ${index + 1}`)
+      .addTo(state.map);
+    state.activeRouteLines.push(stationMarker);
   });
-  endCircle.title = "نهاية المسار";
-
-  map.appendChild(endCircle);
-  state.activeRouteLines.push(endCircle);
 }
 
 function selectBus(busId) {
   if (state.selectedBusId) {
-    document
-      .getElementById(`bus-marker-${state.selectedBusId}`)
-      ?.classList.remove("active");
     document
       .querySelector(`.bus-card[data-bus-id="${state.selectedBusId}"]`)
       ?.classList.remove("active");
@@ -669,10 +770,15 @@ function selectBus(busId) {
 
   state.selectedBusId = busId;
 
-  document.getElementById(`bus-marker-${busId}`)?.classList.add("active");
   document
     .querySelector(`.bus-card[data-bus-id="${busId}"]`)
     ?.classList.add("active");
+
+  // Center map on selected bus
+  const selectedBus = state.busesData.find((b) => b.id === busId);
+  if (selectedBus && state.map) {
+    state.map.setView([selectedBus.lat, selectedBus.lng], 15);
+  }
 
   renderRouteLines();
 }
@@ -687,37 +793,43 @@ function renderBusCards() {
 
 function renderBusCard(bus) {
   const isActive = state.selectedBusId === bus.id;
+  const plateNumber = bus.plateNumber || `#${bus.id}`;
+  const distance = bus.distance ? `${bus.distance} كم` : "غير متاح";
+  const capacity = bus.capacity
+    ? `${bus.current || 0}/${bus.capacity} راكب`
+    : "غير متاح";
+  const status = bus.status || "active";
 
   return `
         <div class="bus-card ${isActive ? "active" : ""}" data-bus-id="${
     bus.id
   }">
             <div class="bus-header">
-                <div class="bus-number">الحافلة #${bus.id}</div>
-                <div class="bus-status ${bus.status}">
-                    ${bus.status === "active" ? "🟢 متاحة" : "🟡 متأخرة"}
+                <div class="bus-number">الحافلة ${plateNumber}</div>
+                <div class="bus-status ${status}">
+                    ${status === "active" ? "🟢 متاحة" : "🟡 متأخرة"}
                 </div>
             </div>
             <div class="bus-body">
                 <div class="bus-route">
-                    <span>${bus.from}</span>
+                    <span>${bus.from || "غير محدد"}</span>
                     <i class="fas fa-arrow-left"></i>
-                    <span>${bus.to}</span>
+                    <span>${bus.to || "غير محدد"}</span>
                 </div>
                 <div class="bus-info">
                     <div class="info-item">
                         <i class="fas fa-location-arrow"></i>
-                        <span>${bus.distance} كم</span>
+                        <span>${distance}</span>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-user-friends"></i>
-                        <span>${bus.current}/${bus.capacity} راكب</span>
+                        <span>${capacity}</span>
                     </div>
                 </div>
                 <div class="bus-info">
                     <div class="info-item">
                         <i class="fas fa-user-tie"></i>
-                        <span>${bus.driver}</span>
+                        <span>${bus.driver || "غير محدد"}</span>
                     </div>
                 </div>
                 <div class="bus-actions">
@@ -810,77 +922,245 @@ function showNotificationAlert(title, message) {
   }
 }
 
-// Data Updates
-function startDataUpdates() {
-  setInterval(updateBusPositions, CONFIG.UPDATE_INTERVALS.BUS_POSITIONS);
-  setInterval(checkBusProximity, CONFIG.UPDATE_INTERVALS.BUS_PROXIMITY);
-}
+// SignalR Integration
+function initializeSignalR() {
+  if (!state.currentUser) {
+    console.error("No current user found");
+    return;
+  }
 
-function updateBusPositions() {
-  state.busesData.forEach((bus) => {
-    // Simulate bus movement
-    bus.lat += (Math.random() - 0.5) * 2;
-    bus.lng += (Math.random() - 0.5) * 2;
+  try {
+    const token = state.currentUser?.refreshToken;
 
-    // Keep within bounds
-    bus.lat = Math.max(10, Math.min(90, bus.lat));
-    bus.lng = Math.max(10, Math.min(90, bus.lng));
-
-    // Update marker position
-    const marker = document.getElementById(`bus-marker-${bus.id}`);
-    if (marker) {
-      marker.style.left = `${bus.lng}%`;
-      marker.style.top = `${bus.lat}%`;
+    if (!token) {
+      console.error("No refresh token found");
+      return;
     }
 
-    // Update ETA
-    const etaChange = Math.floor(Math.random() * 3) - 1;
-    const currentEta = parseInt(bus.eta);
-    bus.eta = Math.max(1, currentEta + etaChange).toString();
+    // Create SignalR connection
+    state.signalRConnection = new signalR.HubConnectionBuilder()
+      .withUrl("https://newbus.tryasp.net/LiveHub", {
+        accessTokenFactory: () => token,
+      })
+      .withAutomaticReconnect()
+      .build();
 
-    // Update distance
-    const distanceNum = parseFloat(bus.distance);
-    const distanceChange = Math.random() * 0.2 - 0.1;
-    bus.distance = Math.max(0.1, distanceNum + distanceChange).toFixed(1);
+    // Setup SignalR event handlers
+    setupSignalREventHandlers();
 
-    // Update passenger count
-    const passengerChange = Math.floor(Math.random() * 5) - 2;
-    bus.current = Math.max(
-      0,
-      Math.min(bus.capacity, bus.current + passengerChange)
-    );
-  });
+    // Start connection
+    state.signalRConnection
+      .start()
+      .then(() => {
+        console.log("SignalR Connected");
+        addNotification(
+          "الاتصال جاهز",
+          "تم الاتصال بنجاح بخدمة التتبع المباشر",
+          "fa-check-circle"
+        );
+      })
+      .catch((err) => {
+        console.error("Connection error:", err);
+        addNotification(
+          "خطأ في الاتصال",
+          "فشل الاتصال بالخادم. يرجى تحديث الصفحة.",
+          "fa-exclamation-triangle"
+        );
+      });
 
-  renderBusCards();
-  if (state.selectedBusId) renderRouteLines();
+    // Handle reconnection events
+    state.signalRConnection.onreconnected(() => {
+      console.log("Reconnected!");
+      addNotification(
+        "إعادة الاتصال",
+        "تم إعادة الاتصال بنجاح",
+        "fa-check-circle"
+      );
+    });
+
+    state.signalRConnection.onreconnecting(() => {
+      console.log("Reconnecting...");
+    });
+
+    state.signalRConnection.onclose(() => {
+      console.log("Connection closed");
+    });
+  } catch (error) {
+    console.error("Error initializing SignalR:", error);
+  }
 }
 
-function checkBusProximity() {
-  state.busesData.forEach((bus) => {
-    const dx = bus.lng - state.userPosition.lng;
-    const dy = bus.lat - state.userPosition.lat;
-    const distance = Math.sqrt(dx * dx + dy * dy);
+function setupSignalREventHandlers() {
+  if (!state.signalRConnection) return;
 
-    if (distance < CONFIG.PROXIMITY_THRESHOLD) {
-      const existingNotification = state.notifications.find(
-        (n) =>
-          n.message.includes(`الحافلة #${bus.id}`) &&
-          n.time.includes(
-            new Date().toLocaleTimeString("ar-EG", { hour: "2-digit" })
-          )
+  // New location from driver
+  state.signalRConnection.on(
+    "NewLocationFromDriver",
+    function (lat, lng, drivername, plateNumberbus, driverid) {
+      console.log(
+        "New location from driver:",
+        driverid,
+        drivername,
+        plateNumberbus,
+        lat,
+        lng
       );
 
-      if (!existingNotification) {
+      // Find or create bus in busesData
+      let bus = state.busesData.find((b) => b.driverId === driverid);
+      const isNewBus = !bus;
+
+      if (!bus) {
+        // Create new bus entry
+        bus = {
+          id: driverid, // Use driverId as bus ID
+          driverId: driverid,
+          driver: drivername,
+          plateNumber: plateNumberbus,
+          lat: parseFloat(lat),
+          lng: parseFloat(lng),
+          status: "active",
+          from: "غير محدد",
+          to: "غير محدد",
+        };
+        state.busesData.push(bus);
+      } else {
+        // Update existing bus
+        bus.lat = parseFloat(lat);
+        bus.lng = parseFloat(lng);
+        bus.driver = drivername;
+        bus.plateNumber = plateNumberbus;
+        bus.status = "active";
+      }
+
+      // Update map marker
+      updateBusMarkerOnMap(bus);
+
+      // Update bus cards
+      renderBusCards();
+
+      // Update stats
+      updateStatsCards();
+
+      // Check proximity if user location is active
+      if (state.isLocationActive && state.userPosition.lat && state.userPosition.lng) {
+        checkBusProximity(bus);
+      }
+
+      // Show notification for new bus
+      if (isNewBus) {
         addNotification(
-          `الحافلة #${bus.id} تقترب منك`,
-          `الحافلة #${bus.id} (${bus.from} → ${bus.to}) على بعد ${Math.round(
-            distance
-          )}% من موقعك`,
-          "fa-exclamation-circle"
+          `حافلة جديدة متاحة`,
+          `الحافلة ${plateNumberbus} للسائق ${drivername} متاحة الآن`,
+          "fa-bus"
         );
       }
     }
+  );
+
+  // Stop location from driver
+  state.signalRConnection.on("stoplocationfromdriver", function (driverid) {
+    console.log("Driver stopped sharing location:", driverid);
+
+    // Remove from busesData
+    state.busesData = state.busesData.filter((b) => b.driverId !== driverid);
+
+    // Remove from map
+    removeBusMarkerFromMap(driverid);
+
+    // Update UI
+    renderBusCards();
+    updateStatsCards();
+
+    // Clear selection if this bus was selected
+    if (state.selectedBusId === driverid) {
+      state.selectedBusId = null;
+      renderRouteLines();
+    }
+
+    addNotification(
+      "توقف الحافلة",
+      `توقفت الحافلة للسائق ${driverid} عن مشاركة الموقع`,
+      "fa-times-circle"
+    );
   });
+
+  // Arrive at new station
+  state.signalRConnection.on(
+    "ArriveNewStation",
+    function (driverName, plateNo, stationName) {
+      console.log("Bus arrived at station:", driverName, plateNo, stationName);
+
+      // Find bus and update route info if possible
+      const bus = state.busesData.find(
+        (b) => b.driver === driverName || b.plateNumber === plateNo
+      );
+      if (bus) {
+        // You might want to update bus.to or other route info here
+        // based on your business logic
+      }
+
+      addNotification(
+        `وصول الحافلة ${plateNo}`,
+        `السائق ${driverName} وصل إلى محطة ${stationName}`,
+        "fa-map-marker-alt"
+      );
+    }
+  );
+}
+
+function checkBusProximity(bus) {
+  if (!state.userPosition.lat || !state.userPosition.lng) return;
+
+  // Calculate distance in kilometers using Haversine formula
+  const R = 6371; // Earth's radius in km
+  const dLat = ((bus.lat - state.userPosition.lat) * Math.PI) / 180;
+  const dLon = ((bus.lng - state.userPosition.lng) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((state.userPosition.lat * Math.PI) / 180) *
+      Math.cos((bus.lat * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c; // Distance in km
+
+  // Check if bus is within proximity threshold (e.g., 500 meters)
+  if (distance < 0.5) {
+    const existingNotification = state.notifications.find(
+      (n) =>
+        n.message.includes(bus.plateNumber || bus.id.toString()) &&
+        Date.now() - n.id < 60000 // Within last minute
+    );
+
+    if (!existingNotification) {
+      addNotification(
+        `الحافلة ${bus.plateNumber || bus.id} قريبة منك`,
+        `الحافلة على بعد ${(distance * 1000).toFixed(0)} متر من موقعك`,
+        "fa-exclamation-circle"
+      );
+    }
+  }
+}
+
+function updateStatsCards() {
+  const statsCards = document.querySelector(".stats-cards");
+  if (statsCards) {
+    statsCards.innerHTML = `
+            ${renderStatCard(
+              "fas fa-bus",
+              "bus",
+              state.busesData.length,
+              "حافلة متاحة"
+            )}
+            ${renderStatCard(
+              "fas fa-map-marker-alt",
+              "station",
+              CONFIG.STATIONS.length,
+              "محطة رئيسية"
+            )}
+        `;
+  }
 }
 
 // Utility Functions
@@ -901,6 +1181,12 @@ function setupEventListeners() {
   dom.closeProfileModal?.addEventListener("click", closeProfileModal);
   dom.cancelProfile?.addEventListener("click", closeProfileModal);
   dom.saveProfile?.addEventListener("click", saveProfile);
+
+  // Location toggle button
+  const toggleLocationBtn = document.getElementById("toggleLocationBtn");
+  if (toggleLocationBtn) {
+    toggleLocationBtn.addEventListener("click", toggleLocation);
+  }
 
   document.addEventListener("click", handleOutsideClick);
 }
@@ -1031,3 +1317,9 @@ async function apiRequest(URI, method = "GET", headers = {}, data = null) {
     return { success: false, error: "Network error" };
   }
 }
+
+
+
+
+
+

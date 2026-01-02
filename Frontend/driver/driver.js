@@ -7,6 +7,8 @@ const state = {
 };
 
 // Configuration
+const API_BASE_URL = "https://newbus.tryasp.net/api/";
+
 const CONFIG = {
   ROUTES: [
     { id: "city-campus", name: "المدينة الجامعية ← الجامعة" },
