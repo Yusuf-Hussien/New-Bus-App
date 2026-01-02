@@ -1531,7 +1531,7 @@ function handleEditBusSubmit(event, busId) {
 // ============================
 async function loadDriversFromAPI() {
   try {
-    const response = await apiAuthRequest("Drivers", "GET");
+    const response = (await apiAuthRequest("Drivers", "GET",{},null)).data;
     
     if (response.success && response.data && Array.isArray(response.data)) {
       state.apiDrivers = response.data;
@@ -1548,7 +1548,7 @@ async function loadDriversFromAPI() {
 
 async function loadAdminsFromAPI() {
   try {
-    const response = await apiAuthRequest("Admins", "GET");
+    const response = (await apiAuthRequest("Admins", "GET")).data;
     
     if (response.success && response.data && Array.isArray(response.data)) {
       state.apiAdmins = response.data;
