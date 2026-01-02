@@ -111,6 +111,7 @@ const state = {
   apiAdmins: [], // Admins loaded from API
   apiTrips: [], // Trips loaded from API
   apiBuses: [], // Buses loaded from API
+  apiStudents: [], // Students (Passengers) loaded from API
 };
 
 // ============================
@@ -268,11 +269,12 @@ async function loadAdminInterface() {
   refreshUserData();
   dom.userName.textContent = state.currentUser.name || "المدير";
 
-  // Load drivers, admins, trips, and buses from API
+  // Load drivers, admins, trips, buses, and students from API
   await loadDriversFromAPI();
   await loadAdminsFromAPI();
   await loadTripsFromAPI();
   await loadBusesFromAPI();
+  await loadStudentsFromAPI();
 
   dom.mainContent.innerHTML = `
         ${renderWelcomeMessage()}
@@ -307,7 +309,7 @@ function renderStats() {
             ${renderStatCard(
               "fas fa-users",
               "users",
-              state.passengers.length,
+              state.apiStudents.length > 0 ? state.apiStudents.length : state.passengers.length,
               "راكب مسجل"
             )}
             ${renderStatCard(
@@ -354,6 +356,9 @@ function renderTables() {
 }
 
 function renderPassengersTable() {
+  // Use API students if available, otherwise use local passengers
+  const passengersToRender = state.apiStudents.length > 0 ? state.apiStudents : state.passengers;
+
   return `
         <div class="table-container">
             <div class="table-header">
@@ -378,7 +383,7 @@ function renderPassengersTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        ${state.passengers.map(renderPassengerRow).join("")}
+                        ${passengersToRender.map(renderPassengerRow).join("")}
                     </tbody>
                 </table>
             </div>
@@ -387,26 +392,49 @@ function renderPassengersTable() {
 }
 
 function renderPassengerRow(passenger) {
+  // Handle API student data format
+  let passengerId, fullName, email, phone, academicLevel, college, status;
+  
+  if (passenger.firstName !== undefined) {
+    // API student format
+    passengerId = passenger.id || "غير محدد";
+    fullName = `${passenger.firstName || ""} ${passenger.secondName || ""} ${passenger.thirdName || ""} ${passenger.lastName || ""}`.trim();
+    email = passenger.email || "غير محدد";
+    phone = passenger.phone || "غير محدد";
+    academicLevel = passenger.levelOfStudy || "غير محدد";
+    college = passenger.facultyName || "غير محدد";
+    status = "active"; // Default status for API students
+  } else {
+    // Local passenger format
+    passengerId = passenger.id;
+    fullName = passenger.fullName;
+    email = passenger.email;
+    phone = passenger.phone;
+    academicLevel = passenger.academicLevel;
+    college = passenger.college;
+    status = passenger.status;
+  }
+
   const statusClass =
-    passenger.status === "active" ? "status-active" : "status-inactive";
-  const statusText = passenger.status === "active" ? "نشط" : "غير نشط";
+    status === "active" ? "status-active" : "status-inactive";
+  const statusText = status === "active" ? "نشط" : "غير نشط";
 
   return `
         <tr>
-            <td>${passenger.fullName}</td>
-            <td>${passenger.email}</td>
-            <td>${passenger.phone}</td>
-            <td>${passenger.academicLevel}</td>
-            <td>${passenger.college}</td>
+            <td>${fullName}</td>
+            <td>${email}</td>
+            <td>${phone}</td>
+            <td>${academicLevel}</td>
+            <td>${college}</td>
             <td>
                 <span class="status-badge ${statusClass}">${statusText}</span>
             </td>
             <td>
                 <div class="action-buttons">
-                    <button class="action-btn edit" onclick="handleEditPassenger(${passenger.id})">
+                    <button class="action-btn edit" onclick="handleEditPassenger(${passengerId})">
                         <i class="fas fa-edit"></i> تعديل
                     </button>
-                    <button class="action-btn delete" onclick="handleDeletePassenger(${passenger.id})">
+                    <button class="action-btn delete" onclick="handleDeletePassenger(${passengerId})">
                         <i class="fas fa-trash"></i> حذف
                     </button>
                 </div>
@@ -601,8 +629,9 @@ function renderBusesTable() {
 function renderBusRow(bus, availableDrivers) {
   // Handle API bus data format
   let busId, plateNo, capacity, status, driver;
+  const isApiBus = bus.plateNo !== undefined;
   
-  if (bus.plateNo !== undefined) {
+  if (isApiBus) {
     // API bus format
     busId = bus.id || "غير محدد";
     plateNo = bus.plateNo || "غير محدد";
@@ -638,6 +667,11 @@ function renderBusRow(bus, availableDrivers) {
                     <button class="action-btn view" onclick="handleViewBus(${busId})">
                         <i class="fas fa-eye"></i> عرض
                     </button>
+                    ${isApiBus ? `
+                    <button class="action-btn delete" onclick="handleDeleteBus(${busId})">
+                        <i class="fas fa-trash"></i> حذف
+                    </button>
+                    ` : ''}
                 </div>
             </td>
         </tr>
@@ -1747,6 +1781,23 @@ async function loadBusesFromAPI() {
   }
 }
 
+async function loadStudentsFromAPI() {
+  try {
+    const response = (await apiAuthRequest("Students", "GET")).data;
+    
+    if (response.success && response.data && Array.isArray(response.data)) {
+      state.apiStudents = response.data;
+      console.log("Loaded students from API:", state.apiStudents.length);
+    } else {
+      console.warn("Failed to load students from API:", response.error);
+      state.apiStudents = [];
+    }
+  } catch (error) {
+    console.error("Error loading students from API:", error);
+    state.apiStudents = [];
+  }
+}
+
 // ============================
 // Add Driver Handler - معالجة إضافة سائق جديد
 // ============================
@@ -2212,39 +2263,68 @@ function handleAddPassenger() {
   alert("فتح نافذة إضافة راكب جديد");
 }
 
-function handleDeletePassenger(passengerId) {
+async function handleDeletePassenger(passengerId) {
   if (!confirm("هل أنت متأكد من حذف هذا الراكب؟")) return;
 
-  const updatedUsers = state.users.filter((user) => user.id !== passengerId);
-  localStorage.setItem("newbus_users", JSON.stringify(updatedUsers));
-  alert("تم حذف الراكب بنجاح");
-  loadAdminInterface();
+  try {
+    const response = await apiAuthRequest(`Students/${passengerId}`, "DELETE");
+
+    if (response.success) {
+      alert("تم حذف الراكب بنجاح");
+      // Reload students from API
+      await loadStudentsFromAPI();
+      loadAdminInterface();
+    } else {
+      alert(`فشل حذف الراكب: ${response.error || "حدث خطأ غير معروف"}`);
+    }
+  } catch (error) {
+    console.error("Error deleting passenger:", error);
+    alert("حدث خطأ أثناء حذف الراكب. يرجى المحاولة مرة أخرى.");
+  }
 }
 
-function handleDeleteDriver(driverId) {
+async function handleDeleteDriver(driverId) {
   if (!confirm("هل أنت متأكد من حذف هذا السائق؟")) return;
 
-  // الحصول على بيانات السائق قبل الحذف
-  const driver = state.drivers.find((d) => d.id === driverId);
-  if (driver && driver.busPlate && driver.busPlate !== "غير معين") {
-    // إزالة السائق من الحافلة
-    const busNumber = driver.busPlate.replace("#", "");
-    const busIndex = CONFIG.BUS_DATA.findIndex(
-      (bus) => bus.id === parseInt(busNumber)
-    );
-    if (busIndex !== -1) {
-      CONFIG.BUS_DATA[busIndex].driver = "غير معين";
-    }
-  }
+  try {
+    const response = await apiAuthRequest(`Drivers/${driverId}`, "DELETE");
 
-  const updatedUsers = state.users.filter((user) => user.id !== driverId);
-  localStorage.setItem("newbus_users", JSON.stringify(updatedUsers));
-  alert("تم حذف السائق بنجاح");
-  loadAdminInterface();
+    if (response.success) {
+      alert("تم حذف السائق بنجاح");
+      // Reload drivers from API
+      await loadDriversFromAPI();
+      loadAdminInterface();
+    } else {
+      alert(`فشل حذف السائق: ${response.error || "حدث خطأ غير معروف"}`);
+    }
+  } catch (error) {
+    console.error("Error deleting driver:", error);
+    alert("حدث خطأ أثناء حذف السائق. يرجى المحاولة مرة أخرى.");
+  }
 }
 
 function handleViewBus(busId) {
   alert(`عرض تفاصيل الحافلة: ${busId}`);
+}
+
+async function handleDeleteBus(busId) {
+  if (!confirm("هل أنت متأكد من حذف هذه الحافلة؟")) return;
+
+  try {
+    const response = await apiAuthRequest(`Buses/${busId}`, "DELETE");
+
+    if (response.success) {
+      alert("تم حذف الحافلة بنجاح");
+      // Reload buses from API
+      await loadBusesFromAPI();
+      loadAdminInterface();
+    } else {
+      alert(`فشل حذف الحافلة: ${response.error || "حدث خطأ غير معروف"}`);
+    }
+  } catch (error) {
+    console.error("Error deleting bus:", error);
+    alert("حدث خطأ أثناء حذف الحافلة. يرجى المحاولة مرة أخرى.");
+  }
 }
 
 function handleViewTrip(tripId) {
@@ -2259,11 +2339,24 @@ function handleEditAdmin(adminId) {
   alert(`تعديل بيانات المدير: ${adminId}`);
 }
 
-function handleDeleteAdmin(adminId) {
+async function handleDeleteAdmin(adminId) {
   if (!confirm("هل أنت متأكد من حذف هذا المدير؟")) return;
   
-  // TODO: Implement delete admin API call
-  alert(`حذف المدير: ${adminId}`);
+  try {
+    const response = await apiAuthRequest(`Admins/${adminId}`, "DELETE");
+
+    if (response.success) {
+      alert("تم حذف المدير بنجاح");
+      // Reload admins from API
+      await loadAdminsFromAPI();
+      loadAdminInterface();
+    } else {
+      alert(`فشل حذف المدير: ${response.error || "حدث خطأ غير معروف"}`);
+    }
+  } catch (error) {
+    console.error("Error deleting admin:", error);
+    alert("حدث خطأ أثناء حذف المدير. يرجى المحاولة مرة أخرى.");
+  }
 }
 
 // ============================
