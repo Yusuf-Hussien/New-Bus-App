@@ -4,6 +4,14 @@ const state = {
   passengerCount: 0,
   currentTrip: null,
   currentUser: null,
+  signalRConnection: null, // SignalR connection reference
+  map: null, // Leaflet map reference
+  driverMarker: null, // Driver location marker
+  driverCircle: null, // Driver location circle
+  studentMarkers: {}, // Student location markers
+  studentCircles: {}, // Student location circles
+  locationInterval: null, // Location update interval
+  isLocationSharing: false, // Location sharing status
 };
 
 // Configuration
@@ -86,6 +94,7 @@ function loadDriverInterface() {
   loadUserInfo();
   loadTripState();
   renderInterface();
+  initializeSignalR(); // Initialize SignalR connection
 }
 
 function loadUserInfo() {
@@ -306,7 +315,7 @@ function renderMap() {
             <div class="map-title">
                 <i class="fas fa-map-marked-alt"></i> خريطة الرحلة
             </div>
-            <div class="driver-map" id="driverMap"></div>
+            <div class="driver-map" id="driverMap" style="height: 500px; width: 100%;"></div>
         </div>
     `;
 }
@@ -389,14 +398,20 @@ function startTrip() {
     completeTripBtn.addEventListener("click", toggleTripCompletion);
   }
 
+  // Start location sharing via SignalR
+  startLocationSharing();
+
   // إظهار إشعار النجاح
   if (typeof showToast === "function") {
     showToast("تم بدء الرحلة بنجاح", "success", "بدء الرحلة");
   }
 }
 
-function endTrip() {
+async function endTrip() {
   if (!confirm("هل أنت متأكد من إنهاء الرحلة؟")) return;
+
+  // Stop location sharing
+  await stopLocationSharing();
 
   saveCompletedTrip();
   resetTripState();
@@ -430,7 +445,12 @@ function saveCompletedTrip() {
   }
 }
 
-function resetTripState() {
+async function resetTripState() {
+  // Stop location sharing if active
+  if (state.isLocationSharing) {
+    await stopLocationSharing();
+  }
+
   state.isTripActive = false;
   state.passengerCount = 0;
   state.currentTrip = null;
@@ -439,80 +459,118 @@ function resetTripState() {
 
 // Map Functions
 function createDriverMap() {
-  const map = document.getElementById("driverMap");
-  if (!map) return;
+  // Check if Leaflet is loaded
+  if (typeof L === 'undefined') {
+    console.error("Leaflet library is not loaded. Please ensure Leaflet is included before this script.");
+    return;
+  }
 
-  createBusMarker(map);
-  createStationMarkers(map);
+  // Check if map div exists
+  const mapElement = document.getElementById("driverMap");
+  if (!mapElement) {
+    console.error("Map element 'driverMap' not found");
+    return;
+  }
 
-  if (state.isTripActive) animateBus();
+  // Initialize Leaflet map
+  const defaultLat = 27.2579; // Hurghada
+  const defaultLng = 33.8116;
+
+  try {
+    state.map = L.map("driverMap").setView([defaultLat, defaultLng], 13);
+
+    // Add tiles (OpenStreetMap)
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(state.map);
+
+    console.log("Driver map initialized successfully");
+  } catch (error) {
+    console.error("Error initializing driver map:", error);
+  }
 }
 
-function createBusMarker(map) {
-  const busMarker = document.createElement("div");
-  busMarker.className = "bus-marker";
-  busMarker.title = "موقع حافلتك";
+// Update driver location marker on map
+function updateDriverLocationMarker(lat, lng, accuracy) {
+  if (!state.map) return;
 
-  Object.assign(busMarker.style, {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "30px",
-    height: "30px",
-    background: "var(--primary)",
-    borderRadius: "50%",
-    color: "white",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "12px",
-    fontWeight: "bold",
-    boxShadow: "0 3px 10px rgba(0,0,0,0.3)",
-    border: "3px solid white",
+  // Remove old markers
+  if (state.driverMarker) {
+    state.map.removeLayer(state.driverMarker);
+  }
+  if (state.driverCircle) {
+    state.map.removeLayer(state.driverCircle);
+  }
+
+  // Bus icon
+  const busIcon = L.icon({
+    iconUrl: 'https://static.vecteezy.com/system/resources/thumbnails/004/433/862/small_2x/bus-icon-with-front-view-public-transportation-station-symbol-for-location-plan-free-vector.jpg',
+    iconSize: [32, 37],
+    iconAnchor: [16, 37],
+    popupAnchor: [0, -37]
   });
 
-  busMarker.innerHTML = '<i class="fas fa-bus"></i>';
-  map.appendChild(busMarker);
+  // Add new markers
+  state.driverMarker = L.marker([lat, lng], { icon: busIcon })
+    .bindPopup("موقعك الحالي - خط العرض: " + lat + ", خط الطول: " + lng)
+    .addTo(state.map);
+
+  state.driverCircle = L.circle([lat, lng], {
+    radius: accuracy,
+    color: "green",
+    fillColor: "#51cf66",
+    fillOpacity: 0.2,
+  }).addTo(state.map);
+
+  // Center map on driver location
+  state.map.setView([lat, lng], 15);
 }
 
-function createStationMarkers(map) {
-  CONFIG.STATIONS.forEach((station) => {
-    const marker = document.createElement("div");
-    marker.className = "station-marker";
-    marker.title = station.name;
+// Update student location marker on map
+function updateStudentLocationMarker(lat, lng, studentId, studentName, facultyName, degree) {
+  if (!state.map) return;
 
-    Object.assign(marker.style, {
-      position: "absolute",
-      top: station.top,
-      left: station.left,
-      width: "12px",
-      height: "12px",
-      background: "var(--warning)",
-      borderRadius: "50%",
-      boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-      border: "2px solid white",
-    });
+  // Remove old markers
+  if (state.studentMarkers[studentId]) {
+    state.map.removeLayer(state.studentMarkers[studentId]);
+  }
+  if (state.studentCircles[studentId]) {
+    state.map.removeLayer(state.studentCircles[studentId]);
+  }
 
-    map.appendChild(marker);
-  });
+  // Add new markers
+  state.studentMarkers[studentId] = L.marker([lat, lng])
+    .bindPopup(`الطالب: ${studentName}<br>الكلية: ${facultyName}<br>الدرجة: ${degree}`)
+    .addTo(state.map);
+
+  state.studentCircles[studentId] = L.circle([lat, lng], {
+    radius: 20,
+    color: "blue",
+    fillColor: "#3388ff",
+    fillOpacity: 0.2,
+  }).addTo(state.map);
 }
 
-function animateBus() {
-  const busMarker = document.querySelector(".bus-marker");
-  if (!busMarker) return;
+// Remove student marker from map
+function removeStudentMarkerFromMap(studentId) {
+  if (!state.map) return;
 
-  let position = 0;
-  const animationInterval = setInterval(() => {
-    if (!state.isTripActive) {
-      clearInterval(animationInterval);
-      return;
-    }
+  if (state.studentMarkers[studentId]) {
+    state.map.removeLayer(state.studentMarkers[studentId]);
+    delete state.studentMarkers[studentId];
+  }
+  if (state.studentCircles[studentId]) {
+    state.map.removeLayer(state.studentCircles[studentId]);
+    delete state.studentCircles[studentId];
+  }
+}
 
-    position = (position + 0.5) % 100;
-    busMarker.style.left = `${20 + position * 0.6}%`;
-    busMarker.style.top = `${30 + Math.sin(position * 0.1) * 20}%`;
-  }, 100);
+function checkSignalRConnection() {
+  return (
+    state.signalRConnection &&
+    state.signalRConnection.state === signalR.HubConnectionState.Connected
+  );
 }
 
 // دالة toggleTripCompletion إذا لم تكن موجودة في profile.js
@@ -633,3 +691,253 @@ async function apiRequest(URI, method = "GET", headers = {}, data = null) {
     return { success: false, error: "Network error" };
   }
 }
+
+
+// SignalR Integration
+function initializeSignalR() {
+  if (!state.currentUser) {
+    console.error("No current user found");
+    return;
+  }
+
+  try {
+    const token = state.currentUser?.refreshToken;
+
+    if (!token) {
+      console.error("No refresh token found");
+      return;
+    }
+
+    // Create SignalR connection
+    state.signalRConnection = new signalR.HubConnectionBuilder()
+      .withUrl("https://newbus.tryasp.net/LiveHub", {
+        accessTokenFactory: () => token,
+      })
+      .withAutomaticReconnect()
+      .build();
+
+    // Setup SignalR event handlers
+    setupSignalREventHandlers();
+
+    // Start connection
+    state.signalRConnection
+      .start()
+      .then(() => {
+        console.log("SignalR Connected for Driver");
+        if (typeof showToast === "function") {
+          showToast("تم الاتصال بنجاح بخدمة التتبع المباشر", "success", "الاتصال جاهز");
+        }
+      })
+      .catch((err) => {
+        console.error("Connection error:", err);
+        if (typeof showToast === "function") {
+          showToast("فشل الاتصال بالخادم. يرجى تحديث الصفحة.", "error", "خطأ في الاتصال");
+        } else {
+          alert("Failed to connect to server. Please refresh the page.");
+        }
+      });
+
+    // Handle reconnection events
+    state.signalRConnection.onreconnected(() => {
+      console.log("Reconnected!");
+      if (typeof showToast === "function") {
+        showToast("تم إعادة الاتصال بنجاح", "success", "إعادة الاتصال");
+      }
+    });
+
+    state.signalRConnection.onreconnecting(() => {
+      console.log("Reconnecting...");
+    });
+
+    state.signalRConnection.onclose(() => {
+      console.log("Connection closed");
+    });
+  } catch (error) {
+    console.error("Error initializing SignalR:", error);
+  }
+}
+
+function setupSignalREventHandlers() {
+  if (!state.signalRConnection) return;
+
+  // New location from student
+  state.signalRConnection.on(
+    "NewLocationFromStudent",
+    function (lat, lng, studentname, faculyname, degree, studentid) {
+      console.log(
+        "New location from student:",
+        studentid,
+        studentname,
+        faculyname,
+        degree,
+        lat,
+        lng
+      );
+
+      // Update map with student location
+      updateStudentLocationMarker(
+        parseFloat(lat),
+        parseFloat(lng),
+        studentid,
+        studentname,
+        faculyname,
+        degree
+      );
+    }
+  );
+
+  // Stop location from student
+  state.signalRConnection.on("stoplocationfromstudent", function (studentid) {
+    console.log("Student stopped sharing location:", studentid);
+
+    // Remove from map
+    removeStudentMarkerFromMap(studentid);
+
+    if (typeof showToast === "function") {
+      showToast(
+        `توقف الطالب ${studentid} عن مشاركة الموقع`,
+        "info",
+        "تحديث الموقع"
+      );
+    }
+  });
+}
+
+// Location Sharing Functions
+function startLocationSharing() {
+  if (!state.signalRConnection || !checkSignalRConnection()) {
+    if (typeof showToast === "function") {
+      showToast("الاتصال غير جاهز. يرجى الانتظار والمحاولة مرة أخرى.", "error", "خطأ");
+    } else {
+      alert("Connection not ready. Please wait and try again.");
+    }
+    return;
+  }
+
+  if (!navigator.geolocation) {
+    if (typeof showToast === "function") {
+      showToast("المتصفح لا يدعم تحديد الموقع", "error", "خطأ");
+    } else {
+      alert("Geolocation is not supported by this browser");
+    }
+    return;
+  }
+
+  // Clear any existing interval
+  if (state.locationInterval) {
+    clearInterval(state.locationInterval);
+  }
+
+  state.isLocationSharing = true;
+
+  // Get driver ID (you might need to adjust this based on your user structure)
+  const driverId = state.currentUser?.id || state.currentUser?.userId || 1;
+
+  // Start location updates
+  state.locationInterval = setInterval(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        // Send to server via SignalR
+        if (checkSignalRConnection()) {
+          state.signalRConnection
+            .invoke("StartTripForDriver", lat.toString(), lng.toString(), driverId.toString())
+            .catch((err) => {
+              console.error("Start trip error:", err);
+            });
+        }
+
+        // Update map marker
+        updateDriverLocationMarker(lat, lng, accuracy);
+      },
+      (error) => {
+        console.error("Error getting location:", error.message);
+        if (typeof showToast === "function") {
+          showToast("تعذر الحصول على موقعك: " + error.message, "error", "خطأ");
+        }
+      }
+    );
+  }, 10000); // Every 10 seconds
+
+  // Get initial position
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+      updateDriverLocationMarker(lat, lng, accuracy);
+
+      // Send initial location
+      if (checkSignalRConnection()) {
+        const driverId = state.currentUser?.id || state.currentUser?.userId || 1;
+        state.signalRConnection
+          .invoke("StartTripForDriver", lat.toString(), lng.toString(), driverId.toString())
+          .catch((err) => {
+            console.error("Start trip error:", err);
+          });
+      }
+    },
+    (error) => {
+      console.error("Error getting initial location:", error.message);
+    }
+  );
+}
+
+async function stopLocationSharing() {
+  state.isLocationSharing = false;
+
+  // Clear interval
+  if (state.locationInterval) {
+    clearInterval(state.locationInterval);
+    state.locationInterval = null;
+  }
+
+  // Remove markers from map
+  if (state.driverMarker && state.map) {
+    state.map.removeLayer(state.driverMarker);
+    state.driverMarker = null;
+  }
+  if (state.driverCircle && state.map) {
+    state.map.removeLayer(state.driverCircle);
+    state.driverCircle = null;
+  }
+
+  // Stop location sharing on server
+  if (checkSignalRConnection()) {
+    try {
+      await state.signalRConnection.invoke("stoplocationforidriver");
+      console.log("Successfully stopped location sharing");
+    } catch (err) {
+      console.error("Error stopping location:", err);
+    }
+  }
+}
+
+// Cleanup on page unload
+window.addEventListener("beforeunload", async function () {
+  // Clear location interval
+  if (state.locationInterval) {
+    clearInterval(state.locationInterval);
+  }
+
+  // Stop location sharing if active
+  if (state.isLocationSharing && checkSignalRConnection()) {
+    try {
+      await state.signalRConnection.invoke("stoplocationforidriver");
+    } catch (err) {
+      console.error("Error stopping location:", err);
+    }
+  }
+
+  // Stop SignalR connection
+  if (state.signalRConnection) {
+    try {
+      await state.signalRConnection.stop();
+    } catch (err) {
+      console.error("Error stopping SignalR:", err);
+    }
+  }
+});
