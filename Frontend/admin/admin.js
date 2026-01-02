@@ -7,7 +7,7 @@ const API_BASE_URL = "https://newbus.tryasp.net/api/";
 const CONFIG = {
   BUS_DATA: [
     {
-      id: 101,
+      id: 1,
       model: "2023",
       capacity: 50,
       status: "active",
@@ -107,6 +107,8 @@ const state = {
   drivers: [],
   passengers: [],
   admins: [],
+  apiDrivers: [], // Drivers loaded from API
+  apiAdmins: [], // Admins loaded from API
 };
 
 // ============================
@@ -260,9 +262,13 @@ function refreshUserData() {
 // ============================
 // Render Functions - وظائف العرض
 // ============================
-function loadAdminInterface() {
+async function loadAdminInterface() {
   refreshUserData();
   dom.userName.textContent = state.currentUser.name || "المدير";
+
+  // Load drivers and admins from API
+  await loadDriversFromAPI();
+  await loadAdminsFromAPI();
 
   dom.mainContent.innerHTML = `
         ${renderWelcomeMessage()}
@@ -309,11 +315,6 @@ function renderStats() {
               "رحلة اليوم"
             )}
         </div>
-        <div style="text-align: center; margin: 20px 0;">
-            <button class="table-btn" onclick="showAddAdminModal()" style="font-size: 1.1rem; padding: 12px 30px;">
-                <i class="fas fa-user-shield"></i> إضافة مدير جديد
-            </button>
-        </div>
     `;
 }
 
@@ -336,6 +337,7 @@ function renderTables() {
         <div class="admin-tables">
             ${renderPassengersTable()}
             ${renderDriversTable()}
+            ${renderAdminsTable()}
             ${renderBusesTable()}
             ${renderTripsTable()}
         </div>
@@ -405,6 +407,9 @@ function renderPassengerRow(passenger) {
 }
 
 function renderDriversTable() {
+  // Use API drivers if available, otherwise use local drivers
+  const driversToRender = state.apiDrivers.length > 0 ? state.apiDrivers : state.drivers;
+
   return `
         <div class="table-container">
             <div class="table-header">
@@ -422,17 +427,17 @@ function renderDriversTable() {
                 <table id="driversTable">
                     <thead>
                         <tr>
-                            <th>الاسم الأول</th>
+                            <th>الاسم الكامل</th>
                             <th>البريد الإلكتروني</th>
                             <th>رقم الهاتف</th>
                             <th>اسم المستخدم</th>
+                            <th>الجنس</th>
                             <th>رقم الحافلة</th>
-                            <th>الحالة</th>
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody>
-                        ${state.drivers.map(renderDriverRow).join("")}
+                        ${driversToRender.map(renderDriverRow).join("")}
                     </tbody>
                 </table>
             </div>
@@ -441,26 +446,98 @@ function renderDriversTable() {
 }
 
 function renderDriverRow(driver) {
-  const statusClass =
-    driver.status === "active" ? "status-active" : "status-inactive";
-  const statusText = driver.status === "active" ? "نشط" : "غير نشط";
+  // Build full name from API response or use existing format
+  const fullName = driver.firstName 
+    ? `${driver.firstName} ${driver.secondName || ""} ${driver.thirdName || ""} ${driver.lastName || ""}`.trim()
+    : driver.fullName || `${driver.firstName || ""} ${driver.lastName || ""}`.trim();
+  
+  const genderText = driver.gender === "Male" || driver.gender === "male" || driver.gender === 1 ? "ذكر" : 
+                     driver.gender === "Female" || driver.gender === "female" || driver.gender === 2 ? "أنثى" : 
+                     driver.gender || "غير محدد";
 
   return `
         <tr>
-            <td>${driver.firstName}</td>
-            <td>${driver.email}</td>
-            <td>${driver.phone}</td>
-            <td>${driver.username}</td>
-            <td>${driver.busPlate}</td>
-            <td>
-                <span class="status-badge ${statusClass}">${statusText}</span>
-            </td>
+            <td>${fullName}</td>
+            <td>${driver.email || "غير محدد"}</td>
+            <td>${driver.phone || "غير محدد"}</td>
+            <td>${driver.userName || driver.username || "غير محدد"}</td>
+            <td>${genderText}</td>
+            <td>${driver.plateNoBus || driver.busPlate || "غير معين"}</td>
             <td>
                 <div class="action-buttons">
                     <button class="action-btn edit" onclick="handleEditDriver(${driver.id})">
                         <i class="fas fa-edit"></i> تعديل
                     </button>
                     <button class="action-btn delete" onclick="handleDeleteDriver(${driver.id})">
+                        <i class="fas fa-trash"></i> حذف
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `;
+}
+
+// ============================
+// Admins Table - جدول المدراء
+// ============================
+function renderAdminsTable() {
+  return `
+        <div class="table-container">
+            <div class="table-header">
+                <div class="table-title">
+                    <i class="fas fa-user-shield"></i> إدارة المدراء
+                </div>
+                <div class="table-actions">
+                    <input type="text" class="search-box" placeholder="بحث في المدراء..." id="searchAdmins">
+                    <button class="table-btn" onclick="showAddAdminModal()">
+                        <i class="fas fa-plus"></i> إضافة مدير
+                    </button>
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table id="adminsTable">
+                    <thead>
+                        <tr>
+                            <th>الاسم الكامل</th>
+                            <th>البريد الإلكتروني</th>
+                            <th>رقم الهاتف</th>
+                            <th>اسم المستخدم</th>
+                            <th>الجنس</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${state.apiAdmins.map(renderAdminRow).join("")}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+function renderAdminRow(admin) {
+  // Build full name from API response
+  const fullName = admin.firstName 
+    ? `${admin.firstName} ${admin.secondName || ""} ${admin.thirdName || ""} ${admin.lastName || ""}`.trim()
+    : admin.name || "غير محدد";
+  
+  const genderText = admin.gender === "Male" || admin.gender === "male" || admin.gender === 1 ? "ذكر" : 
+                     admin.gender === "Female" || admin.gender === "female" || admin.gender === 2 ? "أنثى" : 
+                     admin.gender || "غير محدد";
+
+  return `
+        <tr>
+            <td>${fullName}</td>
+            <td>${admin.email || "غير محدد"}</td>
+            <td>${admin.phone || "غير محدد"}</td>
+            <td>${admin.userName || admin.username || "غير محدد"}</td>
+            <td>${genderText}</td>
+            <td>
+                <div class="action-buttons">
+                    <button class="action-btn edit" onclick="handleEditAdmin(${admin.id})">
+                        <i class="fas fa-edit"></i> تعديل
+                    </button>
+                    <button class="action-btn delete" onclick="handleDeleteAdmin(${admin.id})">
                         <i class="fas fa-trash"></i> حذف
                     </button>
                 </div>
@@ -782,6 +859,19 @@ function showAddDriverModal() {
                                placeholder="أدخل الاسم الأول">
                     </div>
                     <div class="form-group">
+                        <label for="newDriverSecondName">الاسم الثاني</label>
+                        <input type="text" class="form-control" id="newDriverSecondName" 
+                               placeholder="أدخل الاسم الثاني (اختياري)">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newDriverThirdName">الاسم الثالث</label>
+                        <input type="text" class="form-control" id="newDriverThirdName" 
+                               placeholder="أدخل الاسم الثالث (اختياري)">
+                    </div>
+                    <div class="form-group">
                         <label for="newDriverLastName">الاسم الأخير *</label>
                         <input type="text" class="form-control" id="newDriverLastName" required 
                                placeholder="أدخل الاسم الأخير">
@@ -798,8 +888,8 @@ function showAddDriverModal() {
                         <label for="newDriverGender">الجنس *</label>
                         <select class="form-control select" id="newDriverGender" required>
                             <option value="">اختر الجنس</option>
-                            <option value="male">ذكر</option>
-                            <option value="female">أنثى</option>
+                            <option value="1">ذكر</option>
+                            <option value="2">أنثى</option>
                         </select>
                     </div>
                 </div>
@@ -1269,6 +1359,9 @@ async function handleAddAdminSubmit(event) {
     return;
   }
 
+  // Convert gender to number (1 for male, 2 for female based on user's change)
+  const genderNum = parseInt(gender);
+
   // إعداد بيانات الطلب
   const requestBody = {
     firstName: firstName,
@@ -1277,20 +1370,20 @@ async function handleAddAdminSubmit(event) {
     lastName: lastName,
     email: email,
     phone: phone,
-    gender: gender,
+    gender: genderNum,
     userName: userName,
     password: password
   };
 
   try {
-    // إرسال الطلب باستخدام apiAuthRequest
-    const response = await apiAuthRequest("Admins/Signup", "POST", {}, requestBody);
+    // إرسال الطلب باستخدام apiAuthRequest - استخدام "Admins" بدلاً من "Admins/Signup"
+    const response = await apiAuthRequest("Admins", "POST", {}, requestBody);
 
     if (response.success) {
       alert(`تم إضافة المدير ${firstName} ${lastName} بنجاح\nاسم المستخدم: ${userName}\nالبريد الإلكتروني: ${email}`);
       closeModal();
-      // تحديث البيانات إذا لزم الأمر
-      refreshUserData();
+      // Reload admins from API
+      await loadAdminsFromAPI();
       loadAdminInterface();
     } else {
       alert(`فشل إضافة المدير: ${response.error || "حدث خطأ غير معروف"}`);
@@ -1434,9 +1527,46 @@ function handleEditBusSubmit(event, busId) {
 }
 
 // ============================
+// API Data Loading Functions - وظائف تحميل البيانات من API
+// ============================
+async function loadDriversFromAPI() {
+  try {
+    const response = await apiAuthRequest("Drivers", "GET");
+    
+    if (response.success && response.data && Array.isArray(response.data)) {
+      state.apiDrivers = response.data;
+      console.log("Loaded drivers from API:", state.apiDrivers.length);
+    } else {
+      console.warn("Failed to load drivers from API:", response.error);
+      state.apiDrivers = [];
+    }
+  } catch (error) {
+    console.error("Error loading drivers from API:", error);
+    state.apiDrivers = [];
+  }
+}
+
+async function loadAdminsFromAPI() {
+  try {
+    const response = await apiAuthRequest("Admins", "GET");
+    
+    if (response.success && response.data && Array.isArray(response.data)) {
+      state.apiAdmins = response.data;
+      console.log("Loaded admins from API:", state.apiAdmins.length);
+    } else {
+      console.warn("Failed to load admins from API:", response.error);
+      state.apiAdmins = [];
+    }
+  } catch (error) {
+    console.error("Error loading admins from API:", error);
+    state.apiAdmins = [];
+  }
+}
+
+// ============================
 // Add Driver Handler - معالجة إضافة سائق جديد
 // ============================
-function handleAddDriverSubmit(event) {
+async function handleAddDriverSubmit(event) {
   event.preventDefault();
 
   // الحصول على البيانات من النموذج
@@ -1496,63 +1626,46 @@ function handleAddDriverSubmit(event) {
     return;
   }
 
-  // التحقق من عدم تكرار البريد الإلكتروني
-  const existingUserByEmail = state.users.find((user) => user.email === email);
-  if (existingUserByEmail) {
-    alert("البريد الإلكتروني هذا مسجل بالفعل. يرجى استخدام بريد إلكتروني آخر");
-    return;
-  }
+  // Get secondName and thirdName if they exist in the form
+  const secondName = document.getElementById("newDriverSecondName")?.value.trim() || "";
+  const thirdName = document.getElementById("newDriverThirdName")?.value.trim() || "";
 
-  // إنشاء ID جديد
-  const newId = Date.now();
-  const fullName = `${firstName} ${lastName}`;
+  // Convert gender to number (1 for male, 2 for female)
+  const genderNum = parseInt(gender);
 
-  // الحصول على اسم الحافلة إذا تم اختيارها
-  let busPlate = "غير معين";
-  if (busId) {
-    const selectedBus = CONFIG.BUS_DATA.find(
-      (bus) => bus.id === parseInt(busId)
-    );
-    busPlate = selectedBus ? `#${busId}` : "غير معين";
-  }
-
-  // إنشاء كائن السائق الجديد
-  const newDriver = {
-    id: newId,
-    name: fullName,
+  // Prepare request body
+  const requestBody = {
     firstName: firstName,
+    secondName: secondName,
+    thirdName: thirdName,
     lastName: lastName,
     email: email,
     phone: phone,
-    username: username,
+    gender: genderNum,
+    userName: username,
     password: password,
-    gender: gender,
-    accountType: "driver",
-    isLoggedIn: status === "active",
-    busPlate: busPlate,
-    status: status,
-    createdAt: new Date().toISOString(),
+    busId: busId ? parseInt(busId) : 0
   };
 
-  // إضافة السائق إلى state.users
-  state.users.push(newDriver);
-  localStorage.setItem("newbus_users", JSON.stringify(state.users));
+  try {
+    // Send request using apiAuthRequest
+    const response = await apiAuthRequest("Drivers/Signup", "POST", {}, requestBody);
 
-  // تحديث CONFIG.BUS_DATA إذا تم اختيار حافلة
-  if (busId && status === "active") {
-    const busIndex = CONFIG.BUS_DATA.findIndex(
-      (bus) => bus.id === parseInt(busId)
-    );
-    if (busIndex !== -1) {
-      CONFIG.BUS_DATA[busIndex].driver = fullName;
+    if (response.success) {
+      alert(
+        `تم إضافة السائق ${firstName} ${lastName} بنجاح\nاسم المستخدم: ${username}\nالبريد الإلكتروني: ${email}`
+      );
+      closeModal();
+      // Reload drivers from API
+      await loadDriversFromAPI();
+      loadAdminInterface();
+    } else {
+      alert(`فشل إضافة السائق: ${response.error || "حدث خطأ غير معروف"}`);
     }
+  } catch (error) {
+    console.error("Error adding driver:", error);
+    alert("حدث خطأ أثناء إضافة السائق. يرجى المحاولة مرة أخرى.");
   }
-
-  alert(
-    `تم إضافة السائق ${fullName} بنجاح\nاسم المستخدم: ${username}\nالبريد الإلكتروني: ${email}`
-  );
-  closeModal();
-  loadAdminInterface();
 }
 
 // ============================
@@ -1888,6 +2001,7 @@ function handleUpdateAdminSubmit(event) {
 function setupSearch() {
   setupTableSearch("searchPassengers", "passengersTable");
   setupTableSearch("searchDrivers", "driversTable");
+  setupTableSearch("searchAdmins", "adminsTable");
   setupTableSearch("searchBuses", "busesTable");
   setupTableSearch("searchTrips", "tripsTable");
 }
@@ -1951,6 +2065,21 @@ function handleViewBus(busId) {
 
 function handleViewTrip(tripId) {
   alert(`عرض تفاصيل الرحلة: ${tripId}`);
+}
+
+// ============================
+// Admin Action Handlers - معالجات إجراءات المدراء
+// ============================
+function handleEditAdmin(adminId) {
+  // TODO: Implement edit admin functionality
+  alert(`تعديل بيانات المدير: ${adminId}`);
+}
+
+function handleDeleteAdmin(adminId) {
+  if (!confirm("هل أنت متأكد من حذف هذا المدير؟")) return;
+  
+  // TODO: Implement delete admin API call
+  alert(`حذف المدير: ${adminId}`);
 }
 
 // ============================
