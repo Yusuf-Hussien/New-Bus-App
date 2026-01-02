@@ -35,6 +35,9 @@ const CONFIG = {
   MIN_PASSENGERS: 0,
 };
 
+// API Routes
+let apiRoutes = [];
+
 // DOM Elements
 const dom = {
   mainContent: document.getElementById("mainContent"),
@@ -90,22 +93,17 @@ function handleLogout() {
 }
 
 // Load Functions
-function loadDriverInterface() {
+async function loadDriverInterface() {
   loadUserInfo();
   loadTripState();
+  await loadRoutesFromAPI();
   renderInterface();
   initializeSignalR(); // Initialize SignalR connection
 }
 
 function loadUserInfo() {
-  // استخدام دالة getProfileData من profile.js إذا كانت موجودة
-  if (typeof getProfileData === "function") {
-    const profile = getProfileData();
-    dom.userName.textContent =
-      profile.firstName || state.currentUser.name || "السائق";
-  } else {
-    dom.userName.textContent = state.currentUser.name || "السائق";
-  }
+  // Always use "السائق" instead of actual name
+  dom.userName.textContent = "السائق";
 }
 
 function loadTripState() {
@@ -140,17 +138,9 @@ function renderInterface() {
 }
 
 function renderWelcomeMessage() {
-  let driverName = state.currentUser.name || "عزيزي السائق";
-
-  // استخدام دالة getProfileData إذا كانت موجودة
-  if (typeof getProfileData === "function") {
-    const profile = getProfileData();
-    driverName = profile.firstName || driverName;
-  }
-
   return `
         <div class="welcome-message">
-            <h1>مرحباً ${driverName}</h1>
+            <h1>مرحباً السائق</h1>
             <p>استخدم تطبيق NewBus لإدارة رحلاتك وتتبع حافلتك</p>
         </div>
     `;
@@ -159,43 +149,22 @@ function renderWelcomeMessage() {
 function renderDashboard() {
   return `
         <div class="driver-dashboard">
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div class="card-icon primary">
-                        <i class="fas fa-road"></i>
-                    </div>
-                    <div class="card-title">رحلات اليوم</div>
-                </div>
-                <div style="text-align: center; padding: 20px 0;">
-                    <div style="font-size: 3rem; font-weight: 700; color: var(--primary);">3</div>
-                    <div style="color: var(--gray);">رحلة مكتملة</div>
-                </div>
-            </div>
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <div class="card-icon success">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="card-title">متوسط الوقت</div>
-                </div>
-                <div style="text-align: center; padding: 20px 0;">
-                    <div style="font-size: 3rem; font-weight: 700; color: var(--success);">24</div>
-                    <div style="color: var(--gray);">دقيقة للرحلة</div>
-                </div>
-            </div>
-            <!-- تم حذف بطاقة الركاب اليوم حسب الطلب -->
+            <!-- Dashboard cards removed as requested -->
         </div>
     `;
 }
 
 function renderTripForm() {
+  // Use API routes if available, otherwise use local routes
+  const routesToRender = apiRoutes.length > 0 ? apiRoutes : CONFIG.ROUTES;
+  
   return `
         <div class="trip-form">
             <h2 style="color: var(--primary); margin-bottom: 20px;">
                 <i class="fas fa-play-circle"></i> بدء رحلة جديدة
             </h2>
             
-            ${renderSelect("routeSelect", "اختر المسار", CONFIG.ROUTES)}
+            ${renderSelect("routeSelect", "اختر المسار", routesToRender)}
             
             <div style="text-align: center; margin: 25px 0;">
                 <label class="form-label">عدد الركاب الحالي</label>
@@ -216,8 +185,13 @@ function renderTripForm() {
 }
 
 function renderSelect(id, label, options) {
+  // Handle API routes format (with from/to) or local routes format (with name)
   const optionsHtml = options
-    .map((opt) => `<option value="${opt.id}">${opt.name}</option>`)
+    .map((opt) => {
+      const value = opt.id || opt.routeId || "";
+      const displayName = opt.name || (opt.from && opt.to ? `${opt.from} ← ${opt.to}` : "");
+      return `<option value="${value}">${displayName}</option>`;
+    })
     .join("");
 
   return `
@@ -315,7 +289,7 @@ function renderMap() {
             <div class="map-title">
                 <i class="fas fa-map-marked-alt"></i> خريطة الرحلة
             </div>
-            <div class="driver-map" id="driverMap" style="height: 500px; width: 100%;"></div>
+            <div class="driver-map" id="driverMap" style="height: 500px; width: 100%; position: relative; overflow: hidden;"></div>
         </div>
     `;
 }
@@ -689,6 +663,30 @@ async function apiRequest(URI, method = "GET", headers = {}, data = null) {
     console.error("API Request Error:", error);
     //alert("Network error. Please check your connection and try again.");
     return { success: false, error: "Network error" };
+  }
+}
+
+// Load Routes from API
+async function loadRoutesFromAPI() {
+  try {
+    const response = (await apiAuthRequest("Routes", "GET")).data;
+    
+    if (response.success && response.data && Array.isArray(response.data)) {
+      // Transform API routes to match the expected format
+      apiRoutes = response.data.map((route) => ({
+        id: route.id,
+        name: `${route.from} ← ${route.to}`,
+        from: route.from,
+        to: route.to
+      }));
+      console.log("Loaded routes from API:", apiRoutes.length);
+    } else {
+      console.warn("Failed to load routes from API:", response.error);
+      apiRoutes = [];
+    }
+  } catch (error) {
+    console.error("Error loading routes from API:", error);
+    apiRoutes = [];
   }
 }
 
