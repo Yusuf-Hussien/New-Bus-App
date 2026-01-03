@@ -6,32 +6,6 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/Frontend/login.html"
-    },
-    {
-      "src": "/login",
-      "dest": "/Frontend/login.html"
-    },
-    {
-      "src": "/driver",
-      "dest": "/Frontend/driver.html"
-    },
-    {
-      "src": "/passenger",
-      "dest": "/Frontend/passenger.html"
-    },
-    {
-      "src": "/admin",
-      "dest": "/Frontend/admin.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/Frontend/$1"
-    }
-  ],
   "rewrites": [
     {
       "source": "/",
