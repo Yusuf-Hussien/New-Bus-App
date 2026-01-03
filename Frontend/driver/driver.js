@@ -445,22 +445,59 @@ async function startTrip() {
 async function endTrip() {
   if (!confirm("هل أنت متأكد من إنهاء الرحلة؟")) return;
 
-  // Stop location sharing
-  await stopLocationSharing();
+  // Get trip ID from current trip
+  const tripId = state.currentTrip?.tripId;
+  if (!tripId) {
+    console.error("No trip ID found in current trip");
+    if (typeof showToast === "function") {
+      showToast("خطأ: لم يتم العثور على معرف الرحلة", "error", "خطأ");
+    } else {
+      alert("خطأ: لم يتم العثور على معرف الرحلة");
+    }
+    return;
+  }
 
-  saveCompletedTrip();
-  resetTripState();
-  renderInterface();
+  // Call API to finish trip
+  try {
+    console.log("Finishing trip with ID:", tripId);
+    const response = await apiAuthRequest(`Trips/FinishTrip/${tripId}`, "PUT");
 
-  // إظهار إشعار النجاح
-  if (typeof showToast === "function") {
-    showToast(
-      "تم إنهاء الرحلة بنجاح وتخزين بياناتها",
-      "success",
-      "إنهاء الرحلة"
-    );
-  } else {
-    alert("تم إنهاء الرحلة بنجاح وتخزين بياناتها");
+    if (!response.success) {
+      console.error("Failed to finish trip:", response.error);
+      if (typeof showToast === "function") {
+        showToast(`فشل إنهاء الرحلة: ${response.error || "حدث خطأ غير معروف"}`, "error", "خطأ");
+      } else {
+        alert(`فشل إنهاء الرحلة: ${response.error || "حدث خطأ غير معروف"}`);
+      }
+      return;
+    }
+
+    console.log("Trip finished successfully via API");
+
+    // Stop location sharing
+    await stopLocationSharing();
+
+    saveCompletedTrip();
+    resetTripState();
+    renderInterface();
+
+    // إظهار إشعار النجاح
+    if (typeof showToast === "function") {
+      showToast(
+        "تم إنهاء الرحلة بنجاح وتخزين بياناتها",
+        "success",
+        "إنهاء الرحلة"
+      );
+    } else {
+      alert("تم إنهاء الرحلة بنجاح وتخزين بياناتها");
+    }
+  } catch (error) {
+    console.error("Error finishing trip:", error);
+    if (typeof showToast === "function") {
+      showToast("حدث خطأ أثناء إنهاء الرحلة. يرجى المحاولة مرة أخرى.", "error", "خطأ");
+    } else {
+      alert("حدث خطأ أثناء إنهاء الرحلة. يرجى المحاولة مرة أخرى.");
+    }
   }
 }
 
