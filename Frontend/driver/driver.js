@@ -669,7 +669,7 @@ async function apiRequest(URI, method = "GET", headers = {}, data = null) {
 // Load Routes from API
 async function loadRoutesFromAPI() {
   try {
-    const response = (await apiAuthRequest("Routes", "GET")).data;
+    const response = (await apiAuthRequest("Routes/GetAllRoutes", "GET")).data;
     
     if (response.success && response.data && Array.isArray(response.data)) {
       // Transform API routes to match the expected format
