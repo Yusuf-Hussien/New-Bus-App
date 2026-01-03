@@ -496,6 +496,7 @@ function handleLogout() {
       console.error("خطأ أثناء تسجيل الخروج:", error); 
     });
     localStorage.setItem("userSession", JSON.stringify(null));
+    localStorage.setItem("passengerNotifications", JSON.stringify([]));
   }
   window.location.href = "login.html";
 }
