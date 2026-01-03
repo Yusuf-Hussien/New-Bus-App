@@ -325,7 +325,7 @@ function updatePassengerCount() {
 }
 
 // Trip Functions
-function startTrip() {
+async function startTrip() {
   const routeSelect = document.getElementById("routeSelect");
 
   if (!routeSelect.value) {
@@ -338,6 +338,7 @@ function startTrip() {
     return;
   }
 
+  const routeId = parseInt(routeSelect.value);
   const routeName = routeSelect.options[routeSelect.selectedIndex].text;
 
   // الحصول على رقم لوحة الحافلة من البروفايل
@@ -347,37 +348,97 @@ function startTrip() {
     busNumber = profile.plateNoBus || "غير محدد";
   }
 
-  state.isTripActive = true;
-  state.currentTrip = {
-    isActive: true,
-    routeName: routeName,
-    busNumber: busNumber,
-    passengerCount: state.passengerCount,
-    startTime: new Date().toLocaleTimeString(),
-    startDate: new Date().toISOString(),
-  };
+  // Call API to start trip
+  try {
+    const requestBody = {
+      statusTripId: 1,
+      routeID: routeId
+    };
 
-  saveTripToStorage();
-  renderInterface();
+    const response = await apiAuthRequest("Trips/startTrip", "POST", {}, requestBody);
 
-  // إضافة مستمع الحدث لزر إنهاء الرحلة
-  const endTripBtn = document.getElementById("endTripBtn");
-  if (endTripBtn) {
-    endTripBtn.addEventListener("click", endTrip);
-  }
+    if (!response.success) {
+      if (typeof showToast === "function") {
+        showToast(`فشل بدء الرحلة: ${response.error || "حدث خطأ غير معروف"}`, "error", "خطأ");
+      } else {
+        alert(`فشل بدء الرحلة: ${response.error || "حدث خطأ غير معروف"}`);
+      }
+      return;
+    }
 
-  // إضافة مستمع الحدث لزر Complete Trip
-  const completeTripBtn = document.getElementById("completeTripBtn");
-  if (completeTripBtn && typeof toggleTripCompletion === "function") {
-    completeTripBtn.addEventListener("click", toggleTripCompletion);
-  }
+    // Extract trip ID from response
+    // API returns: { success: true, message: "...", data: 3 }
+    // apiRequest wraps it: { success: true, data: { success: true, message: "...", data: 3 } }
+    console.log("API Response:", response);
+    const tripId = response.data?.data || response.data;
+    
+    if (!tripId) {
+      console.error("Invalid trip ID response:", response);
+      if (typeof showToast === "function") {
+        showToast("فشل الحصول على معرف الرحلة من الخادم", "error", "خطأ");
+      } else {
+        alert("فشل الحصول على معرف الرحلة من الخادم");
+      }
+      return;
+    }
+    
+    // Ensure tripId is a number
+    const finalTripId = Number(tripId);
+    console.log("Trip ID extracted:", finalTripId);
+    
+    if (isNaN(finalTripId)) {
+      console.error("Trip ID is not a valid number:", tripId);
+      if (typeof showToast === "function") {
+        showToast("معرف الرحلة غير صحيح", "error", "خطأ");
+      } else {
+        alert("معرف الرحلة غير صحيح");
+      }
+      return;
+    }
 
-  // Start location sharing via SignalR
-  startLocationSharing();
+    state.isTripActive = true;
+    state.currentTrip = {
+      isActive: true,
+      tripId: finalTripId,
+      routeId: routeId,
+      routeName: routeName,
+      busNumber: busNumber,
+      passengerCount: state.passengerCount,
+      startTime: new Date().toLocaleTimeString(),
+      startDate: new Date().toISOString(),
+    };
+    
+    console.log("Current trip state:", state.currentTrip);
 
-  // إظهار إشعار النجاح
-  if (typeof showToast === "function") {
-    showToast("تم بدء الرحلة بنجاح", "success", "بدء الرحلة");
+    saveTripToStorage();
+    renderInterface();
+
+    // إضافة مستمع الحدث لزر إنهاء الرحلة
+    const endTripBtn = document.getElementById("endTripBtn");
+    if (endTripBtn) {
+      endTripBtn.addEventListener("click", endTrip);
+    }
+
+    // إضافة مستمع الحدث لزر Complete Trip
+    const completeTripBtn = document.getElementById("completeTripBtn");
+    if (completeTripBtn && typeof toggleTripCompletion === "function") {
+      completeTripBtn.addEventListener("click", toggleTripCompletion);
+    }
+
+    // Start location sharing via SignalR
+    startLocationSharing();
+
+    // إظهار إشعار النجاح
+    if (typeof showToast === "function") {
+      showToast("تم بدء الرحلة بنجاح", "success", "بدء الرحلة");
+    }
+  } catch (error) {
+    console.error("Error starting trip:", error);
+    if (typeof showToast === "function") {
+      showToast("حدث خطأ أثناء بدء الرحلة. يرجى المحاولة مرة أخرى.", "error", "خطأ");
+    } else {
+      alert("حدث خطأ أثناء بدء الرحلة. يرجى المحاولة مرة أخرى.");
+    }
   }
 }
 
@@ -828,8 +889,17 @@ function startLocationSharing() {
 
   state.isLocationSharing = true;
 
-  // Get driver ID (you might need to adjust this based on your user structure)
-  const driverId = state.currentUser?.id || state.currentUser?.userId || 1;
+  // Get trip ID from current trip
+  const tripId = state.currentTrip?.tripId;
+  if (!tripId) {
+    console.error("No trip ID found in current trip. Current trip:", state.currentTrip);
+    if (typeof showToast === "function") {
+      showToast("خطأ: لم يتم العثور على معرف الرحلة", "error", "خطأ");
+    }
+    return;
+  }
+  
+  console.log("Starting location sharing with trip ID:", tripId);
 
   // Start location updates
   state.locationInterval = setInterval(() => {
@@ -841,10 +911,13 @@ function startLocationSharing() {
 
         // Send to server via SignalR
         if (checkSignalRConnection()) {
+          const tripIdToSend = Number(tripId);
+          console.log("Sending location update - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
           state.signalRConnection
-            .invoke("StartTripForDriver", lat.toString(), lng.toString(), driverId.toString())
+            .invoke("StartTripForDriver", lat.toString(), lng.toString(), tripIdToSend)
             .catch((err) => {
               console.error("Start trip error:", err);
+              console.error("Error details - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
             });
         }
 
@@ -870,11 +943,13 @@ function startLocationSharing() {
 
       // Send initial location
       if (checkSignalRConnection()) {
-        const driverId = state.currentUser?.id || state.currentUser?.userId || 1;
+        const tripIdToSend = Number(tripId);
+        console.log("Sending initial location - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
         state.signalRConnection
-          .invoke("StartTripForDriver", lat.toString(), lng.toString(), driverId.toString())
+          .invoke("StartTripForDriver", lat.toString(), lng.toString(), tripIdToSend)
           .catch((err) => {
-            console.error("Start trip error:", err);
+            console.error("Start trip error (initial):", err);
+            console.error("Error details - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
           });
       }
     },
@@ -939,3 +1014,19 @@ window.addEventListener("beforeunload", async function () {
     }
   }
 });
+
+function parseJwt(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
+
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+      .join('')
+  );
+
+  return JSON.parse(jsonPayload);
+}
