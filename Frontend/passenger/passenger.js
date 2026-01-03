@@ -227,7 +227,7 @@ function startLocationSharing() {
         alert("تعذر الحصول على موقعك: " + error.message);
       }
     );
-  }, 10000); // Every 10 seconds
+  }, 2000); // Every 2 seconds
 
   // Get initial position
   navigator.geolocation.getCurrentPosition(
@@ -656,14 +656,16 @@ function createMap() {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(state.map);
 
-    // Bus icon for Leaflet markers
-    state.busIcon = L.icon({
-      iconUrl:
-        "https://static.vecteezy.com/system/resources/thumbnails/004/433/862/small_2x/bus-icon-with-front-view-public-transportation-station-symbol-for-location-plan-free-vector.jpg",
-      iconSize: [32, 37],
-      iconAnchor: [16, 37],
-      popupAnchor: [0, -37],
-    });
+  // Bus icon - Using a clean, styled bus icon
+   state.busIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/3448/3448339.png',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    shadowSize: [41, 41],
+    shadowAnchor: [12, 41]
+  });
 
     console.log("Map initialized successfully");
   } catch (error) {
@@ -799,6 +801,11 @@ function renderBusCard(bus) {
     ? `${bus.current || 0}/${bus.capacity} راكب`
     : "غير متاح";
   const status = bus.status || "active";
+  const statusTripId = bus.statusTripId || 1;
+  
+  // Status display: 1 = available, 2 = full
+  const statusText = statusTripId === 2 ? "🔴 ممتلئة" : status === "active" ? "🟢 متاحة" : "🟡 متأخرة";
+  const statusClass = statusTripId === 2 ? "full" : status;
 
   return `
         <div class="bus-card ${isActive ? "active" : ""}" data-bus-id="${
@@ -806,8 +813,8 @@ function renderBusCard(bus) {
   }">
             <div class="bus-header">
                 <div class="bus-number">الحافلة ${plateNumber}</div>
-                <div class="bus-status ${status}">
-                    ${status === "active" ? "🟢 متاحة" : "🟡 متأخرة"}
+                <div class="bus-status ${statusClass}">
+                    ${statusText}
                 </div>
             </div>
             <div class="bus-body">
@@ -996,19 +1003,31 @@ function setupSignalREventHandlers() {
   // New location from driver
   state.signalRConnection.on(
     "NewLocationFromDriver",
-    function (lat, lng, drivername, plateNumberbus, driverid) {
+    function (lat, lng, drivername, plateNumberbus, driverid, from, to, statusTrip) {
       console.log(
         "New location from driver:",
         driverid,
         drivername,
         plateNumberbus,
         lat,
-        lng
+        lng,
+        "Status:",
+        statusTrip,
+        from,
+        to
       );
 
       // Find or create bus in busesData
       let bus = state.busesData.find((b) => b.driverId === driverid);
       const isNewBus = !bus;
+
+      // Map statusTripId to status string
+      // 1 = available (متاحة), 2 = full (ممتلئة)
+      const statusMap = {
+        1: "active",
+        2: "full"
+      };
+      const busStatus = statusMap[statusTrip] || "active";
 
       if (!bus) {
         // Create new bus entry
@@ -1019,9 +1038,10 @@ function setupSignalREventHandlers() {
           plateNumber: plateNumberbus,
           lat: parseFloat(lat),
           lng: parseFloat(lng),
-          status: "active",
-          from: "غير محدد",
-          to: "غير محدد",
+          status: busStatus,
+          statusTripId: statusTrip || 1,
+          from: from || "غير محدد",
+          to: to || "غير محدد",
         };
         state.busesData.push(bus);
       } else {
@@ -1030,7 +1050,10 @@ function setupSignalREventHandlers() {
         bus.lng = parseFloat(lng);
         bus.driver = drivername;
         bus.plateNumber = plateNumberbus;
-        bus.status = "active";
+        bus.status = busStatus;
+        bus.statusTripId = statusTrip || bus.statusTripId || 1;
+        bus.from = from || bus.from || "غير محدد";
+        bus.to = to || bus.to || "غير محدد";
       }
 
       // Update map marker
@@ -1126,7 +1149,23 @@ function checkBusProximity(bus) {
   const distance = R * c; // Distance in km
 
   // Check if bus is within proximity threshold (e.g., 500 meters)
-  if (distance < 0.5) {
+  if (distance < 0.5 && distance >= 0.25) {
+    const existingNotification = state.notifications.find(
+      (n) =>
+        n.message.includes(bus.plateNumber || bus.id.toString()) &&
+        Date.now() - n.id < 60000 // Within last minute
+    );
+
+    if (!existingNotification) {
+      addNotification(
+        `الحافلة ${bus.plateNumber || bus.id} قريبة منك`,
+        `الحافلة على بعد ${(distance * 1000).toFixed(0)} متر من موقعك`,
+        "fa-exclamation-circle"
+      );
+    }
+  }
+   // Check if bus is within proximity threshold (e.g., 2000 meters)
+  else if (distance < 2.2 && distance >= 2) {
     const existingNotification = state.notifications.find(
       (n) =>
         n.message.includes(bus.plateNumber || bus.id.toString()) &&

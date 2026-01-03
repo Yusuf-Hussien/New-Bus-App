@@ -88,6 +88,8 @@ function handleLogout() {
       console.error("خطأ أثناء تسجيل الخروج:", error); 
     });
     localStorage.setItem("userSession", JSON.stringify(null));
+    localStorage.setItem("currentTrip", JSON.stringify(null));
+
   }
   window.location.href = "login.html";
 }
@@ -112,7 +114,6 @@ function loadTripState() {
   if (savedTrip && savedTrip.isActive) {
     state.isTripActive = true;
     state.currentTrip = savedTrip;
-    state.passengerCount = savedTrip.passengerCount || 0;
   }
 }
 
@@ -166,15 +167,12 @@ function renderTripForm() {
             
             ${renderSelect("routeSelect", "اختر المسار", routesToRender)}
             
-            <div style="text-align: center; margin: 25px 0;">
-                <label class="form-label">عدد الركاب الحالي</label>
-                <div class="passenger-count">
-                    <button class="count-btn" id="decreasePassengers">-</button>
-                    <div class="count-display" id="passengerCountDisplay">${
-                      state.passengerCount
-                    }</div>
-                    <button class="count-btn" id="increasePassengers">+</button>
-                </div>
+            <div class="form-group">
+                <label class="form-label">حالة الحافلة</label>
+                <select class="form-control" id="statusTripSelect">
+                    <option value="1">متاحة (الحافلة متاحة للركاب)</option>
+                    <option value="2">ممتلئة (الحافلة ممتلئة)</option>
+                </select>
             </div>
             
             <button class="action-btn start" id="startTripBtn">
@@ -206,19 +204,15 @@ function renderSelect(id, label, options) {
 }
 
 function renderActiveTrip() {
-  // الحصول على حالة إكمال الرحلة من localStorage
-  const tripCompletionStatus = JSON.parse(
-    localStorage.getItem("tripCompletionStatus")
-  ) || {
-    isCompleted: false,
-    lastUpdated: null,
-  };
+  // Get current statusTripId from trip
+  const currentStatusTripId = state.currentTrip?.statusTripId || 1;
+  const isFull = currentStatusTripId === 2;
 
-  const completeBtnText = tripCompletionStatus.isCompleted
-    ? '<i class="fas fa-check-circle"></i> الرحلة مكتملة'
-    : '<i class="fas fa-times-circle"></i> الرحلة غير مكتملة (الحافلة ممتلئة)';
+  const completeBtnText = isFull
+    ? '<i class="fas fa-times-circle"></i> الحافلة ممتلئة'
+    : '<i class="fas fa-check-circle"></i> الحافلة متاحة';
 
-  const completeBtnClass = tripCompletionStatus.isCompleted ? "" : "incomplete";
+  const completeBtnClass = isFull ? "incomplete" : "";
 
   return `
         <div class="active-trip">
@@ -265,11 +259,14 @@ function renderTripDetails() {
 }
 
 function renderTripStats() {
+  const currentStatusTripId = state.currentTrip?.statusTripId || 1;
+  const statusText = currentStatusTripId === 2 ? "ممتلئة" : "متاحة";
+  
   return `
         <div class="trip-stats">
             <div class="stat-item">
-                <div class="stat-value">${state.passengerCount}</div>
-                <div class="stat-label">عدد الركاب</div>
+                <div class="stat-value">${statusText}</div>
+                <div class="stat-label">حالة الحافلة</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">24</div>
@@ -296,32 +293,7 @@ function renderMap() {
 
 // Trip Form Events
 function setupTripFormEvents() {
-  document
-    .getElementById("increasePassengers")
-    ?.addEventListener("click", increasePassengers);
-  document
-    .getElementById("decreasePassengers")
-    ?.addEventListener("click", decreasePassengers);
   document.getElementById("startTripBtn")?.addEventListener("click", startTrip);
-}
-
-function increasePassengers() {
-  if (state.passengerCount < CONFIG.MAX_PASSENGERS) {
-    state.passengerCount++;
-    updatePassengerCount();
-  }
-}
-
-function decreasePassengers() {
-  if (state.passengerCount > CONFIG.MIN_PASSENGERS) {
-    state.passengerCount--;
-    updatePassengerCount();
-  }
-}
-
-function updatePassengerCount() {
-  const display = document.getElementById("passengerCountDisplay");
-  if (display) display.textContent = state.passengerCount;
 }
 
 // Trip Functions
@@ -351,6 +323,10 @@ async function startTrip() {
   const routeId = parseInt(routeSelect.value);
   const routeName = routeSelect.options[routeSelect.selectedIndex].text;
 
+  // Get statusTripId from selection
+  const statusTripSelect = document.getElementById("statusTripSelect");
+  const statusTripId = parseInt(statusTripSelect.value) || 1; // Default to 1 (available)
+
   // الحصول على رقم لوحة الحافلة من البروفايل
   let busNumber = "غير محدد";
   if (typeof getProfileData === "function") {
@@ -361,7 +337,7 @@ async function startTrip() {
   // Call API to start trip
   try {
     const requestBody = {
-      statusTripId: 1,
+      statusTripId: statusTripId,
       routeID: routeId
     };
 
@@ -423,7 +399,7 @@ async function startTrip() {
       routeId: routeId,
       routeName: routeName,
       busNumber: busNumber,
-      passengerCount: state.passengerCount,
+      statusTripId: statusTripId,
       startTime: new Date().toLocaleTimeString(),
       startDate: new Date().toISOString(),
     };
@@ -545,7 +521,6 @@ async function resetTripState() {
   }
 
   state.isTripActive = false;
-  state.passengerCount = 0;
   state.currentTrip = null;
   localStorage.removeItem("currentTrip");
 }
@@ -671,44 +646,83 @@ function checkSignalRConnection() {
 
 // دالة toggleTripCompletion إذا لم تكن موجودة في profile.js
 if (typeof toggleTripCompletion === "undefined") {
-  function toggleTripCompletion() {
-    const tripCompletionStatus = JSON.parse(
-      localStorage.getItem("tripCompletionStatus")
-    ) || {
-      isCompleted: false,
-      lastUpdated: null,
-    };
-
-    tripCompletionStatus.isCompleted = !tripCompletionStatus.isCompleted;
-    tripCompletionStatus.lastUpdated = new Date().toISOString();
-
-    localStorage.setItem(
-      "tripCompletionStatus",
-      JSON.stringify(tripCompletionStatus)
-    );
-
-    // تحديث الزر في الواجهة
-    const button = document.getElementById("completeTripBtn");
-    if (button) {
-      if (tripCompletionStatus.isCompleted) {
-        button.classList.remove("incomplete");
-        button.innerHTML = '<i class="fas fa-check-circle"></i> الرحلة مكتملة';
+  async function toggleTripCompletion() {
+    // Get trip ID from current trip
+    const tripId = state.currentTrip?.tripId;
+    if (!tripId) {
+      console.error("No trip ID found in current trip");
+      if (typeof showToast === "function") {
+        showToast("خطأ: لم يتم العثور على معرف الرحلة", "error", "خطأ");
       } else {
-        button.classList.add("incomplete");
-        button.innerHTML =
-          '<i class="fas fa-times-circle"></i> الرحلة غير مكتملة (الحافلة ممتلئة)';
+        alert("خطأ: لم يتم العثور على معرف الرحلة");
+      }
+      return;
+    }
+
+    // Get current statusTripId and toggle it (1 <-> 2)
+    const currentStatusTripId = state.currentTrip?.statusTripId || 1;
+    const newStatusTripId = currentStatusTripId === 1 ? 2 : 1;
+
+    // Call API to update trip status
+    try {
+      const requestBody = {
+        id: tripId,
+        statusTripId: newStatusTripId
+      };
+
+      const response = await apiAuthRequest("Trips/DriverUpdateStatusTrip", "PUT", {}, requestBody);
+
+      if (!response.success) {
+        console.error("Failed to update trip status:", response.error);
+        if (typeof showToast === "function") {
+          showToast(`فشل تحديث حالة الرحلة: ${response.error || "حدث خطأ غير معروف"}`, "error", "خطأ");
+        } else {
+          alert(`فشل تحديث حالة الرحلة: ${response.error || "حدث خطأ غير معروف"}`);
+        }
+        return;
+      }
+
+      // Update local state
+      state.currentTrip.statusTripId = newStatusTripId;
+      saveTripToStorage();
+
+      // Update button UI
+      const button = document.getElementById("completeTripBtn");
+      if (button) {
+        if (newStatusTripId === 2) {
+          button.classList.add("incomplete");
+          button.innerHTML = '<i class="fas fa-times-circle"></i> الحافلة ممتلئة';
+        } else {
+          button.classList.remove("incomplete");
+          button.innerHTML = '<i class="fas fa-check-circle"></i> الحافلة متاحة';
+        }
+      }
+
+      // Update stats and button display by re-rendering active trip section
+      const activeTripContainer = document.querySelector(".active-trip");
+      if (activeTripContainer) {
+        // Update the stats section
+        const statsSection = activeTripContainer.querySelector(".trip-stats");
+        if (statsSection) {
+          statsSection.outerHTML = renderTripStats();
+        }
+      }
+
+      // Show notification
+      if (typeof showToast === "function") {
+        const message = newStatusTripId === 2
+          ? "تم تحديث حالة الرحلة إلى: الحافلة ممتلئة"
+          : "تم تحديث حالة الرحلة إلى: الحافلة متاحة";
+        showToast(message, "success", "حالة الرحلة");
+      }
+    } catch (error) {
+      console.error("Error updating trip status:", error);
+      if (typeof showToast === "function") {
+        showToast("حدث خطأ أثناء تحديث حالة الرحلة. يرجى المحاولة مرة أخرى.", "error", "خطأ");
+      } else {
+        alert("حدث خطأ أثناء تحديث حالة الرحلة. يرجى المحاولة مرة أخرى.");
       }
     }
-
-    // إظهار إشعار
-    if (typeof showToast === "function") {
-      const message = tripCompletionStatus.isCompleted
-        ? "تم تعليم الرحلة كمكتملة بنجاح"
-        : "تم تعليم الرحلة كغير مكتملة (الحافلة ممتلئة)";
-      showToast(message, "success", "حالة الرحلة");
-    }
-
-    return tripCompletionStatus;
   }
 }
 
@@ -962,6 +976,10 @@ function startLocationSharing() {
   
   console.log("Starting location sharing with trip ID:", tripId);
 
+  // Track consecutive errors to stop spamming if method doesn't exist
+  let consecutiveErrors = 0;
+  const MAX_ERRORS = 3;
+
   // Start location updates
   state.locationInterval = setInterval(() => {
     navigator.geolocation.getCurrentPosition(
@@ -971,14 +989,51 @@ function startLocationSharing() {
         const accuracy = position.coords.accuracy;
 
         // Send to server via SignalR
-        if (checkSignalRConnection()) {
+        if (checkSignalRConnection() && consecutiveErrors < MAX_ERRORS) {
+          // Try with tripId as number (most likely format)
           const tripIdToSend = Number(tripId);
           console.log("Sending location update - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
+          
+          // Try different parameter formats based on common SignalR patterns
+          // Format 1: lat (number), lng (number), tripId (number)
           state.signalRConnection
             .invoke("StartTripForDriver", lat.toString(), lng.toString(), tripIdToSend)
+            .then(() => {
+              // Reset error counter on success
+              consecutiveErrors = 0;
+            })
             .catch((err) => {
-              console.error("Start trip error:", err);
-              console.error("Error details - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
+              consecutiveErrors++;
+              console.error("Start trip error (format 1 - all numbers):", err);
+              
+              // Try format 2: lat (string), lng (string), tripId (number)
+              if (consecutiveErrors === 1) {
+                console.log("Retrying with lat/lng as strings...");
+                return state.signalRConnection.invoke("StartTripForDriver", lat.toString(), lng.toString(), tripIdToSend);
+              }
+            })
+            .then((result) => {
+              if (result !== undefined) {
+                consecutiveErrors = 0; // Reset on success
+              }
+            })
+            .catch((err2) => {
+              if (consecutiveErrors >= 2) {
+                console.error("All parameter format attempts failed:", err2);
+                console.error("Error details - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
+                
+                // Stop interval if too many errors
+                if (consecutiveErrors >= MAX_ERRORS) {
+                  console.error("Too many consecutive errors. Stopping location updates.");
+                  if (typeof showToast === "function") {
+                    showToast("خطأ: فشل إرسال الموقع إلى الخادم. يرجى التحقق من الاتصال أو الاتصال بالدعم الفني.", "error", "خطأ");
+                  }
+                  // Clear interval but don't stop location sharing flag
+                  if (state.locationInterval) {
+                    clearInterval(state.locationInterval);
+                  }
+                }
+              }
             });
         }
 
@@ -992,7 +1047,7 @@ function startLocationSharing() {
         }
       }
     );
-  }, 10000); // Every 10 seconds
+  }, 2000); // Every 2 second
 
   // Get initial position
   navigator.geolocation.getCurrentPosition(
@@ -1002,15 +1057,38 @@ function startLocationSharing() {
       const accuracy = position.coords.accuracy;
       updateDriverLocationMarker(lat, lng, accuracy);
 
-      // Send initial location
+      // Send initial location - try different parameter formats
       if (checkSignalRConnection()) {
         const tripIdToSend = Number(tripId);
         console.log("Sending initial location - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
+        
+        // Try format 1: all numbers (lat, lng, tripId)
         state.signalRConnection
           .invoke("StartTripForDriver", lat.toString(), lng.toString(), tripIdToSend)
+          .then(() => {
+            console.log("Initial location sent successfully");
+            consecutiveErrors = 0; // Reset error counter on success
+          })
           .catch((err) => {
-            console.error("Start trip error (initial):", err);
+            console.error("Start trip error (initial - format 1):", err);
+            
+            // Try format 2: lat/lng as strings, tripId as number
+            console.log("Retrying with lat/lng as strings...");
+            return state.signalRConnection
+              .invoke("StartTripForDriver", lat.toString(), lng.toString(), tripIdToSend);
+          })
+          .then((result) => {
+            if (result !== undefined) {
+              console.log("Initial location sent successfully with string lat/lng");
+              consecutiveErrors = 0;
+            }
+          })
+          .catch((err2) => {
+            console.error("All format attempts failed for initial location:", err2);
             console.error("Error details - Lat:", lat, "Lng:", lng, "TripId:", tripIdToSend);
+            if (typeof showToast === "function") {
+              showToast("خطأ: فشل إرسال الموقع الأولي إلى الخادم. قد تكون هناك مشكلة في خادم SignalR.", "error", "خطأ");
+            }
           });
       }
     },
