@@ -1,0 +1,90 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/Frontend/login.html"
+    },
+    {
+      "src": "/login",
+      "dest": "/Frontend/login.html"
+    },
+    {
+      "src": "/driver",
+      "dest": "/Frontend/driver.html"
+    },
+    {
+      "src": "/passenger",
+      "dest": "/Frontend/passenger.html"
+    },
+    {
+      "src": "/admin",
+      "dest": "/Frontend/admin.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/Frontend/$1"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/Frontend/login.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/Frontend/login.html"
+    },
+    {
+      "source": "/driver",
+      "destination": "/Frontend/driver.html"
+    },
+    {
+      "source": "/passenger",
+      "destination": "/Frontend/passenger.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/Frontend/admin.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/Frontend/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
+

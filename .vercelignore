@@ -1,0 +1,28 @@
+# Vercel ignore file - Root directory
+# Files and directories that should not be deployed
+
+# Backend directory - not needed for frontend deployment
+Backend/
+
+# Documentation directory - not needed for deployment
+Documentation/
+
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
