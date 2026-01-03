@@ -575,12 +575,15 @@ function updateDriverLocationMarker(lat, lng, accuracy) {
     state.map.removeLayer(state.driverCircle);
   }
 
-  // Bus icon
+  // Bus icon - Using a clean, styled bus icon
   const busIcon = L.icon({
-    iconUrl: 'https://static.vecteezy.com/system/resources/thumbnails/004/433/862/small_2x/bus-icon-with-front-view-public-transportation-station-symbol-for-location-plan-free-vector.jpg',
-    iconSize: [32, 37],
-    iconAnchor: [16, 37],
-    popupAnchor: [0, -37]
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/3448/3448339.png',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    shadowSize: [41, 41],
+    shadowAnchor: [12, 41]
   });
 
   // Add new markers
