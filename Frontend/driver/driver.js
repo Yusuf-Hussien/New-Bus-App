@@ -285,11 +285,11 @@ function renderTripStats() {
 
 function renderMap() {
   return `
-        <div class="driver-map-container">
+        <div class="driver-map-container" style="height: 500px; width: 100%;">
             <div class="map-title">
                 <i class="fas fa-map-marked-alt"></i> خريطة الرحلة
             </div>
-            <div class="driver-map" id="driverMap" style="height: 500px; width: 100%; position: relative; overflow: hidden;"></div>
+            <div class="driver-map" id="driverMap" style="height: calc(500px - 85px); margin-buttom: 50px;  position: relative; "></div>
         </div>
     `;
 }
@@ -334,6 +334,16 @@ async function startTrip() {
       showToast("الرجاء اختيار المسار قبل بدء الرحلة", "error", "بيانات ناقصة");
     } else {
       alert("الرجاء اختيار المسار قبل بدء الرحلة");
+    }
+    return;
+  }
+
+  // Check SignalR connection before starting trip
+  if (!checkSignalRConnection()) {
+    if (typeof showToast === "function") {
+      showToast("انتظر الاتصال بالخادم...", "warning", "الاتصال");
+    } else {
+      alert("انتظر الاتصال بالخادم...");
     }
     return;
   }
@@ -396,6 +406,16 @@ async function startTrip() {
       return;
     }
 
+    // Verify SignalR is still connected before saving trip state
+    if (!checkSignalRConnection()) {
+      if (typeof showToast === "function") {
+        showToast("انتظر الاتصال بالخادم...", "warning", "الاتصال");
+      } else {
+        alert("انتظر الاتصال بالخادم...");
+      }
+      return;
+    }
+
     state.isTripActive = true;
     state.currentTrip = {
       isActive: true,
@@ -410,6 +430,7 @@ async function startTrip() {
     
     console.log("Current trip state:", state.currentTrip);
 
+    // Only save to localStorage after SignalR connection is confirmed
     saveTripToStorage();
     renderInterface();
 
