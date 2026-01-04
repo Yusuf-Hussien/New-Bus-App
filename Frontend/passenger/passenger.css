@@ -220,6 +220,8 @@ header {
   border-radius: 8px;
   margin-bottom: 5px;
   transition: var(--transition);
+  position: relative;
+  align-items: flex-start;
 }
 
 .notification-item:hover {
@@ -231,6 +233,10 @@ header {
   margin-top: 3px;
 }
 
+.notification-content {
+  flex: 1;
+}
+
 .notification-content h4 {
   margin-bottom: 5px;
   color: var(--dark);
@@ -240,6 +246,34 @@ header {
   font-size: 0.8rem;
   color: var(--gray);
   margin-top: 5px;
+}
+
+.delete-notification-btn {
+  background: transparent;
+  border: none;
+  color: var(--gray);
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: var(--transition);
+  font-size: 0.9rem;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.delete-notification-btn:hover {
+  background: #fee2e2;
+  color: var(--danger);
+}
+
+.clear-all-notifications-btn {
+  transition: var(--transition);
+}
+
+.clear-all-notifications-btn:hover {
+  background: var(--danger) !important;
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 /* Main Content */

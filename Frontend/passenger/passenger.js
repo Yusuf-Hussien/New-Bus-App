@@ -869,7 +869,16 @@ function updateNotificationDisplay() {
             </div>
         `;
   } else {
-    dom.notificationList.innerHTML = state.notifications
+    // Add clear all button at the top
+    const clearAllBtn = `
+      <div style="padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: right;">
+        <button class="clear-all-notifications-btn" onclick="clearAllNotifications()" style="background: var(--danger); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; margin-left: auto;">
+          <i class="fas fa-trash-alt"></i> حذف الكل
+        </button>
+      </div>
+    `;
+    
+    dom.notificationList.innerHTML = clearAllBtn + state.notifications
       .slice(0, 10)
       .map(renderNotificationItem)
       .join("");
@@ -880,13 +889,16 @@ function updateNotificationDisplay() {
 
 function renderNotificationItem(notification) {
   return `
-        <div class="notification-item">
+        <div class="notification-item" data-notification-id="${notification.id}">
             <i class="fas ${notification.icon || "fa-bus"}"></i>
             <div class="notification-content">
                 <h4>${notification.title}</h4>
                 <p>${notification.message}</p>
                 <div class="notification-time">${notification.time}</div>
             </div>
+            <button class="delete-notification-btn" onclick="deleteNotification(${notification.id})" title="حذف">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     `;
 }
@@ -927,6 +939,28 @@ function showNotificationAlert(title, message) {
     setTimeout(() => {
       dom.notificationToggle.style.animation = "pulse 0.5s ease-in-out 3";
     }, 10);
+  }
+}
+
+function deleteNotification(notificationId) {
+  state.notifications = state.notifications.filter(n => n.id !== notificationId);
+  localStorage.setItem(
+    "passengerNotifications",
+    JSON.stringify(state.notifications)
+  );
+  updateNotificationDisplay();
+}
+
+function clearAllNotifications() {
+  if (state.notifications.length === 0) return;
+  
+  if (confirm("هل تريد حذف جميع الإشعارات؟")) {
+    state.notifications = [];
+    localStorage.setItem(
+      "passengerNotifications",
+      JSON.stringify(state.notifications)
+    );
+    updateNotificationDisplay();
   }
 }
 
