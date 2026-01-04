@@ -387,6 +387,36 @@
             overflow: hidden;
         }
 
+        .fit-to-location-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .fit-to-location-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .fit-to-location-btn i {
+            font-size: 1rem;
+        }
+
         /* Access Denied Message */
         .access-denied {
             text-align: center;

@@ -12,6 +12,8 @@ const state = {
   studentCircles: {}, // Student location circles
   locationInterval: null, // Location update interval
   isLocationSharing: false, // Location sharing status
+  knownStudents: new Set(), // Track known students to prevent duplicate notifications
+  currentDriverLocation: null, // Store current driver location
 };
 
 // Configuration
@@ -136,6 +138,9 @@ function renderInterface() {
       completeTripBtn.addEventListener("click", toggleTripCompletion);
     }
   }
+
+  // Setup fit to location button
+  setupFitToLocationButton();
 }
 
 function renderWelcomeMessage() {
@@ -287,6 +292,9 @@ function renderMap() {
                 <i class="fas fa-map-marked-alt"></i> خريطة الرحلة
             </div>
             <div class="driver-map" id="driverMap" style="height: calc(500px - 85px); margin-buttom: 50px;  position: relative; "></div>
+            <button class="fit-to-location-btn" id="fitToLocationBtn" style="display: none;">
+                <i class="fas fa-crosshairs"></i> العودة إلى موقعي
+            </button>
         </div>
     `;
 }
@@ -522,6 +530,7 @@ async function resetTripState() {
 
   state.isTripActive = false;
   state.currentTrip = null;
+  state.knownStudents.clear(); // Clear known students when trip ends
   localStorage.removeItem("currentTrip");
 }
 
@@ -563,6 +572,9 @@ function createDriverMap() {
 function updateDriverLocationMarker(lat, lng, accuracy) {
   if (!state.map) return;
 
+  // Store current driver location
+  state.currentDriverLocation = { lat, lng };
+
   // Remove old markers
   if (state.driverMarker) {
     state.map.removeLayer(state.driverMarker);
@@ -594,8 +606,14 @@ function updateDriverLocationMarker(lat, lng, accuracy) {
     fillOpacity: 0.2,
   }).addTo(state.map);
 
-  // Center map on driver location
-  state.map.setView([lat, lng], 15);
+  // Center map on driver location (only on initial position)
+  if (!state.map.hasInitialCenter) {
+    state.map.setView([lat, lng], 15);
+    state.map.hasInitialCenter = true;
+  }
+
+  // Check if driver marker is in view and update button visibility
+  checkDriverMarkerVisibility();
 }
 
 // Update student location marker on map
@@ -642,6 +660,59 @@ function checkSignalRConnection() {
     state.signalRConnection &&
     state.signalRConnection.state === signalR.HubConnectionState.Connected
   );
+}
+
+// Fit to Location Button Functions
+function setupFitToLocationButton() {
+  const fitBtn = document.getElementById("fitToLocationBtn");
+  if (fitBtn) {
+    fitBtn.addEventListener("click", fitMapToDriverLocation);
+  }
+
+  // Check visibility when map moves or zooms
+  if (state.map) {
+    state.map.on("moveend", checkDriverMarkerVisibility);
+    state.map.on("zoomend", checkDriverMarkerVisibility);
+  }
+}
+
+function checkDriverMarkerVisibility() {
+  if (!state.map || !state.driverMarker || !state.currentDriverLocation) {
+    return;
+  }
+
+  const fitBtn = document.getElementById("fitToLocationBtn");
+  if (!fitBtn) return;
+
+  // Check if driver marker is visible in current view
+  const mapBounds = state.map.getBounds();
+  const driverLatLng = L.latLng(state.currentDriverLocation.lat, state.currentDriverLocation.lng);
+  const isVisible = mapBounds.contains(driverLatLng);
+
+  // Show button if marker is out of view
+  if (isVisible) {
+    fitBtn.style.display = "none";
+  } else {
+    fitBtn.style.display = "block";
+  }
+}
+
+function fitMapToDriverLocation() {
+  if (!state.map || !state.currentDriverLocation) return;
+
+  state.map.setView(
+    [state.currentDriverLocation.lat, state.currentDriverLocation.lng],
+    15,
+    { animate: true, duration: 0.5 }
+  );
+
+  // Hide button after centering
+  const fitBtn = document.getElementById("fitToLocationBtn");
+  if (fitBtn) {
+    setTimeout(() => {
+      fitBtn.style.display = "none";
+    }, 100);
+  }
 }
 
 // دالة toggleTripCompletion إذا لم تكن موجودة في profile.js
@@ -908,6 +979,23 @@ function setupSignalREventHandlers() {
         lng
       );
 
+      // Check if this is a new student (not yet in knownStudents set)
+      const isNewStudent = !state.knownStudents.has(studentid);
+      
+      if (isNewStudent) {
+        // Add to known students set
+        state.knownStudents.add(studentid);
+        
+        // Show notification only for new students
+        if (typeof showToast === "function") {
+          showToast(
+            `انضم طالب جديد: ${studentname || studentid}`,
+            "info",
+            "طالب جديد"
+          );
+        }
+      }
+
       // Update map with student location
       updateStudentLocationMarker(
         parseFloat(lat),
@@ -923,6 +1011,9 @@ function setupSignalREventHandlers() {
   // Stop location from student
   state.signalRConnection.on("stoplocationfromstudent", function (studentid) {
     console.log("Student stopped sharing location:", studentid);
+
+    // Remove from known students set
+    state.knownStudents.delete(studentid);
 
     // Remove from map
     removeStudentMarkerFromMap(studentid);
