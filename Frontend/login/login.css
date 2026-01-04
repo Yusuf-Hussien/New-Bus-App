@@ -743,7 +743,7 @@ button[type="submit"],
     /* Mobile Signup Button */
     .mobile-signup-btn {
         bottom: 15px;
-        right: 15px;
+        right: 0px;
         padding: 10px 20px;
         font-size: 13px;
     }
