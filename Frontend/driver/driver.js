@@ -131,12 +131,9 @@ function renderInterface() {
   createDriverMap();
   if (!state.isTripActive) setupTripFormEvents();
 
-  // إضافة زر Complete Trip إذا كانت هناك رحلة نشطة
+  // Set up event listeners for active trip buttons
   if (state.isTripActive) {
-    const completeTripBtn = document.getElementById("completeTripBtn");
-    if (completeTripBtn) {
-      completeTripBtn.addEventListener("click", toggleTripCompletion);
-    }
+    setupActiveTripButtons();
   }
 
   // Setup fit to location button
@@ -292,16 +289,38 @@ function renderMap() {
                 <i class="fas fa-map-marked-alt"></i> خريطة الرحلة
             </div>
             <div class="driver-map" id="driverMap" style="height: calc(500px - 85px); margin-buttom: 50px;  position: relative; "></div>
-            <button class="fit-to-location-btn" id="fitToLocationBtn" style="display: none;">
-                <i class="fas fa-crosshairs"></i> العودة إلى موقعي
-            </button>
         </div>
+        <button class="fit-to-location-btn" id="fitToLocationBtn" style="display: none;">
+            <i class="fas fa-crosshairs"></i> العودة إلى موقعي
+        </button>
     `;
 }
 
 // Trip Form Events
 function setupTripFormEvents() {
   document.getElementById("startTripBtn")?.addEventListener("click", startTrip);
+}
+
+// Setup event listeners for active trip buttons
+function setupActiveTripButtons() {
+  // Setup end trip button (finish trip and stop SignalR location sharing)
+  const endTripBtn = document.getElementById("endTripBtn");
+  if (endTripBtn) {
+    // Remove existing listener to prevent duplicates
+    endTripBtn.replaceWith(endTripBtn.cloneNode(true));
+    const newEndTripBtn = document.getElementById("endTripBtn");
+    newEndTripBtn.addEventListener("click", endTrip);
+  }
+
+  // Setup complete trip button (update trip status: full/available)
+  const completeTripBtn = document.getElementById("completeTripBtn");
+  if (completeTripBtn) {
+    // Remove existing listener to prevent duplicates
+    completeTripBtn.replaceWith(completeTripBtn.cloneNode(true));
+    const newCompleteTripBtn = document.getElementById("completeTripBtn");
+    // Use inline function to ensure we use the driver.js version (driverUpdateTripStatus)
+    newCompleteTripBtn.addEventListener("click", driverUpdateTripStatus);
+  }
 }
 
 // Trip Functions
@@ -417,18 +436,6 @@ async function startTrip() {
     // Only save to localStorage after SignalR connection is confirmed
     saveTripToStorage();
     renderInterface();
-
-    // إضافة مستمع الحدث لزر إنهاء الرحلة
-    const endTripBtn = document.getElementById("endTripBtn");
-    if (endTripBtn) {
-      endTripBtn.addEventListener("click", endTrip);
-    }
-
-    // إضافة مستمع الحدث لزر Complete Trip
-    const completeTripBtn = document.getElementById("completeTripBtn");
-    if (completeTripBtn && typeof toggleTripCompletion === "function") {
-      completeTripBtn.addEventListener("click", toggleTripCompletion);
-    }
 
     // Start location sharing via SignalR
     startLocationSharing();
@@ -715,84 +722,86 @@ function fitMapToDriverLocation() {
   }
 }
 
-// دالة toggleTripCompletion إذا لم تكن موجودة في profile.js
-if (typeof toggleTripCompletion === "undefined") {
-  async function toggleTripCompletion() {
-    // Get trip ID from current trip
-    const tripId = state.currentTrip?.tripId;
-    if (!tripId) {
-      console.error("No trip ID found in current trip");
+// Driver-specific function to update trip status (uses API)
+// This function has a unique name to avoid conflict with profile.js toggleTripCompletion
+async function driverUpdateTripStatus() {
+  // Debug: Check if function is called
+  //alert("driverUpdateTripStatus called");
+  
+  // Get trip ID from current trip
+  const tripId = state.currentTrip?.tripId;
+  if (!tripId) {
+    console.error("No trip ID found in current trip");
+    if (typeof showToast === "function") {
+      showToast("خطأ: لم يتم العثور على معرف الرحلة", "error", "خطأ");
+    } else {
+      alert("خطأ: لم يتم العثور على معرف الرحلة");
+    }
+    return;
+  }
+
+  // Get current statusTripId and toggle it (1 <-> 2)
+  const currentStatusTripId = state.currentTrip?.statusTripId || 1;
+  const newStatusTripId = currentStatusTripId === 1 ? 2 : 1;
+
+  // Call API to update trip status
+  try {
+    const requestBody = {
+      id: tripId,
+      statusTripId: newStatusTripId
+    };
+
+    const response = await apiAuthRequest("Trips/DriverUpdateStatusTrip", "PUT", {}, requestBody);
+
+    if (!response.success) {
+      console.error("Failed to update trip status:", response.error);
       if (typeof showToast === "function") {
-        showToast("خطأ: لم يتم العثور على معرف الرحلة", "error", "خطأ");
+        showToast(`فشل تحديث حالة الرحلة: ${response.error || "حدث خطأ غير معروف"}`, "error", "خطأ");
       } else {
-        alert("خطأ: لم يتم العثور على معرف الرحلة");
+        alert(`فشل تحديث حالة الرحلة: ${response.error || "حدث خطأ غير معروف"}`);
       }
       return;
     }
 
-    // Get current statusTripId and toggle it (1 <-> 2)
-    const currentStatusTripId = state.currentTrip?.statusTripId || 1;
-    const newStatusTripId = currentStatusTripId === 1 ? 2 : 1;
+    // Update local state
+    state.currentTrip.statusTripId = newStatusTripId;
+    saveTripToStorage();
 
-    // Call API to update trip status
-    try {
-      const requestBody = {
-        id: tripId,
-        statusTripId: newStatusTripId
-      };
-
-      const response = await apiAuthRequest("Trips/DriverUpdateStatusTrip", "PUT", {}, requestBody);
-
-      if (!response.success) {
-        console.error("Failed to update trip status:", response.error);
-        if (typeof showToast === "function") {
-          showToast(`فشل تحديث حالة الرحلة: ${response.error || "حدث خطأ غير معروف"}`, "error", "خطأ");
-        } else {
-          alert(`فشل تحديث حالة الرحلة: ${response.error || "حدث خطأ غير معروف"}`);
-        }
-        return;
-      }
-
-      // Update local state
-      state.currentTrip.statusTripId = newStatusTripId;
-      saveTripToStorage();
-
-      // Update button UI
-      const button = document.getElementById("completeTripBtn");
-      if (button) {
-        if (newStatusTripId === 2) {
-          button.classList.add("incomplete");
-          button.innerHTML = '<i class="fas fa-times-circle"></i> الحافلة ممتلئة';
-        } else {
-          button.classList.remove("incomplete");
-          button.innerHTML = '<i class="fas fa-check-circle"></i> الحافلة متاحة';
-        }
-      }
-
-      // Update stats and button display by re-rendering active trip section
-      const activeTripContainer = document.querySelector(".active-trip");
-      if (activeTripContainer) {
-        // Update the stats section
-        const statsSection = activeTripContainer.querySelector(".trip-stats");
-        if (statsSection) {
-          statsSection.outerHTML = renderTripStats();
-        }
-      }
-
-      // Show notification
-      if (typeof showToast === "function") {
-        const message = newStatusTripId === 2
-          ? "تم تحديث حالة الرحلة إلى: الحافلة ممتلئة"
-          : "تم تحديث حالة الرحلة إلى: الحافلة متاحة";
-        showToast(message, "success", "حالة الرحلة");
-      }
-    } catch (error) {
-      console.error("Error updating trip status:", error);
-      if (typeof showToast === "function") {
-        showToast("حدث خطأ أثناء تحديث حالة الرحلة. يرجى المحاولة مرة أخرى.", "error", "خطأ");
+    // Update button UI
+    const button = document.getElementById("completeTripBtn");
+    if (button) {
+      if (newStatusTripId === 2) {
+        button.classList.add("incomplete");
+        button.innerHTML = '<i class="fas fa-times-circle"></i> الحافلة ممتلئة';
       } else {
-        alert("حدث خطأ أثناء تحديث حالة الرحلة. يرجى المحاولة مرة أخرى.");
+        button.classList.remove("incomplete");
+        button.innerHTML = '<i class="fas fa-check-circle"></i> الحافلة متاحة';
       }
+    }
+
+    // Update stats and button display by re-rendering active trip section
+    const activeTripContainer = document.querySelector(".active-trip");
+    if (activeTripContainer) {
+      // Update the stats section
+      const statsSection = activeTripContainer.querySelector(".trip-stats");
+      if (statsSection) {
+        statsSection.outerHTML = renderTripStats();
+      }
+    }
+
+    // Show notification
+    if (typeof showToast === "function") {
+      const message = newStatusTripId === 2
+        ? "تم تحديث حالة الرحلة إلى: الحافلة ممتلئة"
+        : "تم تحديث حالة الرحلة إلى: الحافلة متاحة";
+      showToast(message, "success", "حالة الرحلة");
+    }
+  } catch (error) {
+    console.error("Error updating trip status:", error);
+    if (typeof showToast === "function") {
+      showToast("حدث خطأ أثناء تحديث حالة الرحلة. يرجى المحاولة مرة أخرى.", "error", "خطأ");
+    } else {
+      alert("حدث خطأ أثناء تحديث حالة الرحلة. يرجى المحاولة مرة أخرى.");
     }
   }
 }
