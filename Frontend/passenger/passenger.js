@@ -289,6 +289,9 @@ async function closeLocationSharing() {
 function updateStudentLocationMarker(lat, lng, accuracy) {
   if (!state.map) return;
 
+  // Update user position in state
+  state.userPosition = { lat, lng };
+
   // Remove old markers
   if (state.studentMarker) {
     state.map.removeLayer(state.studentMarker);
@@ -308,6 +311,15 @@ function updateStudentLocationMarker(lat, lng, accuracy) {
     fillColor: "#3388ff",
     fillOpacity: 0.2,
   }).addTo(state.map);
+
+  // Center map on student location (only on initial position)
+  if (!state.map.hasInitialCenter) {
+    state.map.setView([lat, lng], 15);
+    state.map.hasInitialCenter = true;
+  }
+
+  // Check if student marker is in view and update button visibility
+  checkStudentMarkerVisibility();
 }
 
 function updateLocationUI() {
@@ -329,6 +341,9 @@ function updateLocationUI() {
       status.classList.remove("active");
     }
   }
+  
+  // Update fit-to-location button visibility
+  checkStudentMarkerVisibility();
 }
 
 function checkSignalRConnection() {
@@ -507,6 +522,7 @@ function loadPassengerInterface() {
   loadNotifications();
   renderInterface();
   setupEventListeners();
+  setupFitToLocationButton(); // Setup fit to location button
   initializeSignalR(); // Initialize SignalR instead of fake data updates
 }
 
@@ -551,6 +567,9 @@ function renderInterface() {
 
   createMap();
   renderBusCards();
+  
+  // Setup fit to location button after map is created
+  setupFitToLocationButton();
 }
 
 function renderWelcomeMessage() {
@@ -617,6 +636,9 @@ function renderMap() {
             </div>
             <div class="map" id="liveMap" style="height: 500px; width: 100%;"></div>
         </div>
+        <button class="fit-to-location-btn" id="fitToLocationBtn" style="display: none;">
+            <i class="fas fa-crosshairs"></i> العودة إلى موقعي
+        </button>
     `;
 }
 
@@ -804,9 +826,11 @@ function renderBusCard(bus) {
   const status = bus.status || "active";
   const statusTripId = bus.statusTripId || 1;
   
-  // Status display: 1 = available, 2 = full
-  const statusText = statusTripId === 2 ? "🔴 ممتلئة" : status === "active" ? "🟢 متاحة" : "🟡 متأخرة";
-  const statusClass = statusTripId === 2 ? "full" : status;
+  // Status display: 2 = full (ممتلئة), 1 = available (متاحة)
+  // Handle both numeric and string status values
+  const isFull = statusTripId === 2 || status === "full" || (typeof bus.statusTripId === "string" && bus.statusTripId.toLowerCase() === "completed");
+  const statusText = isFull ? "🔴 ممتلئة" : status === "active" ? "🟢 متاحة" : "🟡 متأخرة";
+  const statusClass = isFull ? "full" : status;
 
   return `
         <div class="bus-card ${isActive ? "active" : ""}" data-bus-id="${
@@ -1056,13 +1080,26 @@ function setupSignalREventHandlers() {
       let bus = state.busesData.find((b) => b.driverId === driverid);
       const isNewBus = !bus;
 
-      // Map statusTripId to status string
-      // 1 = available (متاحة), 2 = full (ممتلئة)
-      const statusMap = {
-        1: "active",
-        2: "full"
-      };
-      const busStatus = statusMap[statusTrip] || "active";
+      // Map statusTrip string to status
+      // "completed" = full (ممتلئة), "notcompleted" = available (متاحة)
+      // Also handle numeric values for backward compatibility
+      let busStatus = "active";
+      let statusTripId = 1; // 1 = available, 2 = full
+      
+      if (typeof statusTrip === "string") {
+        // Handle string values from SignalR
+        if (statusTrip.toLowerCase() === "completed") {
+          busStatus = "full";
+          statusTripId = 2;
+        } else if (statusTrip.toLowerCase() === "notcompleted") {
+          busStatus = "active";
+          statusTripId = 1;
+        }
+      } else if (typeof statusTrip === "number") {
+        // Handle numeric values for backward compatibility
+        statusTripId = statusTrip;
+        busStatus = statusTrip === 2 ? "full" : "active";
+      }
 
       if (!bus) {
         // Create new bus entry
@@ -1074,7 +1111,7 @@ function setupSignalREventHandlers() {
           lat: parseFloat(lat),
           lng: parseFloat(lng),
           status: busStatus,
-          statusTripId: statusTrip || 1,
+          statusTripId: statusTripId,
           from: from || "غير محدد",
           to: to || "غير محدد",
         };
@@ -1086,7 +1123,7 @@ function setupSignalREventHandlers() {
         bus.driver = drivername;
         bus.plateNumber = plateNumberbus;
         bus.status = busStatus;
-        bus.statusTripId = statusTrip || bus.statusTripId || 1;
+        bus.statusTripId = statusTripId;
         bus.from = from || bus.from || "غير محدد";
         bus.to = to || bus.to || "غير محدد";
       }
@@ -1263,6 +1300,73 @@ function setupEventListeners() {
   }
 
   document.addEventListener("click", handleOutsideClick);
+}
+
+// Fit to Location Button Functions
+function setupFitToLocationButton() {
+  const fitBtn = document.getElementById("fitToLocationBtn");
+  if (fitBtn) {
+    // Remove existing listener to prevent duplicates
+    fitBtn.replaceWith(fitBtn.cloneNode(true));
+    const newFitBtn = document.getElementById("fitToLocationBtn");
+    newFitBtn.addEventListener("click", fitMapToStudentLocation);
+  }
+
+  // Check visibility when map moves or zooms
+  if (state.map) {
+    // Remove existing listeners to prevent duplicates
+    state.map.off("moveend", checkStudentMarkerVisibility);
+    state.map.off("zoomend", checkStudentMarkerVisibility);
+    
+    // Add new listeners
+    state.map.on("moveend", checkStudentMarkerVisibility);
+    state.map.on("zoomend", checkStudentMarkerVisibility);
+  }
+}
+
+function checkStudentMarkerVisibility() {
+  if (!state.map || !state.studentMarker || !state.userPosition.lat || !state.userPosition.lng) {
+    return;
+  }
+
+  const fitBtn = document.getElementById("fitToLocationBtn");
+  if (!fitBtn) return;
+
+  // Only show button if location is active
+  if (!state.isLocationActive) {
+    fitBtn.style.display = "none";
+    return;
+  }
+
+  // Check if student marker is visible in current view
+  const mapBounds = state.map.getBounds();
+  const studentLatLng = L.latLng(state.userPosition.lat, state.userPosition.lng);
+  const isVisible = mapBounds.contains(studentLatLng);
+
+  // Show button if marker is out of view
+  if (isVisible) {
+    fitBtn.style.display = "none";
+  } else {
+    fitBtn.style.display = "block";
+  }
+}
+
+function fitMapToStudentLocation() {
+  if (!state.map || !state.userPosition.lat || !state.userPosition.lng) return;
+
+  state.map.setView(
+    [state.userPosition.lat, state.userPosition.lng],
+    15,
+    { animate: true, duration: 0.5 }
+  );
+
+  // Hide button after centering
+  const fitBtn = document.getElementById("fitToLocationBtn");
+  if (fitBtn) {
+    setTimeout(() => {
+      fitBtn.style.display = "none";
+    }, 100);
+  }
 }
 
 function toggleNotificationPanel() {
