@@ -59,6 +59,6 @@ namespace NewBusAPI.Controllers
             return Ok(new ApiResponse<string>("", "Logout Successfuly"));
         }
 
-
+     
     }
 }

@@ -57,11 +57,15 @@ namespace NewBusBLL.Students.StudentBLL
                 throw new ValidationException("Admin Data Is Not Valid");
             if (string.IsNullOrEmpty(dtoStudentCreate.UserName) || string.IsNullOrEmpty(dtoStudentCreate.Password))
                 throw new ValidationException("Username And Password Are Required");
-            if( await _UOW.Students.IsExist(s=>s.Username==dtoStudentCreate.UserName))
+            if (await _UOW.Drivers.IsExist((d => d.Username == dtoStudentCreate.UserName)))
                 throw new ValidationException("UserName Is Used Before");
-            if (await _UOW.Students.IsExist(s => s.Person.Phone == dtoStudentCreate.Phone))
+            if (await _UOW.Admins.IsExist((d => d.Username == dtoStudentCreate.UserName)))
+                throw new ValidationException("UserName Is Used Before");
+            if (await _UOW.Students.IsExist((d => d.Username == dtoStudentCreate.UserName)))
+                throw new ValidationException("UserName Is Used Before");
+            if (await _UOW.People.IsExist(s => s.Phone == dtoStudentCreate.Phone))
                 throw new ValidationException("Phone Is Used Before");
-            if (await _UOW.Students.IsExist(s => s.Person.Email == dtoStudentCreate.Email))
+            if (await _UOW.People.IsExist(s => s.Email == dtoStudentCreate.Email)) //kkkef
                 throw new ValidationException("Email Is Used Before");
             if (!await _UOW.Faculties.IsExist(f => f.Id == dtoStudentCreate.FacultyId))
                 throw new ValidationException("Uou must Choice Faculty ID Correctly");

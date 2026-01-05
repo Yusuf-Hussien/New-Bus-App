@@ -17,7 +17,6 @@ public partial class Admin
     public string Password { get; set; }
     public string Token { get; set; }
     public bool Isverified { get; set; } = false;
-
     public virtual Person Person { get; set; }
     public virtual ICollection<ResetPasswordAdmin> ResetPasswordAdmins { get; set; } = new List<ResetPasswordAdmin>();
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewBusDAL.Models;
 
@@ -11,9 +12,11 @@ using NewBusDAL.Models;
 namespace NewBusDAL.Migrations
 {
     [DbContext(typeof(NewBusContext))]
-    partial class NewBusContextModelSnapshot : ModelSnapshot
+    [Migration("20251231151835_UpdateRefreshTokenExpirateDate")]
+    partial class UpdateRefreshTokenExpirateDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

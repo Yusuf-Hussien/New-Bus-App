@@ -27,6 +27,7 @@ namespace NewBusBLL.Token.Token
             _UOW = UOW;
             _Config = configuration;
         }
+     
         public async Task<DTOReturnLogin> GenerateToken(DTOLogin Login, string Role)
         {
             if (Role == Roles.Admin)
@@ -56,7 +57,7 @@ namespace NewBusBLL.Token.Token
                     RefreshToken = await GenerateRefreshTokenForStudent(student)
                 };
             }
-
+            
         }
         private async Task<string> GenerateAccessTokenForAdmin(Admin admin)
         {

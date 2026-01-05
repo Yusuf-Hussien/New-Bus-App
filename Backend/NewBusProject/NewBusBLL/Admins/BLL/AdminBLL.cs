@@ -133,11 +133,15 @@ namespace NewBusBLL.Admins.BLL
                 throw new ValidationException("Admin Data Is Not Valid");
             if (string.IsNullOrEmpty(dtoAdminCreate.UserName) || string.IsNullOrEmpty(dtoAdminCreate.Password))
                 throw new ValidationException("Username And Password Are Required");
-            if (await _unitOfWork.Admins.IsExist(s => s.Username == dtoAdminCreate.UserName))
+            if (await _unitOfWork.Drivers.IsExist((d => d.Username == dtoAdminCreate.UserName)))
                 throw new ValidationException("UserName Is Used Before");
-            if (await _unitOfWork.Admins.IsExist(s => s.Person.Phone == dtoAdminCreate.Phone))
+            if (await _unitOfWork.Admins.IsExist((d => d.Username == dtoAdminCreate.UserName)))
+                throw new ValidationException("UserName Is Used Before");
+            if (await _unitOfWork.Students.IsExist((d => d.Username == dtoAdminCreate.UserName)))
+                throw new ValidationException("UserName Is Used Before");
+            if (await _unitOfWork.People.IsExist(s => s.Phone == dtoAdminCreate.Phone))
                 throw new ValidationException("Phone Is Used Before");
-            if (await _unitOfWork.Admins.IsExist(s => s.Person.Email == dtoAdminCreate.Email))
+            if (await _unitOfWork.People.IsExist(s => s.Email == dtoAdminCreate.Email)) 
                 throw new ValidationException("Email Is Used Before");
             if (dtoAdminCreate.Gender < Convert.ToInt32(enGender.Male) || Convert.ToInt32(dtoAdminCreate.Gender) > Convert.ToInt32(enGender.Female))
                 throw new ValidationException("GenderID Is Not Correct");

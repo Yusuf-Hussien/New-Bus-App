@@ -1,4 +1,5 @@
-﻿using Azure.Identity;
+﻿using AutoMapper;
+using Azure.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using NewBusBLL.AdminConnection;
@@ -8,9 +9,13 @@ using NewBusBLL.Station.Interface;
 using NewBusBLL.StationTrips;
 using NewBusBLL.StudentConnection;
 using NewBusBLL.Students.InterFace;
+using NewBusBLL.Trip;
 using NewBusDAL.DTO_General;
 using NewBusDAL.Models;
+using NewBusDAL.Repositry.Interfaces.IunitOfWork;
+using NewBusDAL.Repositry.RepoClassess.UnitOfWork;
 using NewBusDAL.StationTrip;
+using System;
 using System.Collections.Concurrent;
 
 namespace NewBusAPI.HUB
@@ -25,15 +30,18 @@ namespace NewBusAPI.HUB
         private readonly IStudentBLL _studentbll;
         private readonly IstationBLL _StationBLL;
         private readonly NewBusBLL.StationTrips.IstationTrip _StataionTripBLL;
-        private static ConcurrentDictionary<string, DateTime> LastPing = new();
 
+        
+        private readonly ITripBLL _TripBLL; 
         public LiveHub(
                 IStudentBLL studentbll,
                 IDriverBLL driverbll,
                 IStudentConnection studentConnection,
                 IAdminConnection adminConnection,
-                IDriverConnection driverConnection, IstationBLL istation, IstationTrip stationtrip)
+                IDriverConnection driverConnection, IstationBLL istation, IstationTrip stationtrip,ITripBLL Trip)
         {
+          
+
             _StudentConnection = studentConnection;
             _AdminConnection = adminConnection;
             _DriverConnection = driverConnection;
@@ -41,13 +49,10 @@ namespace NewBusAPI.HUB
             _StationBLL = istation;
             _studentbll = studentbll;
             _StataionTripBLL = stationtrip;
+            _TripBLL = Trip;
         }
 
-        public Task Ping()
-        {
-            LastPing[Context.ConnectionId] = DateTime.Now;
-            return Task.CompletedTask;
-        }
+    
 
         public override async Task OnConnectedAsync()
         {
@@ -78,26 +83,7 @@ namespace NewBusAPI.HUB
             await base.OnConnectedAsync();
         }
 
-        public static async Task CheckInactiveConnections(LiveHub hub)
-        {
-            var now = DateTime.Now;
-            foreach (var kvp in LastPing.ToList())
-            {
-                var connId = kvp.Key;
-                var last = kvp.Value;
-
-                if ((now - last).TotalSeconds > 6) // غير نشط لأكثر من 30 ثانية
-                {
-
-                    await hub._StudentConnection.RemoveFromConnectionStudentTable(connId);
-                    await hub._DriverConnection.RemoveFromConnectionDriverTable(connId);
-                    await hub.Groups.RemoveFromGroupAsync(connId, "Students");
-                    await hub.Groups.RemoveFromGroupAsync(connId, "Drivers");
-
-                    LastPing.TryRemove(connId, out _);
-                }
-            }
-        }
+       
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             var conn = Context.ConnectionId;
@@ -173,6 +159,7 @@ namespace NewBusAPI.HUB
 
             var DriverId = int.Parse(Context?.User?.FindFirst("ID")?.Value!);
             var Driver = await _driverbll.GetDriverByID(DriverId);
+            var Trip = await _TripBLL.GetTripByID(TripId);
             await _driverbll.UpdateLiveLocation(new DtoUpdateLocation
             {
                 Id = DriverId,
@@ -228,7 +215,7 @@ namespace NewBusAPI.HUB
             }
 
 
-            await Clients.Group("Students").SendAsync("NewLocationFromDriver", latitude, longitude, Driver.FirstName + " " + Driver.LastName, Driver.PlateNoBus, DriverId);
+            await Clients.Group("Students").SendAsync("NewLocationFromDriver", latitude, longitude, Driver.FirstName + " " + Driver.LastName, Driver.PlateNoBus, DriverId,Trip.TripFrom,Trip.TripTo,Trip.StatusTrip);
         }
     }
 

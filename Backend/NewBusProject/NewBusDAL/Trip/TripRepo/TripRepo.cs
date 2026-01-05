@@ -34,8 +34,8 @@ namespace NewBusDAL.Trip.TripRepo
         {
             var Trips = await _context.Trips.Include(t => t.Driver).
                 ThenInclude(d => d.Person)
-                .Include(t => t.Route).Where(T=>T.Id==id).ToListAsync();
-            if (!Trips.Any())
+                .Include(t => t.Route).Where(T=>T.Id==id).FirstOrDefaultAsync();
+            if (Trips==null)
                 return null;
             return _mapper.Map<DtoTripRead>(Trips);
         }

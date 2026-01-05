@@ -40,8 +40,8 @@ namespace NewBusBLL.LogoutService
             {
                 Salt = Salt,
                 Token = _Hash.GenerateHashedPassword(Logout.RefreshToken, Salt),
-                IsActive = true
-
+                IsActive = true,
+                ExpireAt= DateTime.UtcNow.AddDays(10)
             };
         await _UOW.RefreshTokens.AddAsync(Tokens);
           await _UOW.Complete();

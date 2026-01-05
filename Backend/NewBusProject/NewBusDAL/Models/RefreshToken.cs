@@ -17,6 +17,7 @@ namespace NewBusDAL.Models
         public string Salt { get; set; }
         [JsonIgnore]
         public bool IsActive { get; set; }
+        public DateTime ExpireAt { get; set; }
 
     }
 }

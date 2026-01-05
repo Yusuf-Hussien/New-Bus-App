@@ -48,9 +48,13 @@ namespace NewBusBLL.Driver.Driver
                 throw new ValidationException("Username And Password Are Required");
             if (await _unitOfWork.Drivers.IsExist((d => d.Username == driver.UserName)))
                 throw new ValidationException("UserName Is Used Before");
-            if (await _unitOfWork.Drivers.IsExist(((d => d.Person.Phone == driver.Phone))))
+            if (await _unitOfWork.Admins.IsExist((d => d.Username == driver.UserName)))
+                throw new ValidationException("UserName Is Used Before");
+            if (await _unitOfWork.Students.IsExist((d => d.Username == driver.UserName)))
+                throw new ValidationException("UserName Is Used Before");
+            if (await _unitOfWork.People.IsExist(s => s.Phone == driver.Phone))
                 throw new ValidationException("Phone Is Used Before");
-            if (await _unitOfWork.Drivers.IsExist((d => d.Person.Email == driver.Email)))
+            if (await _unitOfWork.People.IsExist(s => s.Email == driver.Email)) //kkkef
                 throw new ValidationException("Email Is Used Before");
             if (driver.Gender < Convert.ToInt32(enGender.Male) || Convert.ToInt32((int)driver.Gender) > Convert.ToInt32(enGender.Female))
                 throw new ValidationException("GenderID Is Not Correct");

@@ -134,7 +134,7 @@ namespace NewBusAPI.Controllers
                 throw new ValidationException("Error , OTP 6 digit");
             await _adminBLL.ResetPassword(Password);
 
-            return Redirect(_configuration["FrontEndDomainLogin"]!);
+            return Ok(new ApiResponse<string>("", "Password Reseted Successfuly"));
         }
 
 

@@ -39,7 +39,7 @@ namespace NewBusAPI.Controllers
             var buses = await _BusBLL.GetAllBusesAsync();
             return Ok(new ApiResponse<IEnumerable<DtoBusRead>> (buses, "Buses Data"));
         }
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<DtoBusRead>>> GetBusById([FromRoute] int id)
         {
             var bus = await _BusBLL.GetBusByIdAsync(id);
@@ -57,7 +57,7 @@ namespace NewBusAPI.Controllers
             await _BusBLL.UpdateBusAsync(bus);
             return Ok(new ApiResponse<string>("", "Buses Updated Data"));
         }
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse<string>>> DeleteBus([FromRoute] int id)
         {
             await _BusBLL.RemoveBusAsync(id);

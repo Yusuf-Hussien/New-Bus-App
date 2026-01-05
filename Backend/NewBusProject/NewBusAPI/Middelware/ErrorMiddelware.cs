@@ -47,7 +47,9 @@
                 case ForBiddenException:
                        status = HttpStatusCode.Forbidden;
                     break;
-
+                case UnauthorizeAccessException:
+                    status = HttpStatusCode.Unauthorized;
+                    break;
                 default:
                     status = HttpStatusCode.InternalServerError;
                     break;
