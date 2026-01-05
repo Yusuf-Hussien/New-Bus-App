@@ -517,6 +517,52 @@ button[type="submit"],
     margin-right: 8px;
 }
 
+/* =========================
+   Mobile Auth Header (STATIC)
+========================= */
+.mobile-auth-header {
+  display: none;
+  position: relative;   /* مهم */
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Logo */
+.mobile-auth-header .logo-circle {
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.mobile-auth-header .logo-bus {
+  font-size: 30px;
+  color: #fff;
+}
+
+.mobile-auth-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 6px 0 2px;
+}
+
+.mobile-auth-header p {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Show only on mobile */
+@media (max-width: 768px) {
+  .mobile-auth-header {
+    display: block;
+  }
+}
 /* ============================
        Animations
 ============================ */
@@ -662,6 +708,7 @@ button[type="submit"],
     .form-container.sign-up h1 {
         font-size: 26px;
         margin-bottom: 25px;
+        text-align: center;
     }
 
     /* Mobile Signup Button */
@@ -941,4 +988,15 @@ button[type="submit"],
     .otp-input:focus {
         background: rgba(255, 255, 255, 0.1);
     }
+}
+@media (max-width: 768px) {
+  .form-container::before,
+  .form-container::after,
+  form::before,
+  form::after,
+  h1::before,
+  h1::after {
+    display: none !important;
+    content: none !important;
+  }
 }

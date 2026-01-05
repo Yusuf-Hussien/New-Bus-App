@@ -785,6 +785,19 @@ function initEventListeners() {
         console.log("Mobile signup button not found (optional)");
     }
 
+    // Back to Sign In button from Sign Up form
+    const signupBackToSignInBtn = document.getElementById("signupBackToSignIn");
+    if (signupBackToSignInBtn) {
+        signupBackToSignInBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            console.log("Back to Sign In button clicked");
+            container.classList.remove("right-panel-active");
+            resetMessages();
+        });
+    } else {
+        console.log("Back to Sign In button not found (optional)");
+    }
+
     // Forgot Password
     if (resendOtpBtn) {
         resendOtpBtn.addEventListener("click", handleRequstingOtpSubmit);
