@@ -10,6 +10,7 @@ const state = {
   driverCircle: null, // Driver location circle
   studentMarkers: {}, // Student location markers
   studentCircles: {}, // Student location circles
+  studentLocations: {}, // Student details + last location
   locationInterval: null, // Location update interval
   isLocationSharing: false, // Location sharing status
   knownStudents: new Set(), // Track known students to prevent duplicate notifications
@@ -126,6 +127,7 @@ function renderInterface() {
         ${renderDashboard()}
         ${state.isTripActive ? renderActiveTrip() : renderTripForm()}
         ${renderMap()}
+        ${renderActiveStudentsTable()}
     `;
 
   createDriverMap();
@@ -138,6 +140,9 @@ function renderInterface() {
 
   // Setup fit to location button
   setupFitToLocationButton();
+
+  // Render initial active students table state
+  updateActiveStudentsTable();
 }
 
 function renderWelcomeMessage() {
@@ -293,6 +298,32 @@ function renderMap() {
         <button class="fit-to-location-btn" id="fitToLocationBtn" style="display: none;">
             <i class="fas fa-crosshairs"></i> العودة إلى موقعي
         </button>
+    `;
+}
+
+// Active students table
+function renderActiveStudentsTable() {
+  return `
+        <div class="active-students-card" style="margin-top: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); padding: 16px;">
+            <div class="map-title" style="margin-bottom: 12px;">
+                <i class="fas fa-users"></i> الطلاب النشطون الآن
+            </div>
+            <div class="table-responsive" style="overflow-x: auto;">
+                <table class="table" style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: #f8fafc;">
+                        <tr>
+                            <th style="text-align: right; padding: 8px;">المعرف</th>
+                            <th style="text-align: right; padding: 8px;">الاسم</th>
+                            <th style="text-align: right; padding: 8px;">الكلية</th>
+                            <th style="text-align: right; padding: 8px;">الإجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activeStudentsTableBody">
+                        <!-- Filled dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     `;
 }
 
@@ -627,6 +658,16 @@ function updateDriverLocationMarker(lat, lng, accuracy) {
 function updateStudentLocationMarker(lat, lng, studentId, studentName, facultyName, degree) {
   if (!state.map) return;
 
+  // Store latest student info/location
+  state.studentLocations[studentId] = {
+    id: studentId,
+    name: studentName || studentId,
+    faculty: facultyName || "غير محدد",
+    degree: degree || "",
+    lat: parseFloat(lat),
+    lng: parseFloat(lng),
+  };
+
   // Remove old markers
   if (state.studentMarkers[studentId]) {
     state.map.removeLayer(state.studentMarkers[studentId]);
@@ -646,6 +687,9 @@ function updateStudentLocationMarker(lat, lng, studentId, studentName, facultyNa
     fillColor: "#3388ff",
     fillOpacity: 0.2,
   }).addTo(state.map);
+
+  // Refresh active students table
+  updateActiveStudentsTable();
 }
 
 // Remove student marker from map
@@ -659,6 +703,12 @@ function removeStudentMarkerFromMap(studentId) {
   if (state.studentCircles[studentId]) {
     state.map.removeLayer(state.studentCircles[studentId]);
     delete state.studentCircles[studentId];
+  }
+
+  // Remove from locations list and refresh table
+  if (state.studentLocations[studentId]) {
+    delete state.studentLocations[studentId];
+    updateActiveStudentsTable();
   }
 }
 
@@ -719,6 +769,56 @@ function fitMapToDriverLocation() {
     setTimeout(() => {
       fitBtn.style.display = "none";
     }, 100);
+  }
+}
+
+// Render / update active students table
+function updateActiveStudentsTable() {
+  const tbody = document.getElementById("activeStudentsTableBody");
+  if (!tbody) return;
+
+  const students = Object.values(state.studentLocations);
+
+  if (!students.length) {
+    tbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 12px; color: #6b7280;">
+                    لا يوجد طلاب يشاركون موقعهم حالياً
+                </td>
+            </tr>
+        `;
+    return;
+  }
+
+  tbody.innerHTML = students
+    .map(
+      (s) => `
+            <tr>
+                <td style="padding: 8px;">${s.id}</td>
+                <td style="padding: 8px;">${s.name}</td>
+                <td style="padding: 8px;">${s.faculty}</td>
+                <td style="padding: 8px;">
+                    <button class="btn" style="padding: 6px 10px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer;"
+                        onclick="focusStudentLocation('${s.id}')">
+                        <i class="fas fa-location-arrow"></i> الانتقال للموقع
+                    </button>
+                </td>
+            </tr>
+        `
+    )
+    .join("");
+}
+
+function focusStudentLocation(studentId) {
+  if (!state.map) return;
+  const info = state.studentLocations[studentId];
+  if (!info) return;
+
+  state.map.setView([info.lat, info.lng], 16, { animate: true, duration: 0.5 });
+
+  // If marker exists, open its popup
+  if (state.studentMarkers[studentId]) {
+    state.studentMarkers[studentId].openPopup();
   }
 }
 
