@@ -941,6 +941,15 @@ function initializeSignalR() {
         if (typeof showToast === "function") {
           showToast("تم الاتصال بنجاح بخدمة التتبع المباشر", "success", "الاتصال جاهز");
         }
+
+        // If there is an active trip (e.g. after page refresh), resume location sharing automatically
+        if (state.isTripActive && state.currentTrip && !state.isLocationSharing) {
+          try {
+            startLocationSharing();
+          } catch (error) {
+            console.error("Error while auto-resuming location sharing after connect:", error);
+          }
+        }
       })
       .catch((err) => {
         console.error("Connection error:", err);
@@ -956,6 +965,15 @@ function initializeSignalR() {
       console.log("Reconnected!");
       if (typeof showToast === "function") {
         showToast("تم إعادة الاتصال بنجاح", "success", "إعادة الاتصال");
+      }
+
+      // When connection is restored and trip is still active, ensure location sharing is running
+      if (state.isTripActive && state.currentTrip && !state.isLocationSharing) {
+        try {
+          startLocationSharing();
+        } catch (error) {
+          console.error("Error while auto-resuming location sharing after reconnect:", error);
+        }
       }
     });
 

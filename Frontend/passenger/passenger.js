@@ -199,6 +199,7 @@ function startLocationSharing() {
   }
 
   state.isLocationActive = true;
+  saveLocationSharingState(); // Save state to localStorage
   updateLocationUI();
 
   // Start location updates
@@ -252,6 +253,7 @@ function startLocationSharing() {
 
 async function closeLocationSharing() {
   state.isLocationActive = false;
+  saveLocationSharingState(); // Save state to localStorage (false)
 
   // Clear interval
   if (state.locationInterval) {
@@ -520,9 +522,11 @@ function handleLogout() {
 function loadPassengerInterface() {
   loadUserInfo();
   loadNotifications();
+  loadLocationSharingState(); // Load location sharing state from localStorage
   renderInterface();
   setupEventListeners();
   setupFitToLocationButton(); // Setup fit to location button
+  updateLocationUI(); // Update UI to reflect loaded location sharing state
   initializeSignalR(); // Initialize SignalR instead of fake data updates
 }
 
@@ -554,6 +558,19 @@ function loadNotifications() {
   state.notifications =
     JSON.parse(localStorage.getItem("passengerNotifications")) || [];
   updateNotificationDisplay();
+}
+
+function loadLocationSharingState() {
+  const savedState = localStorage.getItem("passengerLocationSharing");
+  if (savedState === "true") {
+    state.isLocationActive = true;
+  } else {
+    state.isLocationActive = false;
+  }
+}
+
+function saveLocationSharingState() {
+  localStorage.setItem("passengerLocationSharing", state.isLocationActive.toString());
 }
 
 function renderInterface() {
@@ -1024,6 +1041,15 @@ function initializeSignalR() {
           "تم الاتصال بنجاح بخدمة التتبع المباشر",
           "fa-check-circle"
         );
+
+        // If location sharing was active (e.g. after page refresh), resume it automatically
+        if (state.isLocationActive && !state.locationInterval) {
+          try {
+            startLocationSharing();
+          } catch (error) {
+            console.error("Error while auto-resuming location sharing after connect:", error);
+          }
+        }
       })
       .catch((err) => {
         console.error("Connection error:", err);
@@ -1042,6 +1068,15 @@ function initializeSignalR() {
         "تم إعادة الاتصال بنجاح",
         "fa-check-circle"
       );
+
+      // When connection is restored and location sharing was active, ensure it's running
+      if (state.isLocationActive && !state.locationInterval) {
+        try {
+          startLocationSharing();
+        } catch (error) {
+          console.error("Error while auto-resuming location sharing after reconnect:", error);
+        }
+      }
     });
 
     state.signalRConnection.onreconnecting(() => {
@@ -1429,6 +1464,32 @@ additionalStyles.textContent = `
     }
 `;
 document.head.appendChild(additionalStyles);
+
+// Cleanup on page unload
+window.addEventListener("beforeunload", async function () {
+  // Clear location interval
+  if (state.locationInterval) {
+    clearInterval(state.locationInterval);
+  }
+
+  // Stop location sharing if active
+  if (state.isLocationActive && checkSignalRConnection()) {
+    try {
+      await state.signalRConnection.invoke("stoplocationforistudent");
+    } catch (err) {
+      console.error("Error stopping location:", err);
+    }
+  }
+
+  // Stop SignalR connection
+  if (state.signalRConnection) {
+    try {
+      await state.signalRConnection.stop();
+    } catch (err) {
+      console.error("Error stopping SignalR:", err);
+    }
+  }
+});
 
 // Initialize
 document.addEventListener("DOMContentLoaded", function () {
