@@ -604,11 +604,12 @@ button[type="submit"],
        Responsive Styles
 ============================ */
 
-/* Large Screens */
-@media (max-width: 1366px) {
+/* Tablet Screens Only */
+@media (min-width: 768px) and (max-width: 1024px) {
     .form-container.sign-up form {
-        max-height: none;
-        overflow-y: visible;
+        max-height: none !important;
+        overflow-y: visible !important;
+        height: 816px;
     }
 
     .form-container.sign-up {
@@ -998,5 +999,102 @@ button[type="submit"],
   h1::after {
     display: none !important;
     content: none !important;
+  }
+}
+
+/* ============================
+   TABLET FIXES (768px - 1024px)
+============================ */
+
+/* Fix for tablets only */
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  /* Reset mobile styles for tablets */
+  .container {
+    flex-direction: row !important; /* Keep side-by-side layout */
+    min-height: 600px;
+    border-radius: 20px;
+    margin: 40px auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  }
+  
+  .form-container {
+    width: 50% !important;
+    padding: 50px 40px !important;
+  }
+  
+  /* Fix sign-up form padding */
+  .form-container.sign-up {
+    padding-top: 50px !important;
+    padding: 50px 40px !important;
+  }
+  
+  .form-container.sign-up form {
+    margin-top: 30px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
+  /* Show overlay on tablet */
+  .overlay-container {
+    display: block !important;
+    width: 50% !important;
+  }
+  
+  /* Fix radio buttons layout */
+  .radio-group {
+    flex-direction: row !important;
+    gap: 15px;
+  }
+  
+  .radio-label {
+    min-width: 120px !important;
+    justify-content: center;
+  }
+  
+  /* Hide mobile button on tablet */
+  .mobile-signup-btn {
+    display: none !important;
+  }
+  
+  /* Fix mobile header */
+  .mobile-auth-header {
+    display: none !important;
+  }
+  
+  /* Fix form titles */
+  .form-container.sign-up h1,
+  .form-container.sign-in h1 {
+    font-size: 28px !important;
+  }
+  
+  /* Fix input sizes */
+  .input-group input,
+  .form-select {
+    padding: 16px 20px 16px 45px !important;
+    font-size: 16px !important;
+  }
+  
+  /* Prevent horizontal scroll */
+  body, html {
+    overflow-x: hidden;
+  }
+}
+
+/* Fix for portrait tablets */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .container {
+    flex-direction: column !important;
+    max-width: 90%;
+    margin: 20px auto;
+  }
+  
+  .form-container {
+    width: 100% !important;
+  }
+  
+  .overlay-container {
+    width: 100% !important;
+    height: 200px;
   }
 }
