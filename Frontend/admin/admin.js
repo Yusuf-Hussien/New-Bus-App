@@ -267,7 +267,14 @@ function refreshUserData() {
 // ============================
 async function loadAdminInterface() {
   refreshUserData();
-  dom.userName.textContent = state.currentUser.name || "المدير";
+  
+  // Load user info from JWT claims stored in userSession
+  // Use name from JWT claims if available
+  const displayName = state.currentUser.name || 
+                     (state.currentUser.firstName && state.currentUser.secondName 
+                       ? `${state.currentUser.firstName} ${state.currentUser.secondName}` 
+                       : "المدير");
+  dom.userName.textContent = displayName;
 
   // Load drivers, admins, trips, buses, and students from API
   await loadDriversFromAPI();

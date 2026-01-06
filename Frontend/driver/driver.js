@@ -107,8 +107,17 @@ async function loadDriverInterface() {
 }
 
 function loadUserInfo() {
-  // Always use "السائق" instead of actual name
-  dom.userName.textContent = "السائق";
+  // Load user info from JWT claims stored in userSession
+  if (state.currentUser) {
+    // Use name from JWT claims if available, otherwise use "السائق"
+    const displayName = state.currentUser.name || 
+                       (state.currentUser.firstName && state.currentUser.secondName 
+                         ? `${state.currentUser.firstName} ${state.currentUser.secondName}` 
+                         : "السائق");
+    dom.userName.textContent = displayName;
+  } else {
+    dom.userName.textContent = "السائق";
+  }
 }
 
 function loadTripState() {
@@ -312,7 +321,7 @@ function renderActiveStudentsTable() {
                 <table class="table" style="width: 100%; border-collapse: collapse;">
                     <thead style="background: #f8fafc;">
                         <tr>
-                            <th style="text-align: right; padding: 8px;">المعرف</th>
+                            <th style="text-align: right; padding: 8px;">الكود</th>
                             <th style="text-align: right; padding: 8px;">الاسم</th>
                             <th style="text-align: right; padding: 8px;">الكلية</th>
                             <th style="text-align: right; padding: 8px;">الإجراء</th>

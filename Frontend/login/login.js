@@ -116,6 +116,98 @@ function shakeElement(element) {
     setTimeout(() => element.style.animation = "shake 0.5s ease-in-out", 10);
 }
 
+// ============================
+// JWT Parsing Functions
+// ============================
+
+/**
+ * Parse JWT token and extract payload
+ * @param {string} token - JWT token string
+ * @returns {object} - Parsed JWT payload
+ */
+function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        if (!base64Url) {
+            console.error("Invalid JWT token format");
+            return null;
+        }
+        
+        const base64 = base64Url
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+        
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split('')
+                .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                .join('')
+        );
+        
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        console.error("Error parsing JWT token:", error);
+        return null;
+    }
+}
+
+/**
+ * Extract user claims from JWT token
+ * Handles both short claim names and full claim type URIs
+ * @param {string} token - JWT access token
+ * @returns {object} - Extracted user data with ID, email, name, role
+ */
+function extractUserClaimsFromJwt(token) {
+    if (!token) {
+        console.error("No token provided");
+        return null;
+    }
+    
+    const payload = parseJwt(token);
+    if (!payload) {
+        return null;
+    }
+    
+    // Extract claims - handle both short names and full claim type URIs
+    const userId = payload.ID || payload.id || payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"] || null;
+    
+    // Role can be stored as "role" or with full claim type URI
+    const role = payload.role || 
+                 payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] ||
+                 payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] ||
+                 null;
+    
+    // Email can be stored as "email" or with full claim type URI
+    const email = payload.email || 
+                  payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"] ||
+                  payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/email"] ||
+                  null;
+    
+    // Name can be stored as "name" or with full claim type URI
+    const name = payload.name || 
+                 payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] ||
+                 payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/name"] ||
+                 null;
+    
+    // Parse name into firstName and secondName if it's a full name
+    let firstName = null;
+    let secondName = null;
+    if (name) {
+        const nameParts = name.trim().split(/\s+/);
+        firstName = nameParts[0] || null;
+        secondName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : null;
+    }
+    
+    return {
+        id: userId,
+        role: role,
+        email: email,
+        name: name,
+        firstName: firstName,
+        secondName: secondName
+    };
+}
+
 function showToast(message, isSuccess = true) {
     toastMessage.textContent = message;
     toast.querySelector('i').className = isSuccess ? "fas fa-check-circle" : "fas fa-exclamation-circle";
@@ -614,6 +706,9 @@ function saveUserCookies(email, userData, accountType) {
     const accessToken = userData.data.accessToken || '';
     const refreshToken = userData.data.refreshToken || '';
 
+    // Extract user claims from JWT access token
+    const userClaims = extractUserClaimsFromJwt(accessToken);
+    
     // Calculate exact expiration times
     const accessTokenExpiresAt = Date.now() + (30 * 60 * 1000);        // 30 minutes
     const refreshTokenExpiresAt = Date.now() + (10 * 24 * 60 * 60 * 1000); // 10 days
@@ -626,6 +721,13 @@ function saveUserCookies(email, userData, accountType) {
         refreshToken,
         accessTokenExpiresAt,    // Useful for proactive refresh
         refreshTokenExpiresAt,
+        // Add extracted JWT claims for profile loading
+        id: userClaims?.id || null,
+        email: userClaims?.email || email, // Fallback to email parameter if JWT doesn't have it
+        name: userClaims?.name || null,
+        firstName: userClaims?.firstName || null,
+        secondName: userClaims?.secondName || null,
+        role: userClaims?.role || accountType, // Fallback to accountType if role not in JWT
     };
 
     // Use localStorage for persistence across tabs

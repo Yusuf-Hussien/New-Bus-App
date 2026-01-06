@@ -67,9 +67,36 @@ function removeToast(toastId) {
 function getProfileData() {
   try {
     // محاولة قراءة البيانات من localStorage
-    const user = JSON.parse(localStorage.getItem("currentUser")) || {};
+    // First try userSession (where JWT claims are stored), then fallback to currentUser
+    const userSession = JSON.parse(localStorage.getItem("userSession")) || {};
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
     const savedProfile =
       JSON.parse(localStorage.getItem("driverProfile")) || {};
+
+    // Extract JWT claims data from userSession
+    // Handle name splitting if full name is provided but firstName/secondName are not
+    let jwtFirstName = userSession.firstName || currentUser.firstName || null;
+    let jwtSecondName = userSession.secondName || currentUser.secondName || null;
+    
+    // If name exists but firstName/secondName don't, try to split it
+    if ((!jwtFirstName || !jwtSecondName) && userSession.name) {
+      const nameParts = userSession.name.trim().split(/\s+/);
+      if (!jwtFirstName && nameParts.length > 0) {
+        jwtFirstName = nameParts[0];
+      }
+      if (!jwtSecondName && nameParts.length > 1) {
+        jwtSecondName = nameParts.slice(1).join(' ');
+      }
+    }
+    
+    const jwtData = {
+      id: userSession.id || currentUser.id || null,
+      email: userSession.email || currentUser.email || null,
+      name: userSession.name || currentUser.name || null,
+      firstName: jwtFirstName,
+      secondName: jwtSecondName,
+      userName: userSession.userName || currentUser.userName || null,
+    };
 
     // البيانات الأساسية الافتراضية
     const defaultProfile = {
@@ -84,12 +111,32 @@ function getProfileData() {
       createdByAdminName: "مدير النظام",
     };
 
-    // دمج البيانات: الأولوية للبيانات المحفوظة، ثم بيانات المستخدم، ثم الافتراضية
-    const mergedProfile = {
-      ...defaultProfile,
-      ...user,
-      ...savedProfile,
-    };
+    // دمج البيانات: الأولوية للبيانات المحفوظة، ثم بيانات JWT، ثم بيانات المستخدم، ثم الافتراضية
+    // Merge order: savedProfile (highest) > jwtData > currentUser > defaultProfile (lowest)
+    
+    // Start with defaults
+    const mergedProfile = { ...defaultProfile };
+    
+    // Apply currentUser data (legacy)
+    Object.keys(currentUser).forEach(key => {
+      if (currentUser[key]) {
+        mergedProfile[key] = currentUser[key];
+      }
+    });
+    
+    // Apply JWT data (should override defaults and legacy data)
+    Object.keys(jwtData).forEach(key => {
+      if (jwtData[key]) {
+        mergedProfile[key] = jwtData[key];
+      }
+    });
+    
+    // Apply savedProfile data (highest priority - only override if value exists)
+    Object.keys(savedProfile).forEach(key => {
+      if (savedProfile[key]) {
+        mergedProfile[key] = savedProfile[key];
+      }
+    });
 
     // التأكد من وجود الاسم الكامل
     if (

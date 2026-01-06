@@ -359,11 +359,20 @@ function checkSignalRConnection() {
 function openProfileModal() {
   if (!state.currentUser) return;
 
-  // Load current user data
-  document.getElementById("firstName").value =
-    state.currentUser.firstName || "";
-  document.getElementById("secondName").value =
-    state.currentUser.secondName || "";
+  // Load current user data from JWT claims and saved profile
+  // Split name from JWT if it's stored as full name
+  let firstName = state.currentUser.firstName || "";
+  let secondName = state.currentUser.secondName || "";
+  
+  // If name exists but firstName/secondName don't, try to split it
+  if (!firstName && state.currentUser.name) {
+    const nameParts = state.currentUser.name.trim().split(/\s+/);
+    firstName = nameParts[0] || "";
+    secondName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : "";
+  }
+
+  document.getElementById("firstName").value = firstName;
+  document.getElementById("secondName").value = secondName;
   document.getElementById("thirdName").value =
     state.currentUser.thirdName || "";
   document.getElementById("lastName").value = state.currentUser.lastName || "";
@@ -531,10 +540,11 @@ function loadPassengerInterface() {
 }
 
 function loadUserInfo() {
-  // إذا كان الاسم غير موجود، أنشئه من الأسماء المنفصلة
+  // Load user info from JWT claims stored in userSession
+  // If name is not available, construct it from firstName/secondName from JWT
   if (
     !state.currentUser.name &&
-    (state.currentUser.firstName || state.currentUser.lastName)
+    (state.currentUser.firstName || state.currentUser.secondName)
   ) {
     const fullName = [
       state.currentUser.firstName,
@@ -544,10 +554,15 @@ function loadUserInfo() {
     ]
       .filter((name) => name && name.trim() !== "")
       .join(" ");
-    state.currentUser.name = fullName;
+    if (fullName) {
+      state.currentUser.name = fullName;
+    }
   }
 
-  const displayName = state.currentUser.name || "المستخدم";
+  // If still no name, try to use email or default
+  const displayName = state.currentUser.name || 
+                     state.currentUser.email?.split('@')[0] || 
+                     "المستخدم";
   dom.userName.textContent = displayName;
 
   // تحديث نوع المستخدم حسب الجنس
