@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Placeholder Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            background: #4A90E2;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button:hover {
+            background: #2E5C8A;
+        }
+        .info {
+            background: #e6f2ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚌 Generate Placeholder Icons</h1>
+    <div class="info">
+        <p>This will generate simple placeholder icons with a bus emoji.</p>
+        <p>You can replace these later with your custom branded icons.</p>
+    </div>
+    <button onclick="generateIcons()">Generate All Icons</button>
+    <div id="status"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        
+        function generateIcons() {
+            const status = document.getElementById('status');
+            status.innerHTML = '<p>Generating icons...</p>';
+            
+            sizes.forEach((size, index) => {
+                setTimeout(() => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Background
+                    ctx.fillStyle = '#4A90E2';
+                    ctx.fillRect(0, 0, size, size);
+                    
+                    // Bus icon (using emoji or simple shape)
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = `${size * 0.6}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('🚌', size / 2, size / 2);
+                    
+                    // Convert to blob and download
+                    canvas.toBlob((blob) => {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.download = `icon-${size}x${size}.png`;
+                        link.href = url;
+                        link.click();
+                        URL.revokeObjectURL(url);
+                    }, 'image/png');
+                }, index * 200);
+            });
+            
+            setTimeout(() => {
+                status.innerHTML = '<p style="color: green;">✓ All icons generated! Check your downloads folder.</p>';
+            }, sizes.length * 200 + 500);
+        }
+    </script>
+</body>
+</html>
+

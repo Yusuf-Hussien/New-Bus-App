@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Generate Icons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        h1 {
+            color: #4A90E2;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .icon-preview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .icon-item {
+            text-align: center;
+        }
+        .icon-item canvas {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 100px;
+            height: auto;
+        }
+        .icon-item p {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+        button {
+            background: linear-gradient(135deg, #4A90E2 0%, #2E5C8A 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.6);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4A90E2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚌 NewBus Icon Generator</h1>
+        <p class="subtitle">Professional PWA icons ready for deployment</p>
+        
+        <div class="icon-preview" id="iconPreview"></div>
+        
+        <button id="generateBtn" onclick="generateAllIcons()">
+            Generate All Icons
+        </button>
+        <button id="downloadAllBtn" onclick="downloadAllIcons()" disabled style="display: none;">
+            📥 Download All Icons
+        </button>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        let generatedIcons = [];
+        let downloadLinks = [];
+
+        function drawBusIcon(ctx, size) {
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const scale = size / 512;
+            
+            // Background with gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#4A90E2');
+            gradient.addColorStop(1, '#2E5C8A');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Rounded corners effect
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            const radius = size * 0.15;
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+            
+            // Bus body (white)
+            ctx.fillStyle = '#FFFFFF';
+            const busWidth = size * 0.6;
+            const busHeight = size * 0.4;
+            const busX = centerX - busWidth / 2;
+            const busY = centerY - busHeight / 2;
+            
+            // Rounded rectangle for bus
+            ctx.beginPath();
+            ctx.roundRect(busX, busY, busWidth, busHeight, size * 0.05);
+            ctx.fill();
+            
+            // Bus windows
+            ctx.fillStyle = '#4A90E2';
+            const windowWidth = busWidth * 0.15;
+            const windowHeight = busHeight * 0.4;
+            const windowSpacing = busWidth * 0.2;
+            const windowY = busY + busHeight * 0.2;
+            
+            // Left window
+            ctx.fillRect(busX + windowSpacing, windowY, windowWidth, windowHeight);
+            // Right window
+            ctx.fillRect(busX + busWidth - windowSpacing - windowWidth, windowY, windowWidth, windowHeight);
+            
+            // Bus wheels
+            ctx.fillStyle = '#2E5C8A';
+            const wheelRadius = size * 0.06;
+            // Left wheel
+            ctx.beginPath();
+            ctx.arc(busX + busWidth * 0.25, busY + busHeight, wheelRadius, 0, Math.PI * 2);
+            ctx.fill();
+            // Right wheel
+            ctx.beginPath();
+            ctx.arc(busX + busWidth * 0.75, busY + busHeight, wheelRadius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Polyfill for roundRect if not available
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+
+        function generateAllIcons() {
+            const generateBtn = document.getElementById('generateBtn');
+            const status = document.getElementById('status');
+            const preview = document.getElementById('iconPreview');
+            
+            generateBtn.disabled = true;
+            status.innerHTML = '<div class="status info"><span class="loading"></span>Generating icons...</div>';
+            preview.innerHTML = '';
+            generatedIcons = [];
+            
+            sizes.forEach((size, index) => {
+                setTimeout(() => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext('2d');
+                    
+                    drawBusIcon(ctx, size);
+                    
+                    const dataUrl = canvas.toDataURL('image/png');
+                    generatedIcons.push({ size, dataUrl, canvas });
+                    
+                    // Add to preview
+                    const iconItem = document.createElement('div');
+                    iconItem.className = 'icon-item';
+                    const previewCanvas = document.createElement('canvas');
+                    previewCanvas.width = 100;
+                    previewCanvas.height = 100;
+                    const previewCtx = previewCanvas.getContext('2d');
+                    previewCtx.drawImage(canvas, 0, 0, 100, 100);
+                    iconItem.appendChild(previewCanvas);
+                    iconItem.innerHTML += `<p>${size}x${size}</p>`;
+                    preview.appendChild(iconItem);
+                    
+                    if (index === sizes.length - 1) {
+                        generateBtn.disabled = false;
+                        document.getElementById('downloadAllBtn').style.display = 'inline-block';
+                        status.innerHTML = '<div class="status success">✓ All icons generated successfully! Click "Download All Icons" to save them.</div>';
+                    }
+                }, index * 100);
+            });
+        }
+
+        function downloadAllIcons() {
+            if (generatedIcons.length === 0) {
+                alert('Please generate icons first!');
+                return;
+            }
+            
+            const status = document.getElementById('status');
+            status.innerHTML = '<div class="status info">Downloading icons...</div>';
+            
+            generatedIcons.forEach((icon, index) => {
+                setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.download = `icon-${icon.size}x${icon.size}.png`;
+                    link.href = icon.dataUrl;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    if (index === generatedIcons.length - 1) {
+                        status.innerHTML = '<div class="status success">✓ All icons downloaded! Move them to the Frontend/icons/ directory.</div>';
+                    }
+                }, index * 150);
+            });
+        }
+
+        // Auto-generate on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                generateAllIcons();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+
