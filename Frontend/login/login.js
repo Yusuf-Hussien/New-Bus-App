@@ -460,9 +460,9 @@ async function handleSignUpSubmit(event) {
     // Create user data
     const userData = {
         firstName:name,
-        secondName: "second", 
-        thirdName: "third",
-        lastName: "last",
+        secondName: "", 
+        thirdName: "",
+        lastName: "",
         email: email,
         phone: phone,
         gender: gender,
