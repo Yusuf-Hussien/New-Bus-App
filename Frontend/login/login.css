@@ -230,7 +230,7 @@
 ============================ */
 .forgot-password-page {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -240,7 +240,10 @@
     padding: 40px;
     box-sizing: border-box;
     animation: fadeIn 0.3s ease;
+    overflow-y: auto;
 }
+
+
 
 .forgot-password-page.active {
     display: block;
@@ -1097,4 +1100,11 @@ button[type="submit"],
     width: 100% !important;
     height: 200px;
   }
+}
+
+@media (max-width: 768px) {
+    .forgot-password-page {
+        padding: 20px 15px;
+        padding-top: 40px;
+    }
 }
