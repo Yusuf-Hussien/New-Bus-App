@@ -28,6 +28,14 @@
       "destination": "/Frontend/admin.html"
     },
     {
+      "source": "/robots.txt",
+      "destination": "/Frontend/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/Frontend/sitemap.xml"
+    },
+    {
       "source": "/(.*)",
       "destination": "/Frontend/$1"
     }

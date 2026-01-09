@@ -1,0 +1,27 @@
+# robots.txt for NewBus - Hurghada University Bus Transport System
+
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /passenger
+Allow: /driver
+
+# Disallow admin panel from search engines (security)
+Disallow: /admin
+
+# Allow all static assets
+Allow: /icons/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.json
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.svg
+
+# Sitemap location
+Sitemap: https://newbus.app/sitemap.xml
+
+# Crawl delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
