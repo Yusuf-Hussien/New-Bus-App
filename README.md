@@ -30,10 +30,20 @@
 
 ## 📋 Table of Contents
 
+<details>
+<summary><b>Click to expand full table of contents</b></summary>
+
 - [Overview](#overview)
 - [Problem Statement](#problem-statement)
 - [✨ Features](#-features)
-- [🏗️ Architecture](#️-architecture)
+- [⚡ Real-Time Features & Architecture](#-real-time-features--architecture)
+  - [SignalR Hub Architecture](#signalr-hub-architecture)
+  - [Connection Management System](#connection-management-system)
+  - [Location Sharing Flows](#location-sharing-flows)
+  - [Proximity Detection System](#proximity-detection-system)
+  - [Station Arrival Detection](#station-arrival-detection)
+  - [Real-Time Event Flow Diagrams](#real-time-event-flow-diagrams)
+- [🏗️ System Architecture](#️-system-architecture)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [📚 Project Structure](#-project-structure)
 - [📱 PWA Support](#-pwa-support)
@@ -48,17 +58,36 @@
 - [👥 Team Members](#-team-members)
 - [📄 License](#-license)
 
+</details>
+
 ---
 
 ## Overview
+
+<!--<details>
+<summary><b>📖 Click to expand overview</b></summary>-->
 
 **New Bus App** is a comprehensive university team project designed to solve real-world transportation challenges by providing a smart bus management and booking system. The system aims to digitalize bus operations, improve user experience for passengers, and provide administrators with clear control over buses, routes, and finances.
 
 This project is developed collaboratively by a multidisciplinary team, combining backend, frontend, DevOps, UI/UX, and system analysis skills to deliver a modern, scalable, and extensible solution.
 
+### Key Highlights
+
+- 🚀 **Real-Time Communication** - Powered by SignalR for instant updates
+- 📍 **GPS Tracking** - Live location tracking for buses and passengers
+- 🔔 **Smart Notifications** - Proximity-based alerts and station arrival notifications
+- 🎯 **Role-Based Access** - Separate dashboards for Students, Drivers, and Admins
+- 📱 **PWA Ready** - Installable web app with offline capabilities
+- 🔒 **Secure** - JWT authentication with refresh tokens
+
+<!--</details>-->
+
 ---
 
 ## Problem Statement
+
+<!--<details>
+<summary><b>🔍 Click to expand problem statement</b></summary>-->
 
 Traditional bus systems often suffer from:
 
@@ -72,6 +101,8 @@ Traditional bus systems often suffer from:
 | 💺 **Inefficient seat management** | Manual seat allocation and availability |
 
 **New Bus App** addresses these challenges by offering a modern, scalable, and extensible solution with real-time capabilities, comprehensive management tools, and an intuitive user interface.
+
+<!--</details>-->
 
 ---
 
@@ -114,6 +145,7 @@ Traditional bus systems often suffer from:
 - Password reset functionality
 - JWT-based authentication with refresh tokens
 - Role-based access control (Student, Driver, Admin)
+- Token validation middleware for logout detection
 
 </details>
 
@@ -125,6 +157,7 @@ Traditional bus systems often suffer from:
 - Route creation and management
 - Station management along routes
 - Faculty-based route organization
+- Real-time bus status updates
 
 </details>
 
@@ -135,6 +168,7 @@ Traditional bus systems often suffer from:
 - Assign buses and drivers to trips
 - Station-to-station trip planning
 - Trip status management (In Progress, Completed)
+- Real-time trip tracking
 
 </details>
 
@@ -146,6 +180,7 @@ Traditional bus systems often suffer from:
 - Display active routes and current bus positions
 - Real-time passenger location sharing
 - Driver location broadcasting
+- Interactive Leaflet maps with custom markers
 
 </details>
 
@@ -156,6 +191,8 @@ Traditional bus systems often suffer from:
 - Push notifications when Bus is close (2 Km and 0.5 Km)
 - Trip status change notifications
 - SignalR integration for live updates
+- Station arrival notifications
+- Proximity-based alerts
 
 </details>
 
@@ -167,6 +204,7 @@ Traditional bus systems often suffer from:
 - Input validation at multiple layers
 - Custom exception handling
 - Background services for token cleanup (Quartz.NET)
+- Connection state management in database
 
 </details>
 
@@ -182,7 +220,518 @@ Traditional bus systems often suffer from:
 
 ---
 
-## 🏗️ Architecture
+## ⚡ Real-Time Features & Architecture
+
+This section provides comprehensive details about the real-time communication system powered by SignalR.
+
+### SignalR Hub Architecture
+
+<details>
+<summary><b>🏗️ Click to expand SignalR Hub details</b></summary>
+
+The system uses **ASP.NET Core SignalR** for real-time bidirectional communication between clients and the server.
+
+#### Hub Configuration
+
+- **Hub Name**: `LiveHub`
+- **Hub Path**: `/LiveHub`
+- **Authentication**: JWT token via query parameter `access_token`
+- **Connection Settings**:
+  - Keep-Alive Interval: 5 seconds
+  - Client Timeout: 10 seconds
+  - Automatic Reconnection: Enabled
+
+#### Hub Structure
+
+```
+LiveHub (SignalR Hub)
+├── OnConnectedAsync()          # Handle client connections
+├── OnDisconnectedAsync()        # Handle client disconnections
+├── sharelivelocationforstudent() # Student location sharing
+├── StartTripForDriver()         # Driver trip start with location
+├── stoplocationforistudent()    # Stop student location sharing
+└── stoplocationforidriver()    # Stop driver location sharing
+```
+
+#### Authentication Flow
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant SignalR
+    participant JWT
+    participant Hub
+
+    Client->>SignalR: Connect with JWT token
+    SignalR->>JWT: Validate token from query
+    JWT-->>SignalR: Token validated
+    SignalR->>Hub: OnConnectedAsync()
+    Hub->>Hub: Extract user role & ID
+    Hub->>Hub: Add to role-based group
+    Hub->>Hub: Store connection in DB
+    Hub-->>Client: Connection established
+```
+
+#### Role-Based Group Management
+
+- **Students Group**: All connected students receive driver location updates
+- **Drivers Group**: All connected drivers receive student location updates
+- **Admin Connections**: Tracked in database for monitoring
+
+</details>
+
+### Connection Management System
+
+<details>
+<summary><b>🔌 Click to expand connection management details</b></summary>
+
+The system maintains connection state in the database for each user role.
+
+#### Database Tables
+
+1. **StudentConnection** - Tracks active student SignalR connections
+2. **DriverConnection** - Tracks active driver SignalR connections
+3. **AdminConnections** - Tracks active admin SignalR connections
+
+#### Connection Lifecycle
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Connection Lifecycle                      │
+└─────────────────────────────────────────────────────────────┘
+
+1. Client Connects
+   ├── JWT token validated
+   ├── User role identified
+   ├── Connection ID generated
+   └── Entry created in database
+
+2. Active Connection
+   ├── User added to role-based SignalR group
+   ├── Connection ID stored in database
+   └── Real-time events enabled
+
+3. Client Disconnects
+   ├── Connection removed from database
+   ├── User removed from SignalR groups
+   └── Cleanup completed
+```
+
+#### Connection Management Features
+
+- **Automatic Cleanup**: Connections removed on disconnect
+- **Connection Tracking**: Monitor active users per role
+- **Group Management**: Automatic group assignment based on role
+- **Reconnection Support**: Automatic reconnection with state restoration
+
+#### Connection Statistics
+
+The system provides methods to get active connection counts:
+- `GetAllStudentConnection()` - Returns active student connections
+- `GetAllDriverActive()` - Returns active driver connections
+- `GetAllAdminActive()` - Returns active admin connections
+
+</details>
+
+### Location Sharing Flows
+
+<details>
+<summary><b>📍 Click to expand location sharing flows</b></summary>
+
+#### Student Location Sharing Flow
+
+```
+┌──────────────┐                    ┌──────────────┐                    ┌──────────────┐
+│   Student    │                    │  SignalR Hub │                    │   Drivers    │
+│   Client     │                    │   (LiveHub)   │                    │   Group      │
+└──────┬───────┘                    └──────┬───────┘                    └──────┬───────┘
+       │                                    │                                    │
+       │ 1. sharelivelocationforstudent()   │                                    │
+       │    (lat, lng)                      │                                    │
+       ├───────────────────────────────────>│                                    │
+       │                                    │                                    │
+       │                                    │ 2. Update DB (Student Location)    │
+       │                                    ├────────────────────────────────────>│
+       │                                    │                                    │
+       │                                    │ 3. NewLocationFromStudent()        │
+       │                                    │    (lat, lng, name, faculty, id)  │
+       │                                    ├────────────────────────────────────>│
+       │                                    │                                    │
+       │                                    │ 4. Update map markers              │
+       │                                    │                                    │
+```
+
+**Student Location Sharing Process**:
+
+1. Student enables location sharing in the app
+2. Client calls `sharelivelocationforstudent(latitude, longitude)` via SignalR
+3. Hub validates authentication and extracts student ID
+4. Hub updates student location in database
+5. Hub broadcasts location to all drivers in "Drivers" group
+6. Drivers receive `NewLocationFromStudent` event with:
+   - Latitude & Longitude
+   - Student Name
+   - Faculty Name
+   - Level of Study
+   - Student ID
+
+#### Driver Location Sharing Flow
+
+```
+┌──────────────┐                    ┌──────────────┐                    ┌──────────────┐
+│   Driver     │                    │  SignalR Hub │                    │  Students    │
+│   Client     │                    │   (LiveHub)  │                    │   Group      │
+└──────┬───────┘                    └──────┬───────┘                    └──────┬───────┘
+       │                                    │                                    │
+       │ 1. StartTripForDriver()            │                                    │
+       │    (lat, lng, TripId)              │                                    │
+       ├───────────────────────────────────>│                                    │
+       │                                    │                                    │
+       │                                    │ 2. Update DB (Driver Location)     │
+       │                                    ├────────────────────────────────────>│
+       │                                    │                                    │
+       │                                    │ 3. Check Station Proximity          │
+       │                                    │    (CalculateDistance)              │
+       │                                    │                                    │
+       │                                    │ 4a. If near station:                │
+       │                                    │     ArriveNewStation()             │
+       │                                    ├────────────────────────────────────>│
+       │                                    │                                    │
+       │                                    │ 4b. Always:                         │
+       │                                    │     NewLocationFromDriver()         │
+       │                                    │     (lat, lng, name, plate, id,     │
+       │                                    │      from, to, status)              │
+       │                                    ├────────────────────────────────────>│
+       │                                    │                                    │
+       │                                    │ 5. Update map & notifications       │
+       │                                    │                                    │
+```
+
+**Driver Location Sharing Process**:
+
+1. Driver starts a trip and enables location sharing
+2. Client periodically calls `StartTripForDriver(latitude, longitude, TripId)` via SignalR
+3. Hub validates authentication and extracts driver ID
+4. Hub updates driver location in database
+5. Hub calculates distance to all stations using Haversine formula
+6. If driver enters station radius:
+   - Creates/updates StationTrip record
+   - Broadcasts `ArriveNewStation` to all students
+7. Hub always broadcasts `NewLocationFromDriver` to all students with:
+   - Latitude & Longitude
+   - Driver Name
+   - Bus Plate Number
+   - Driver ID
+   - Trip From/To locations
+   - Trip Status
+
+#### Stop Location Sharing
+
+- **Students**: Call `stoplocationforistudent()` → Notifies drivers group
+- **Drivers**: Call `stoplocationforidriver()` → Notifies students group
+
+</details>
+
+### Proximity Detection System
+
+<details>
+<summary><b>📏 Click to expand proximity detection details</b></summary>
+
+The system implements a dual-layer proximity detection system for bus-to-passenger distance alerts.
+
+#### Distance Calculation Algorithm
+
+The system uses the **Haversine Formula** to calculate the great-circle distance between two points on Earth:
+
+```csharp
+public static double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
+{
+    const double R = 6371; // Earth's radius in km
+    // Convert to radians
+    double latRad1 = lat1 * Math.PI / 180.0;
+    double lonRad1 = lon1 * Math.PI / 180.0;
+    double latRad2 = lat2 * Math.PI / 180.0;
+    double lonRad2 = lon2 * Math.PI / 180.0;
+    
+    // Haversine formula
+    double dLat = latRad2 - latRad1;
+    double dLon = lonRad2 - lonRad1;
+    
+    double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+               Math.Cos(latRad1) * Math.Cos(latRad2) *
+               Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+    
+    double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+    
+    return R * c * 1000; // Distance in meters
+}
+```
+
+#### Proximity Alert Zones
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│              Proximity Detection Zones                        │
+└─────────────────────────────────────────────────────────────┘
+
+                    ┌─────────────┐
+                    │   Student    │
+                    │   Location   │
+                    └──────┬───────┘
+                           │
+                    ┌──────┴───────┐
+                    │              │
+         ┌──────────┴──────────┐   │
+         │                     │   │
+    ┌────┴────┐          ┌─────┴───┴─────┐
+    │  2 KM  │          │   500 METERS   │
+    │  Zone  │          │     Zone       │
+    └────┬───┘          └─────┬──────────┘
+         │                    │
+    ┌────┴────────────────────┴─────┐
+    │        Bus Location            │
+    └───────────────────────────────┘
+
+Alert Triggers:
+- 2 KM Zone: First alert when bus is 2.0-2.2 km away
+- 500 M Zone: Second alert when bus is 0.25-0.5 km away
+```
+
+#### Frontend Proximity Detection
+
+The frontend calculates distance in real-time when receiving driver location updates:
+
+```javascript
+function checkBusProximity(bus) {
+  // Calculate distance using Haversine formula
+  const R = 6371; // Earth's radius in km
+  const dLat = ((bus.lat - userPosition.lat) * Math.PI) / 180;
+  const dLon = ((bus.lng - userPosition.lng) * Math.PI) / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos((userPosition.lat * Math.PI) / 180) *
+            Math.cos((bus.lat * Math.PI) / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c; // Distance in km
+  
+  // Check 500m zone (0.25 - 0.5 km)
+  if (distance < 0.5 && distance >= 0.25) {
+    // Show proximity alert
+  }
+  // Check 2km zone (2.0 - 2.2 km)
+  else if (distance < 2.2 && distance >= 2) {
+    // Show proximity alert
+  }
+}
+```
+
+#### Notification Deduplication
+
+- Prevents duplicate notifications within 60 seconds
+- Checks if notification already exists for the same bus
+- Only shows one notification per proximity zone
+
+</details>
+
+### Station Arrival Detection
+
+<details>
+<summary><b>🚏 Click to expand station arrival detection details</b></summary>
+
+The system automatically detects when a bus arrives at a station and notifies all students.
+
+#### Station Detection Flow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│           Station Arrival Detection Process                  │
+└─────────────────────────────────────────────────────────────┘
+
+1. Driver sends location update
+   └──> StartTripForDriver(lat, lng, TripId)
+
+2. Hub retrieves all stations
+   └──> GetAllStationsForHub()
+
+3. For each station:
+   ├── Calculate distance: CalculateDistance(station, driver)
+   ├── Check if within radius: IsEnterArea(distance, station.Radius)
+   └── If true:
+       ├── Check if StationTrip exists
+       ├── If not exists: Create StationTrip record
+       ├── If exists but not visited: Update and notify
+       └── Broadcast ArriveNewStation() to Students group
+
+4. Students receive notification:
+   └── Driver Name, Bus Plate, Station Name
+```
+
+#### Station Configuration
+
+Each station has:
+- **Latitude & Longitude**: Station coordinates
+- **Radius**: Detection radius in meters (configurable per station)
+- **Name**: Station display name
+
+#### Station Trip Tracking
+
+The system maintains `StationTrip` records to track:
+- Which stations have been visited for each trip
+- Prevents duplicate notifications for the same station
+- Tracks visit status (`IsVisited` flag)
+
+#### Arrival Notification
+
+When a bus enters a station's radius:
+
+```csharp
+await Clients.Group("Students").SendAsync(
+    "ArriveNewStation", 
+    Driver.FirstName + " " + Driver.LastName,  // Driver name
+    Driver.PlateNoBus,                         // Bus plate number
+    Station.Name                                // Station name
+);
+```
+
+Students receive this notification and can:
+- See which bus arrived
+- Know which station the bus is at
+- Plan accordingly
+
+#### Detection Algorithm
+
+```csharp
+// For each station
+foreach (var Station in Stations) {
+    // Calculate distance in meters
+    var distance = Utilities.CalculateDistance(
+        Station.Latititude, 
+        Station.Longitude,
+        driverLatitude, 
+        driverLongitude
+    );
+    
+    // Check if within station radius
+    if (Utilities.IsEnterArea(distance, Station.Radius)) {
+        // Station detected - handle notification
+        var stationTrip = await GetStationTrip(Station.Id, TripId);
+        
+        if (stationTrip == null || !stationTrip.IsVisited) {
+            // First time at this station for this trip
+            await NotifyStudents();
+            break; // Only notify for first matching station
+        }
+    }
+}
+```
+
+</details>
+
+### Real-Time Event Flow Diagrams
+
+<details>
+<summary><b>📊 Click to expand event flow diagrams</b></summary>
+
+#### Complete Real-Time Communication Flow
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Real-Time Communication Architecture              │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────┐         ┌─────────────┐         ┌─────────────┐
+│   Student   │         │  SignalR    │         │   Driver    │
+│   Client    │         │    Hub      │         │   Client    │
+└──────┬──────┘         └──────┬──────┘         └──────┬──────┘
+       │                       │                        │
+       │ 1. Connect            │                        │
+       ├──────────────────────>│                        │
+       │                       │                        │
+       │                       │ 2. Authenticate        │
+       │                       │    (JWT validation)    │
+       │                       │                        │
+       │                       │ 3. Add to "Students"   │
+       │                       │    group               │
+       │                       │                        │
+       │ 4. Connection OK      │                        │
+       │<──────────────────────┤                        │
+       │                       │                        │
+       │                       │                        │ 5. Connect
+       │                       │                        ├─────────────>
+       │                       │                        │
+       │                       │                        │ 6. Add to "Drivers"
+       │                       │                        │    group
+       │                       │                        │
+       │                       │                        │ 7. Connection OK
+       │                       │                        │<─────────────
+       │                       │                        │
+       │ 8. Share Location     │                        │
+       │    (lat, lng)         │                        │
+       ├──────────────────────>│                        │
+       │                       │                        │
+       │                       │ 9. Update DB           │
+       │                       │                        │
+       │                       │ 10. Broadcast to       │
+       │                       │     Drivers group     │
+       │                       ├───────────────────────────────────────>
+       │                       │                        │
+       │                       │                        │ 11. Update map
+       │                       │                        │
+       │                       │                        │ 12. Start Trip
+       │                       │                        │     (lat, lng, TripId)
+       │                       │<───────────────────────────────────────
+       │                       │                        │
+       │                       │ 13. Update DB         │
+       │                       │                        │
+       │                       │ 14. Check Stations     │
+       │                       │     (Proximity)       │
+       │                       │                        │
+       │                       │ 15a. If near station:  │
+       │                       │      ArriveNewStation │
+       │<──────────────────────┤                        │
+       │                       │                        │
+       │                       │ 15b. Always:           │
+       │                       │      NewLocationFrom   │
+       │                       │      Driver            │
+       │<──────────────────────┤                        │
+       │                       │                        │
+       │ 16. Update map &      │                        │
+       │     check proximity   │                        │
+       │                       │                        │
+```
+
+#### Event Sequence Diagram
+
+```
+Student Location Update Sequence:
+
+Student → Hub: sharelivelocationforstudent(lat, lng)
+Hub → Database: Update Student Location
+Hub → Drivers Group: NewLocationFromStudent(lat, lng, name, faculty, id)
+Drivers → UI: Update map markers
+
+Driver Location Update Sequence:
+
+Driver → Hub: StartTripForDriver(lat, lng, TripId)
+Hub → Database: Update Driver Location
+Hub → Database: Get All Stations
+Hub → Calculation: CalculateDistance for each station
+Hub → Check: IsEnterArea(distance, radius)
+If true:
+  Hub → Database: Create/Update StationTrip
+  Hub → Students Group: ArriveNewStation(driver, plate, station)
+Hub → Students Group: NewLocationFromDriver(lat, lng, driver, plate, id, from, to, status)
+Students → UI: Update map & check proximity
+```
+
+</details>
+
+---
+
+## 🏗️ System Architecture
+
+<details>
+<summary><b>🏛️ Click to expand architecture details</b></summary>
 
 The project follows a **3-Tier N-Layer Architecture** pattern:
 
@@ -192,6 +741,7 @@ The project follows a **3-Tier N-Layer Architecture** pattern:
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────────┐  │
 │  │   Web App   │  │  Admin UI   │  │      Driver Panel       │  │
 │  │ (Vanilla JS)│  │             │  │                         │  │
+│  │  + SignalR  │  │  + SignalR  │  │      + SignalR          │  │
 │  └─────────────┘  └─────────────┘  └─────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
                               │
@@ -205,7 +755,7 @@ The project follows a **3-Tier N-Layer Architecture** pattern:
 │                              │                                   │
 │  ┌──────────────────────────────────────────────────────────┐   │
 │  │                    Business Logic Layer                   │   │
-│  │              Services │ SignalR Hubs │ Quartz Jobs        │   │
+│  │  Services │ SignalR Hubs │ Quartz Jobs │ Utilities      │   │
 │  └──────────────────────────────────────────────────────────┘   │
 │                              │                                   │
 │  ┌──────────────────────────────────────────────────────────┐   │
@@ -217,6 +767,12 @@ The project follows a **3-Tier N-Layer Architecture** pattern:
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                         SQL Server Database                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐   │
+│  │   Entities   │  │ Connections  │  │   StationTrips      │   │
+│  │  (Users,     │  │  (SignalR    │  │   (Tracking)        │   │
+│  │   Buses,     │  │   State)     │  │                     │   │
+│  │   Trips)     │  │              │  │                     │   │
+│  └──────────────┘  └──────────────┘  └──────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -230,10 +786,16 @@ The project follows a **3-Tier N-Layer Architecture** pattern:
 | 💉 **Dependency Injection** | Loose coupling & testability |
 | 🎯 **DTO Pattern** | Data transfer between layers |
 | 🗺️ **AutoMapper** | Object-to-object mapping |
+| 🔌 **Hub Pattern** | SignalR real-time communication |
+
+</details>
 
 ---
 
 ## 🛠️ Tech Stack
+
+<details>
+<summary><b>🛠️ Click to expand tech stack details</b></summary>
 
 <table>
 <tr>
@@ -280,13 +842,14 @@ The project follows a **3-Tier N-Layer Architecture** pattern:
 </tr>
 </table>
 
+</details>
+
 ---
 
-
-# 📚 Project Structure
+## 📚 Project Structure
 
 <details>
-<summary><b>Click to expand</b></summary>
+<summary><b>📁 Click to expand project structure</b></summary>
 
 ```
 New-Bus-App/
@@ -306,42 +869,62 @@ New-Bus-App/
 │   │   │   │   ├── StudentsController.cs
 │   │   │   │   └── TripsController.cs
 │   │   │   │
-│   │   │   ├── SignalR/               # Real-time Communication
-│   │   │   │   └── LiveHub.cs
+│   │   │   ├── clshub/               # SignalR Real-time Communication
+│   │   │   │   └── LiveHub.cs         # Main SignalR Hub
 │   │   │   │
-│   │   │   ├── Middleware/            # Custom Middlewares
-│   │   │   ├── BackgroundServices/    # Quartz.NET Jobs
-│   │   │   ├── Program.cs             # Entry Point
-│   │   │   └── appsettings.json       # Configuration
+│   │   │   ├── Math/                 # Utility Functions
+│   │   │   │   └── Utilities.cs       # Distance calculation
+│   │   │   │
+│   │   │   ├── Middelware/           # Custom Middlewares
+│   │   │   │   ├── CheckLoginingMiddelware.cs
+│   │   │   │   └── ErrorMiddelware.cs
+│   │   │   │
+│   │   │   ├── BackgroundService/    # Quartz.NET Jobs
+│   │   │   │   ├── RemoveOTPnoVerfied.cs
+│   │   │   │   ├── RemoveRefreshTokenExpired.cs
+│   │   │   │   └── RemoveRefreshTokenLogout.cs
+│   │   │   │
+│   │   │   ├── Program.cs            # Entry Point
+│   │   │   └── appsettings.json      # Configuration
 │   │   │
-│   │   ├── NewBusBLL/                 # Business Logic Layer
+│   │   ├── NewBusBLL/                # Business Logic Layer
 │   │   │   ├── Admins/
 │   │   │   ├── Buses/
 │   │   │   ├── Drivers/
+│   │   │   ├── DriverConnection/     # Driver connection management
+│   │   │   ├── StudentConnection/    # Student connection management
+│   │   │   ├── AdminConnection/      # Admin connection management
 │   │   │   ├── EmailService/
 │   │   │   ├── Exceptions/
 │   │   │   ├── RefreshToken/
 │   │   │   ├── Routes/
 │   │   │   ├── Stations/
+│   │   │   ├── StationTrips/         # Station trip tracking
 │   │   │   ├── Students/
 │   │   │   └── Trips/
 │   │   │
-│   │   └── NewBusDAL/                 # Data Access Layer
+│   │   └── NewBusDAL/                # Data Access Layer
 │   │       ├── Models/
+│   │       │   ├── StudentConnection.cs
+│   │       │   ├── DriverConnection.cs
+│   │       │   ├── AdminConnections.cs
+│   │       │   └── ...
 │   │       ├── Repositories/
 │   │       ├── DTOs/
 │   │       └── Migrations/
 │   │
-│   └── NewBusTest/                    # Unit Tests
+│   └── NewBusTest/                   # Unit Tests
 │
-├── Frontend/                          # Vanilla JS + PWA
+├── Frontend/                         # Vanilla JS + PWA
 │   ├── admin.html
 │   ├── driver.html
 │   ├── passenger.html
 │   ├── login.html
 │   ├── admin/
 │   ├── driver/
+│   │   └── driver.js                 # Driver SignalR client
 │   ├── passenger/
+│   │   └── passenger.js               # Student SignalR client
 │   ├── login/
 │   ├── config.js
 │   ├── manifest.json
@@ -363,6 +946,9 @@ New-Bus-App/
 ---
 
 ## 📱 PWA Support
+
+<details>
+<summary><b>📱 Click to expand PWA details</b></summary>
 
 New Bus App is a **Progressive Web App** that provides a native-like experience:
 
@@ -395,9 +981,14 @@ New Bus App is a **Progressive Web App** that provides a native-like experience:
 
 </details>
 
+</details>
+
 ---
 
 ## 🔍 SEO Optimization
+
+<details>
+<summary><b>🔍 Click to expand SEO details</b></summary>
 
 New Bus App is fully optimized for search engines:
 
@@ -429,9 +1020,14 @@ New Bus App is fully optimized for search engines:
 | 📄 **Semantic HTML** | ✅ Accessibility |
 | 📱 **Mobile-first** | ✅ Responsive design |
 
+</details>
+
 ---
 
 ## 🚀 Getting Started
+
+<details>
+<summary><b>🚀 Click to expand setup instructions</b></summary>
 
 ### Prerequisites
 
@@ -478,9 +1074,14 @@ npx http-server -p 5500
 
 Access at `http://localhost:5500`
 
+</details>
+
 ---
 
 ## ⚙️ Configuration
+
+<details>
+<summary><b>⚙️ Click to expand configuration details</b></summary>
 
 ### Backend Configuration
 
@@ -524,9 +1125,26 @@ policy.WithOrigins(
 )
 ```
 
+### SignalR Configuration
+
+SignalR is configured in `Program.cs`:
+
+```csharp
+builder.Services.AddSignalR(options =>
+{
+    options.KeepAliveInterval = TimeSpan.FromSeconds(5);
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(10);
+});
+```
+
+</details>
+
 ---
 
 ## 🚢 Deployment
+
+<details>
+<summary><b>🚢 Click to expand deployment details</b></summary>
 
 ### Frontend Deployment (Vercel)
 
@@ -606,9 +1224,14 @@ docker run -p 8080:80 newbus-api
 - [ ] Test authentication flow
 - [ ] Verify email service configuration
 
+</details>
+
 ---
 
 ## 📡 API Documentation
+
+<details>
+<summary><b>📡 Click to expand API documentation</b></summary>
 
 Full API documentation available at **[Swagger UI](https://newbus.tryasp.net/swagger/index.html)**
 
@@ -628,16 +1251,35 @@ All protected endpoints require JWT authentication:
 Authorization: Bearer <your-jwt-token>
 ```
 
-
 ### SignalR Hub
 
 - **Hub Path**: `/LiveHub`
 - **Connection**: Real-time location updates and notifications
 - **Authentication**: JWT token via query parameter `access_token`
 
+#### SignalR Methods
+
+**Client → Server**:
+- `sharelivelocationforstudent(latitude, longitude)` - Share student location
+- `StartTripForDriver(latitude, longitude, TripId)` - Start trip and share driver location
+- `stoplocationforistudent()` - Stop sharing student location
+- `stoplocationforidriver()` - Stop sharing driver location
+
+**Server → Client**:
+- `NewLocationFromStudent(lat, lng, name, faculty, level, id)` - Receive student location (Drivers)
+- `NewLocationFromDriver(lat, lng, name, plate, id, from, to, status)` - Receive driver location (Students)
+- `ArriveNewStation(driverName, plateNumber, stationName)` - Station arrival notification (Students)
+- `stoplocationfromstudent(studentId)` - Student stopped sharing (Drivers)
+- `stoplocationfromdriver(driverId)` - Driver stopped sharing (Students)
+
+</details>
+
 ---
 
 ## 🧪 Testing
+
+<details>
+<summary><b>🧪 Click to expand testing details</b></summary>
 
 ### Running Unit Tests
 
@@ -651,10 +1293,24 @@ dotnet test
 1. **API Testing** - Use Swagger UI at `/swagger`
 2. **Frontend Testing** - Test all user roles
 3. **Integration Testing** - Test end-to-end flows
+4. **SignalR Testing** - Test real-time connections and events
+
+### Testing Real-Time Features
+
+1. **Connection Test**: Verify users can connect to SignalR hub
+2. **Location Sharing**: Test student and driver location updates
+3. **Proximity Detection**: Verify alerts at 2km and 500m
+4. **Station Arrival**: Test automatic station detection
+5. **Group Broadcasting**: Verify messages reach correct groups
+
+</details>
 
 ---
 
 ## 👥 User Roles
+
+<details>
+<summary><b>👥 Click to expand user roles details</b></summary>
 
 <table>
 <tr>
@@ -667,6 +1323,7 @@ dotnet test
 - Receive proximity alerts
 - View trip history
 - Share live location
+- Receive station arrival notifications
 
 </td>
 <td align="center" width="33%">
@@ -678,6 +1335,7 @@ dotnet test
 - View assigned routes
 - Manage trip status
 - View passenger locations
+- Broadcast station arrivals
 
 </td>
 <td align="center" width="33%">
@@ -689,14 +1347,20 @@ dotnet test
 - Route configuration
 - Analytics dashboard
 - Schedule control
+- Monitor active connections
 
 </td>
 </tr>
 </table>
 
+</details>
+
 ---
 
 ## 📸 Screenshots
+
+<details>
+<summary><b>📸 Click to view screenshots</b></summary>
 
 <div align="center">
 
@@ -706,9 +1370,14 @@ dotnet test
 
 </div>
 
+</details>
+
 ---
 
 ## 📖 Documentation
+
+<details>
+<summary><b>📖 Click to expand documentation list</b></summary>
 
 ### Available Documentation
 
@@ -720,9 +1389,14 @@ dotnet test
 | 📚 [User Manual](./Documentation/User%20Manual%20.pdf) | End-user guide and instructions |
 | 📅 [Project Schedule](./Documentation/project_scheduling.png) | Project timeline and milestones |
 
+</details>
+
 ---
 
 ## 👥 Team Members
+
+<!--<details>
+<summary><b>👥 Click to expand team members</b></summary>-->
 
 <div align="center">
 
@@ -737,6 +1411,10 @@ dotnet test
 *University Project • Hurghada University • 2025-2026*
 
 </div>
+
+<!--</details>-->
+
+---
 
 ## 📄 License
 
